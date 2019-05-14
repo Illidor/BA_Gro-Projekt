@@ -1,4 +1,4 @@
-# BA_Gro-Projekt
+# BA_GroßProjekt
 2019_Bachelor_Game_Dev
 
 
