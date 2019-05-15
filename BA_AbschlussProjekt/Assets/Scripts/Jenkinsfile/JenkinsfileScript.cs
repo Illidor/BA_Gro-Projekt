@@ -9,7 +9,7 @@ public class JenkinsfileScript : MonoBehaviour
     static string[] SCENES = FindEnabledEditorScenes();
 
     static string APP_NAME = "Großprojekt";
-    static string TARGET_DIR = "C:\\Jenkins";
+    static string TARGET_DIR = "C:/Jenkins";
 
     [MenuItem("Custom/CI/Build Mac OS X")]
     static void PerformMacOSXBuild()
