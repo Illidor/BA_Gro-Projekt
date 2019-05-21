@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor;
+using UnityEngine.SceneManagement;
 
 public class BuildScript
 {
@@ -17,6 +18,13 @@ public class BuildScript
     [MenuItem("Build/Build Windows")]
     static void BuildWindows()
     {
+        scenes = new string[SceneManager.sceneCount];
+
+        for (int i = 0; i < SceneManager.sceneCount; i++)
+        {
+            scenes[i] = SceneManager.GetSceneAt(i).path.ToString();
+        }
+
         BuildPipeline.BuildPlayer(scenes, "./" + name + "_Windows/" + name+".exe", BuildTarget.StandaloneWindows64, BuildOptions.None);
     }
 
