@@ -13,8 +13,8 @@ public class InteractionSkript : MonoBehaviour
     public float throwStrengh;
 
 
-    // Update is called once per frame
-    void Update()
+ 
+    void Update()   // Update is called once per frame
     {
         if(grabbedObject != null)
         {
@@ -56,7 +56,7 @@ public class InteractionSkript : MonoBehaviour
 
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
 
-        grabbedObject.GetComponent<Rigidbody>().AddForce(new Vector3(ray.direction.x, ray.direction.y * throwStrengh, ray.direction.z) , ForceMode.Impulse);
+        grabbedObject.GetComponent<Rigidbody>().AddForce(ray.direction*throwStrengh , ForceMode.Impulse);
 
         Debug.Log(ray.direction);
 
