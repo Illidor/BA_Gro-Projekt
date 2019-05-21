@@ -1,0 +1,1 @@
+"C:\Program Files\Unity\Hub\Editor\2019.1.2f1\Editor\Unity.exe" -projectPath "D:\Backup\GrossProjekt\BA_AbschlussProjekt" -quit -batchmode -executeMethod BuildScript.BuildWindows /dev/stdout
