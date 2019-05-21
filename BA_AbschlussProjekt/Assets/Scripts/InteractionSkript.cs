@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityStandardAssets.CrossPlatformInput;
 
+[Obsolete]
 public class InteractionSkript : MonoBehaviour
 {
     private bool mouseButtonClicked = false;

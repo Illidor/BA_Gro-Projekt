@@ -5,7 +5,8 @@ using UnityEngine;
 
 public class Door : BaseInteractable
 {
-    public override bool Interact()
+
+    public override bool Interact(InteractionScript interactionScript)
     {
         return OpenDoor();
     }
