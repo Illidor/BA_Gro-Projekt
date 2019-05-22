@@ -25,7 +25,7 @@ public class BuildScript
             scenes[i] = SceneManager.GetSceneAt(i).path.ToString();
         }
 
-        BuildPipeline.BuildPlayer(scenes, "./" + name + "_Windows/" + name+".exe", BuildTarget.StandaloneWindows64, BuildOptions.None);
+        BuildPipeline.BuildPlayer(scenes, "C:/Users/AB/Dropbox/" + System.DateTime.Today.ToString() + "/" + name+".exe", BuildTarget.StandaloneWindows64, BuildOptions.None);
     }
 
     [MenuItem("Build/Build Linux")]
