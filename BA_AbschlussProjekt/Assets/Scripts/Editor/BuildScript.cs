@@ -4,50 +4,28 @@ using UnityEngine;
 using UnityEditor;
 using UnityEngine.SceneManagement;
 using System.IO;
+using System.Globalization;
 
 public class BuildScript
 {
-    static string[] scenes = { "Assets/Scenes/SampleScene.unity" };
+    static string[] scenes = { "Assets/Scenes/Whitebox_Room.unity" };
     static string name = "ReleaseBuild";
-
-    [MenuItem("Build/Build WebGL")]
-    static void BuildWebGL()
-    {
-        BuildPipeline.BuildPlayer(scenes, "./" + name + "_Web/" + name, BuildTarget.WebGL, BuildOptions.None);
-    }
 
     [MenuItem("Build/Build Windows")]
     static void BuildWindows()
     {
-        scenes = new string[SceneManager.sceneCount];
+        string dateTime = System.DateTime.Now.ToString();
+        dateTime = dateTime.Replace(":", "-");
+        dateTime = dateTime.Replace("/", "_");
+        string buildPath = "C:/Users/AB/Desktop/Builds/" + System.DateTime.Now + "/";
 
-        for (int i = 0; i < SceneManager.sceneCount; i++)
+        if (!Directory.Exists(buildPath))
         {
-            scenes[i] = SceneManager.GetSceneAt(i).path.ToString();
+            Directory.CreateDirectory(buildPath);
         }
 
-        string projectPath = "C:/Users/AB/Desktop/Builds/" + System.DateTime.Today.Day.ToString() + "_" + System.DateTime.Today.Month.ToString() + "/";
-        //string projectPath = "C:/Users/MattManco/Desktop/Gro0projekt/Builds/" + System.DateTime.Today.Day.ToString() + "_" + System.DateTime.Today.Month.ToString() + "/";
 
-        if (!Directory.Exists(projectPath))
-        {
-            Directory.CreateDirectory(projectPath);
-        }
 
-        BuildPipeline.BuildPlayer(scenes,  projectPath + name + "_v" + Application.version +".exe", BuildTarget.StandaloneWindows64, BuildOptions.None);
-    }
-
-    [MenuItem("Build/Build Linux")]
-    static void BuildLinux()
-    {
-        BuildPipeline.BuildPlayer(scenes, "./" + name + "_Linux/" + name, BuildTarget.StandaloneLinux64, BuildOptions.None);
-    }
-
-    [MenuItem("Build/Build All")]
-    static void BuildAll()
-    {
-        BuildLinux();
-        BuildWindows();
-        BuildWebGL();
+        BuildPipeline.BuildPlayer(scenes,  buildPath + name + "_v" + Application.version +".exe", BuildTarget.StandaloneWindows64, BuildOptions.None);
     }
 }
