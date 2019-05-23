@@ -17,7 +17,7 @@ public class BuildScript
         string dateTime = System.DateTime.Now.ToString();
         dateTime = dateTime.Replace(":", "-");
         dateTime = dateTime.Replace("/", "_");
-        string buildPath = "C:/Users/AB/Desktop/Builds/" + dateTime + "/";
+        string buildPath = "C:/Users/AB/Dropbox/Autodeploy/" + dateTime + "/";
 
         if (!Directory.Exists(buildPath))
         {
