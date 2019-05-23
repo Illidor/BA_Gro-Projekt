@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor;
 using UnityEngine.SceneManagement;
+using System.IO;
 
 public class BuildScript
 {
@@ -25,7 +26,15 @@ public class BuildScript
             scenes[i] = SceneManager.GetSceneAt(i).path.ToString();
         }
 
-        BuildPipeline.BuildPlayer(scenes, "C:/Users/AB/Dropbox/" + System.DateTime.Today.ToString() + "/" + name+".exe", BuildTarget.StandaloneWindows64, BuildOptions.None);
+        //string projectPath = "C:/Users/AB/Dropbox/" + System.DateTime.Today.ToString() + "/";
+        string projectPath = "C:/Users/MattManco/Desktop/Gro0projekt/Builds/" + System.DateTime.Today.Day.ToString() + "_" + System.DateTime.Today.Month.ToString() + "/";
+
+        if(!Directory.Exists(projectPath))
+        {
+            Directory.CreateDirectory(projectPath);
+        }
+
+        BuildPipeline.BuildPlayer(scenes,  projectPath + name+".exe", BuildTarget.StandaloneWindows64, BuildOptions.None);
     }
 
     [MenuItem("Build/Build Linux")]
