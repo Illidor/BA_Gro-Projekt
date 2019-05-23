@@ -26,8 +26,8 @@ public class BuildScript
             scenes[i] = SceneManager.GetSceneAt(i).path.ToString();
         }
 
-        //string projectPath = "C:/Users/AB/Dropbox/" + System.DateTime.Today.ToString() + "/";
-        string projectPath = "C:/Users/MattManco/Desktop/Gro0projekt/Builds/" + System.DateTime.Today.Day.ToString() + "_" + System.DateTime.Today.Month.ToString() + "/";
+        string projectPath = "C:/Users/AB/Desktop/Builds" + System.DateTime.Today.ToString() + "/";
+        //string projectPath = "C:/Users/MattManco/Desktop/Gro0projekt/Builds/" + System.DateTime.Today.Day.ToString() + "_" + System.DateTime.Today.Month.ToString() + "/";
 
         if(!Directory.Exists(projectPath))
         {
