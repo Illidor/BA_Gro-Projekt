@@ -8,7 +8,7 @@ using System.IO;
 public class BuildScript
 {
     static string[] scenes = { "Assets/Scenes/SampleScene.unity" };
-    static string name = "MyGame";
+    static string name = "ReleaseBuild";
 
     [MenuItem("Build/Build WebGL")]
     static void BuildWebGL()
@@ -26,15 +26,15 @@ public class BuildScript
             scenes[i] = SceneManager.GetSceneAt(i).path.ToString();
         }
 
-        string projectPath = "C:/Users/AB/Desktop/Builds" + System.DateTime.Today.ToString() + "/";
+        string projectPath = "C:/Users/AB/Desktop/Builds/" + System.DateTime.Today.Day.ToString() + "_" + System.DateTime.Today.Month.ToString() + "/";
         //string projectPath = "C:/Users/MattManco/Desktop/Gro0projekt/Builds/" + System.DateTime.Today.Day.ToString() + "_" + System.DateTime.Today.Month.ToString() + "/";
 
-        if(!Directory.Exists(projectPath))
+        if (!Directory.Exists(projectPath))
         {
             Directory.CreateDirectory(projectPath);
         }
 
-        BuildPipeline.BuildPlayer(scenes,  projectPath + name+".exe", BuildTarget.StandaloneWindows64, BuildOptions.None);
+        BuildPipeline.BuildPlayer(scenes,  projectPath + name + "_v" + Application.version +".exe", BuildTarget.StandaloneWindows64, BuildOptions.None);
     }
 
     [MenuItem("Build/Build Linux")]
