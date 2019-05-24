@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class MannequinPuzzleDoor : BaseInteractable
 {
+    private bool isOpen = false;
+
     public override bool Interact(InteractionScript interactionScript)
     {
         return false; //TODO play locked door sound
@@ -11,6 +13,11 @@ public class MannequinPuzzleDoor : BaseInteractable
 
     public void UnlockAndOpen()
     {
-        Destroy(gameObject);  //TODO implement neat door opening
+        if (!GetComponent<Animation>().isPlaying && !isOpen)
+        {
+            GetComponent<Animation>().Play();
+            isOpen = true;
+        }
     }
 }
+

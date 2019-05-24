@@ -10,7 +10,18 @@ public class PlayerDeath : MonoBehaviour
 
     private void KillPlayer()
     {
-        Destroy(gameObject); //TODO implement neat player death
+
+        gameObject.GetComponentInChildren<Animator>().enabled = false;
+
+        foreach (BoxCollider parent in gameObject.GetComponentsInChildren<BoxCollider>())
+        {
+            parent.isTrigger = false;
+        }
+
+        foreach (Rigidbody parent in gameObject.GetComponentsInChildren<Rigidbody>())
+        {
+            parent.useGravity = true;
+        }
     }
 
     private void OnEnable()

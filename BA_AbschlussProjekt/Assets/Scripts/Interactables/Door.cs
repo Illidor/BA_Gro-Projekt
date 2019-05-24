@@ -5,6 +5,9 @@ using UnityEngine;
 
 public class Door : BaseInteractable
 {
+    public Animation openDoor;
+
+    private bool isOpen = false;
 
     public override bool Interact(InteractionScript interactionScript)
     {
@@ -17,6 +20,12 @@ public class Door : BaseInteractable
     /// <returns>Whether the door got opend or not</returns>
     private bool OpenDoor()
     {
-        throw new NotImplementedException(); //TODO inplement door logic
+        if (!openDoor.isPlaying && !isOpen)
+        {
+            openDoor.Play();
+            isOpen = true;
+            return true;
+        }
+        return false;
     }
 }
