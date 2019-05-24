@@ -8,4 +8,9 @@ public class MannequinPuzzleDoor : BaseInteractable
     {
         return false; //TODO play locked door sound
     }
+
+    public void UnlockAndOpen()
+    {
+        Destroy(gameObject);  //TODO implement neat door opening
+    }
 }
