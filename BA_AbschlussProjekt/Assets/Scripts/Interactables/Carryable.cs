@@ -12,8 +12,8 @@ public class Carryable : BaseInteractable
 {
     private const string noPlayerCollisionLayerName = "NoPlayerCollision";
 
-    private new Rigidbody rigidbody;
-    private new Collider collider;
+    protected new Rigidbody rigidbody;
+    protected new Collider collider;
 
     private void Awake()
     {
@@ -23,45 +23,55 @@ public class Carryable : BaseInteractable
 
     public override bool Interact(InteractionScript interactionScript)
     {
-        if (interactionScript.IsCarrying)   // if player is carrying this
-        {
-            Drop(interactionScript);
-            return false;
-        }
-
         Grab(interactionScript);
         return true;
     }
 
+    /// <summary>
+    /// To be fired when an interaction between a carried item and another interactable starts. Return whether the combining was successfull (true) or not (false)
+    /// </summary>
+    /// <returns>Return whether the combining was successfull (true) or not (false)</returns>
+    public virtual bool Combine(InteractionScript interactionScript, BaseInteractable combinationComponent)
+    {
+        return false;
+    }
+
     private void Grab(InteractionScript interactionScript)
     {
-        transform.parent = interactionScript.GrabingPoint.transform;
-        rigidbody.isKinematic = true;
-        interactionScript.CarriedObject = this;
+        AttachToPlayer(interactionScript);
         transform.localPosition = Vector3.zero;
 
         gameObject.layer = LayerMask.NameToLayer(noPlayerCollisionLayerName);
     }
 
-    private void Drop(InteractionScript interactionScript)
+    /// <summary>
+    /// Attaches itself to the player. Changes its parent to the hand, sets itself to kinematic and sets itself as carried object
+    /// </summary>
+    protected void AttachToPlayer(InteractionScript interactionScript)
     {
-        transform.parent = InstancePool.transform;
-        rigidbody.isKinematic = false;
-        interactionScript.CarriedObject = null;
-
-        gameObject.layer = LayerMask.NameToLayer("Default");
+        transform.parent = interactionScript.GrabingPoint.transform;
+        rigidbody.isKinematic = true;
+        interactionScript.CarriedObject = this;
     }
 
     public void Throw(InteractionScript interactionScript, float throwingStrength)
     {
-        transform.parent = InstancePool.transform;
-        rigidbody.isKinematic = false;
-        interactionScript.CarriedObject = null;
+        DetachFromPlayer(interactionScript);
 
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
         rigidbody.AddForce(ray.direction.normalized * throwingStrength, ForceMode.Impulse);
 
         Invoke("ResetLayer", 2f); //TODO: Switch to better implementation of invoking ResetLayer. (Maybe with trigger or distance check?)
+    }
+
+    /// <summary>
+    /// Detaches itself from the player. Changes its parent to global, sets itself to non-kinematic and sets the carried object to null
+    /// </summary>
+    protected void DetachFromPlayer(InteractionScript interactionScript)
+    {
+        transform.parent = InstancePool.transform;
+        rigidbody.isKinematic = false;
+        interactionScript.CarriedObject = null;
     }
 
     private void ResetLayer()
