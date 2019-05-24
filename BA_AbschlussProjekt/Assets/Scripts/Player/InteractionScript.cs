@@ -43,24 +43,29 @@ public class InteractionScript : MonoBehaviour
         if (CTRLHub.InteractDown)
             CheckInteraction();
 
-        if (!IsCarrying)
+        if (IsCarrying)
             HandleThrowing();
     }
 
     private void CheckInteraction()
     {
-        if (IsCarrying)
-            CarriedObject.Interact(this);
-        else
-            SearchForItemToInteract();
-    }
-
-    private void SearchForItemToInteract()
-    {
         Ray screenCenterRay = Camera.main.ScreenPointToRay(Input.mousePosition);
 
         if (Physics.Raycast(screenCenterRay, out RaycastHit hit, grabingReach))
-            hit.collider.GetComponent<BaseInteractable>()?.Interact(this);
+        {
+            BaseInteractable interactableToInteractWith = hit.collider.GetComponent<BaseInteractable>();
+
+            if (interactableToInteractWith != null)
+            {
+                if (IsCarrying)
+                {
+                    Debug.Log("combine " + CarriedObject.name  +" with " + interactableToInteractWith.name);
+                    CarriedObject.Combine(this, interactableToInteractWith);
+                }
+                else
+                    interactableToInteractWith.Interact(this);
+            }
+        }
     }
 
     private void HandleThrowing()
@@ -71,7 +76,7 @@ public class InteractionScript : MonoBehaviour
         if (CTRLHub.ThrowUp)
         {
             // time difference times time difference multiplicator times overall multiplicator
-            float finalThrowingStrength = 1 + (Time.time - throwChargeTimer) * throwingChargeModifier * throwingStrength; 
+            float finalThrowingStrength = (Time.time - throwChargeTimer) * throwingChargeModifier * throwingStrength; 
             if (finalThrowingStrength > maxThrowingStrength)
                 finalThrowingStrength = maxThrowingStrength;
 
