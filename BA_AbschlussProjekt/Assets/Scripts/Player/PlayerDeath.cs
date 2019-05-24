@@ -10,7 +10,7 @@ public class PlayerDeath : MonoBehaviour
 
     private void KillPlayer()
     {
-        Destroy(gameObject);
+        Destroy(gameObject); //TODO implement neat player death
     }
 
     private void OnEnable()

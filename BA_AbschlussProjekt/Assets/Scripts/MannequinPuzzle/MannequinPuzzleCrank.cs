@@ -16,7 +16,7 @@ public class MannequinPuzzleCrank : Carryable
         switch (mannequinPuzzleCrankType)
         {
             case MannequinPuzzleCrankTypes.RealCrank:
-                Destroy(combinationComponent.gameObject);
+                Destroy(combinationComponent.gameObject); //TODO implement neat door opening
                 return true;
 
             case MannequinPuzzleCrankTypes.FakeCrank:
