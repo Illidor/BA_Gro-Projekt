@@ -18,6 +18,8 @@ public class MannequinObject : Carryable
             transform.position = combinationComponent.transform.position + new Vector3(0, 1, 0); //TODO implement meaningfull mannequin combine action
             collider.enabled = false;
 
+            GetComponent<AudioSource>().Play();
+
             MannequinPuzzle.mannequinSatisfied(mannequinColor);
 
             return true;

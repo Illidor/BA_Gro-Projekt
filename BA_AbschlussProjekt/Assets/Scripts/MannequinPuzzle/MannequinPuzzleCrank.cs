@@ -17,10 +17,14 @@ public class MannequinPuzzleCrank : Carryable
         {
             case MannequinPuzzleCrankTypes.RealCrank:
                 mannequinPuzzleDoor.UnlockAndOpen();
+
+                GetComponent<AudioSource>().Play();
                 return true;
 
             case MannequinPuzzleCrankTypes.FakeCrank:
                 PlayerDeath.playerDeath();
+
+                GetComponent<AudioSource>().Play();
                 return true;
 
             default:
