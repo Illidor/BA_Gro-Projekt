@@ -5,7 +5,6 @@ using UnityStandardAssets.CrossPlatformInput;
 namespace UnityStandardAssets.Characters.FirstPerson
 {
     [RequireComponent(typeof (Rigidbody))]
-    [RequireComponent(typeof (CapsuleCollider))]
     public class RigidbodyFirstPersonController : MonoBehaviour
     {
         [Serializable]
@@ -14,9 +13,9 @@ namespace UnityStandardAssets.Characters.FirstPerson
             public float ForwardSpeed = 8.0f;   // Speed when walking forward
             public float BackwardSpeed = 4.0f;  // Speed when walking backwards
             public float StrafeSpeed = 4.0f;    // Speed when walking sideways
-            public float RunMultiplier = 2.0f;   // Speed when sprinting
+            public float RunMultiplier = 1.5f;   // Speed when sprinting
 	        public KeyCode RunKey = KeyCode.LeftShift;
-            public float JumpForce = 30f;
+            public float JumpForce = 60f;
             public AnimationCurve SlopeCurveModifier = new AnimationCurve(new Keyframe(-90.0f, 1.0f), new Keyframe(0.0f, 1.0f), new Keyframe(90.0f, 0.0f));
             [HideInInspector] public float CurrentTargetSpeed = 8f;
 
@@ -84,7 +83,6 @@ namespace UnityStandardAssets.Characters.FirstPerson
 
 
         private Rigidbody m_RigidBody;
-        private CapsuleCollider m_Capsule;
         private float m_YRotation;
         private Vector3 m_GroundContactNormal;
         private bool m_Jump, m_PreviouslyGrounded, m_Jumping, m_IsGrounded;
@@ -117,11 +115,18 @@ namespace UnityStandardAssets.Characters.FirstPerson
             }
         }
 
+        // Custom
+
+        private bool isCrouching = false;
+        private Vector3 cameraStandPosition = new Vector3(0f, 0.6f, 0f);
+        private Vector3 cameraCrouchPosition = new Vector3(0f, -0.2f, 0f);
+        [SerializeField] private CapsuleCollider standCollider;
+        [SerializeField] private CapsuleCollider crouchCollider;
+
 
         private void Start()
         {
             m_RigidBody = GetComponent<Rigidbody>();
-            m_Capsule = GetComponent<CapsuleCollider>();
             mouseLook.Init (transform, cam.transform);
         }
 
@@ -133,6 +138,22 @@ namespace UnityStandardAssets.Characters.FirstPerson
             if (CrossPlatformInputManager.GetButtonDown("Jump") && !m_Jump)
             {
                 m_Jump = true;
+            }
+
+            if (m_Jump == false && CrossPlatformInputManager.GetButtonDown("Crouch") && isCrouching == false)
+            {
+                isCrouching = true;
+                crouchCollider.enabled = true;
+                standCollider.enabled = false;
+                cam.transform.localPosition = cameraCrouchPosition;
+            }
+
+            if (m_Jump == false && CrossPlatformInputManager.GetButtonUp("Crouch") && isCrouching)
+            {
+                isCrouching = false;
+                standCollider.enabled = true;
+                crouchCollider.enabled = false;
+                cam.transform.localPosition = cameraStandPosition;
             }
         }
 
@@ -150,11 +171,11 @@ namespace UnityStandardAssets.Characters.FirstPerson
 
                 desiredMove.x = desiredMove.x*movementSettings.CurrentTargetSpeed;
                 desiredMove.z = desiredMove.z*movementSettings.CurrentTargetSpeed;
-                desiredMove.y = desiredMove.y*movementSettings.CurrentTargetSpeed;
+                desiredMove.y = /*desiredMove.y*movementSettings.CurrentTargetSpeed;*/0f;
                 if (m_RigidBody.velocity.sqrMagnitude <
                     (movementSettings.CurrentTargetSpeed*movementSettings.CurrentTargetSpeed))
                 {
-                    m_RigidBody.AddForce(desiredMove*SlopeMultiplier(), ForceMode.Impulse);
+                    m_RigidBody.AddForce(desiredMove*SlopeMultiplier() / 2f, ForceMode.VelocityChange);
                 }
             }
 
@@ -197,8 +218,8 @@ namespace UnityStandardAssets.Characters.FirstPerson
         private void StickToGroundHelper()
         {
             RaycastHit hitInfo;
-            if (Physics.SphereCast(transform.position, m_Capsule.radius * (1.0f - advancedSettings.shellOffset), Vector3.down, out hitInfo,
-                                   ((m_Capsule.height/2f) - m_Capsule.radius) +
+            if (Physics.SphereCast(transform.position, standCollider.radius * (1.0f - advancedSettings.shellOffset), Vector3.down, out hitInfo,
+                                   ((standCollider.height/2f) - standCollider.radius) +
                                    advancedSettings.stickToGroundHelperDistance, Physics.AllLayers, QueryTriggerInteraction.Ignore))
             {
                 if (Mathf.Abs(Vector3.Angle(hitInfo.normal, Vector3.up)) < 85f)
@@ -245,8 +266,8 @@ namespace UnityStandardAssets.Characters.FirstPerson
         {
             m_PreviouslyGrounded = m_IsGrounded;
             RaycastHit hitInfo;
-            if (Physics.SphereCast(transform.position, m_Capsule.radius * (1.0f - advancedSettings.shellOffset), Vector3.down, out hitInfo,
-                                   ((m_Capsule.height/2f) - m_Capsule.radius) + advancedSettings.groundCheckDistance, Physics.AllLayers, QueryTriggerInteraction.Ignore))
+            if (Physics.SphereCast(transform.position, standCollider.radius * (1.0f - advancedSettings.shellOffset), Vector3.down, out hitInfo,
+                                   ((standCollider.height/2f) - standCollider.radius) + advancedSettings.groundCheckDistance, Physics.AllLayers, QueryTriggerInteraction.Ignore))
             {
                 m_IsGrounded = true;
                 m_GroundContactNormal = hitInfo.normal;
