@@ -14,28 +14,36 @@ public class HealthConditions : MonoBehaviour
     void Update()
     {
         // Test functions to add conditions to the player
-        if (Input.GetKeyDown(KeyCode.U))
+        if (Input.GetKeyDown(KeyCode.Z))
         {
             AddConditionToCurrentConditions(Condition.ArmDislocated);
             Debug.Log("Disloacte Arm");
         }
 
-        if (Input.GetKeyDown(KeyCode.I))
+        if (Input.GetKeyDown(KeyCode.U))
         {
             AddConditionToCurrentConditions(Condition.HandSprained);
             Debug.Log("Sprain Hand");
         }
 
-        if (Input.GetKeyDown(KeyCode.O))
+        if (Input.GetKeyDown(KeyCode.I))
         {
             AddConditionToCurrentConditions(Condition.TwistedAnkle);
             Debug.Log("Twist Ankle");
         }
 
-        if (Input.GetKeyDown(KeyCode.P))
+        if (Input.GetKeyDown(KeyCode.O))
         {
             AddConditionToCurrentConditions(Condition.BrokenLeg);
             Debug.Log("Break Leg");
+        }
+
+        if (Input.GetKeyDown(KeyCode.P))
+        {
+            RemoveConditionFromCurrentConditions(Condition.ArmDislocated);
+            RemoveConditionFromCurrentConditions(Condition.BrokenLeg);
+            RemoveConditionFromCurrentConditions(Condition.HandSprained);
+            RemoveConditionFromCurrentConditions(Condition.TwistedAnkle);
         }
     }
 

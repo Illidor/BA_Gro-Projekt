@@ -17,6 +17,7 @@ namespace UnityStandardAssets.Characters.FirstPerson
 	        public KeyCode RunKey = KeyCode.LeftShift;
             public float JumpForce = 60f;
             public AnimationCurve SlopeCurveModifier = new AnimationCurve(new Keyframe(-90.0f, 1.0f), new Keyframe(0.0f, 1.0f), new Keyframe(90.0f, 0.0f));
+            public HealthConditions healthConditions;
             [HideInInspector] public float CurrentTargetSpeed = 8f;
 
             private bool m_Running;
@@ -42,8 +43,12 @@ namespace UnityStandardAssets.Characters.FirstPerson
 				}
 	            if (Input.GetKey(RunKey))
 	            {
-		            CurrentTargetSpeed *= RunMultiplier;
-		            m_Running = true;
+                    if(healthConditions.GetConditions().Contains(HealthConditions.Condition.TwistedAnkle) == false &&
+                        healthConditions.GetConditions().Contains(HealthConditions.Condition.BrokenLeg) == false)
+                    {
+                        CurrentTargetSpeed *= RunMultiplier;
+                        m_Running = true;
+                    }
 	            }
 	            else
 	            {
@@ -69,12 +74,10 @@ namespace UnityStandardAssets.Characters.FirstPerson
             public float shellOffset; //reduce the radius by that ratio to avoid getting stuck in wall (a value of 0.1f is nice)
         }
 
-
         public Camera cam;
         public MovementSettings movementSettings = new MovementSettings();
         public MouseLook mouseLook = new MouseLook();
         public AdvancedSettings advancedSettings = new AdvancedSettings();
-
 
         private Rigidbody m_RigidBody;
         private float m_YRotation;
@@ -107,7 +110,6 @@ namespace UnityStandardAssets.Characters.FirstPerson
 
         // Custom
         private bool isCrouching = false;
-        private bool canMove = true;
         private Vector3 cameraStandPosition = new Vector3(0f, 0.6f, 0f);
         private Vector3 cameraCrouchPosition = new Vector3(0f, -0.2f, 0f);
         [SerializeField] private CapsuleCollider standCollider;
@@ -124,6 +126,7 @@ namespace UnityStandardAssets.Characters.FirstPerson
             m_RigidBody = GetComponent<Rigidbody>();
             healthConditions = GetComponent<HealthConditions>();
             mouseLook.Init (transform, cam.transform);
+            movementSettings.healthConditions = healthConditions;
 
             // Speed init values
             defaultForwardSpeed = movementSettings.ForwardSpeed;
@@ -163,7 +166,7 @@ namespace UnityStandardAssets.Characters.FirstPerson
             GroundCheck();
             Vector2 input = GetInput();
 
-            if ( canMove == true && (Mathf.Abs(input.x) > float.Epsilon || Mathf.Abs(input.y) > float.Epsilon) && (advancedSettings.airControl || m_IsGrounded))
+            if ( healthConditions.GetConditions().Contains(HealthConditions.Condition.BrokenLeg) == false && (Mathf.Abs(input.x) > float.Epsilon || Mathf.Abs(input.y) > float.Epsilon) && (advancedSettings.airControl || m_IsGrounded))
             {
                 // always move along the camera forward as it is the direction that it being aimed at
                 Vector3 desiredMove = cam.transform.forward*input.y + cam.transform.right*input.x;
@@ -331,14 +334,12 @@ namespace UnityStandardAssets.Characters.FirstPerson
                         movementSettings.ForwardSpeed = 0f;
                         movementSettings.BackwardSpeed = 0f;
                         movementSettings.ForwardSpeed = 0f;
-                        canMove = false;
                     }
                     else
                     {
                         movementSettings.ForwardSpeed = defaultForwardSpeed;
                         movementSettings.BackwardSpeed = defaultBackwardSpeed;
                         movementSettings.ForwardSpeed = defaultForwardSpeed;
-                        canMove = true;
                     }
                     break;
             }
