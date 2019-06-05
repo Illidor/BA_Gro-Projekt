@@ -19,9 +19,7 @@ namespace UnityStandardAssets.Characters.FirstPerson
             public AnimationCurve SlopeCurveModifier = new AnimationCurve(new Keyframe(-90.0f, 1.0f), new Keyframe(0.0f, 1.0f), new Keyframe(90.0f, 0.0f));
             [HideInInspector] public float CurrentTargetSpeed = 8f;
 
-#if !MOBILE_INPUT
             private bool m_Running;
-#endif
 
             public void UpdateDesiredTargetSpeed(Vector2 input)
             {
@@ -42,7 +40,6 @@ namespace UnityStandardAssets.Characters.FirstPerson
 					//handled last as if strafing and moving forward at the same time forwards speed should take precedence
 					CurrentTargetSpeed = ForwardSpeed;
 				}
-#if !MOBILE_INPUT
 	            if (Input.GetKey(RunKey))
 	            {
 		            CurrentTargetSpeed *= RunMultiplier;
@@ -52,15 +49,12 @@ namespace UnityStandardAssets.Characters.FirstPerson
 	            {
 		            m_Running = false;
 	            }
-#endif
             }
 
-#if !MOBILE_INPUT
             public bool Running
             {
                 get { return m_Running; }
             }
-#endif
         }
 
 
@@ -107,29 +101,35 @@ namespace UnityStandardAssets.Characters.FirstPerson
         {
             get
             {
- #if !MOBILE_INPUT
 				return movementSettings.Running;
-#else
-	            return false;
-#endif
             }
         }
 
         // Custom
-
         private bool isCrouching = false;
+        private bool canMove = true;
         private Vector3 cameraStandPosition = new Vector3(0f, 0.6f, 0f);
         private Vector3 cameraCrouchPosition = new Vector3(0f, -0.2f, 0f);
         [SerializeField] private CapsuleCollider standCollider;
         [SerializeField] private CapsuleCollider crouchCollider;
+        private HealthConditions healthConditions;
 
+        // used for saving before reducing the speed with health conditions
+        private float defaultForwardSpeed;
+        private float defaultBackwardSpeed;
+        private float defaultStrafeSpeed;
 
         private void Start()
         {
             m_RigidBody = GetComponent<Rigidbody>();
+            healthConditions = GetComponent<HealthConditions>();
             mouseLook.Init (transform, cam.transform);
-        }
 
+            // Speed init values
+            defaultForwardSpeed = movementSettings.ForwardSpeed;
+            defaultBackwardSpeed = movementSettings.BackwardSpeed;
+            defaultStrafeSpeed = movementSettings.StrafeSpeed;
+        }
 
         private void Update()
         {
@@ -163,7 +163,7 @@ namespace UnityStandardAssets.Characters.FirstPerson
             GroundCheck();
             Vector2 input = GetInput();
 
-            if ((Mathf.Abs(input.x) > float.Epsilon || Mathf.Abs(input.y) > float.Epsilon) && (advancedSettings.airControl || m_IsGrounded))
+            if ( canMove == true && (Mathf.Abs(input.x) > float.Epsilon || Mathf.Abs(input.y) > float.Epsilon) && (advancedSettings.airControl || m_IsGrounded))
             {
                 // always move along the camera forward as it is the direction that it being aimed at
                 Vector3 desiredMove = cam.transform.forward*input.y + cam.transform.right*input.x;
@@ -179,7 +179,7 @@ namespace UnityStandardAssets.Characters.FirstPerson
                 }
             }
 
-            if (m_IsGrounded)
+            if ( m_IsGrounded)
             {
                 m_RigidBody.drag = 5f;
 
@@ -281,6 +281,78 @@ namespace UnityStandardAssets.Characters.FirstPerson
             {
                 m_Jumping = false;
             }
+        }
+
+        private void ChangePlayerValuesAccordingToCondition(HealthConditions.Condition con, bool addCondition)
+        {
+            switch (con)
+            {
+                case HealthConditions.Condition.ArmDislocated:
+                    if(addCondition)
+                    {
+                        // Cannot pick up items
+                    }
+                    else
+                    {
+                        // Can pick up items again
+                    }
+                    break;
+
+                case HealthConditions.Condition.HandSprained:
+                    if (addCondition)
+                    {
+                        // Cannot pick up items
+                    }
+                    else
+                    {
+                        // Can pick up items again
+                    }
+                    break;
+
+                case HealthConditions.Condition.TwistedAnkle:
+                    if (addCondition)
+                    {
+                        movementSettings.ForwardSpeed = defaultForwardSpeed / 2f;
+                        movementSettings.BackwardSpeed = defaultBackwardSpeed / 2f;
+                        movementSettings.ForwardSpeed = defaultForwardSpeed / 2f;
+
+                    }
+                    else
+                    {
+                        movementSettings.ForwardSpeed = defaultForwardSpeed;
+                        movementSettings.BackwardSpeed = defaultBackwardSpeed;
+                        movementSettings.ForwardSpeed = defaultForwardSpeed;
+                    }
+                    break;
+
+                case HealthConditions.Condition.BrokenLeg:
+                    if (addCondition)
+                    {
+                        movementSettings.ForwardSpeed = 0f;
+                        movementSettings.BackwardSpeed = 0f;
+                        movementSettings.ForwardSpeed = 0f;
+                        canMove = false;
+                    }
+                    else
+                    {
+                        movementSettings.ForwardSpeed = defaultForwardSpeed;
+                        movementSettings.BackwardSpeed = defaultBackwardSpeed;
+                        movementSettings.ForwardSpeed = defaultForwardSpeed;
+                        canMove = true;
+                    }
+                    break;
+            }
+        }
+
+        private void OnEnable()
+        {
+            HealthConditions.ChangeCondition += ChangePlayerValuesAccordingToCondition;
+        }
+
+        private void OnDisable()
+        {
+            HealthConditions.ChangeCondition -= ChangePlayerValuesAccordingToCondition;
+
         }
     }
 }
