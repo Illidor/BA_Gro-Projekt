@@ -65,4 +65,9 @@ public class Door : BaseInteractable
         
         return false;
     }
+
+    public override bool Combine(GameObject gameObject)
+    {
+        return false;
+    }
 }

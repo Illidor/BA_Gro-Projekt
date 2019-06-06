@@ -84,4 +84,9 @@ public class Carryable : BaseInteractable
     {
         gameObject.layer = LayerMask.NameToLayer("Default");
     }
+
+    public override bool Combine(GameObject gameObject)
+    {
+        return false;
+    }
 }

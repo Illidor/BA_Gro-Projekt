@@ -12,4 +12,6 @@ public abstract class BaseInteractable : MonoBehaviour
     /// </summary>
     /// <returns>Whether the Interaction was successfull (true) or not (false)</returns>
     public abstract bool Interact(InteractionScript interactionScript);
+
+    public abstract bool Combine(GameObject gameObject);
 }

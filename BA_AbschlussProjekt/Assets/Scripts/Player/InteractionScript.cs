@@ -65,9 +65,17 @@ public class InteractionScript : MonoBehaviour
                 {
                     Debug.Log("combine " + CarriedObject.name  +" with " + interactableToInteractWith.name);
                     CarriedObject.Combine(this, interactableToInteractWith);
+
+                    interactableToInteractWith.gameObject.GetComponent<BaseInteractable>().Combine(CarriedObject.gameObject);
+                }
+                else if(interactableToInteractWith.gameObject.GetComponent<FlashbackInteraction>() != null)
+                {
+                    interactableToInteractWith.Interact(this);
                 }
                 else
-                    interactableToInteractWith.Interact(this);
+                {
+                    interactableToInteractWith.gameObject.GetComponent<FlashbackInteraction>().Interact(this);
+                }
             }
         }
     }
@@ -90,7 +98,7 @@ public class InteractionScript : MonoBehaviour
 
     private void HandleUseObject()
     {
-        if(Input.GetKeyDown(KeyCode.Keypad3))
+        if (Input.GetKeyDown(KeyCode.Keypad3))
         {
             CarriedObject.UseObject();
         }
