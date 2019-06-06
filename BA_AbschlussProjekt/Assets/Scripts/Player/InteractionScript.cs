@@ -44,7 +44,11 @@ public class InteractionScript : MonoBehaviour
             CheckInteraction();
 
         if (IsCarrying)
+        {
             HandleThrowing();
+            //if is carrying stuff handle use of those
+            HandleUseObject();
+        }
     }
 
     private void CheckInteraction()
@@ -81,6 +85,14 @@ public class InteractionScript : MonoBehaviour
                 finalThrowingStrength = maxThrowingStrength;
 
             CarriedObject.Throw(this, finalThrowingStrength);
+        }
+    }
+
+    private void HandleUseObject()
+    {
+        if(Input.GetKeyDown(KeyCode.Keypad3))
+        {
+            CarriedObject.UseObject();
         }
     }
 }
