@@ -1,22 +1,28 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Pixelplacement;
 
 public class Book : Carryable
 {
-    private Vector3 startPosition;
-    public Transform readingSpot;
-    private Vector3 endPosition;
+    [SerializeField] GameObject bookToRead;
 
-    private void Start()
-    {
-        endPosition = readingSpot.position;
-    }
+    private bool isBookOpened = false;
+
     public override bool Use()
     {
         base.Use();
-        startPosition = transform.position;
-        Debug.Log("Used");
+        if(!isBookOpened)
+        {
+            bookToRead.SetActive(true);
+            isBookOpened = true;
+        }
+        else
+        {
+            bookToRead.SetActive(false);
+            isBookOpened = false;
+            base.isInUse = false;
+        }
         return true;
     }
 

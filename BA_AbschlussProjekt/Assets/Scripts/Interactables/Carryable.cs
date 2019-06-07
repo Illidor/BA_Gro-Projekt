@@ -15,6 +15,7 @@ public class Carryable : BaseInteractable
     protected new Rigidbody rigidbody;
     protected new Collider collider;
 
+    [HideInInspector] public bool isInUse = false;
 
     private void Awake()
     {
@@ -57,12 +58,15 @@ public class Carryable : BaseInteractable
 
     public void Throw(InteractionScript interactionScript, float throwingStrength)
     {
-        DetachFromPlayer(interactionScript);
+        if(isInUse == false)
+        {
+            DetachFromPlayer(interactionScript);
 
-        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-        rigidbody.AddForce(ray.direction.normalized * throwingStrength, ForceMode.Impulse);
+            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+            rigidbody.AddForce(ray.direction.normalized * throwingStrength, ForceMode.Impulse);
 
-        Invoke("ResetLayer", 2f); //TODO: Switch to better implementation of invoking ResetLayer. (Maybe with trigger or distance check?)
+            Invoke("ResetLayer", 2f); //TODO: Switch to better implementation of invoking ResetLayer. (Maybe with trigger or distance check?)
+        }
     }
 
     ///// <summary>
@@ -95,6 +99,8 @@ public class Carryable : BaseInteractable
 
     public override bool Use()
     {
+        if (!isInUse)
+            isInUse = true;
 
         return true;
     }
