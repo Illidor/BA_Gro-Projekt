@@ -24,6 +24,11 @@ public class FlashbackInteraction : BaseInteractable
         return true;
     }
 
+    public override bool Use()
+    {
+        return false;
+    }
+
     private IEnumerator showFLashback(InteractionScript interactionScript)
     {
         foreach (var item in flashbackSprite)

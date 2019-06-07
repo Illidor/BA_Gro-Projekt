@@ -70,4 +70,9 @@ public class Door : BaseInteractable
     {
         return false;
     }
+
+    public override bool Use()
+    {
+        return false;
+    }
 }
