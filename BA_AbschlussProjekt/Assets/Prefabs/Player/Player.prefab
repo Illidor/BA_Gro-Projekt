@@ -726,10 +726,10 @@ GameObject:
   m_Component:
   - component: {fileID: 1486825502684125691}
   - component: {fileID: 5897735446282238102}
+  - component: {fileID: 5897735446282238184}
   - component: {fileID: 5897735446282238187}
   - component: {fileID: 5897735446282238186}
   - component: {fileID: 5897735446282238185}
-  - component: {fileID: 5897735446282238184}
   - component: {fileID: 5897735446282238100}
   - component: {fileID: 274559583242498417}
   m_Layer: 2
@@ -773,48 +773,6 @@ Rigidbody:
   m_Interpolate: 1
   m_Constraints: 112
   m_CollisionDetection: 1
---- !u!114 &5897735446282238187
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2520074269177441256}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 33db0d32e1d865645abe95dac7c90625, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  grabingReach: 2.5
-  throwingStrength: 1
-  throwingChargeModifier: 1
-  maxThrowingStrength: 30
-  grabingPoint: {fileID: 1908579107162259689}
---- !u!114 &5897735446282238186
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2520074269177441256}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1fa3911a6f2dde243ab1d1813c48eab6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &5897735446282238185
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2520074269177441256}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 125e586b501b0b94ca993dc3a24600a0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  animator: {fileID: 4214896330035745844}
 --- !u!114 &5897735446282238184
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -887,6 +845,48 @@ MonoBehaviour:
     shellOffset: 0
   standCollider: {fileID: 4309658133002816595}
   crouchCollider: {fileID: 6069957258101352019}
+--- !u!114 &5897735446282238187
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2520074269177441256}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 33db0d32e1d865645abe95dac7c90625, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  grabingReach: 2.5
+  throwingStrength: 1
+  throwingChargeModifier: 1
+  maxThrowingStrength: 30
+  grabingPoint: {fileID: 1908579107162259689}
+--- !u!114 &5897735446282238186
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2520074269177441256}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1fa3911a6f2dde243ab1d1813c48eab6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &5897735446282238185
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2520074269177441256}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 125e586b501b0b94ca993dc3a24600a0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  animator: {fileID: 4214896330035745844}
 --- !u!114 &5897735446282238100
 MonoBehaviour:
   m_ObjectHideFlags: 0
