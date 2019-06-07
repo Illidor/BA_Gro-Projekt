@@ -15,8 +15,8 @@ public class AnimationController : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
-    {
-        animator.SetFloat("Forward", controller.Velocity.magnitude);
-    }
+    //void Update()
+    //{
+    //    animator.SetFloat("Forward", controller.Velocity.magnitude);
+    //}
 }

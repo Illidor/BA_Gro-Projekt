@@ -8,7 +8,7 @@ using System.Globalization;
 
 public class BuildScript
 {
-    static string[] scenes = { "Assets/Scenes/Prototyp.unity" };
+    static string[] scenes = { "Assets/Scenes/Prototyp-Erzieher.unity" };
     static string name = "ReleaseBuild";
 
     [MenuItem("Build/Build Windows")]

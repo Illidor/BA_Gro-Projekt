@@ -64,6 +64,12 @@ public class Carryable : BaseInteractable
         Invoke("ResetLayer", 2f); //TODO: Switch to better implementation of invoking ResetLayer. (Maybe with trigger or distance check?)
     }
 
+    //use currently Equipped Object
+    public void UseObject()
+    {
+        Debug.Log("used");
+    }
+
     /// <summary>
     /// Detaches itself from the player. Changes its parent to global, sets itself to non-kinematic and sets the carried object to null
     /// </summary>
@@ -77,5 +83,10 @@ public class Carryable : BaseInteractable
     private void ResetLayer()
     {
         gameObject.layer = LayerMask.NameToLayer("Default");
+    }
+
+    public override bool Combine(GameObject gameObject)
+    {
+        return false;
     }
 }

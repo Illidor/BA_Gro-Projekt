@@ -2,12 +2,22 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class Door : BaseInteractable
 {
+    public static event UnityAction TriggerAnim1; 
+    public static event UnityAction TriggerAnim2; 
+    public static event UnityAction TriggerAnim3; 
+
     public Animation openDoor;
 
     private bool isOpen = false;
+
+    //Check if the Door is locked
+    public bool isLocked = false;
+
+    private int interactionCounter = 0;
 
     public override bool Interact(InteractionScript interactionScript)
     {
@@ -20,12 +30,44 @@ public class Door : BaseInteractable
     /// <returns>Whether the door got opend or not</returns>
     private bool OpenDoor()
     {
-        if (!openDoor.isPlaying && !isOpen)
+        if (isLocked)
+        {
+            switch (interactionCounter)
+            {
+                case 0:
+                    if (TriggerAnim1 != null)
+                    {
+                        TriggerAnim1();
+                        interactionCounter++;
+                    }
+                    break;
+                case 1:
+                    if (TriggerAnim2 != null)
+                    {
+                        TriggerAnim2();
+                        interactionCounter++;
+                    }
+                    break;
+                case 2:
+                    if (TriggerAnim3 != null)
+                    {
+                        TriggerAnim3();
+                    }
+                    break;
+            }
+        }
+        else if (!openDoor.isPlaying && !isOpen && !isLocked)
         {
             openDoor.Play();
             isOpen = true;
             return true;
         }
+        
+        return false;
+    }
+
+    public override bool Combine(GameObject gameObject)
+    {
         return false;
     }
 }
