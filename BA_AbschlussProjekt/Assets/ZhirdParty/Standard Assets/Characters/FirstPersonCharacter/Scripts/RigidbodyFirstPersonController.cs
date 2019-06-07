@@ -110,8 +110,8 @@ namespace UnityStandardAssets.Characters.FirstPerson
 
         // Custom
         private bool isCrouching = false;
-        private Vector3 cameraStandPosition = new Vector3(0f, 0.0f, 0f);
-        private Vector3 cameraCrouchPosition = new Vector3(0f, -0.8f, -0.5f);
+        private Vector3 cameraStandPosition = new Vector3(0f, 0.6f, -0.052f);
+        private Vector3 cameraCrouchPosition = new Vector3(0f, -0.2f, -0.052f);
         [SerializeField] private CapsuleCollider standCollider;
         [SerializeField] private CapsuleCollider crouchCollider;
         private HealthConditions healthConditions;
