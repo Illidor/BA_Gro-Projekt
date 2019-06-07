@@ -28,4 +28,9 @@ public class ForceInteraction : BaseInteractable
 
         return toForceInteractionOn.Interact(interactionScript);
     }
+
+    public override bool Use()
+    {
+        return false;
+    }
 }

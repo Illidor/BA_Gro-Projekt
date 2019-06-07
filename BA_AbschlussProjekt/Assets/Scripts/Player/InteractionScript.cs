@@ -47,7 +47,7 @@ public class InteractionScript : MonoBehaviour
         {
             HandleThrowing();
             //if is carrying stuff handle use of those
-            HandleUseObject();
+            //HandleUseObject();
         }
     }
 
@@ -64,11 +64,11 @@ public class InteractionScript : MonoBehaviour
                 if (IsCarrying)
                 {
                     Debug.Log("combine " + CarriedObject.name  +" with " + interactableToInteractWith.name);
-                    CarriedObject.Combine(this, interactableToInteractWith);
+                    //CarriedObject.Combine(this, interactableToInteractWith);
 
                     interactableToInteractWith.gameObject.GetComponent<BaseInteractable>().Combine(CarriedObject.gameObject);
                 }
-                else if(interactableToInteractWith.gameObject.GetComponent<FlashbackInteraction>() != null)
+                else if(interactableToInteractWith.gameObject.GetComponent<FlashbackInteraction>() == null)
                 {
                     interactableToInteractWith.Interact(this);
                 }
@@ -76,6 +76,13 @@ public class InteractionScript : MonoBehaviour
                 {
                     interactableToInteractWith.gameObject.GetComponent<FlashbackInteraction>().Interact(this);
                 }
+            }
+        }
+        else
+        {
+            if(IsCarrying)
+            {
+                CarriedObject.gameObject.GetComponent<BaseInteractable>().Use();
             }
         }
     }
@@ -93,14 +100,6 @@ public class InteractionScript : MonoBehaviour
                 finalThrowingStrength = maxThrowingStrength;
 
             CarriedObject.Throw(this, finalThrowingStrength);
-        }
-    }
-
-    private void HandleUseObject()
-    {
-        if (Input.GetKeyDown(KeyCode.Keypad3))
-        {
-            CarriedObject.UseObject();
         }
     }
 }

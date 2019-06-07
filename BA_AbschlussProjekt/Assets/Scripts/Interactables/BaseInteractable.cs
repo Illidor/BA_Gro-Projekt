@@ -14,4 +14,6 @@ public abstract class BaseInteractable : MonoBehaviour
     public abstract bool Interact(InteractionScript interactionScript);
 
     public abstract bool Combine(GameObject gameObject);
+
+    public abstract bool Use();
 }

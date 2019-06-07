@@ -46,4 +46,9 @@ public class HatchInteraction : BaseInteractable
 
         return false;
     }
+
+    public override bool Use()
+    {
+        return false;
+    }
 }

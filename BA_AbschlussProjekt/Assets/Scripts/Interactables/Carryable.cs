@@ -15,6 +15,7 @@ public class Carryable : BaseInteractable
     protected new Rigidbody rigidbody;
     protected new Collider collider;
 
+
     private void Awake()
     {
         rigidbody = GetComponent<Rigidbody>();
@@ -64,11 +65,13 @@ public class Carryable : BaseInteractable
         Invoke("ResetLayer", 2f); //TODO: Switch to better implementation of invoking ResetLayer. (Maybe with trigger or distance check?)
     }
 
-    //use currently Equipped Object
-    public void UseObject()
-    {
-        Debug.Log("used");
-    }
+    ///// <summary>
+    /////use currently Equipped Object
+    ///// </summary>
+    //public virtual void Use()
+    //{
+    //    Debug.Log("used");
+    //}
 
     /// <summary>
     /// Detaches itself from the player. Changes its parent to global, sets itself to non-kinematic and sets the carried object to null
@@ -88,5 +91,11 @@ public class Carryable : BaseInteractable
     public override bool Combine(GameObject gameObject)
     {
         return false;
+    }
+
+    public override bool Use()
+    {
+
+        return true;
     }
 }
