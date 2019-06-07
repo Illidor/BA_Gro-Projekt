@@ -1,11 +1,10 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System;
 using UnityEngine;
 
 /// <summary>
 /// Central input handling
 /// </summary>
-public static class CTRLHub
+public class CTRLHub : MonoBehaviour
 {
     // Key to press for interacting with interactable Objects. Pressing it again on carriables will drop them without throwing.
     private static KeyCode interactKey = KeyCode.Mouse0;
@@ -24,4 +23,16 @@ public static class CTRLHub
     public static float HorizontalAxis { get { return Input.GetAxis("Horizontal"); } }
 
     public static float VerticalAxis { get { return Input.GetAxis("Vertical"); } }
+
+
+    private void Awake()
+    {
+        interactKey = ParseKeyCode("Fire1", "Mouse0");
+        throwKey    = ParseKeyCode("Fire2", "Mouse1");
+    }
+
+    private KeyCode ParseKeyCode(string internalName, string keyCodeName)
+    {
+        return (KeyCode)Enum.Parse(typeof(KeyCode), PlayerPrefs.GetString(internalName, keyCodeName));
+    }
 }
