@@ -68,13 +68,9 @@ public class InteractionScript : MonoBehaviour
 
                     interactableToInteractWith.gameObject.GetComponent<BaseInteractable>().Combine(CarriedObject.gameObject);
                 }
-                else if(interactableToInteractWith.gameObject.GetComponent<FlashbackInteraction>() != null)
-                {
-                    interactableToInteractWith.Interact(this);
-                }
                 else
                 {
-                    interactableToInteractWith.gameObject.GetComponent<FlashbackInteraction>().Interact(this);
+                    interactableToInteractWith.Interact(this);
                 }
             }
         }
