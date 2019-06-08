@@ -37,6 +37,7 @@ public class HatchInteraction : BaseInteractable
                     }
                     catch (System.Exception) { }
                 }
+
             }
             else
             {
