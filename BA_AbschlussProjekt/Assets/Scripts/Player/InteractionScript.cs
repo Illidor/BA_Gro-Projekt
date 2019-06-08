@@ -46,8 +46,6 @@ public class InteractionScript : MonoBehaviour
         if (IsCarrying)
         {
             HandleThrowing();
-            //if is carrying stuff handle use of those
-            //HandleUseObject();
         }
     }
 
