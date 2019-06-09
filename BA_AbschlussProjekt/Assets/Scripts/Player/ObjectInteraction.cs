@@ -120,6 +120,7 @@ public class ObjectInteraction : BaseInteractable
     public virtual void PutDown(InteractionScript interactionScript)
     {
         DetachFromPlayer(interactionScript);
+        pulledOn = false;
         //Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
         Invoke("ResetLayer", 2f); //TODO: Switch to better implementation of invoking ResetLayer. (Maybe with trigger or distance check?)
     }
