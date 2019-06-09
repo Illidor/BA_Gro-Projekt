@@ -8,7 +8,7 @@ using System.Globalization;
 
 public class BuildScript
 {
-    static string[] scenes = { "Assets/Scenes/Prototyp-Erzieher.unity" };
+    static string[] scenes = { "Assets/Scenes/BoxScene-Felix.unity" };
     static string name = "ReleaseBuild";
 
     [MenuItem("Build/Build Windows")]
@@ -17,7 +17,7 @@ public class BuildScript
         string dateTime = System.DateTime.Now.ToString();
         dateTime = dateTime.Replace(":", "-");
         dateTime = dateTime.Replace("/", "_");
-        string buildPath = "C:/Users/AB/Dropbox/Autodeploy/" + dateTime + "/";
+        string buildPath = "C:/Studium/Endprojekt_Material/Autodeploy/" + dateTime + "/";
 
         if (!Directory.Exists(buildPath))
         {
