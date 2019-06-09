@@ -72,7 +72,16 @@ public class InteractionScript : MonoBehaviour
                 {
                     interactableToInteractWith.Interact(this);
                 }
+
             }
+            else
+            {
+                CarriedObject.Use();
+            }
+        }
+        else if(CarriedObject != null)
+        {
+            CarriedObject.Use();
         }
     }
 
@@ -96,7 +105,7 @@ public class InteractionScript : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Keypad3))
         {
-            CarriedObject.UseObject();
+            CarriedObject.Use();
         }
     }
 }

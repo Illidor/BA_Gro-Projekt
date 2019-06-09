@@ -26,6 +26,7 @@ public class PictureInteraction : BaseInteractable
         if(otherGameObject.name == objectToInteract.name)
         {
             renderer.enabled = true;
+            Destroy(otherGameObject);
             return true;
         }
         else

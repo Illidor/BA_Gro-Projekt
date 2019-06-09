@@ -85,4 +85,9 @@ public class LadderInteraction : BaseInteractable
     {
         throw new NotImplementedException();
     }
+
+    public override bool Use()
+    {
+        throw new NotImplementedException();
+    }
 }
