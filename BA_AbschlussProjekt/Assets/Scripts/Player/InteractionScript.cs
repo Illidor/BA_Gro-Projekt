@@ -39,6 +39,11 @@ public class InteractionScript : MonoBehaviour
             HandledDrop();
     }
 
+    public static InteractionScript Get()
+    {
+        return GameObject.Find("Player").GetComponent<InteractionScript>();
+    }
+
     private void CheckInteraction()
     {
         Ray screenCenterRay = Camera.main.ScreenPointToRay(Input.mousePosition);

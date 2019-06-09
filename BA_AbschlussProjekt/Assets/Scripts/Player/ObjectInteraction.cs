@@ -10,7 +10,10 @@ public class ObjectInteraction : BaseInteractable
 {
     [SerializeField][Tooltip("What Interactiontype")]
     private Enums.ObjectParameters objectParameters;
-
+    [SerializeField][Tooltip("The Rigidbody of the Player")]
+    private Rigidbody playerRigidbody;
+    [SerializeField]
+    private bool pulledOn = false;
 
     private Transform objectAttachpoint;
     private Transform objectAttachpointAlternative;
@@ -24,6 +27,7 @@ public class ObjectInteraction : BaseInteractable
     {
         rigidbody = GetComponent<Rigidbody>();
         collider = GetComponent<Collider>();
+        playerRigidbody = InteractionScript.Get().transform.GetComponent<Rigidbody>();
     }
 
     #region InteractCarryPull
@@ -84,8 +88,9 @@ public class ObjectInteraction : BaseInteractable
     private void ConnectToIK(InteractionScript interactionScript, int iKPoints)
     {
         //TODO: IK Funktion
-        transform.parent = interactionScript.GrabingPoint.transform;
-        rigidbody.isKinematic = true;
+        //transform.parent = interactionScript.GrabingPoint.transform;
+        //rigidbody.isKinematic = true;
+        pulledOn = true;
         interactionScript.UsedObject = this;
         interactionScript.IsPulling = true;
         gameObject.layer = LayerMask.NameToLayer(noPlayerCollisionLayerName);
@@ -130,5 +135,20 @@ public class ObjectInteraction : BaseInteractable
     public override bool Combine(GameObject gameObject)
     {
         throw new NotImplementedException();
+    }
+    private void ResetLayer()
+    {
+        gameObject.layer = LayerMask.NameToLayer("Default");
+    }
+    protected void PushPull()
+    {
+        if (pulledOn)
+        {
+            this.rigidbody.velocity = playerRigidbody.velocity;
+        }
+    }
+    private void FixedUpdate()
+    {
+        PushPull();
     }
 }
