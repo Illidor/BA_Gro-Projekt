@@ -22,12 +22,19 @@ public class ObjectInteraction : BaseInteractable
 
     protected new Rigidbody rigidbody;
     protected new Collider collider;
+    protected AudioManager audioManager;
+
+    [SerializeField]
+    protected string dropSound;
+    [SerializeField]
+    protected string pickUpSound;
 
     protected void Awake()
     {
         rigidbody = GetComponent<Rigidbody>();
         collider = GetComponent<Collider>();
         playerRigidbody = InteractionScript.Get().transform.GetComponent<Rigidbody>();
+        audioManager = FindObjectOfType<AudioManager>();
     }
 
     #region InteractCarryPull
@@ -60,6 +67,7 @@ public class ObjectInteraction : BaseInteractable
     
     private void CarryOneHand(InteractionScript interactionScript)
     {
+        PlaySound(pickUpSound);
         //SetIKPoint(interactionScript, 1);
         ConnectToIK(interactionScript, 1);
     }
@@ -73,6 +81,7 @@ public class ObjectInteraction : BaseInteractable
 
     private void CarryTwoHands(InteractionScript interactionScript)
     {
+        PlaySound(pickUpSound);
         //SetIKPoint(interactionScript, 2);
         ConnectToIK(interactionScript, 2);
     }
@@ -115,8 +124,16 @@ public class ObjectInteraction : BaseInteractable
     {
         return false;
     }
-
-
+    
+    protected void PlaySound(string soundType)
+    {
+        if (GetComponent<AudioSource>() != null)
+        {
+            Destroy(GetComponent<AudioSource>());
+        }
+        audioManager.AddSound(soundType, this.gameObject);
+        GetComponent<AudioSource>().Play();
+    }
 
     public virtual void PutDown(InteractionScript interactionScript)
     {
@@ -138,7 +155,7 @@ public class ObjectInteraction : BaseInteractable
     {
         throw new NotImplementedException();
     }
-    private void ResetLayer()
+    protected void ResetLayer()
     {
         gameObject.layer = LayerMask.NameToLayer("Default");
     }
@@ -149,7 +166,7 @@ public class ObjectInteraction : BaseInteractable
             this.rigidbody.velocity = playerRigidbody.velocity;
         }
     }
-    private void FixedUpdate()
+    protected void FixedUpdate()
     {
         PushPull();
     }

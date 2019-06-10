@@ -29,9 +29,10 @@ public class Carryable : ObjectInteraction
 
     private void Grab(InteractionScript interactionScript)
     {
+        PlaySound(pickUpSound);
         AttachToPlayer(interactionScript);
         transform.localPosition = Vector3.zero;
-
+        
         gameObject.layer = LayerMask.NameToLayer(noPlayerCollisionLayerName);
     }
 

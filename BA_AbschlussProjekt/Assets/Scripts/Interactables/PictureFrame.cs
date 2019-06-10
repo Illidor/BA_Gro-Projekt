@@ -10,6 +10,10 @@ public class PictureFrame : ObjectInteraction
     private float velocity;
     private void OnCollisionEnter(Collision other)
     {
+        if (velocity < -1)
+        {
+
+        }
         if (other.collider.material.bounciness < 0.6 && !broken && velocity < -10)
         {
             Break();
