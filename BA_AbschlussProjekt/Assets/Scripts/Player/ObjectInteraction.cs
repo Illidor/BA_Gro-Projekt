@@ -91,8 +91,8 @@ public class ObjectInteraction : BaseInteractable
         //transform.parent = interactionScript.GrabingPoint.transform;
         //rigidbody.isKinematic = true;
         pulledOn = true;
-        interactionScript.UsedObject = this;
-        interactionScript.IsPulling = true;
+        interactionScript.CarriedObject = (Carryable)(BaseInteractable)this;
+        interactionScript.IsCarrying = true;
         gameObject.layer = LayerMask.NameToLayer(noPlayerCollisionLayerName);
     }
 
@@ -130,7 +130,7 @@ public class ObjectInteraction : BaseInteractable
         //TODO: Detach IK
         transform.parent = InstancePool.transform;
         rigidbody.isKinematic = false;
-        interactionScript.UsedObject = null;
+        interactionScript.CarriedObject = null;
     }
 
     public override bool Combine(GameObject gameObject)
@@ -151,5 +151,10 @@ public class ObjectInteraction : BaseInteractable
     private void FixedUpdate()
     {
         PushPull();
+    }
+
+    public override bool Use()
+    {
+        throw new NotImplementedException();
     }
 }

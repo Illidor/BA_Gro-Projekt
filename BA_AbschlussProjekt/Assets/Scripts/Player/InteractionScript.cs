@@ -19,7 +19,7 @@ public class InteractionScript : MonoBehaviour
     private Transform grabingPoint;
 
 
-    private Carryable carriedObject;
+    public Carryable carriedObject;
     public Carryable CarriedObject
     {
         get { return carriedObject; }
@@ -45,7 +45,10 @@ public class InteractionScript : MonoBehaviour
 
         if (IsCarrying)
         {
-            HandleThrowing();
+            if (CTRLHub.ThrowUp)
+            {
+                carriedObject.Throw(this, 0);
+            }
             //if is carrying stuff handle use of those
             HandleUseObject();
         }
@@ -74,7 +77,7 @@ public class InteractionScript : MonoBehaviour
                 }
 
             }
-            else
+            else if (CarriedObject != null)
             {
                 CarriedObject.Use();
             }
@@ -85,19 +88,11 @@ public class InteractionScript : MonoBehaviour
         }
     }
 
-    private void HandleThrowing()
+    private void HandledDrop()
     {
-        if (CTRLHub.ThrowDown)
-            throwChargeTimer = Time.time;
-
         if (CTRLHub.ThrowUp)
         {
-            // time difference times time difference multiplicator times overall multiplicator
-            float finalThrowingStrength = (Time.time - throwChargeTimer) * throwingChargeModifier * throwingStrength; 
-            if (finalThrowingStrength > maxThrowingStrength)
-                finalThrowingStrength = maxThrowingStrength;
-
-            CarriedObject.Throw(this, finalThrowingStrength);
+            carriedObject.Throw(this,0);
         }
     }
 
@@ -107,6 +102,11 @@ public class InteractionScript : MonoBehaviour
         {
             CarriedObject.Use();
         }
+    }
+
+    public static InteractionScript Get()
+    {
+        return GameObject.Find("Player").GetComponent<InteractionScript>();
     }
 }
 
