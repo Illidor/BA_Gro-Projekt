@@ -132,7 +132,10 @@ public class ObjectInteraction : BaseInteractable
             Destroy(GetComponent<AudioSource>());
         }
         audioManager.AddSound(soundType, this.gameObject);
-        GetComponent<AudioSource>().Play();
+        if(GetComponent<AudioSource>() != null)
+        {
+            GetComponent<AudioSource>().Play();
+        }
     }
 
     public virtual void PutDown(InteractionScript interactionScript)

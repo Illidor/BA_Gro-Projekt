@@ -8,6 +8,8 @@ public class PictureInteraction : BaseInteractable
 
     public GameObject objectToInteract;
 
+    public GameObject objectToSpawn;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -26,7 +28,9 @@ public class PictureInteraction : BaseInteractable
         if(otherGameObject.name == objectToInteract.name)
         {
             renderer.enabled = true;
+            otherGameObject.GetComponent<Carryable>().PutDown(InteractionScript.Get());
             Destroy(otherGameObject);
+            GameObject gO = Instantiate(objectToSpawn);
             return true;
         }
         else

@@ -5,13 +5,15 @@ using UnityEngine;
 public class DoorKeyInteraction : BaseInteractable
 {
     [SerializeField] GameObject keyInLock;
-    [SerializeField] GameObject objectToInteractWith;
+    [SerializeField] string objectToInteractWith;
 
     public override bool Combine(GameObject otherGameObject)
     {
-        if(otherGameObject.name == objectToInteractWith.name)
+        if(otherGameObject.name == objectToInteractWith)
         {
             keyInLock.SetActive(true);
+            GetComponent<Animator>().SetTrigger("open");
+            Destroy(otherGameObject);
             return true;
         }
         else
