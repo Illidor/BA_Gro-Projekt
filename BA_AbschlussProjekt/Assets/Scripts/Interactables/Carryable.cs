@@ -53,7 +53,7 @@ public class Carryable : BaseInteractable
     {
         transform.parent = interactionScript.GrabingPoint.transform;
         rigidbody.isKinematic = true;
-        //interactionScript.CarriedObject = this;
+        interactionScript.CarriedObject = this;
     }
 
     public void Throw(InteractionScript interactionScript, float throwingStrength)
@@ -84,7 +84,7 @@ public class Carryable : BaseInteractable
     {
         transform.parent = InstancePool.transform;
         rigidbody.isKinematic = false;
-        //interactionScript.CarriedObject = null;
+        interactionScript.CarriedObject = null;
     }
 
     private void ResetLayer()
