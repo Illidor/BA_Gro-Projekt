@@ -66,6 +66,7 @@ public class ObjectInteraction : BaseInteractable
 
     private void PullOneHand(InteractionScript interactionScript)
     {
+        pulledOn = true;
         //SetIKPoint(interactionScript, 1);
         ConnectToIK(interactionScript, 1);
     }
@@ -78,6 +79,7 @@ public class ObjectInteraction : BaseInteractable
 
     private void PullTwoHands(InteractionScript interactionScript)
     {
+        pulledOn = true;
         //SetIKPoint(interactionScript, 2);
         ConnectToIK(interactionScript, 2);
     }
@@ -90,9 +92,8 @@ public class ObjectInteraction : BaseInteractable
         //TODO: IK Funktion
         //transform.parent = interactionScript.GrabingPoint.transform;
         //rigidbody.isKinematic = true;
-        pulledOn = true;
-        interactionScript.CarriedObject = (Carryable)(BaseInteractable)this;
-        interactionScript.IsCarrying = true;
+        interactionScript.UsedObject = (ObjectInteraction)(BaseInteractable)this;
+        interactionScript.IsPulling = true;
         gameObject.layer = LayerMask.NameToLayer(noPlayerCollisionLayerName);
     }
 
@@ -130,7 +131,7 @@ public class ObjectInteraction : BaseInteractable
         //TODO: Detach IK
         transform.parent = InstancePool.transform;
         rigidbody.isKinematic = false;
-        interactionScript.CarriedObject = null;
+        interactionScript.UsedObject = null;
     }
 
     public override bool Combine(GameObject gameObject)
@@ -155,6 +156,7 @@ public class ObjectInteraction : BaseInteractable
 
     public override bool Use()
     {
+        Debug.Log("no usecase");
         throw new NotImplementedException();
     }
 }

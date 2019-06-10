@@ -2,57 +2,50 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.Linq;
 
 public class InteractionScript : MonoBehaviour
 {
-    [SerializeField] [Tooltip("Max distance to objects the player is able to grab")]
-    private float grabingReach = 1.5f;
-    [SerializeField] [Tooltip("Multiplicator of final throwing strength")]
-    private float throwingStrength = 1f;
-    [SerializeField] [Tooltip("Multiplicator of overtime strength when holding down the throw button")]
-    private float throwingChargeModifier = 1f;
     [SerializeField]
-    [Tooltip("Maximum throwing strength. Needed to not overpower charge")]
-    private float maxThrowingStrength = 30f;
-    [Space]
-    [SerializeField] [Tooltip("Hand the carried object is parented to")]
+    [Tooltip("Max distance to objects the player is able to grab")]
+    private float grabingReach = 1.5f;
+    [SerializeField]
+    [Tooltip("Hand the carried object is parented to")]
     private Transform grabingPoint;
 
-
-    public Carryable carriedObject;
-    public Carryable CarriedObject
+    private ObjectInteraction usedObject;
+    public ObjectInteraction UsedObject
     {
-        get { return carriedObject; }
+        get { return usedObject; }
         set
         {
-            carriedObject = value;
-            IsCarrying = (value == null ? false : true);
+            usedObject = value;
+            IsInteracting = (value == null ? false : true);
+            IsPulling = (value == null ? false : true);
         }
     }
 
-    public bool IsCarrying { get; set; }
-
+    public bool IsInteracting { get; set; }
     public Transform GrabingPoint { get { return grabingPoint; } }
 
-
-    private float throwChargeTimer;
-
+    public bool IsPulling { get; set; }
 
     private void Update()
     {
         if (CTRLHub.InteractDown)
             CheckInteraction();
 
-        if (IsCarrying)
+        if (IsInteracting)
         {
             if (CTRLHub.ThrowUp)
             {
-                carriedObject.Throw(this, 0);
+                HandledDrop();
             }
-            //if is carrying stuff handle use of those
             HandleUseObject();
         }
     }
+
+
 
     private void CheckInteraction()
     {
@@ -64,27 +57,26 @@ public class InteractionScript : MonoBehaviour
 
             if (interactableToInteractWith != null)
             {
-                if (IsCarrying)
+                if (IsInteracting)
                 {
-                    Debug.Log("combine " + CarriedObject.name  +" with " + interactableToInteractWith.name);
-                    CarriedObject.Combine(this, interactableToInteractWith);
+                    Debug.Log("combine " + UsedObject.name + " with " + interactableToInteractWith.name);
+                    UsedObject.Combine(this, interactableToInteractWith);
 
-                    interactableToInteractWith.gameObject.GetComponent<BaseInteractable>().Combine(CarriedObject.gameObject);
+                    interactableToInteractWith.gameObject.GetComponent<BaseInteractable>().Combine(UsedObject.gameObject);
                 }
                 else
                 {
                     interactableToInteractWith.Interact(this);
                 }
-
             }
-            else if (CarriedObject != null)
+            else if (UsedObject != null)
             {
-                CarriedObject.Use();
+                UsedObject.Use();
             }
         }
-        else if(CarriedObject != null)
+        else if (UsedObject != null)
         {
-            CarriedObject.Use();
+            UsedObject.Use();
         }
     }
 
@@ -92,24 +84,21 @@ public class InteractionScript : MonoBehaviour
     {
         if (CTRLHub.ThrowUp)
         {
-            carriedObject.Throw(this,0);
+            UsedObject.PutDown(this);
         }
     }
-
     private void HandleUseObject()
     {
         if (Input.GetKeyDown(KeyCode.Keypad3))
         {
-            CarriedObject.Use();
+            UsedObject.Use();
         }
     }
-
     public static InteractionScript Get()
     {
-        return GameObject.Find("Player").GetComponent<InteractionScript>();
+        return GameObject.FindGameObjectWithTag("Player").GetComponent<InteractionScript>();
     }
 }
-
 
 /*
 
