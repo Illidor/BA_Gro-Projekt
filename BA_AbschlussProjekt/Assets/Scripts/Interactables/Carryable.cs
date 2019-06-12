@@ -29,7 +29,7 @@ public class Carryable : ObjectInteraction
 
     private void Grab(InteractionScript interactionScript)
     {
-        PlaySound(pickUpSound);
+        PlaySound(soundNames[Convert.ToInt16(SoundTypes.pickup)]);
         AttachToPlayer(interactionScript);
         transform.localPosition = Vector3.zero;
         

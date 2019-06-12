@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.Linq;
 
 
 [RequireComponent(typeof(Rigidbody))]
@@ -23,11 +24,18 @@ public class ObjectInteraction : BaseInteractable
     protected new Rigidbody rigidbody;
     protected new Collider collider;
     protected AudioManager audioManager;
+    [SerializeField]
+    protected AudioSource[] sounds;   
 
     [SerializeField]
-    protected string dropSound;
+    private float velocity;
     [SerializeField]
-    protected string pickUpSound;
+    protected string[] soundNames;
+    protected enum SoundTypes
+    {
+        pickup=0,
+        drop=1 //TODO: override
+    }
 
     protected void Awake()
     {
@@ -64,10 +72,10 @@ public class ObjectInteraction : BaseInteractable
         }
         return true;
     }
-    
+
     private void CarryOneHand(InteractionScript interactionScript)
     {
-        PlaySound(pickUpSound);
+        PlaySound(soundNames[Convert.ToInt16(SoundTypes.pickup)]);
         //SetIKPoint(interactionScript, 1);
         ConnectToIK(interactionScript, 1);
     }
@@ -81,7 +89,7 @@ public class ObjectInteraction : BaseInteractable
 
     private void CarryTwoHands(InteractionScript interactionScript)
     {
-        PlaySound(pickUpSound);
+        PlaySound(soundNames[Convert.ToInt16(SoundTypes.pickup)]);
         //SetIKPoint(interactionScript, 2);
         ConnectToIK(interactionScript, 2);
     }
@@ -129,11 +137,24 @@ public class ObjectInteraction : BaseInteractable
     {
         if (GetComponent<AudioSource>() != null)
         {
-            Destroy(GetComponent<AudioSource>());
+            sounds = GetComponents<AudioSource>();
+            foreach (AudioSource sound in sounds)
+            {
+                if (sound.clip.name == soundType)
+                {
+                    sound.Play();
+                }
+                else
+                {
+                    audioManager.AddSound(soundType, this.gameObject);
+                    sounds = GetComponents<AudioSource>();
+                    sounds.First(audios => audios.name == soundType).Play();
+                }
+            }
         }
-        audioManager.AddSound(soundType, this.gameObject);
-        if(GetComponent<AudioSource>() != null)
+        else
         {
+            audioManager.AddSound(soundType, this.gameObject);
             GetComponent<AudioSource>().Play();
         }
     }
@@ -172,8 +193,15 @@ public class ObjectInteraction : BaseInteractable
     protected void FixedUpdate()
     {
         PushPull();
+        velocity = rigidbody.velocity.y;
     }
-
+    private void OnCollisionEnter(Collision other)
+    {
+        if (velocity < -3)
+        {
+            PlaySound(soundNames[Convert.ToInt16(SoundTypes.drop)]);
+        }
+    }
     public override bool Use()
     {
         Debug.Log("no usecase");

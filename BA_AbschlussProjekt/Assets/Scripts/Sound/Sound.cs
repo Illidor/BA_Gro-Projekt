@@ -5,7 +5,7 @@ using UnityEngine;
 public class Sound
 {
 
-    public string name;
+    //public string name;
 
     public AudioClip clip;
 
@@ -20,6 +20,7 @@ public class Sound
     public float pitchVariance = .1f;
 
     public bool loop = false;
+    public bool playOnAwake = false;
 
     public AudioMixerGroup mixerGroup;
 
