@@ -6,14 +6,12 @@ using UnityEngine;
 /// Base class for all interactable objects.
 /// </summary>
 public abstract class BaseInteractable : MonoBehaviour
-{
+{ 
     /// <summary>
     /// To be fired when an interaction starts. Return whether the Interaction was successfull (true) or not (false)
     /// </summary>
     /// <returns>Whether the Interaction was successfull (true) or not (false)</returns>
     public abstract bool Interact(InteractionScript interactionScript);
-
-    public abstract bool Combine(GameObject gameObject);
-
-    public abstract bool Use();
 }
+
+

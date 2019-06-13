@@ -2,24 +2,16 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class HatchInteraction : BaseInteractable
+public class HatchInteraction : MonoBehaviour, ICombinable
 {
-    public List<GameObject> thingsToInteractWtih;
+    public List<BaseInteractable> thingsToInteractWtih;
     public List<GameObject> correlatingGameObjects;
 
-
-
-    public override bool Interact(InteractionScript interactionScript)
+    public bool Combine(InteractionScript player, BaseInteractable interactingComponent)
     {
-       return false;
-    }
-
-    public override bool Combine(GameObject gameObject)
-    {
-        Debug.Log("Interacting with: " + gameObject.name);
-        foreach (var gO in thingsToInteractWtih)
+        foreach (BaseInteractable interactable in thingsToInteractWtih)
         {
-            if(gameObject.name == gO.name)
+            if(interactingComponent.name == interactable.name)
             {
                 try
                 {
@@ -29,7 +21,7 @@ public class HatchInteraction : BaseInteractable
 
 
 
-                foreach (var cgO in correlatingGameObjects)
+                foreach (GameObject cgO in correlatingGameObjects)
                 {
                     try
                     {
@@ -48,8 +40,4 @@ public class HatchInteraction : BaseInteractable
         return false;
     }
 
-    public override bool Use()
-    {
-        return false;
-    }
 }

@@ -14,23 +14,12 @@ public class ForceInteraction : BaseInteractable
 
     private bool alreadyForcedInteraction = false;
 
-    public override bool Combine(GameObject gameObject)
-    {
-        //Do nithing?!
-        return false;
-    }
-
     public override bool Interact(InteractionScript interactionScript)
     {
         if (oneTimeOnly && alreadyForcedInteraction)
             return false;
         alreadyForcedInteraction = true;
 
-        return toForceInteractionOn.Interact(interactionScript);
-    }
-
-    public override bool Use()
-    {
-        return false;
+        return (bool)toForceInteractionOn?.Interact(interactionScript);
     }
 }

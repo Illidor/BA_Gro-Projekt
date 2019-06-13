@@ -2,33 +2,22 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DoorKeyInteraction : BaseInteractable
+public class DoorKeyInteraction : MonoBehaviour, ICombinable        // I see similarities with PictureInteraction
 {
-    [SerializeField] GameObject keyInLock;
-    [SerializeField] string objectToInteractWith;
+    [SerializeField]
+    GameObject keyInLock;
+    [SerializeField]
+    string objectToInteractWith;
 
-    public override bool Combine(GameObject otherGameObject)
+    public bool Combine(InteractionScript player, BaseInteractable interactingComponent)
     {
-        if(otherGameObject.name == objectToInteractWith)
+        if(interactingComponent.name == objectToInteractWith)
         {
             keyInLock.SetActive(true);
             GetComponent<Animator>().SetTrigger("open");
-            Destroy(otherGameObject);
+            Destroy(interactingComponent.gameObject);
             return true;
         }
-        else
-        {
-            return false;
-        }
-    }
-
-    public override bool Interact(InteractionScript interactionScript)
-    {
-        throw new System.NotImplementedException();
-    }
-
-    public override bool Use()
-    {
-        throw new System.NotImplementedException();
+        return false;
     }
 }
