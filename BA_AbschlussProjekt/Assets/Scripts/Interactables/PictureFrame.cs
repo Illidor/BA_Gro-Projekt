@@ -7,7 +7,7 @@ public class PictureFrame : GrabInteractable
 
     private void OnCollisionEnter(Collision other)
     {
-        if (other.collider.material.bounciness < 0.6 && !broken && rigidbodyPulling.velocity.y < -10)
+        if (other.collider.material.bounciness < 0.6 && !broken && rigid.velocity.y < -10)
         {
             Break();
         }

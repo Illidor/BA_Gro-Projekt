@@ -1,6 +1,7 @@
 ﻿using System;
 using CustomEnums;
 using UnityEngine;
+using System.Linq;
 
 /// <summary>
 /// Used for objects that can be carried or pushed
@@ -26,9 +27,24 @@ public class GrabInteractable : BaseInteractable
     protected bool isBeeingPulled;
     protected Rigidbody rigidbodyPulling;
 
+    //Sound
+    protected AudioManager audioManager;
+    [SerializeField]
+    private float velocity;
+    [SerializeField]
+    protected AudioSource[] sounds;
+    protected string[] soundNames;
+    protected enum SoundTypes
+    {
+        pickup = 0,
+        drop = 1 //TODO: override
+    }
+
+
     protected void Awake()
     {
         rigid = GetComponent<Rigidbody>();
+        audioManager = FindObjectOfType<AudioManager>();
     }
 
     public override bool Interact(InteractionScript player)
@@ -36,10 +52,15 @@ public class GrabInteractable : BaseInteractable
         InteractionConditions playersConditions = player.PlayerHealth.GetInjuriesAsInteractionConditions();
 
         if (possibleConditionsToCarry.HasFlag(playersConditions))
+        {
+            PlaySound(soundNames[(int)SoundTypes.pickup]);
             return CarryOutInteraction_Carry(player);
+        }
 
         if (possibleConditionsToPush.HasFlag(playersConditions))
+        {
             return CarryOutInteraction_Push(player);
+        }
 
         return false;
     }
@@ -81,8 +102,9 @@ public class GrabInteractable : BaseInteractable
 
     private void FixedUpdate()
     {
+        velocity = rigid.velocity.y;
         //TODO: better implementation of pulling. Maybe considering objects weight and players conditions
-        if(isBeeingPulled)
+        if (isBeeingPulled)
             rigid.velocity = rigidbodyPulling.velocity;     
     }
 
@@ -90,6 +112,47 @@ public class GrabInteractable : BaseInteractable
     {
         gameObject.layer = LayerMask.NameToLayer("Default");
 
+    }
+
+    /// <summary>
+    /// Play a sound of a type eg. pickup, drop
+    /// </summary>
+    /// <param name="soundType">type eg. pickup, drop</param>
+    protected void PlaySound(string soundType)
+    {
+        if (GetComponent<AudioSource>() != null)
+        {
+            sounds = GetComponents<AudioSource>();
+            foreach (AudioSource sound in sounds)
+            {
+                if (sound.clip.name == soundType)
+                {
+                    sound.Play();
+                }
+                else
+                {
+                    audioManager.AddSound(soundType, this.gameObject);
+                    sounds = GetComponents<AudioSource>();
+                    sounds.First(audios => audios.name == soundType).Play();
+                }
+            }
+        }
+        else
+        {
+            audioManager.AddSound(soundType, this.gameObject);
+            GetComponent<AudioSource>().Play();
+        }
+    }
+
+    /// <summary>
+    /// play dropsound when falling from high
+    /// </summary>
+    private void OnCollisionEnter(Collision other)
+    {
+        if (velocity < -3)
+        {
+            PlaySound(soundNames[(int)SoundTypes.drop]);
+        }
     }
 
 }
