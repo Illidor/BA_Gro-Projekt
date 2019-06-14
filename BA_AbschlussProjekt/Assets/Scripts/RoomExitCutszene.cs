@@ -30,7 +30,7 @@ public class RoomExitCutszene : MonoBehaviour
 
     private void Update()
     {
-        if (fixLook)
+        if (fixLook && lookAtObj != null)
         {
             playerObject.GetComponentInParent<Transform>().LookAt(lookAtObj.transform.position);
         }

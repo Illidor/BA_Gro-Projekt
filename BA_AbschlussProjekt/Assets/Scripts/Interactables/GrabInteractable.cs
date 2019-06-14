@@ -156,7 +156,10 @@ public class GrabInteractable : BaseInteractable
     {
         if (velocity < -3)
         {
-            PlaySound(soundNames[(int)SoundTypes.drop]);
+            if (GetComponent<AudioSource>() != null)
+            {
+                PlaySound(soundNames[(int)SoundTypes.drop]);
+            }
         }
     }
 
