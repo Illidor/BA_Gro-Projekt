@@ -5,17 +5,14 @@ using UnityEngine.UI;
 
 public class FlashbackInteraction : BaseInteractable
 {
-    public Image image;
-    public List<Sprite> flashbackSprite;
-    public Carryable secondInteraction;
-
-    public float flashbackTimer;
-
-
-    public override bool Combine(GameObject gameObject)
-    {
-        return false;
-    }
+    [SerializeField]
+    private float flashbackTimer;
+    [SerializeField]
+    private List<Sprite> flashbackSprites;
+    [SerializeField]
+    private Image image;
+    [SerializeField]
+    public BaseInteractable secondInteraction;
 
     public override bool Interact(InteractionScript interactionScript)
     {
@@ -23,15 +20,10 @@ public class FlashbackInteraction : BaseInteractable
         StartCoroutine(showFLashback(interactionScript));
         return true;
     }
-
-    public override bool Use()
-    {
-        return false;
-    }
-
+    
     private IEnumerator showFLashback(InteractionScript interactionScript)
     {
-        foreach (var item in flashbackSprite)
+        foreach (Sprite item in flashbackSprites)
         {
             image.enabled = true;
             image.sprite = item;
@@ -39,10 +31,8 @@ public class FlashbackInteraction : BaseInteractable
             image.enabled = false;
         }
 
-        if(secondInteraction != null)
-        {
-            secondInteraction.Interact(interactionScript);
-        }
-        yield return new WaitForFixedUpdate();
+        secondInteraction?.Interact(interactionScript);
+
+        yield return null;
     }
 }

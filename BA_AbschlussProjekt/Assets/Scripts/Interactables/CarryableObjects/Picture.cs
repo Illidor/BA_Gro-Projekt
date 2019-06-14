@@ -2,31 +2,24 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Picture : Carryable
+public class Picture : GrabInteractable
 {
     public List<GameObject> pictureParts = new List<GameObject>();
     private MeshRenderer pictureUnbroken;
     private BoxCollider interactionCollider;
 
-    // Start is called before the first frame update
     void Start()
     {
         pictureUnbroken = GetComponent<MeshRenderer>();
         interactionCollider = GetComponent<BoxCollider>();
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
     private void OnCollisionEnter(Collision collision)
     {
-        // Check for Physics Material
-        if(base.isInUse == false)
+        // Check for Physics Material            no idea what this comment means, maybe a todo? The code had nothing to do with physics materials... I'll leave it in just in case
+        if(isBeeingCarried == false)
         {
-            foreach (var part in pictureParts)
+            foreach (GameObject part in pictureParts)
             {
                 pictureUnbroken.enabled = false;
                 interactionCollider.enabled = false;
