@@ -8,7 +8,7 @@ public class PictureInteraction : MonoBehaviour, ICombinable
 
     public GameObject objectToInteract;
 
-    public GameObject objectToSpawn;
+    public GameObject boxToOpen;
 
     void Start()
     {
@@ -20,9 +20,12 @@ public class PictureInteraction : MonoBehaviour, ICombinable
     {
         if(interactingComponent.name == objectToInteract.name)
         {
-            renderer.enabled = true;
-            Destroy(interactingComponent.gameObject);
-            Instantiate(objectToSpawn);
+            ((GrabInteractable)interactingComponent).PutDown(player);
+            interactingComponent.gameObject.GetComponent<Rigidbody>().isKinematic = true;
+            interactingComponent.transform.SetParent(transform);
+            interactingComponent.transform.localPosition = Vector3.zero;
+            interactingComponent.transform.localEulerAngles = Vector3.zero;
+            boxToOpen.GetComponent<Animation>().Play();
             return true;
         }
         return false;

@@ -17,7 +17,7 @@ public class Picture : GrabInteractable
     private void OnCollisionEnter(Collision collision)
     {
         // Check for Physics Material            no idea what this comment means, maybe a todo? The code had nothing to do with physics materials... I'll leave it in just in case
-        if(isBeeingCarried == false)
+        if(IsBeeingCarried == false)
         {
             foreach (GameObject part in pictureParts)
             {
