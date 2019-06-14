@@ -8,7 +8,7 @@ public class PictureInteraction : MonoBehaviour, ICombinable
 
     public GameObject objectToInteract;
 
-    public GameObject objectToSpawn;
+    public GameObject boxToOpen;
 
     void Start()
     {
@@ -22,7 +22,7 @@ public class PictureInteraction : MonoBehaviour, ICombinable
         {
             renderer.enabled = true;
             Destroy(interactingComponent.gameObject);
-            Instantiate(objectToSpawn);
+            boxToOpen.GetComponent<Animation>().Play();
             return true;
         }
         return false;
