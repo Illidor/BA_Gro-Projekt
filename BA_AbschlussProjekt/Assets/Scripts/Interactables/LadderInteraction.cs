@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class LadderInteraction : BaseInteractable
+public class LadderInteraction : ConditionedInteractable
 {
     [SerializeField]
     private float climbingSpeed;
@@ -25,32 +25,6 @@ public class LadderInteraction : BaseInteractable
             if (value == false)
                 currentClimber = null;
         }
-    }
-
-    public override bool Interact(InteractionScript interactionScript)
-    {
-        currentClimber = interactionScript;
-        currentClimber.GetComponent<Rigidbody>().isKinematic = true;
-        currentClimber.GetComponent<Rigidbody>().useGravity = false;
-
-        //Snap Player onto nearest Pos on Ladder
-        Vector3 heading = endPoint.position - startPoint.position;
-        float magnitudeMax = heading.magnitude;
-        heading.Normalize();
-        Vector3 lhs = currentClimber.transform.position - startPoint.position;
-        float dotProd = Vector3.Dot(lhs, heading);
-        dotProd = Mathf.Clamp(dotProd, 0f, magnitudeMax);
-        Vector3 ladderMountingPos = startPoint.position + heading * dotProd;
-
-        if (ladderMountingPos.y <= startPoint.position.y)
-            ladderMountingPos = startPoint.position + new Vector3(0, 0.075f, 0);
-        else if (ladderMountingPos.y >= startPoint.position.y)
-            ladderMountingPos = startPoint.position + new Vector3(0, -0.075f, 0);
-        currentClimber.transform.position = ladderMountingPos;
-
-        IsBeeingClimbed = true;
-
-        return true;
     }
 
     void Update()
@@ -80,14 +54,29 @@ public class LadderInteraction : BaseInteractable
         currentClimber = null;
     }
 
-
-    public override bool Combine(GameObject gameObject)
+    public override bool CarryOutInteraction(InteractionScript player)
     {
-        throw new NotImplementedException();
-    }
+        currentClimber = player;
+        currentClimber.GetComponent<Rigidbody>().isKinematic = true;
+        currentClimber.GetComponent<Rigidbody>().useGravity = false;
 
-    public override bool Use()
-    {
-        throw new NotImplementedException();
+        //Snap Player onto nearest Pos on Ladder
+        Vector3 heading = endPoint.position - startPoint.position;
+        float magnitudeMax = heading.magnitude;
+        heading.Normalize();
+        Vector3 lhs = currentClimber.transform.position - startPoint.position;
+        float dotProd = Vector3.Dot(lhs, heading);
+        dotProd = Mathf.Clamp(dotProd, 0f, magnitudeMax);
+        Vector3 ladderMountingPos = startPoint.position + heading * dotProd;
+
+        if (ladderMountingPos.y <= startPoint.position.y)
+            ladderMountingPos = startPoint.position + new Vector3(0, 0.075f, 0);
+        else if (ladderMountingPos.y >= startPoint.position.y)
+            ladderMountingPos = startPoint.position + new Vector3(0, -0.075f, 0);
+        currentClimber.transform.position = ladderMountingPos;
+
+        IsBeeingClimbed = true;
+
+        return true;
     }
 }
