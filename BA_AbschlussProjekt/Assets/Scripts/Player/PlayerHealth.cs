@@ -306,7 +306,8 @@ public class PlayerHealth : MonoBehaviour
 
             default: break;
         }
-        return InteractionConditions.Unable;
+
+        throw new Exception("Impossible combination received. ");
     }
 }
 
