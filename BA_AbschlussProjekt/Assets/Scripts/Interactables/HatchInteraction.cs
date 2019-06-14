@@ -9,6 +9,7 @@ public class HatchInteraction : MonoBehaviour, ICombinable
 
     public bool Combine(InteractionScript player, BaseInteractable interactingComponent)
     {
+        Debug.Log("Hatch Combine");
         foreach (BaseInteractable interactable in thingsToInteractWtih)
         {
             if(interactingComponent.name == interactable.name)

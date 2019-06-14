@@ -46,7 +46,7 @@ public class InteractionScript : MonoBehaviour
         Ray screenCenterRay = Camera.main.ScreenPointToRay(Input.mousePosition);
 
         RaycastHit raycastHit;
-        bool didRaycastHit = Physics.Raycast(screenCenterRay, out raycastHit, emptyHandedGrabingReach);
+        bool didRaycastHit = Physics.Raycast(screenCenterRay, out raycastHit, grabingReach);
 
         if (IsCarrying == false)
         {
