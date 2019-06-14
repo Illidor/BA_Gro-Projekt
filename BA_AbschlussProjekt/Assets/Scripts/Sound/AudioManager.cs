@@ -18,14 +18,14 @@ public class AudioManager : MonoBehaviour
 			audioManager = this;
 			DontDestroyOnLoad(gameObject);
 		}
-		foreach (Sound s in sounds)
-		{
-			//s.source = gameObject.AddComponent<AudioSource>();
-			//s.source.clip = s.clip;
-			//s.source.loop = s.loop;
-   //         s.source.playOnAwake = s.playOnAwake;
+		//foreach (Sound s in sounds)
+		//{
+		//	//s.source = gameObject.AddComponent<AudioSource>();
+		//	//s.source.clip = s.clip;
+		//	//s.source.loop = s.loop;
+        //  //s.source.playOnAwake = s.playOnAwake;
             
-		}
+		//}
 	}
     public void AddSound(string soundName, GameObject sourceObject)
     {
