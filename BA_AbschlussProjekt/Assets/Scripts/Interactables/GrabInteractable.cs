@@ -30,6 +30,7 @@ public class GrabInteractable : BaseInteractable
     private float velocity;
     [SerializeField]
     protected AudioSource[] sounds;
+    [SerializeField]
     protected string[] soundNames;
 
     public bool IsBeeingCarried { get; protected set; }
