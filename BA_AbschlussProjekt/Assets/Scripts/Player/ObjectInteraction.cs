@@ -7,10 +7,11 @@ using System.Linq;
 
 [RequireComponent(typeof(Rigidbody))]
 [RequireComponent(typeof(Collider))]
+[Obsolete]
 public class ObjectInteraction : BaseInteractable
 {
-    [SerializeField][Tooltip("What Interactiontype")]
-    private Enums.ObjectParameters objectParameters;
+    //[SerializeField][Tooltip("What Interactiontype")]
+    //private Enums.ObjectParameters objectParameters;
     [SerializeField][Tooltip("The Rigidbody of the Player")]
     private Rigidbody playerRigidbody;
     [SerializeField]
@@ -41,7 +42,7 @@ public class ObjectInteraction : BaseInteractable
     {
         rigidbody = GetComponent<Rigidbody>();
         collider = GetComponent<Collider>();
-        playerRigidbody = InteractionScript.Get().transform.GetComponent<Rigidbody>();
+        //playerRigidbody = InteractionScript.Get().transform.GetComponent<Rigidbody>();
         audioManager = FindObjectOfType<AudioManager>();
     }
 
@@ -53,23 +54,23 @@ public class ObjectInteraction : BaseInteractable
     /// <returns>Returns if Successful</returns>
     public override bool Interact(InteractionScript interactionScript)
     {
-        switch (objectParameters)
-        {
-            case Enums.ObjectParameters.CarryOneHand:
-                CarryOneHand(interactionScript);
-                break;
-            case Enums.ObjectParameters.PullOneHand:
-                PullOneHand(interactionScript);
-                break;
-            case Enums.ObjectParameters.CarryTwoHands:
-                CarryTwoHands(interactionScript);
-                break;
-            case Enums.ObjectParameters.PullTwoHands:
-                PullTwoHands(interactionScript);
-                break;
-            default:
-                return false;
-        }
+        //switch (objectParameters)
+        //{
+        //    case Enums.ObjectParameters.CarryOneHand:
+        //        CarryOneHand(interactionScript);
+        //        break;
+        //    case Enums.ObjectParameters.PullOneHand:
+        //        PullOneHand(interactionScript);
+        //        break;
+        //    case Enums.ObjectParameters.CarryTwoHands:
+        //        CarryTwoHands(interactionScript);
+        //        break;
+        //    case Enums.ObjectParameters.PullTwoHands:
+        //        PullTwoHands(interactionScript);
+        //        break;
+        //    default:
+        //        return false;
+        //}
         return true;
     }
 
@@ -109,8 +110,8 @@ public class ObjectInteraction : BaseInteractable
         //TODO: IK Funktion
         //transform.parent = interactionScript.GrabingPoint.transform;
         //rigidbody.isKinematic = true;
-        interactionScript.UsedObject = (ObjectInteraction)(BaseInteractable)this;
-        interactionScript.IsPulling = true;
+        //interactionScript.UsedObject = (ObjectInteraction)(BaseInteractable)this;
+        //interactionScript.IsPulling = true;
         gameObject.layer = LayerMask.NameToLayer(noPlayerCollisionLayerName);
     }
 
@@ -172,13 +173,9 @@ public class ObjectInteraction : BaseInteractable
         //TODO: Detach IK
         transform.parent = InstancePool.transform;
         rigidbody.isKinematic = false;
-        interactionScript.UsedObject = null;
+        //interactionScript.UsedObject = null;
     }
-
-    public override bool Combine(GameObject gameObject)
-    {
-        throw new NotImplementedException();
-    }
+    
     protected void ResetLayer()
     {
         gameObject.layer = LayerMask.NameToLayer("Default");
@@ -201,10 +198,5 @@ public class ObjectInteraction : BaseInteractable
         {
             PlaySound(soundNames[Convert.ToInt16(SoundTypes.drop)]);
         }
-    }
-    public override bool Use()
-    {
-        Debug.Log("no usecase");
-        throw new NotImplementedException();
     }
 }
