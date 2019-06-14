@@ -54,7 +54,10 @@ public class GrabInteractable : BaseInteractable
 
         if (possibleConditionsToCarry.HasFlag(playersConditions))
         {
-            PlaySound(soundNames[(int)SoundTypes.pickup]);
+            if (GetComponent<AudioSource>() != null)
+            {
+                PlaySound(soundNames[(int)SoundTypes.pickup]);
+            }
             return CarryOutInteraction_Carry(player);
         }
 
@@ -152,7 +155,10 @@ public class GrabInteractable : BaseInteractable
     {
         if (velocity < -3)
         {
-            PlaySound(soundNames[(int)SoundTypes.drop]);
+            if(GetComponent<AudioSource>() != null)
+            {
+                PlaySound(soundNames[(int)SoundTypes.drop]);
+            }
         }
     }
 
