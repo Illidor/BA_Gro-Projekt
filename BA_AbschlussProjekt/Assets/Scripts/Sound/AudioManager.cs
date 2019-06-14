@@ -20,15 +20,16 @@ public class AudioManager : MonoBehaviour
 		}
 		foreach (Sound s in sounds)
 		{
-			s.source = gameObject.AddComponent<AudioSource>();
-			s.source.clip = s.clip;
-			s.source.loop = s.loop;
+			//s.source = gameObject.AddComponent<AudioSource>();
+			//s.source.clip = s.clip;
+			//s.source.loop = s.loop;
+   //         s.source.playOnAwake = s.playOnAwake;
             
 		}
 	}
     public void AddSound(string soundName, GameObject sourceObject)
     {
-        Sound s = Array.Find(sounds, item => item.name == soundName);
+        Sound s = Array.Find(sounds, item => item.clip.name == soundName);
         if (s == null)
         {
             Debug.LogWarning("Sound: " + name + " not found!");
@@ -36,8 +37,11 @@ public class AudioManager : MonoBehaviour
         }
         sourceObject.AddComponent<AudioSource>();
         sourceObject.GetComponent<AudioSource>().clip = s.clip;
+        sourceObject.GetComponent<AudioSource>().loop = s.loop;
         sourceObject.GetComponent<AudioSource>().volume = s.volume;
         sourceObject.GetComponent<AudioSource>().pitch = s.pitch;
+        sourceObject.GetComponent<AudioSource>().playOnAwake = s.playOnAwake;
+        sourceObject.GetComponent<AudioSource>().outputAudioMixerGroup = s.mixerGroup;
     }
     //public void Play(string sound)
     //{

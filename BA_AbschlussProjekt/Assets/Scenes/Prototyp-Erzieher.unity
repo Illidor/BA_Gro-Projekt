@@ -154,7 +154,7 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 2038262176}
   m_PrefabAsset: {fileID: 0}
---- !u!84 &88356306
+--- !u!84 &135380126
 RenderTexture:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -168,7 +168,7 @@ RenderTexture:
   m_DownscaleFallback: 0
   serializedVersion: 3
   m_Width: 512
-  m_Height: 512
+  m_Height: 256
   m_AntiAliasing: 1
   m_DepthFormat: 0
   m_ColorFormat: 52
@@ -418,6 +418,40 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 15
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!84 &552514696
+RenderTexture:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: 
+  m_ImageContentsHash:
+    serializedVersion: 2
+    Hash: 00000000000000000000000000000000
+  m_ForcedFallbackFormat: 4
+  m_DownscaleFallback: 0
+  serializedVersion: 3
+  m_Width: 512
+  m_Height: 512
+  m_AntiAliasing: 1
+  m_DepthFormat: 0
+  m_ColorFormat: 52
+  m_MipMap: 0
+  m_GenerateMips: 1
+  m_SRGB: 0
+  m_UseDynamicScale: 0
+  m_BindMS: 0
+  m_EnableCompatibleFormat: 1
+  m_TextureSettings:
+    serializedVersion: 2
+    m_FilterMode: 1
+    m_Aniso: 1
+    m_MipBias: 0
+    m_WrapU: 1
+    m_WrapV: 1
+    m_WrapW: 1
+  m_Dimension: 2
+  m_VolumeDepth: 1
 --- !u!1 &556156384
 GameObject:
   m_ObjectHideFlags: 0
@@ -743,50 +777,55 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sounds:
-  - name: ClutchAndPicture
-    clip: {fileID: 8300000, guid: 4cbb41d0ee5c6d04f9156966885cbbb0, type: 3}
+  - clip: {fileID: 8300000, guid: 4cbb41d0ee5c6d04f9156966885cbbb0, type: 3}
     volume: 1
     volumeVariance: 0
-    pitch: 0.1
+    pitch: 1
     pitchVariance: 0
     loop: 0
-    mixerGroup: {fileID: 0}
+    playOnAwake: 0
+    mixerGroup: {fileID: 5178708053223807269, guid: 6872fd114135b4f46bccacb6c64a5036,
+      type: 2}
     source: {fileID: 0}
-  - name: Book
-    clip: {fileID: 8300000, guid: e25364716be8d5a4d9e8c876221c504c, type: 3}
+  - clip: {fileID: 8300000, guid: e25364716be8d5a4d9e8c876221c504c, type: 3}
     volume: 1
     volumeVariance: 0
-    pitch: 0.1
+    pitch: 1
     pitchVariance: 0
     loop: 0
-    mixerGroup: {fileID: 0}
+    playOnAwake: 0
+    mixerGroup: {fileID: 5178708053223807269, guid: 6872fd114135b4f46bccacb6c64a5036,
+      type: 2}
     source: {fileID: 0}
-  - name: Fall
-    clip: {fileID: 8300000, guid: 1b3af4b1a70529745b1adf166596e325, type: 3}
+  - clip: {fileID: 8300000, guid: 1b3af4b1a70529745b1adf166596e325, type: 3}
     volume: 1
     volumeVariance: 0
     pitch: 0.1
     pitchVariance: 0
     loop: 0
-    mixerGroup: {fileID: 0}
+    playOnAwake: 0
+    mixerGroup: {fileID: 5178708053223807269, guid: 6872fd114135b4f46bccacb6c64a5036,
+      type: 2}
     source: {fileID: 0}
-  - name: Matresse
-    clip: {fileID: 8300000, guid: a5dd28d7b39593f458bca26ab120fd2c, type: 3}
+  - clip: {fileID: 8300000, guid: a5dd28d7b39593f458bca26ab120fd2c, type: 3}
     volume: 1
     volumeVariance: 0
-    pitch: 0.1
+    pitch: 1
     pitchVariance: 0
     loop: 0
-    mixerGroup: {fileID: 0}
+    playOnAwake: 0
+    mixerGroup: {fileID: 5178708053223807269, guid: 6872fd114135b4f46bccacb6c64a5036,
+      type: 2}
     source: {fileID: 0}
-  - name: Door
-    clip: {fileID: 8300000, guid: 5dfe7dda97d917f47b3e1fdfdede8231, type: 3}
+  - clip: {fileID: 8300000, guid: 5dfe7dda97d917f47b3e1fdfdede8231, type: 3}
     volume: 1
     volumeVariance: 0
     pitch: 0.1
     pitchVariance: 0
     loop: 0
-    mixerGroup: {fileID: 0}
+    playOnAwake: 0
+    mixerGroup: {fileID: 5178708053223807269, guid: 6872fd114135b4f46bccacb6c64a5036,
+      type: 2}
     source: {fileID: 0}
 --- !u!4 &647355978
 Transform:
@@ -1001,7 +1040,7 @@ MonoBehaviour:
   overrideColor: 0
   overridingColor: {r: 0.9999, g: 0.9999, b: 0.9999, a: 0.9999}
   useShadow: 1
-  shadowMapRenderTexture: {fileID: 1285119254}
+  shadowMapRenderTexture: {fileID: 135380126}
   useCookie: 1
   cookieMapRenderTexture: {fileID: 0}
   enableOutOfPhaseColor: 0
@@ -1378,13 +1417,38 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 454802717101530959, guid: 4687304f889dec448b485a3d8b30c155,
         type: 3}
+      propertyPath: sounds.Array.size
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 454802717101530959, guid: 4687304f889dec448b485a3d8b30c155,
+        type: 3}
+      propertyPath: soundNames.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 454802717101530959, guid: 4687304f889dec448b485a3d8b30c155,
+        type: 3}
       propertyPath: dropSound
-      value: ClutchAndPicture
+      value: "Kr\xFCckeBild"
       objectReference: {fileID: 0}
     - target: {fileID: 454802717101530959, guid: 4687304f889dec448b485a3d8b30c155,
         type: 3}
       propertyPath: pickUpSound
-      value: ClutchAndPicture
+      value: "Kr\xFCckeBild"
+      objectReference: {fileID: 0}
+    - target: {fileID: 454802717101530959, guid: 4687304f889dec448b485a3d8b30c155,
+        type: 3}
+      propertyPath: pulledOn
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 454802717101530959, guid: 4687304f889dec448b485a3d8b30c155,
+        type: 3}
+      propertyPath: soundNames.Array.data[0]
+      value: "Kr\xFCckeBild"
+      objectReference: {fileID: 0}
+    - target: {fileID: 454802717101530959, guid: 4687304f889dec448b485a3d8b30c155,
+        type: 3}
+      propertyPath: soundNames.Array.data[1]
+      value: "Kr\xFCckeBild"
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4687304f889dec448b485a3d8b30c155, type: 3}
@@ -1496,7 +1560,7 @@ MonoBehaviour:
   overrideColor: 0
   overridingColor: {r: 0.9999, g: 0.9999, b: 0.9999, a: 0.9999}
   useShadow: 1
-  shadowMapRenderTexture: {fileID: 88356306}
+  shadowMapRenderTexture: {fileID: 552514696}
   useCookie: 1
   cookieMapRenderTexture: {fileID: 0}
   enableOutOfPhaseColor: 0
@@ -1504,7 +1568,7 @@ MonoBehaviour:
   outOfPhaseColor: {r: 0, g: 1, b: 1, a: 1}
   storeShadowDataShader: {fileID: 4800000, guid: fff19db2423616b4dbabe995cd97279e,
     type: 3}
-  shadowDataRenderTexture: {fileID: 1806261920}
+  shadowDataRenderTexture: {fileID: 1943824003}
   customDistanceFalloffThreshold: 0.5
   customDistanceFalloffPower: 2
   storeDirectionalSpotLightCookieMapShader: {fileID: 4800000, guid: ffdac5434c39f7545b910c253007c8fc,
@@ -1930,40 +1994,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: cbbbb635863f22d47a9751c886e46b94, type: 3}
---- !u!84 &1285119254
-RenderTexture:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_Name: 
-  m_ImageContentsHash:
-    serializedVersion: 2
-    Hash: 00000000000000000000000000000000
-  m_ForcedFallbackFormat: 4
-  m_DownscaleFallback: 0
-  serializedVersion: 3
-  m_Width: 512
-  m_Height: 256
-  m_AntiAliasing: 1
-  m_DepthFormat: 0
-  m_ColorFormat: 52
-  m_MipMap: 0
-  m_GenerateMips: 1
-  m_SRGB: 0
-  m_UseDynamicScale: 0
-  m_BindMS: 0
-  m_EnableCompatibleFormat: 1
-  m_TextureSettings:
-    serializedVersion: 2
-    m_FilterMode: 1
-    m_Aniso: 1
-    m_MipBias: 0
-    m_WrapU: 1
-    m_WrapV: 1
-    m_WrapW: 1
-  m_Dimension: 2
-  m_VolumeDepth: 1
 --- !u!1 &1340921156 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 7795861642244174620, guid: 1651d9862a83f0b41877a2bf6d9b2d49,
@@ -2282,40 +2312,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1776460800}
   m_CullTransparentMesh: 0
---- !u!84 &1806261920
-RenderTexture:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_Name: 
-  m_ImageContentsHash:
-    serializedVersion: 2
-    Hash: 00000000000000000000000000000000
-  m_ForcedFallbackFormat: 4
-  m_DownscaleFallback: 0
-  serializedVersion: 3
-  m_Width: 32
-  m_Height: 1
-  m_AntiAliasing: 1
-  m_DepthFormat: 0
-  m_ColorFormat: 52
-  m_MipMap: 0
-  m_GenerateMips: 1
-  m_SRGB: 0
-  m_UseDynamicScale: 0
-  m_BindMS: 0
-  m_EnableCompatibleFormat: 1
-  m_TextureSettings:
-    serializedVersion: 2
-    m_FilterMode: 1
-    m_Aniso: 1
-    m_MipBias: 0
-    m_WrapU: 1
-    m_WrapV: 1
-    m_WrapW: 1
-  m_Dimension: 2
-  m_VolumeDepth: 1
 --- !u!1 &1875686373
 GameObject:
   m_ObjectHideFlags: 0
@@ -2409,6 +2405,40 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 19
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!84 &1943824003
+RenderTexture:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: 
+  m_ImageContentsHash:
+    serializedVersion: 2
+    Hash: 00000000000000000000000000000000
+  m_ForcedFallbackFormat: 4
+  m_DownscaleFallback: 0
+  serializedVersion: 3
+  m_Width: 32
+  m_Height: 1
+  m_AntiAliasing: 1
+  m_DepthFormat: 0
+  m_ColorFormat: 52
+  m_MipMap: 0
+  m_GenerateMips: 1
+  m_SRGB: 0
+  m_UseDynamicScale: 0
+  m_BindMS: 0
+  m_EnableCompatibleFormat: 1
+  m_TextureSettings:
+    serializedVersion: 2
+    m_FilterMode: 1
+    m_Aniso: 1
+    m_MipBias: 0
+    m_WrapU: 1
+    m_WrapV: 1
+    m_WrapW: 1
+  m_Dimension: 2
+  m_VolumeDepth: 1
 --- !u!1001 &2038262176
 PrefabInstance:
   m_ObjectHideFlags: 0
