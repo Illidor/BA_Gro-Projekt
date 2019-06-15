@@ -146,7 +146,8 @@ public class GrabInteractable : BaseInteractable
         else
         {
             audioManager.AddSound(soundType, this.gameObject);
-            GetComponent<AudioSource>().Play();
+            sounds = GetComponents<AudioSource>();
+            sounds[0].Play();
         }
     }
 
@@ -155,7 +156,7 @@ public class GrabInteractable : BaseInteractable
     /// </summary>
     private void OnCollisionEnter(Collision other)
     {
-        if (velocity < -3)
+        if (velocity < -2)
         {
             if(GetComponent<AudioSource>() != null)
             {

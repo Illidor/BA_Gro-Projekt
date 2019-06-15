@@ -10,6 +10,7 @@ public class Crutch : GrabInteractable
     protected override bool CarryOutInteraction_Carry(InteractionScript player)
     {
         player.IncreaseReach(reachIncreaseOnCarry);
+        PlaySound(soundNames[(int)SoundTypes.pickup]);
 
         return base.CarryOutInteraction_Carry(player);
     }

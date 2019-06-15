@@ -34,7 +34,7 @@ public class InteractionScript : MonoBehaviour
         if (CTRLHub.InteractDown)
             CheckInteraction();
 
-        if (IsCarrying)
+        if (IsCarrying || IsPushing)
         {
             if (CTRLHub.DropUp)
                 HandledDrop();
