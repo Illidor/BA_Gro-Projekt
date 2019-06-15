@@ -27,7 +27,7 @@ public class GrabInteractable : BaseInteractable
     //Sound
     protected AudioManager audioManager;
     [SerializeField]
-    private float velocity;
+    protected float velocity;
     [SerializeField]
     protected AudioSource[] sounds;
     [SerializeField]
@@ -85,7 +85,9 @@ public class GrabInteractable : BaseInteractable
 
     public virtual void PutDown(InteractionScript player)  //TODO: better putDown implementation instead of simply droping the object
     {
+        transform.localPosition += new Vector3(0, 0, -1.5f);
         transform.parent = InstancePool.transform;
+        transform.position += new Vector3(0, 0.5f, 0);
         rigid.isKinematic = false;
         player.StopUsingObject();
 
@@ -124,7 +126,7 @@ public class GrabInteractable : BaseInteractable
     /// Play a sound of a type eg. pickup, drop
     /// </summary>
     /// <param name="soundType">type eg. pickup, drop</param>
-    protected void PlaySound(string soundType)
+    public void PlaySound(string soundType)
     {
         if (GetComponent<AudioSource>() != null)
         {
@@ -154,7 +156,7 @@ public class GrabInteractable : BaseInteractable
     /// <summary>
     /// play dropsound when falling from high
     /// </summary>
-    private void OnCollisionEnter(Collision other)
+    protected void OnCollisionEnter(Collision other)
     {
         if (velocity < -2)
         {

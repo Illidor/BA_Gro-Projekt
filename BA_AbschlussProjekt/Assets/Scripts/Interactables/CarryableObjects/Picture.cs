@@ -24,16 +24,18 @@ public class Picture : GrabInteractable
         interactionCollider = GetComponent<BoxCollider>();
     }
 
-    private void OnCollisionEnter(Collision other)
+    private new void OnCollisionEnter(Collision other)
     {
         // Check for Physics Material            no idea what this comment means, maybe a todo? The code had nothing to do with physics materials... I'll leave it in just in case
         if(IsBeeingCarried == false)
         {
-            if (other.collider.material.bounciness < 0.6 && !broken && rigid.velocity.y < -10)
+            Debug.Log("Not carried drop");
+            if (other.collider.material.bounciness < 0.6 && !broken && velocity < -10)
             {
+                Debug.Log("Break");
                 Break();
             }
-            else
+            else if (velocity < -2)
             {
                 PlaySound(soundNames[(int)SoundTypes.drop]);
             }
@@ -42,10 +44,8 @@ public class Picture : GrabInteractable
 
     private void Break()
     {
-        if (GetComponent<AudioSource>() != null)
-        {
-            PlaySound(soundNames[(int)SoundTypes.destroy]);
-        }
+        PlaySound(soundNames[(int)SoundTypes.destroy]);
+
         broken = true;
         foreach (GameObject part in pictureParts)
         {

@@ -9,15 +9,32 @@ public class DoorKeyInteraction : MonoBehaviour, ICombinable        // I see sim
     [SerializeField]
     string objectToInteractWith;
 
+    protected AudioManager audioManager;
+    [SerializeField]
+    protected string interactSound;
+
+    private void Awake()
+    {
+        audioManager = FindObjectOfType<AudioManager>();
+    }
     public bool Combine(InteractionScript player, BaseInteractable interactingComponent)
     {
         if(interactingComponent.name == objectToInteractWith)
         {
             keyInLock.SetActive(true);
+            
             GetComponent<Animator>().SetTrigger("open");
             Destroy(interactingComponent.gameObject);
             return true;
         }
         return false;
+    }
+    protected void PlaySound(string soundType)
+    {
+        if (GetComponent<AudioSource>() == null)
+        {
+            audioManager.AddSound(soundType, this.gameObject);
+            GetComponent<AudioSource>().Play();
+        }
     }
 }
