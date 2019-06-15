@@ -60,6 +60,7 @@ public class GrabInteractable : BaseInteractable
             {
                 PlaySound(soundNames[(int)SoundTypes.pickup]);
             }
+
             return CarryOutInteraction_Carry(player);
         }
 
@@ -117,7 +118,6 @@ public class GrabInteractable : BaseInteractable
     protected void ResetLayer()
     {
         gameObject.layer = LayerMask.NameToLayer("Default");
-
     }
 
     /// <summary>
@@ -155,7 +155,7 @@ public class GrabInteractable : BaseInteractable
     /// </summary>
     private void OnCollisionEnter(Collision other)
     {
-        if (velocity < -3)
+        if (velocity < -3)      // Why having a variable "velocity" instead of using "rigid.velocity" directly? 
         {
             if (GetComponent<AudioSource>() != null)
             {

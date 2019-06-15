@@ -34,10 +34,10 @@ public class InteractionScript : MonoBehaviour
         if (CTRLHub.InteractDown)
             CheckInteraction();
 
-        if (IsCarrying)
+        if (IsCarrying || IsPushing)
         {
             if (CTRLHub.DropUp)
-                HandledDrop();
+                UsedObject.PutDown(this);
         }
     }
 
@@ -63,15 +63,6 @@ public class InteractionScript : MonoBehaviour
             }
 
             UsedObject.GetComponent<IUseable>()?.Use(this);
-        }
-    }
-
-
-    private void HandledDrop()
-    {
-        if (CTRLHub.DropUp)
-        {
-            UsedObject.PutDown(this);
         }
     }
 
