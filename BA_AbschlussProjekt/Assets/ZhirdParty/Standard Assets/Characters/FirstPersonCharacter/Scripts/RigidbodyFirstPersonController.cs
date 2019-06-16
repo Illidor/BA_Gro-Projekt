@@ -17,7 +17,6 @@ namespace UnityStandardAssets.Characters.FirstPerson
 	        public KeyCode RunKey = KeyCode.LeftShift;
             public float JumpForce = 60f;
             public AnimationCurve SlopeCurveModifier = new AnimationCurve(new Keyframe(-90.0f, 1.0f), new Keyframe(0.0f, 1.0f), new Keyframe(90.0f, 0.0f));
-            [HideInInspector] public HealthConditions healthConditions;
             [HideInInspector] public float CurrentTargetSpeed = 8f;
 
             private bool m_Running;
@@ -43,12 +42,7 @@ namespace UnityStandardAssets.Characters.FirstPerson
 				}
 	            if (Input.GetKey(RunKey))
 	            {
-                    if(healthConditions.GetConditions().Contains(HealthConditions.Condition.TwistedAnkle) == false &&
-                        healthConditions.GetConditions().Contains(HealthConditions.Condition.BrokenLeg) == false)
-                    {
-                        CurrentTargetSpeed *= RunMultiplier;
-                        m_Running = true;
-                    }
+
 	            }
 	            else
 	            {
@@ -114,7 +108,7 @@ namespace UnityStandardAssets.Characters.FirstPerson
         private Vector3 cameraCrouchPosition = new Vector3(0f, 0.625f, 0f);
         [SerializeField] private CapsuleCollider standCollider;
         [SerializeField] private CapsuleCollider crouchCollider;
-        private HealthConditions healthConditions;
+        PlayerHealth playerHealth;
 
         // used for saving before reducing the speed with health conditions
         private float defaultForwardSpeed;
@@ -124,14 +118,14 @@ namespace UnityStandardAssets.Characters.FirstPerson
         private void Start()
         {
             m_RigidBody = GetComponent<Rigidbody>();
-            healthConditions = GetComponent<HealthConditions>();
             mouseLook.Init (transform, cam.transform);
-            movementSettings.healthConditions = healthConditions;
 
             // Speed init values
             defaultForwardSpeed = movementSettings.ForwardSpeed;
             defaultBackwardSpeed = movementSettings.BackwardSpeed;
             defaultStrafeSpeed = movementSettings.StrafeSpeed;
+
+            playerHealth = gameObject.GetComponent<PlayerHealth>();
         }
 
         private void Update()
@@ -158,15 +152,16 @@ namespace UnityStandardAssets.Characters.FirstPerson
                 crouchCollider.enabled = false;
                 cam.transform.localPosition = cameraStandPosition;
             }
-        }
 
+            checkMovability();
+        }
 
         private void FixedUpdate()
         {
             GroundCheck();
             Vector2 input = GetInput();
 
-            if ( healthConditions.GetConditions().Contains(HealthConditions.Condition.BrokenLeg) == false && (Mathf.Abs(input.x) > float.Epsilon || Mathf.Abs(input.y) > float.Epsilon) && (advancedSettings.airControl || m_IsGrounded))
+            if ((Mathf.Abs(input.x) > float.Epsilon || Mathf.Abs(input.y) > float.Epsilon) && (advancedSettings.airControl || m_IsGrounded))
             {
                 // always move along the camera forward as it is the direction that it being aimed at
                 Vector3 desiredMove = cam.transform.forward*input.y + cam.transform.right*input.x;
@@ -274,6 +269,14 @@ namespace UnityStandardAssets.Characters.FirstPerson
             {
                 m_IsGrounded = true;
                 m_GroundContactNormal = hitInfo.normal;
+
+                //FootSprainedCheck
+                Debug.Log(m_RigidBody.velocity.y);
+                if (m_RigidBody.velocity.y < -10f && hitInfo.collider.material.bounciness < 0.6f)
+                {
+                    playerHealth.changeCondition(Conditions.LowerBodyCondition, 0.5f);
+                    playerHealth.PlaySound(); //ToDo
+                } 
             }
             else
             {
@@ -286,74 +289,103 @@ namespace UnityStandardAssets.Characters.FirstPerson
             }
         }
 
-        private void ChangePlayerValuesAccordingToCondition(HealthConditions.Condition con, bool addCondition)
+        private void checkMovability()
         {
-            switch (con)
+            if(playerHealth.getCondition(Conditions.LowerBodyCondition) > 1.5f)
             {
-                case HealthConditions.Condition.ArmDislocated:
-                    if(addCondition)
-                    {
-                        // Cannot pick up items
-                    }
-                    else
-                    {
-                        // Can pick up items again
-                    }
-                    break;
-
-                case HealthConditions.Condition.HandSprained:
-                    if (addCondition)
-                    {
-                        // Cannot pick up items
-                    }
-                    else
-                    {
-                        // Can pick up items again
-                    }
-                    break;
-
-                case HealthConditions.Condition.TwistedAnkle:
-                    if (addCondition)
-                    {
-                        movementSettings.ForwardSpeed = defaultForwardSpeed / 2f;
-                        movementSettings.BackwardSpeed = defaultBackwardSpeed / 2f;
-                        movementSettings.ForwardSpeed = defaultForwardSpeed / 2f;
-
-                    }
-                    else
-                    {
-                        movementSettings.ForwardSpeed = defaultForwardSpeed;
-                        movementSettings.BackwardSpeed = defaultBackwardSpeed;
-                        movementSettings.ForwardSpeed = defaultForwardSpeed;
-                    }
-                    break;
-
-                case HealthConditions.Condition.BrokenLeg:
-                    if (addCondition)
-                    {
-                        movementSettings.ForwardSpeed = 0f;
-                        movementSettings.BackwardSpeed = 0f;
-                        movementSettings.ForwardSpeed = 0f;
-                    }
-                    else
-                    {
-                        movementSettings.ForwardSpeed = defaultForwardSpeed;
-                        movementSettings.BackwardSpeed = defaultBackwardSpeed;
-                        movementSettings.ForwardSpeed = defaultForwardSpeed;
-                    }
-                    break;
+                movementSettings.ForwardSpeed = defaultForwardSpeed;
+                movementSettings.BackwardSpeed = defaultBackwardSpeed;
+                movementSettings.ForwardSpeed = defaultForwardSpeed;
             }
+            else if (playerHealth.getCondition(Conditions.LowerBodyCondition) > 1f)
+            {
+                movementSettings.ForwardSpeed = defaultForwardSpeed / 2f;
+                movementSettings.BackwardSpeed = defaultBackwardSpeed / 2f;
+                movementSettings.ForwardSpeed = defaultForwardSpeed / 2f;
+            }
+            else if(playerHealth.getCondition(Conditions.LowerBodyCondition) > 0)
+            {
+                movementSettings.ForwardSpeed = defaultForwardSpeed / 3f;
+                movementSettings.BackwardSpeed = defaultBackwardSpeed / 3f;
+                movementSettings.ForwardSpeed = defaultForwardSpeed / 3f;
+            }
+            else
+            {
+                movementSettings.ForwardSpeed = 0f;
+                movementSettings.BackwardSpeed = 0f;
+                movementSettings.ForwardSpeed = 0f;
+            }
+
         }
 
-        private void OnEnable()
-        {
-            HealthConditions.ChangeCondition += ChangePlayerValuesAccordingToCondition;
-        }
+        //private void ChangePlayerValuesAccordingToCondition(PlayerInjuries playerInjuries, bool addCondition)
+        //{
+        //    switch ()
+        //    {
+        //        case PlayerInjuries.LeftArmDislocated:
+        //            if(addCondition)
+        //            {
+        //                // Cannot pick up items
+        //            }
+        //            else
+        //            {
+        //                // Can pick up items again
+        //            }
+        //            break;
 
-        private void OnDisable()
-        {
-            HealthConditions.ChangeCondition -= ChangePlayerValuesAccordingToCondition;
+        //        case PlayerInjuries.RightArmDislocated:
+        //            if (addCondition)
+        //            {
+        //                // Cannot pick up items
+        //            }
+        //            else
+        //            {
+        //                // Can pick up items again
+        //            }
+        //            break;
 
-        }
+        //        case PlayerInjuries.RightFootSprained:
+        //            if (addCondition)
+        //            {
+        //                movementSettings.ForwardSpeed = defaultForwardSpeed / 2f;
+        //                movementSettings.BackwardSpeed = defaultBackwardSpeed / 2f;
+        //                movementSettings.ForwardSpeed = defaultForwardSpeed / 2f;
+
+        //            }
+        //            else
+        //            {
+        //                movementSettings.ForwardSpeed = defaultForwardSpeed;
+        //                movementSettings.BackwardSpeed = defaultBackwardSpeed;
+        //                movementSettings.ForwardSpeed = defaultForwardSpeed;
+        //            }
+        //            break;
+
+        //        case PlayerInjuries.RightFootBroken:
+        //            if (addCondition)
+        //            {
+        //                movementSettings.ForwardSpeed = 0f;
+        //                movementSettings.BackwardSpeed = 0f;
+        //                movementSettings.ForwardSpeed = 0f;
+        //            }
+        //            else
+        //            {
+        //                movementSettings.ForwardSpeed = defaultForwardSpeed;
+        //                movementSettings.BackwardSpeed = defaultBackwardSpeed;
+        //                movementSettings.ForwardSpeed = defaultForwardSpeed;
+        //            }
+        //            break;
+        //    }
+        //}
+
+        //private void OnEnable()
+        //{
+        //    HealthConditions.ChangeCondition += ChangePlayerValuesAccordingToCondition;
+        //}
+
+        //private void OnDisable()
+        //{
+        //    HealthConditions.ChangeCondition -= ChangePlayerValuesAccordingToCondition;
+
+        //}
     }
 }

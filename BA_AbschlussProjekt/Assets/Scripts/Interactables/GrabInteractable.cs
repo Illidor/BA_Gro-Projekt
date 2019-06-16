@@ -85,9 +85,16 @@ public class GrabInteractable : BaseInteractable
 
     public virtual void PutDown(InteractionScript player)  //TODO: better putDown implementation instead of simply droping the object
     {
-        transform.localPosition += new Vector3(0, 0, -1.5f);
-        transform.parent = InstancePool.transform;
-        transform.position += new Vector3(0, 0.5f, 0);
+        if (IsBeeingCarried)
+        {
+            transform.localPosition += new Vector3(0, 0, -1.5f);
+            transform.parent = InstancePool.transform;
+            transform.position += new Vector3(0, 0.5f, 0);
+        }
+        else
+        {
+            transform.parent = InstancePool.transform;
+        }
         rigid.isKinematic = false;
         player.StopUsingObject();
 
@@ -112,8 +119,17 @@ public class GrabInteractable : BaseInteractable
     {
         velocity = rigid.velocity.y;
         //TODO: better implementation of pulling. Maybe considering objects weight and players conditions
+        //if (IsBeeingPulled)
+        //    rigid.velocity = rigidbodyPulling.velocity;
+
+        //new:
         if (IsBeeingPulled)
-            rigid.velocity = rigidbodyPulling.velocity;     
+        {
+            Ray r = new Ray(Camera.main.transform.position, Camera.main.transform.forward);
+            Vector3 pointToPull = r.GetPoint(rigidbodyPulling.gameObject.GetComponent<InteractionScript>().GetReach());
+            pointToPull = new Vector3(pointToPull.x, transform.position.y, pointToPull.z);
+            transform.position = Vector3.Lerp(transform.position,pointToPull, 0.3f);
+        }
     }
 
     protected void ResetLayer()
@@ -158,11 +174,7 @@ public class GrabInteractable : BaseInteractable
     /// </summary>
     protected void OnCollisionEnter(Collision other)
     {
-<<<<<<< HEAD
-        if (velocity < -2)
-=======
-        if (velocity < -3)      // Why having a variable "velocity" instead of using "rigid.velocity" directly? 
->>>>>>> origin/Sebastian
+        if (velocity < -2)      // Why having a variable "velocity" instead of using "rigid.velocity" directly? 
         {
             if(GetComponent<AudioSource>() != null)
             {

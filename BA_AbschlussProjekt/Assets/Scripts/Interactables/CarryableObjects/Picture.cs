@@ -44,7 +44,12 @@ public class Picture : GrabInteractable
 
     private void Break()
     {
-        PlaySound(soundNames[(int)SoundTypes.destroy]);
+        try
+        {
+            PlaySound(soundNames[(int)SoundTypes.destroy]);
+        }
+        catch { }
+
 
         broken = true;
         foreach (GameObject part in pictureParts)
@@ -54,5 +59,7 @@ public class Picture : GrabInteractable
             part.SetActive(true);
             part.GetComponent<Rigidbody>().AddForce(new Vector3(UnityEngine.Random.Range(-0.1f, 0.1f), UnityEngine.Random.Range(-0.1f, 0.1f), UnityEngine.Random.Range(-0.1f, 0.1f)));
         }
+
+        this.enabled = false;
     }
 }

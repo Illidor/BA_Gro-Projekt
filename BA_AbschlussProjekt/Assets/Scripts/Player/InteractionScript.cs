@@ -62,7 +62,14 @@ public class InteractionScript : MonoBehaviour
                     return;
             }
 
-            UsedObject.GetComponent<IUseable>()?.Use(this);
+            if(UsedObject != null)
+            {
+                UsedObject.GetComponent<IUseable>()?.Use(this);
+            }
+            else
+            {
+                //UsedObject
+            }
         }
     }
 
@@ -95,6 +102,11 @@ public class InteractionScript : MonoBehaviour
     public void ResetReachToDefault()
     {
         grabingReach = emptyHandedGrabingReach;
+    }
+
+    public float GetReach()
+    {
+        return grabingReach;
     }
 }
 

@@ -24,6 +24,7 @@ public class DoorKeyInteraction : MonoBehaviour, ICombinable        // I see sim
             keyInLock.SetActive(true);
             
             GetComponent<Animator>().SetTrigger("open");
+            ((GrabInteractable)interactingComponent).PutDown(player);
             Destroy(interactingComponent.gameObject);
             return true;
         }
