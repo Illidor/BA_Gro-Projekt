@@ -158,7 +158,11 @@ public class GrabInteractable : BaseInteractable
     /// </summary>
     protected void OnCollisionEnter(Collision other)
     {
+<<<<<<< HEAD
         if (velocity < -2)
+=======
+        if (velocity < -3)      // Why having a variable "velocity" instead of using "rigid.velocity" directly? 
+>>>>>>> origin/Sebastian
         {
             if(GetComponent<AudioSource>() != null)
             {
