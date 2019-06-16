@@ -2,33 +2,40 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DoorKeyInteraction : BaseInteractable
+public class DoorKeyInteraction : MonoBehaviour, ICombinable        // I see similarities with PictureInteraction
 {
-    [SerializeField] GameObject keyInLock;
-    [SerializeField] string objectToInteractWith;
+    [SerializeField]
+    GameObject keyInLock;
+    [SerializeField]
+    string objectToInteractWith;
 
-    public override bool Combine(GameObject otherGameObject)
+    protected AudioManager audioManager;
+    [SerializeField]
+    protected string interactSound;
+
+    private void Awake()
     {
-        if(otherGameObject.name == objectToInteractWith)
+        audioManager = FindObjectOfType<AudioManager>();
+    }
+    public bool Combine(InteractionScript player, BaseInteractable interactingComponent)
+    {
+        if(interactingComponent.name == objectToInteractWith)
         {
             keyInLock.SetActive(true);
+            
             GetComponent<Animator>().SetTrigger("open");
-            Destroy(otherGameObject);
+            ((GrabInteractable)interactingComponent).PutDown(player);
+            Destroy(interactingComponent.gameObject);
             return true;
         }
-        else
+        return false;
+    }
+    protected void PlaySound(string soundType)
+    {
+        if (GetComponent<AudioSource>() == null)
         {
-            return false;
+            audioManager.AddSound(soundType, this.gameObject);
+            GetComponent<AudioSource>().Play();
         }
-    }
-
-    public override bool Interact(InteractionScript interactionScript)
-    {
-        throw new System.NotImplementedException();
-    }
-
-    public override bool Use()
-    {
-        throw new System.NotImplementedException();
     }
 }

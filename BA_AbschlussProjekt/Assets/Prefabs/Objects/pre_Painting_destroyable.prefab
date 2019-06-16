@@ -14,9 +14,8 @@ GameObject:
   - component: {fileID: 6164104001475000625}
   - component: {fileID: 6164104001475000626}
   - component: {fileID: 6164104001475000622}
-  - component: {fileID: 6164104001475000623}
   m_Layer: 8
-  m_Name: pre_Painting
+  m_Name: pre_Painting_destroyable
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -94,8 +93,8 @@ MeshRenderer:
   m_RendererPriority: 0
   m_Materials:
   - {fileID: -681132614480344848, guid: 797bf2dcb27baa74d8d9a1236779e437, type: 3}
-  - {fileID: 2688456280696028412, guid: 797bf2dcb27baa74d8d9a1236779e437, type: 3}
-  - {fileID: -5131512367502145845, guid: 797bf2dcb27baa74d8d9a1236779e437, type: 3}
+  - {fileID: 2100000, guid: 1d097cc5aec193945b89094de484db7b, type: 2}
+  - {fileID: 2100000, guid: 1d097cc5aec193945b89094de484db7b, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -127,24 +126,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ac1899df4685aca42aa607d24653cce7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isInUse: 0
+  possibleConditionsToCarry: 1183293387
+  possibleConditionsToPush: 0
+  velocity: 0
+  sounds: []
+  soundNames:
+  - snd_painting_crutch
+  - snd_painting_crutch
+  - snd_paintingbreak
   pictureParts:
   - {fileID: 7202743046419215586}
   - {fileID: 6132358634849324548}
   - {fileID: 7598224178198413588}
---- !u!114 &6164104001475000623
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2786222905488919634}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6d60c12aafcaff945941a8ec274d3b9b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  isInUse: 0
 --- !u!1 &6132358634849324548
 GameObject:
   m_ObjectHideFlags: 0

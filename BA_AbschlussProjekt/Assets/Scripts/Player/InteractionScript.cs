@@ -6,99 +6,146 @@ using System.Linq;
 
 public class InteractionScript : MonoBehaviour
 {
-    [SerializeField]
-    [Tooltip("Max distance to objects the player is able to grab")]
-    private float grabingReach = 1.5f;
-    [SerializeField]
-    [Tooltip("Hand the carried object is parented to")]
+    [SerializeField] [Tooltip("Max distance to objects the player is able to grab empty handed")]
+    private float emptyHandedGrabingReach = 1.5f;
+    [SerializeField] [Tooltip("Hand the carried object is parented to")]
     private Transform grabingPoint;
+    [SerializeField] [Tooltip("Handler of the players injuries")]
+    private PlayerHealth playerHealth;
 
-    private ObjectInteraction usedObject;
-    public ObjectInteraction UsedObject
-    {
-        get { return usedObject; }
-        set
-        {
-            usedObject = value;
-            IsInteracting = (value == null ? false : true);
-            IsPulling = (value == null ? false : true);
-        }
-    }
+    public PlayerHealth PlayerHealth { get { return playerHealth; } }
 
-    public bool IsInteracting { get; set; }
+    private GrabInteractable UsedObject { get; set; }
+
+    public bool IsCarrying { get; private set; }
+    public bool IsPushing  { get; private set; }
+
     public Transform GrabingPoint { get { return grabingPoint; } }
 
-    public bool IsPulling { get; set; }
+    private float grabingReach;
+
+    private void Awake()
+    {
+        grabingReach = emptyHandedGrabingReach;
+    }
 
     private void Update()
     {
         if (CTRLHub.InteractDown)
             CheckInteraction();
 
-        if (IsInteracting)
+        if (IsCarrying || IsPushing)
         {
-            if (CTRLHub.ThrowUp)
-            {
-                HandledDrop();
-            }
-            HandleUseObject();
+            if (CTRLHub.DropUp)
+                UsedObject.PutDown(this);
         }
     }
-
-
 
     private void CheckInteraction()
     {
         Ray screenCenterRay = Camera.main.ScreenPointToRay(Input.mousePosition);
 
-        if (Physics.Raycast(screenCenterRay, out RaycastHit hit, grabingReach))
+        RaycastHit raycastHit;
+        bool didRaycastHit = Physics.Raycast(screenCenterRay, out raycastHit, grabingReach);
+
+        if (IsCarrying == false)
         {
-            BaseInteractable interactableToInteractWith = hit.collider.GetComponent<BaseInteractable>();
-
-            if (interactableToInteractWith != null)
+            raycastHit.collider?.GetComponent<BaseInteractable>()?.Interact(this);
+        }
+        else
+        {
+            if (didRaycastHit)
             {
-                if (IsInteracting)
-                {
-                    Debug.Log("combine " + UsedObject.name + " with " + interactableToInteractWith.name);
-                    UsedObject.Combine(this, interactableToInteractWith);
-
-                    interactableToInteractWith.gameObject.GetComponent<BaseInteractable>().Combine(UsedObject.gameObject);
-                }
-                else
-                {
-                    interactableToInteractWith.Interact(this);
-                }
+                ICombinable objectToCombineWith = raycastHit.collider.GetComponent<ICombinable>();
+                if (objectToCombineWith != null &&
+                    objectToCombineWith.Combine(this, UsedObject))
+                    return;
             }
-            else if (UsedObject != null)
+
+            if(UsedObject != null)
             {
-                UsedObject.Use();
+                UsedObject.GetComponent<IUseable>()?.Use(this);
+            }
+            else
+            {
+                //UsedObject
+            }
+        }
+    }
+
+    public void SetCarriedObject(GrabInteractable objectToCarry)
+    {
+        UsedObject = objectToCarry;
+        IsCarrying = true;
+        IsPushing = false;
+    }
+
+    public void SetPushedObject(GrabInteractable objectToPush)
+    {
+        UsedObject = objectToPush;
+        IsPushing = true;
+        IsCarrying = false;
+    }
+
+    public void StopUsingObject()
+    {
+        UsedObject = null;
+        IsCarrying = false;
+        IsPushing = false;
+    }
+
+    public void IncreaseReach(float reachToAdd)
+    {
+        grabingReach += reachToAdd;
+    }
+
+    public void ResetReachToDefault()
+    {
+        grabingReach = emptyHandedGrabingReach;
+    }
+
+    public float GetReach()
+    {
+        return grabingReach;
+    }
+}
+
+
+
+/* old CheckInteraction
+private void CheckInteraction()
+{
+    Ray screenCenterRay = Camera.main.ScreenPointToRay(Input.mousePosition);
+
+    if (Physics.Raycast(screenCenterRay, out RaycastHit hit, grabingReach))
+    {
+        BaseInteractable interactableToInteractWith = hit.collider.GetComponent<BaseInteractable>();
+
+        if (interactableToInteractWith != null)
+        {
+            if (IsInteracting)
+            {
+                Debug.Log("combine " + UsedObject.name + " with " + interactableToInteractWith.name);
+                UsedObject.Combine(this, interactableToInteractWith);
+
+                //interactableToInteractWith.gameObject.GetComponent<BaseInteractable>().Combine(UsedObject.gameObject);
+            }
+            else
+            {
+                interactableToInteractWith.Interact(this);
             }
         }
         else if (UsedObject != null)
         {
-            UsedObject.Use();
+            //UsedObject.Use();
         }
     }
-
-    private void HandledDrop()
+    else if (UsedObject != null)
     {
-        if (CTRLHub.ThrowUp)
-        {
-            UsedObject.PutDown(this);
-        }
-    }
-    private void HandleUseObject()
-    {
-        if (Input.GetKeyDown(KeyCode.Keypad3))
-        {
-            UsedObject.Use();
-        }
-    }
-    public static InteractionScript Get()
-    {
-        return GameObject.FindGameObjectWithTag("Player").GetComponent<InteractionScript>();
+        //UsedObject.Use();
     }
 }
+*/
 
 /*
 

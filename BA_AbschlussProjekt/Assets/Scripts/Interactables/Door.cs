@@ -66,13 +66,6 @@ public class Door : BaseInteractable
         return false;
     }
 
-    public override bool Combine(GameObject gameObject)
-    {
-        return false;
-    }
-
-    public override bool Use()
-    {
-        return false;
-    }
+    // if combining door with key to unlock is needed, inherit ICombinable
+    
 }

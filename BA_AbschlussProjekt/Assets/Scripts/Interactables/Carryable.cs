@@ -6,7 +6,7 @@ using UnityEngine;
 /// <summary>
 /// Logic of objects the player is able to pickup and carry.
 /// </summary>
-
+[Obsolete]
 public class Carryable : ObjectInteraction
 {
     private const string noPlayerCollisionLayerName = "NoPlayerCollision";
@@ -29,7 +29,7 @@ public class Carryable : ObjectInteraction
 
     private void Grab(InteractionScript interactionScript)
     {
-        PlaySound(pickUpSound);
+        PlaySound(soundNames[Convert.ToInt16(SoundTypes.pickup)]);
         AttachToPlayer(interactionScript);
         transform.localPosition = Vector3.zero;
         
@@ -43,7 +43,7 @@ public class Carryable : ObjectInteraction
     {
         transform.parent = interactionScript.GrabingPoint.transform;
         rigidbody.isKinematic = true;
-        interactionScript.UsedObject = this; 
+        //interactionScript.UsedObject = this; 
     }
 
     public void Throw(InteractionScript interactionScript, float throwingStrength)
@@ -72,13 +72,9 @@ public class Carryable : ObjectInteraction
     {
         gameObject.layer = LayerMask.NameToLayer("Default");
     }
+    
 
-    public override bool Combine(GameObject gameObject)
-    {
-        return false;
-    }
-
-    public override bool Use()
+    public bool Use()
     {
         if (!isInUse)
             isInUse = true;
