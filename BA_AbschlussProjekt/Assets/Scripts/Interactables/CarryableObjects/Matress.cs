@@ -13,7 +13,7 @@ public class Matress : GrabInteractable
     // Start is called before the first frame update
     void Start()
     {
-        PlaySound(soundNames[(int)SoundTypes.pull]);
+        audioManager.PlaySound(soundNames[(int)SoundTypes.pull], this);
         GetComponent<AudioSource>().mute = true;
     }
 
@@ -23,16 +23,16 @@ public class Matress : GrabInteractable
         float speed = Mathf.Sqrt(Mathf.Pow(rigid.velocity.x, 2) + Mathf.Pow(rigid.velocity.z, 2));
         if (speed < -1 || speed > 1)
         {
-            if (sounds[0].mute == true)
+            if (soundSources[0].mute == true)
             {
-                sounds[0].mute = false;
+                soundSources[0].mute = false;
             }
         }
         else
         {
-            if (sounds[0].mute == false)
+            if (soundSources[0].mute == false)
             {
-                sounds[0].mute = true;
+                soundSources[0].mute = true;
             }
         }
     }

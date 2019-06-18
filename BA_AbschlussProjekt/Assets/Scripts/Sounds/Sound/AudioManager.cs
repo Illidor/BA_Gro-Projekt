@@ -1,6 +1,7 @@
 ﻿using UnityEngine.Audio;
 using System;
 using UnityEngine;
+using System.Linq;
 
 public class AudioManager : MonoBehaviour
 {
@@ -27,6 +28,11 @@ public class AudioManager : MonoBehaviour
             
 		//}
 	}
+    /// <summary>
+    /// Add Sound and set Settings
+    /// </summary>
+    /// <param name="soundName"></param>
+    /// <param name="sourceObject"></param>
     public void AddSound(string soundName, GameObject sourceObject)
     {
         Sound s = Array.Find(sounds, item => item.clip.name == soundName);
@@ -42,6 +48,34 @@ public class AudioManager : MonoBehaviour
         sourceObject.GetComponent<AudioSource>().pitch = s.pitch;
         sourceObject.GetComponent<AudioSource>().playOnAwake = s.playOnAwake;
         sourceObject.GetComponent<AudioSource>().outputAudioMixerGroup = s.mixerGroup;
+    }
+
+
+    public void PlaySound(string soundType, GrabInteractable sourceObj)
+    {
+        if (GetComponent<AudioSource>() != null)
+        {
+            sourceObj.soundSources = sourceObj.GetComponents<AudioSource>();
+            foreach (AudioSource sound in sourceObj.soundSources)
+            {
+                if (sound.clip.name == soundType)
+                {
+                    sound.Play();
+                }
+                else
+                {
+                    audioManager.AddSound(soundType, sourceObj.gameObject);
+                    sourceObj.soundSources = sourceObj.GetComponents<AudioSource>();
+                    sourceObj.soundSources.First(audios => audios.name == soundType).Play();
+                }
+            }
+        }
+        else
+        {
+            audioManager.AddSound(soundType, sourceObj.gameObject);
+            sourceObj.soundSources = sourceObj.GetComponents<AudioSource>();
+            sourceObj.soundSources[0].Play();
+        }
     }
     //public void Play(string sound)
     //{

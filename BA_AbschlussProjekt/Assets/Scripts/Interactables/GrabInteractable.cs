@@ -1,7 +1,6 @@
 ﻿using System;
 using CustomEnums;
 using UnityEngine;
-using System.Linq;
 
 /// <summary>
 /// Used for objects that can be carried or pushed
@@ -29,7 +28,7 @@ public class GrabInteractable : BaseInteractable
     [SerializeField]
     protected float velocity;
     [SerializeField]
-    protected AudioSource[] sounds;
+    public AudioSource[] soundSources;
     [SerializeField]
     protected string[] soundNames;
 
@@ -58,7 +57,7 @@ public class GrabInteractable : BaseInteractable
         {
             if (GetComponent<AudioSource>() != null)
             {
-                PlaySound(soundNames[(int)SoundTypes.pickup]);
+                audioManager.PlaySound(soundNames[(int)SoundTypes.pickup], this);
             }
             return CarryOutInteraction_Carry(player);
         }
@@ -138,36 +137,36 @@ public class GrabInteractable : BaseInteractable
 
     }
 
-    /// <summary>
-    /// Play a sound of a type eg. pickup, drop
-    /// </summary>
-    /// <param name="soundType">type eg. pickup, drop</param>
-    public void PlaySound(string soundType)
-    {
-        if (GetComponent<AudioSource>() != null)
-        {
-            sounds = GetComponents<AudioSource>();
-            foreach (AudioSource sound in sounds)
-            {
-                if (sound.clip.name == soundType)
-                {
-                    sound.Play();
-                }
-                else
-                {
-                    audioManager.AddSound(soundType, this.gameObject);
-                    sounds = GetComponents<AudioSource>();
-                    sounds.First(audios => audios.name == soundType).Play();
-                }
-            }
-        }
-        else
-        {
-            audioManager.AddSound(soundType, this.gameObject);
-            sounds = GetComponents<AudioSource>();
-            sounds[0].Play();
-        }
-    }
+    ///// <summary>
+    ///// Play a sound of a type eg. pickup, drop
+    ///// </summary>
+    ///// <param name="soundType">type eg. pickup, drop</param>
+    //public void PlaySound(string soundType)
+    //{
+    //    if (GetComponent<AudioSource>() != null)
+    //    {
+    //        sounds = GetComponents<AudioSource>();
+    //        foreach (AudioSource sound in sounds)
+    //        {
+    //            if (sound.clip.name == soundType)
+    //            {
+    //                sound.Play();
+    //            }
+    //            else
+    //            {
+    //                audioManager.AddSound(soundType, this.gameObject);
+    //                sounds = GetComponents<AudioSource>();
+    //                sounds.First(audios => audios.name == soundType).Play();
+    //            }
+    //        }
+    //    }
+    //    else
+    //    {
+    //        audioManager.AddSound(soundType, this.gameObject);
+    //        sounds = GetComponents<AudioSource>();
+    //        sounds[0].Play();
+    //    }
+    //}
 
     /// <summary>
     /// play dropsound when falling from high
@@ -178,7 +177,7 @@ public class GrabInteractable : BaseInteractable
         {
             if(GetComponent<AudioSource>() != null)
             {
-                PlaySound(soundNames[(int)SoundTypes.drop]);
+                audioManager.PlaySound(soundNames[(int)SoundTypes.drop], this);
             }
         }
     }
