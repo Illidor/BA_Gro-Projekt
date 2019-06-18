@@ -6,8 +6,8 @@ using System.Linq;
 
 public class InteractionScript : MonoBehaviour
 {
-    [SerializeField] [Tooltip("Max distance to objects the player is able to grab")]
-    private float grabingReach = 1.5f;
+    [SerializeField] [Tooltip("Max distance to objects the player is able to grab empty handed")]
+    private float emptyHandedGrabingReach = 1.5f;
     [SerializeField] [Tooltip("Hand the carried object is parented to")]
     private Transform grabingPoint;
     [SerializeField] [Tooltip("Handler of the players injuries")]
@@ -21,17 +21,23 @@ public class InteractionScript : MonoBehaviour
     public bool IsPushing  { get; private set; }
 
     public Transform GrabingPoint { get { return grabingPoint; } }
-    
+
+    private float grabingReach;
+
+    private void Awake()
+    {
+        grabingReach = emptyHandedGrabingReach;
+    }
 
     private void Update()
     {
         if (CTRLHub.InteractDown)
             CheckInteraction();
 
-        if (IsCarrying)
+        if (IsCarrying || IsPushing)
         {
             if (CTRLHub.DropUp)
-                HandledDrop();
+                UsedObject.PutDown(this);
         }
     }
 
@@ -56,16 +62,14 @@ public class InteractionScript : MonoBehaviour
                     return;
             }
 
-            UsedObject.GetComponent<IUseable>()?.Use(this);
-        }
-    }
-
-
-    private void HandledDrop()
-    {
-        if (CTRLHub.DropUp)
-        {
-            UsedObject.PutDown(this);
+            if(UsedObject != null)
+            {
+                UsedObject.GetComponent<IUseable>()?.Use(this);
+            }
+            else
+            {
+                //UsedObject
+            }
         }
     }
 
@@ -88,6 +92,21 @@ public class InteractionScript : MonoBehaviour
         UsedObject = null;
         IsCarrying = false;
         IsPushing = false;
+    }
+
+    public void IncreaseReach(float reachToAdd)
+    {
+        grabingReach += reachToAdd;
+    }
+
+    public void ResetReachToDefault()
+    {
+        grabingReach = emptyHandedGrabingReach;
+    }
+
+    public float GetReach()
+    {
+        return grabingReach;
     }
 }
 

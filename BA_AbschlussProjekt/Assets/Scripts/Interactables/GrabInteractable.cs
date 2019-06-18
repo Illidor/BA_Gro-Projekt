@@ -22,18 +22,21 @@ public class GrabInteractable : BaseInteractable
     public InteractionConditions possibleConditionsToPush = InteractionConditions.Unable;
 
     protected Rigidbody rigid;
-
-    protected bool isBeeingCarried;
-    protected bool isBeeingPulled;
     protected Rigidbody rigidbodyPulling;
 
     //Sound
     protected AudioManager audioManager;
     [SerializeField]
-    private float velocity;
+    protected float velocity;
     [SerializeField]
     protected AudioSource[] sounds;
+    [SerializeField]
     protected string[] soundNames;
+
+    public bool IsBeeingCarried { get; protected set; }
+
+    public bool IsBeeingPulled { get; protected set; }
+
     protected enum SoundTypes
     {
         pickup = 0,
@@ -53,7 +56,10 @@ public class GrabInteractable : BaseInteractable
 
         if (possibleConditionsToCarry.HasFlag(playersConditions))
         {
-            PlaySound(soundNames[(int)SoundTypes.pickup]);
+            if (GetComponent<AudioSource>() != null)
+            {
+                PlaySound(soundNames[(int)SoundTypes.pickup]);
+            }
             return CarryOutInteraction_Carry(player);
         }
 
@@ -65,36 +71,45 @@ public class GrabInteractable : BaseInteractable
         return false;
     }
 
-    private bool CarryOutInteraction_Carry(InteractionScript player)
+    protected virtual bool CarryOutInteraction_Carry(InteractionScript player)
     {
         gameObject.layer = LayerMask.NameToLayer("NoPlayerCollision");
         transform.parent = player.GrabingPoint.transform;
         transform.localPosition = Vector3.zero;
         rigid.isKinematic = true;
         player.SetCarriedObject(this);
-        isBeeingCarried = true;
+        IsBeeingCarried = true;
 
         return true;
     }
 
-    public void PutDown(InteractionScript player)  //TODO: better putDown implementation instead of simply droping the object
+    public virtual void PutDown(InteractionScript player)  //TODO: better putDown implementation instead of simply droping the object
     {
-        transform.parent = InstancePool.transform;
+        if (IsBeeingCarried)
+        {
+            transform.localPosition += new Vector3(0, 0, -1.5f);
+            transform.parent = InstancePool.transform;
+            transform.position += new Vector3(0, 0.5f, 0);
+        }
+        else
+        {
+            transform.parent = InstancePool.transform;
+        }
         rigid.isKinematic = false;
         player.StopUsingObject();
 
-        isBeeingPulled = false;
-        isBeeingCarried = false;
+        IsBeeingPulled = false;
+        IsBeeingCarried = false;
         rigidbodyPulling = null;
 
         Invoke("ResetLayer", 2f); //TODO: Switch to better implementation of invoking ResetLayer. (Maybe with trigger or distance check)
     }
 
-    private bool CarryOutInteraction_Push(InteractionScript player)
+    protected virtual bool CarryOutInteraction_Push(InteractionScript player)
     {
         player.SetPushedObject(this);
 
-        isBeeingPulled = true;
+        IsBeeingPulled = true;
         rigidbodyPulling = player.GetComponent<Rigidbody>();
 
         return true;
@@ -104,8 +119,17 @@ public class GrabInteractable : BaseInteractable
     {
         velocity = rigid.velocity.y;
         //TODO: better implementation of pulling. Maybe considering objects weight and players conditions
-        if (isBeeingPulled)
-            rigid.velocity = rigidbodyPulling.velocity;     
+        //if (IsBeeingPulled)
+        //    rigid.velocity = rigidbodyPulling.velocity;
+
+        //new:
+        if (IsBeeingPulled)
+        {
+            Ray r = new Ray(Camera.main.transform.position, Camera.main.transform.forward);
+            Vector3 pointToPull = r.GetPoint(rigidbodyPulling.gameObject.GetComponent<InteractionScript>().GetReach());
+            pointToPull = new Vector3(pointToPull.x, transform.position.y, pointToPull.z);
+            transform.position = Vector3.Lerp(transform.position,pointToPull, 0.3f);
+        }
     }
 
     protected void ResetLayer()
@@ -118,7 +142,7 @@ public class GrabInteractable : BaseInteractable
     /// Play a sound of a type eg. pickup, drop
     /// </summary>
     /// <param name="soundType">type eg. pickup, drop</param>
-    protected void PlaySound(string soundType)
+    public void PlaySound(string soundType)
     {
         if (GetComponent<AudioSource>() != null)
         {
@@ -140,18 +164,22 @@ public class GrabInteractable : BaseInteractable
         else
         {
             audioManager.AddSound(soundType, this.gameObject);
-            GetComponent<AudioSource>().Play();
+            sounds = GetComponents<AudioSource>();
+            sounds[0].Play();
         }
     }
 
     /// <summary>
     /// play dropsound when falling from high
     /// </summary>
-    private void OnCollisionEnter(Collision other)
+    protected void OnCollisionEnter(Collision other)
     {
-        if (velocity < -3)
+        if (velocity < -2)      // Why having a variable "velocity" instead of using "rigid.velocity" directly? 
         {
-            PlaySound(soundNames[(int)SoundTypes.drop]);
+            if(GetComponent<AudioSource>() != null)
+            {
+                PlaySound(soundNames[(int)SoundTypes.drop]);
+            }
         }
     }
 

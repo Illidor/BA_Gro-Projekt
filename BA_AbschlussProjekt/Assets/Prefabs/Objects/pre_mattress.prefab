@@ -14,9 +14,9 @@ GameObject:
   - component: {fileID: 6857673082592309575}
   - component: {fileID: 6857673082592309574}
   - component: {fileID: 6857673082592309573}
-  - component: {fileID: 6857673082592309572}
+  - component: {fileID: 7186798870273332767}
   m_Layer: 0
-  m_Name: mdl_mattress
+  m_Name: pre_mattress
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2147,10 +2147,10 @@ SkinnedMeshRenderer:
   m_BlendShapeWeights: []
   m_RootBone: {fileID: 0}
   m_AABB:
-    m_Center: {x: 0, y: 0, z: -0.00000023841858}
-    m_Extent: {x: 0.41581434, y: 0.06964874, z: 0.83960736}
+    m_Center: {x: 0.00000023841858, y: 0, z: -0.00000047683716}
+    m_Extent: {x: 1.2224905, y: 0.06964874, z: 1.2390915}
   m_DirtyAABB: 0
---- !u!114 &6857673082592309572
+--- !u!114 &7186798870273332767
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -2159,11 +2159,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 6857673082592309571}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d8bdc993e595ec845b9a429a2b6ef257, type: 3}
+  m_Script: {fileID: 11500000, guid: 81351d73e10160843abb07dc325e5936, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  possibleConditionsToCarry: 0
-  possibleConditionsToPush: -1
+  possibleConditionsToCarry: -1
+  possibleConditionsToPush: 0
   velocity: 0
-  sounds:
-  - {fileID: 0}
+  sounds: []
+  soundNames: []
