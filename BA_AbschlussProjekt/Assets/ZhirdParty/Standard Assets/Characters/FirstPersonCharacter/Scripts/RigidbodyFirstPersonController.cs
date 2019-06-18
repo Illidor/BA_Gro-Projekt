@@ -271,7 +271,6 @@ namespace UnityStandardAssets.Characters.FirstPerson
                 m_GroundContactNormal = hitInfo.normal;
 
                 //FootSprainedCheck
-                Debug.Log(m_RigidBody.velocity.y);
                 if (m_RigidBody.velocity.y < -10f && hitInfo.collider.material.bounciness < 0.6f)
                 {
                     playerHealth.changeCondition(Conditions.LowerBodyCondition, 0.5f);
