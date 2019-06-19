@@ -44,10 +44,12 @@ public class GrabInteractable : BaseInteractable
     }
 
 
-    protected void Awake()
+    protected new void Awake()
     {
         rigid = GetComponent<Rigidbody>();
         audioManager = FindObjectOfType<AudioManager>();
+
+        base.Awake();
     }
 
     public override bool Interact(InteractionScript player)

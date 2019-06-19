@@ -17,6 +17,8 @@ public class FamilyPicture : GrabInteractable
         if (familyPictureCollectionParent == null)
             familyPictureCollectionParent = uiImageOfItself.transform.parent.gameObject;
         familyPictureCollectionParent.SetActive(false);
+
+        textToDisplayOnHover = "Click to pick up " + DisplayName;
     }
 
     protected override bool CarryOutInteraction_Carry(InteractionScript player)

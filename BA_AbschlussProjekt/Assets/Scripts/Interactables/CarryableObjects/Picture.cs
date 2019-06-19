@@ -22,6 +22,8 @@ public class Picture : GrabInteractable
     {
         pictureUnbroken = GetComponent<MeshRenderer>();
         interactionCollider = GetComponent<BoxCollider>();
+
+        textToDisplayOnHover = "Click to pick up " + DisplayName;
     }
 
     private new void OnCollisionEnter(Collision other)
