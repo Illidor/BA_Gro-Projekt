@@ -282,8 +282,11 @@ namespace UnityStandardAssets.Characters.FirstPerson
                 m_IsGrounded = false;
                 m_GroundContactNormal = Vector3.up;
             }
+
+            // Landing
             if (!m_PreviouslyGrounded && m_IsGrounded && m_Jumping)
             {
+                //AudioManager.audioManager.Play("snd_landingjump");
                 m_Jumping = false;
             }
         }
