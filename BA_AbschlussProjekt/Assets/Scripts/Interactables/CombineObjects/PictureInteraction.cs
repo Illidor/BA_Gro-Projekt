@@ -5,6 +5,7 @@ using UnityEngine;
 public class PictureInteraction : MonoBehaviour, ICombinable
 {
     private new MeshRenderer renderer;
+    public MeshRenderer rendererCanvas;
 
     public GameObject objectToInteract;
 
@@ -14,6 +15,7 @@ public class PictureInteraction : MonoBehaviour, ICombinable
     {
         renderer = GetComponent<MeshRenderer>();
         renderer.enabled = false;
+        rendererCanvas.enabled = false;
     }
 
     public bool Combine(InteractionScript player, BaseInteractable interactingComponent)
@@ -25,7 +27,8 @@ public class PictureInteraction : MonoBehaviour, ICombinable
             interactingComponent.transform.SetParent(transform);
             interactingComponent.transform.localPosition = Vector3.zero;
             interactingComponent.transform.localEulerAngles = Vector3.zero;
-            boxToOpen.GetComponent<Animation>().Play();
+            rendererCanvas.enabled = true;
+            boxToOpen.transform.Rotate(55f, 0, 0);
             return true;
         }
         return false;
