@@ -19,6 +19,12 @@ public class Door : BaseInteractable
 
     private int interactionCounter = 0;
 
+    protected new void Awake()
+    {
+        textToDisplayOnHover = "Click to try to break down " + DisplayName;
+        base.Awake();
+    }
+
     public override bool Interact(InteractionScript interactionScript)
     {
         return OpenDoor();

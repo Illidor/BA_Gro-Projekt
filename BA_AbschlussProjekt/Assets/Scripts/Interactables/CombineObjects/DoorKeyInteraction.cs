@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DoorKeyInteraction : MonoBehaviour, ICombinable        // I see similarities with PictureInteraction
+public class DoorKeyInteraction : NamedObject, ICombinable        // I implemented ICombinable because there was a combine method ~Seb
 {
     [SerializeField]
     GameObject keyInLock;
@@ -37,5 +37,17 @@ public class DoorKeyInteraction : MonoBehaviour, ICombinable        // I see sim
             audioManager.AddSound(soundType, this.gameObject);
             GetComponent<AudioSource>().Play();
         }
+    }
+
+    public bool HandleCombine(InteractionScript player, BaseInteractable currentlyHolding)
+    {
+        player.GUIInteractionFeedbackHandler.StandardCrosshair.SetActive(false);
+        player.GUIInteractionFeedbackHandler.InteractionCrosshair.SetActive(true);
+        player.GUIInteractionFeedbackHandler.ActionDescription.text = "Click to combine " + DisplayName + " with " + currentlyHolding.DisplayName; //Inherit from NamedObject to have access to DisplayName
+
+        if (CTRLHub.InteractDown)
+            return Combine(player, currentlyHolding);
+
+        return false;
     }
 }

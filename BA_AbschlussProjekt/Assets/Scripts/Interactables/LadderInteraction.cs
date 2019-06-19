@@ -27,6 +27,12 @@ public class LadderInteraction : ConditionedInteractable
         }
     }
 
+    protected new void Awake()
+    {
+        textToDisplayOnHover = "Click to climb " + DisplayName;
+        base.Awake();
+    }
+
     void Update()
     {
         if (!IsBeeingClimbed)

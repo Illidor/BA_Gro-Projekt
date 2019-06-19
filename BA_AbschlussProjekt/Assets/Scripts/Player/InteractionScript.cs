@@ -8,10 +8,16 @@ public class InteractionScript : MonoBehaviour
 {
     [SerializeField] [Tooltip("Max distance to objects the player is able to grab empty handed")]
     private float emptyHandedGrabingReach = 1.5f;
-    [SerializeField] [Tooltip("Hand the carried object is parented to")]
-    private Transform grabingPoint;
+
+    [field: Space, 
+        LabelOverride("Grabing Point"), SerializeField, Tooltip("Hand the carried object is parented to")]
+    public Transform GrabingPoint { get; private set; }
     [SerializeField] [Tooltip("Handler of the players injuries")]
     private PlayerHealth playerHealth;
+
+    [field: LabelOverride("GUI Interaction Feedback Handler"), SerializeField, 
+        Tooltip("The GUI Interaction Feedback Handler of the player. If not supplied the script will search on this gameobject and it's children")]
+    public GUIInteractionFeedbackHandler GUIInteractionFeedbackHandler { get; private set; }
 
     public PlayerHealth PlayerHealth { get { return playerHealth; } }
 
@@ -20,19 +26,19 @@ public class InteractionScript : MonoBehaviour
     public bool IsCarrying { get; private set; }
     public bool IsPushing  { get; private set; }
 
-    public Transform GrabingPoint { get { return grabingPoint; } }
-
     private float grabingReach;
 
-    private void Awake()
+    protected void Awake()
     {
         grabingReach = emptyHandedGrabingReach;
+
+        if (GUIInteractionFeedbackHandler == null)
+            GUIInteractionFeedbackHandler = GetComponentInChildren<GUIInteractionFeedbackHandler>();
     }
 
-    private void Update()
+    protected void Update()
     {
-        if (CTRLHub.InteractDown)
-            CheckInteraction();
+        HandleActions();
 
         if (IsCarrying || IsPushing)
         {
@@ -41,8 +47,10 @@ public class InteractionScript : MonoBehaviour
         }
     }
 
-    private void CheckInteraction()
+    private void HandleActions()
     {
+        GUIInteractionFeedbackHandler.ResetGUI();
+
         Ray screenCenterRay = Camera.main.ScreenPointToRay(Input.mousePosition);
 
         RaycastHit raycastHit;
@@ -50,26 +58,17 @@ public class InteractionScript : MonoBehaviour
 
         if (IsCarrying == false)
         {
-            raycastHit.collider?.GetComponent<BaseInteractable>()?.Interact(this);
+            raycastHit.collider?.GetComponent<BaseInteractable>()?.HandleInteraction(this);
         }
         else
         {
             if (didRaycastHit)
             {
-                ICombinable objectToCombineWith = raycastHit.collider.GetComponent<ICombinable>();
-                if (objectToCombineWith != null &&
-                    objectToCombineWith.Combine(this, UsedObject))
+                if (raycastHit.collider.GetComponent<ICombinable>()?.HandleCombine(this, UsedObject) == true)
                     return;
             }
 
-            if(UsedObject != null)
-            {
-                UsedObject.GetComponent<IUseable>()?.Use(this);
-            }
-            else
-            {
-                //UsedObject
-            }
+            UsedObject?.GetComponent<IUseable>()?.HandleUse(this);
         }
     }
 

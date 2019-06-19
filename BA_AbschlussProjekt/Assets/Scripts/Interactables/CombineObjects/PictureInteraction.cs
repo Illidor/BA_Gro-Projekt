@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PictureInteraction : MonoBehaviour, ICombinable
+public class PictureInteraction : NamedObject, ICombinable
 {
     private new MeshRenderer renderer;
 
@@ -28,6 +28,18 @@ public class PictureInteraction : MonoBehaviour, ICombinable
             boxToOpen.GetComponent<Animation>().Play();
             return true;
         }
+        return false;
+    }
+
+    public bool HandleCombine(InteractionScript player, BaseInteractable currentlyHolding)
+    {
+        player.GUIInteractionFeedbackHandler.StandardCrosshair.SetActive(false);
+        player.GUIInteractionFeedbackHandler.InteractionCrosshair.SetActive(true);
+        player.GUIInteractionFeedbackHandler.ActionDescription.text = "Click to combine " + DisplayName + " with " + currentlyHolding.DisplayName;
+
+        if (CTRLHub.InteractDown)
+            return Combine(player, currentlyHolding);
+
         return false;
     }
 }
