@@ -27,12 +27,26 @@ public class LadderInteraction : ConditionedInteractable
         }
     }
 
+    // Audio ticker that plays sound after X seconds when player is on ladder
+    private float climbTicker = 5f;
+    private float climbAudioThreshold = 0.75f;
+
     void Update()
     {
         if (!IsBeeingClimbed)
             return;
 
         currentClimber.transform.localPosition += (endPoint.position - startPoint.position).normalized * (climbingSpeed * CTRLHub.VerticalAxis);
+
+
+        // Ladder audio handling
+        climbTicker += Time.deltaTime;
+
+        if(climbTicker > climbAudioThreshold && (Input.GetAxis("Vertical") > 0.1f || Input.GetAxis("Vertical") < -0.1f))
+        {
+            climbTicker = 0f;
+            //AudioManager.audioManager.Play("snd_climbing_ladder");
+        }
 
         if (currentClimber.transform.position.y < startPoint.position.y)
         {

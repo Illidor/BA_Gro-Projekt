@@ -17,6 +17,7 @@ public class HatchInteraction : MonoBehaviour, ICombinable
                 try
                 {
                     this.gameObject.GetComponent<Animation>().Play();
+                    //AudioManager.audioManager.Play("snd_openattic_ladder");
                 }
                 catch (System.Exception){}
 
