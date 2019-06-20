@@ -22,6 +22,8 @@ public class Picture : GrabInteractable
     {
         pictureUnbroken = GetComponent<MeshRenderer>();
         interactionCollider = GetComponent<BoxCollider>();
+
+        textToDisplayOnHover = "Click to pick up " + DisplayName;
     }
 
     private new void OnCollisionEnter(Collision other)
@@ -37,7 +39,7 @@ public class Picture : GrabInteractable
             }
             else if (velocity < -2)
             {
-                PlaySound(soundNames[(int)SoundTypes.drop]);
+                audioManager.PlaySound(soundNames[(int)SoundTypes.drop], this);
             }
         }
     }
@@ -46,7 +48,7 @@ public class Picture : GrabInteractable
     {
         try
         {
-            PlaySound(soundNames[(int)SoundTypes.destroy]);
+            audioManager.PlaySound(soundNames[(int)SoundTypes.destroy], this);
         }
         catch { }
 

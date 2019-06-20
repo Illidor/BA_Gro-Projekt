@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class HatchInteraction : MonoBehaviour, ICombinable
+public class HatchInteraction : NamedObject, ICombinable
 {
     public List<BaseInteractable> thingsToInteractWtih;
     public List<GameObject> correlatingGameObjects;
@@ -42,4 +42,15 @@ public class HatchInteraction : MonoBehaviour, ICombinable
         return false;
     }
 
+    public bool HandleCombine(InteractionScript player, BaseInteractable currentlyHolding)
+    {
+        player.GUIInteractionFeedbackHandler.StandardCrosshair.SetActive(false);
+        player.GUIInteractionFeedbackHandler.InteractionCrosshair.SetActive(true);
+        player.GUIInteractionFeedbackHandler.ActionDescription.text = "Click to combine " + DisplayName + " with " + currentlyHolding.DisplayName;
+
+        if (CTRLHub.InteractDown)
+            return Combine(player, currentlyHolding);
+
+        return false;
+    }
 }
