@@ -39,7 +39,7 @@ public class Picture : GrabInteractable
             }
             else if (velocity < -2)
             {
-                audioManager.PlaySound(soundNames[(int)SoundTypes.drop], this);
+                AudioManager.PlaySound(SoundNames[(int)SoundTypes.drop], this);
             }
         }
     }
@@ -48,7 +48,7 @@ public class Picture : GrabInteractable
     {
         try
         {
-            audioManager.PlaySound(soundNames[(int)SoundTypes.destroy], this);
+            AudioManager.PlaySound(SoundNames[(int)SoundTypes.destroy], this);
         }
         catch { }
 

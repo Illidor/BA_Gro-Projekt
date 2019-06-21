@@ -6,7 +6,7 @@ using UnityEngine.Serialization;
 /// <summary>
 /// Base class for all interactable objects.
 /// </summary>
-public abstract class BaseInteractable : NamedObject
+public abstract class BaseInteractable : InteractionFoundation
 {
     protected string textToDisplayOnHover = "";
 

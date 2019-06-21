@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class HatchInteraction : NamedObject, ICombinable
+public class HatchInteraction : InteractionFoundation, ICombinable
 {
     public List<BaseInteractable> thingsToInteractWtih;
     public List<GameObject> correlatingGameObjects;

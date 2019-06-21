@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DoorKeyInteraction : NamedObject, ICombinable        // I implemented ICombinable because there was a combine method ~Seb
+public class DoorKeyInteraction : InteractionFoundation, ICombinable        // I implemented ICombinable because there was a combine method ~Seb
 {
     [SerializeField]
     GameObject keyInLock;
@@ -43,7 +43,7 @@ public class DoorKeyInteraction : NamedObject, ICombinable        // I implement
     {
         player.GUIInteractionFeedbackHandler.StandardCrosshair.SetActive(false);
         player.GUIInteractionFeedbackHandler.InteractionCrosshair.SetActive(true);
-        player.GUIInteractionFeedbackHandler.ActionDescription.text = "Click to combine " + DisplayName + " with " + currentlyHolding.DisplayName; //Inherit from NamedObject to have access to DisplayName
+        player.GUIInteractionFeedbackHandler.ActionDescription.text = "Click to combine " + DisplayName + " with " + currentlyHolding.DisplayName; //Inherit from InteractionFoundation to have access to DisplayName
 
         if (CTRLHub.InteractDown)
             return Combine(player, currentlyHolding);

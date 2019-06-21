@@ -55,7 +55,7 @@ public class Crutch : GrabInteractable
             if (attachTime > 2.2f)
             {
                 attachTime = 0;
-                audioManager.PlaySound(soundNames[(int)SoundTypes.pickup], this);
+                AudioManager.PlaySound(SoundNames[(int)SoundTypes.pickup], this);
                 base.CarryOutInteraction_Carry(FindObjectOfType<InteractionScript>());
             }
             if (attachTime > 0)

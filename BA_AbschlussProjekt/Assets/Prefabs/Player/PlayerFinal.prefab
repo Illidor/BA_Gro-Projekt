@@ -13,6 +13,8 @@ GameObject:
   - component: {fileID: 3560991054528320994}
   - component: {fileID: 3560991053695900330}
   - component: {fileID: 1829712333563262121}
+  - component: {fileID: 5108789556920818492}
+  - component: {fileID: 1942961346730145996}
   m_Layer: 2
   m_Name: PlayerFinal
   m_TagString: Untagged
@@ -151,8 +153,38 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   emptyHandedGrabingReach: 1.5
-  grabingPoint: {fileID: 0}
-  playerHealth: {fileID: 0}
+  <GrabingPoint>k__BackingField: {fileID: 6101202195397955174}
+  playerHealth: {fileID: 5108789556920818492}
+  <GUIInteractionFeedbackHandler>k__BackingField: {fileID: 1942961346730145996}
+--- !u!114 &5108789556920818492
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3560991054522834944}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6160c672c8f9c744a9360669162406c0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerInjuries: 0
+--- !u!114 &1942961346730145996
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3560991054522834944}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d04ce5dfae928fc45a8195b9370cf344, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  <StandardCrosshair>k__BackingField: {fileID: 0}
+  <InteractionCrosshair>k__BackingField: {fileID: 0}
+  <ActionDescription>k__BackingField: {fileID: 0}
+  <SecondActionDescription>k__BackingField: {fileID: 0}
 --- !u!1 &3560991054522834946
 GameObject:
   m_ObjectHideFlags: 0
@@ -427,6 +459,12 @@ PrefabInstance:
 --- !u!4 &6518171479452833652 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -4216859302048453862, guid: 67ab401e80e33c2469b0645b74ba8b5e,
+    type: 3}
+  m_PrefabInstance: {fileID: 2238155576616418414}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &6101202195397955174 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 5450575670805574152, guid: 67ab401e80e33c2469b0645b74ba8b5e,
     type: 3}
   m_PrefabInstance: {fileID: 2238155576616418414}
   m_PrefabAsset: {fileID: 0}

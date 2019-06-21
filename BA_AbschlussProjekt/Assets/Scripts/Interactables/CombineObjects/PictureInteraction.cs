@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PictureInteraction : NamedObject, ICombinable
+public class PictureInteraction : InteractionFoundation, ICombinable
 {
     private new MeshRenderer renderer;
     public MeshRenderer rendererCanvas;

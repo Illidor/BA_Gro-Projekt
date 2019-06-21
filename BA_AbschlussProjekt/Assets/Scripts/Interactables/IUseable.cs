@@ -21,7 +21,7 @@ public interface IUseable
     {
         player.GUIInteractionFeedbackHandler.StandardCrosshair.SetActive(false);
         player.GUIInteractionFeedbackHandler.InteractionCrosshair.SetActive(true);
-        player.GUIInteractionFeedbackHandler.ActionDescription.text = "Click to use " + DisplayName; //Inherit from NamedObject to have access to DisplayName
+        player.GUIInteractionFeedbackHandler.ActionDescription.text = "Click to use " + DisplayName; //Inherit from InteractionFoundation to have access to DisplayName
 
         if (CTRLHub.InteractDown)
             Use(player);
