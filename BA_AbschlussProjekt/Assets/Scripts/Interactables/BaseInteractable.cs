@@ -14,6 +14,8 @@ public abstract class BaseInteractable : InteractionFoundation
     {
         if (textToDisplayOnHover.Equals(""))
             textToDisplayOnHover =  "Click to interact with " + DisplayName;
+
+        base.Awake();
     }
 
     /// <summary>

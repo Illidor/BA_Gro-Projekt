@@ -16,7 +16,7 @@ public class HatchInteraction : InteractionFoundation, ICombinable
             {
                 try
                 {
-                    this.gameObject.GetComponent<Animation>().Play();
+                    this.GetComponent<Animator>().SetTrigger("open"); ;
                     //AudioManager.audioManager.Play("snd_openattic_ladder");
                 }
                 catch (System.Exception){}
@@ -27,7 +27,7 @@ public class HatchInteraction : InteractionFoundation, ICombinable
                 {
                     try
                     {
-                        cgO.GetComponent<Animation>().Play();
+                        cgO.GetComponent<Animator>().SetTrigger("open");
                     }
                     catch (System.Exception) { }
                 }

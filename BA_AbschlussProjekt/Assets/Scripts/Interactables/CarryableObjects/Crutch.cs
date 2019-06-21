@@ -41,6 +41,11 @@ public class Crutch : GrabInteractable
     }
     private void Update()
     {
+        if(playerAnim == null)
+        {
+            playerAnim = FindObjectOfType<AnimationController>().animator;
+        }
+
         if (attachingToObj && !wasAttached)
         {
             wasAttached = true;
