@@ -3,7 +3,7 @@ using System;
 using UnityEngine;
 using System.Linq;
 
-public class AudioManager : MonoBehaviour       // Maybe implement as SIngelton?
+public class AudioManager : MonoBehaviour       // Maybe implement as SIngelton? 
 {
 	public static AudioManager audioManager;
 	public Sound[] sounds;//TODO: Find Sounds
