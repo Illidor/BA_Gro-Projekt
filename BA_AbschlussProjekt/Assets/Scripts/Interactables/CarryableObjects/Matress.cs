@@ -30,7 +30,7 @@ public class Matress : GrabInteractable
         }
         else
         {
-            if (SoundSources[0].mute == false)
+            if (SoundSources.Length > 0 && SoundSources[0].mute == false)
             {
                 SoundSources[0].mute = true;
             }

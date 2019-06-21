@@ -978,8 +978,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <DisplayName>k__BackingField: 
   <AudioManager>k__BackingField: {fileID: 0}
-  <SoundSources>k__BackingField: []
-  <SoundNames>k__BackingField: []
+  soundSources: []
+  soundNames: []
   thingsToInteractWtih:
   - {fileID: 833718130}
   correlatingGameObjects:
@@ -1301,15 +1301,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a1edc7a80eba53c49a718594db1ae6d2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  <DisplayName>k__BackingField: 
+  <DisplayName>k__BackingField: Picture Piece
   <AudioManager>k__BackingField: {fileID: 0}
-  <SoundSources>k__BackingField: []
-  <SoundNames>k__BackingField: []
+  soundSources: []
+  soundNames: []
   possibleConditionsToCarry: -1
   possibleConditionsToPush: 0
   velocity: 0
-  uiImageOfItself: {fileID: 0}
-  familyPictureCollectionParent: {fileID: 0}
+  uiImageOfItself: {fileID: 511064256}
+  familyPictureCollectionParent: {fileID: 205185712}
 --- !u!54 &144058896
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -1378,6 +1378,12 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 7566570576069419470, guid: c3ba7992663a07e4eb27e574a28ecf63,
     type: 3}
   m_PrefabInstance: {fileID: 1419670861}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &205185712 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3831993861507521471, guid: e938667ec4b4adb40babf91034363b3e,
+    type: 3}
+  m_PrefabInstance: {fileID: 711853719}
   m_PrefabAsset: {fileID: 0}
 --- !u!114 &220697830 stripped
 MonoBehaviour:
@@ -1855,15 +1861,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a1edc7a80eba53c49a718594db1ae6d2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  <DisplayName>k__BackingField: 
+  <DisplayName>k__BackingField: Picture Piece
   <AudioManager>k__BackingField: {fileID: 0}
-  <SoundSources>k__BackingField: []
-  <SoundNames>k__BackingField: []
+  soundSources: []
+  soundNames: []
   possibleConditionsToCarry: -1
   possibleConditionsToPush: 0
   velocity: 0
-  uiImageOfItself: {fileID: 0}
-  familyPictureCollectionParent: {fileID: 0}
+  uiImageOfItself: {fileID: 1239366473}
+  familyPictureCollectionParent: {fileID: 205185712}
 --- !u!54 &267910625
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -2552,8 +2558,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <DisplayName>k__BackingField: Ladder
   <AudioManager>k__BackingField: {fileID: 0}
-  <SoundSources>k__BackingField: []
-  <SoundNames>k__BackingField: []
+  soundSources: []
+  soundNames: []
   possibleConditionsToInteract: -1
   climbingSpeed: 0
   startPoint: {fileID: 894915633}
@@ -2585,8 +2591,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <DisplayName>k__BackingField: Hatch
   <AudioManager>k__BackingField: {fileID: 220697830}
-  <SoundSources>k__BackingField: []
-  <SoundNames>k__BackingField: []
+  soundSources: []
+  soundNames: []
   thingsToInteractWtih:
   - {fileID: 833718130}
   correlatingGameObjects: []
@@ -2711,6 +2717,18 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c3ba7992663a07e4eb27e574a28ecf63, type: 3}
+--- !u!114 &390448562 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3831993862484436421, guid: e938667ec4b4adb40babf91034363b3e,
+    type: 3}
+  m_PrefabInstance: {fileID: 711853719}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -765806418, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &394218191
 GameObject:
   m_ObjectHideFlags: 0
@@ -3393,6 +3411,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 49ca07eb886760a498c2d78b4cca9c06, type: 3}
+--- !u!1 &511064256 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3831993861976558422, guid: e938667ec4b4adb40babf91034363b3e,
+    type: 3}
+  m_PrefabInstance: {fileID: 711853719}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &525963652
 GameObject:
   m_ObjectHideFlags: 0
@@ -3662,7 +3686,7 @@ PrefabInstance:
     - target: {fileID: 7186798870273332767, guid: 9c5a8c63df9c96a43a1d38c62d712e84,
         type: 3}
       propertyPath: soundNames.Array.size
-      value: 3
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7186798870273332767, guid: 9c5a8c63df9c96a43a1d38c62d712e84,
         type: 3}
@@ -3682,7 +3706,7 @@ PrefabInstance:
     - target: {fileID: 7186798870273332767, guid: 9c5a8c63df9c96a43a1d38c62d712e84,
         type: 3}
       propertyPath: soundNames.Array.data[2]
-      value: snd_mattress
+      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 7186798870273332767, guid: 9c5a8c63df9c96a43a1d38c62d712e84,
         type: 3}
@@ -3692,6 +3716,11 @@ PrefabInstance:
     - target: {fileID: 7186798870273332767, guid: 9c5a8c63df9c96a43a1d38c62d712e84,
         type: 3}
       propertyPath: <SoundNames>k__BackingField.Array.data[0]
+      value: snd_mattress
+      objectReference: {fileID: 0}
+    - target: {fileID: 7186798870273332767, guid: 9c5a8c63df9c96a43a1d38c62d712e84,
+        type: 3}
+      propertyPath: soundNames.Array.data[0]
       value: snd_mattress
       objectReference: {fileID: 0}
     - target: {fileID: 6857673082592309573, guid: 9c5a8c63df9c96a43a1d38c62d712e84,
@@ -4190,6 +4219,11 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[2]
       value: 
       objectReference: {fileID: 2100000, guid: 1d097cc5aec193945b89094de484db7b, type: 2}
+    - target: {fileID: 4703577875574175283, guid: 206ae01d7434dcd49813ca75a8f7f3c1,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 206ae01d7434dcd49813ca75a8f7f3c1, type: 3}
 --- !u!4 &594468531 stripped
@@ -4877,8 +4911,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <DisplayName>k__BackingField: 
   <AudioManager>k__BackingField: {fileID: 0}
-  <SoundSources>k__BackingField: []
-  <SoundNames>k__BackingField: []
+  soundSources: []
+  soundNames: []
   keyInLock: {fileID: 966277687}
   objectToInteractWith: pre_Key
   interactSound: 
@@ -8427,6 +8461,31 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 993202543}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &993522351 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6529743844718242207, guid: 90e53311f6e155b4888e98665830a2f1,
+    type: 3}
+  m_PrefabInstance: {fileID: 898820640}
+  m_PrefabAsset: {fileID: 0}
+--- !u!95 &993522353 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 166375312135501558, guid: 90e53311f6e155b4888e98665830a2f1,
+    type: 3}
+  m_PrefabInstance: {fileID: 898820640}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &993522354
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 993522351}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 125e586b501b0b94ca993dc3a24600a0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  animator: {fileID: 993522353}
 --- !u!4 &1046509712 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7566570576069419470, guid: c3ba7992663a07e4eb27e574a28ecf63,
@@ -8651,8 +8710,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <DisplayName>k__BackingField: Teddy Bear
   <AudioManager>k__BackingField: {fileID: 0}
-  <SoundSources>k__BackingField: []
-  <SoundNames>k__BackingField: []
+  soundSources: []
+  soundNames: []
   possibleConditionsToCarry: 1610612719
   possibleConditionsToPush: 0
   velocity: 0
@@ -9398,6 +9457,12 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1191304680}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &1239366473 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3831993861643376383, guid: e938667ec4b4adb40babf91034363b3e,
+    type: 3}
+  m_PrefabInstance: {fileID: 711853719}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1239501084
 GameObject:
   m_ObjectHideFlags: 0
@@ -9580,24 +9645,6 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1243053228}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
---- !u!1 &1256135701 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 3560991054522834946, guid: 90e53311f6e155b4888e98665830a2f1,
-    type: 3}
-  m_PrefabInstance: {fileID: 898820640}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &1256135705
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1256135701}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cdcd06815c47d30489f70df42db56a48, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!84 &1257062234
 RenderTexture:
   m_ObjectHideFlags: 0
@@ -10467,6 +10514,18 @@ Transform:
   m_Father: {fileID: 786232917}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 89.997, z: 0}
+--- !u!1 &1342058399 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3831993860689357064, guid: e938667ec4b4adb40babf91034363b3e,
+    type: 3}
+  m_PrefabInstance: {fileID: 711853719}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1347453910 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3831993860864576962, guid: e938667ec4b4adb40babf91034363b3e,
+    type: 3}
+  m_PrefabInstance: {fileID: 711853719}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1359380198
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -11372,15 +11431,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a1edc7a80eba53c49a718594db1ae6d2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  <DisplayName>k__BackingField: 
+  <DisplayName>k__BackingField: Picture Piece
   <AudioManager>k__BackingField: {fileID: 0}
-  <SoundSources>k__BackingField: []
-  <SoundNames>k__BackingField: []
+  soundSources: []
+  soundNames: []
   possibleConditionsToCarry: -1
   possibleConditionsToPush: 0
   velocity: 0
-  uiImageOfItself: {fileID: 0}
-  familyPictureCollectionParent: {fileID: 0}
+  uiImageOfItself: {fileID: 1342058399}
+  familyPictureCollectionParent: {fileID: 205185712}
 --- !u!54 &1481737702
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -11812,15 +11871,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a1edc7a80eba53c49a718594db1ae6d2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  <DisplayName>k__BackingField: 
+  <DisplayName>k__BackingField: Picture Piece
   <AudioManager>k__BackingField: {fileID: 0}
-  <SoundSources>k__BackingField: []
-  <SoundNames>k__BackingField: []
+  soundSources: []
+  soundNames: []
   possibleConditionsToCarry: -1
   possibleConditionsToPush: 0
   velocity: 0
-  uiImageOfItself: {fileID: 0}
-  familyPictureCollectionParent: {fileID: 0}
+  uiImageOfItself: {fileID: 1347453910}
+  familyPictureCollectionParent: {fileID: 205185712}
 --- !u!54 &1574218461
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -14786,6 +14845,11 @@ PrefabInstance:
         type: 3}
       propertyPath: image
       value: 
+      objectReference: {fileID: 390448562}
+    - target: {fileID: 4455260979416429345, guid: 2ebc6dc5391873e4788e1a0f7d41ef5d,
+        type: 3}
+      propertyPath: <DisplayName>k__BackingField
+      value: Crutch
       objectReference: {fileID: 0}
     - target: {fileID: 4966893981994274061, guid: 2ebc6dc5391873e4788e1a0f7d41ef5d,
         type: 3}
