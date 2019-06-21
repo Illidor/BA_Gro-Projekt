@@ -20,7 +20,7 @@ public class InteractionFoundation : MonoBehaviour
 
     //TODO: add summary
     [field: LabelOverride("Sound Sources"), SerializeField]
-    public AudioSource[] SoundSources { get; protected set; }
+    public AudioSource[] SoundSources { get; set; }
 
     //TODO: add summary
     [field: LabelOverride("Audio Manager"), SerializeField]
