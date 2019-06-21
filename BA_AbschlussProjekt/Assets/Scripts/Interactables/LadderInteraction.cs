@@ -6,7 +6,7 @@ using UnityEngine;
 public class LadderInteraction : ConditionedInteractable
 {
     [SerializeField]
-    private float climbingSpeed;
+    private float climbingSpeed = 0.001f;
     [Space]
     [SerializeField]
     private Transform startPoint;
@@ -25,6 +25,12 @@ public class LadderInteraction : ConditionedInteractable
             if (value == false)
                 currentClimber = null;
         }
+    }
+
+    private void OnValidate()
+    {
+        if (climbingSpeed <= 0)
+            climbingSpeed = 0.001f;
     }
 
     // Audio ticker that plays sound after X seconds when player is on ladder
