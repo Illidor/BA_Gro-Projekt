@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using UnityEngine;
 
 /// <summary>
 /// A collection of essential components all sort of interactiony objects need.
@@ -18,13 +19,23 @@ public class InteractionFoundation : MonoBehaviour
     [field: LabelOverride("Audio Manager"), SerializeField, Tooltip("Handler for all Audio related buissness. Should exist only once, therefor should be found somewhere in Globals")]
     public AudioManager AudioManager { get; protected set; }
 
+    [SerializeField]
+    protected AudioSource[] soundSources;
     //TODO: add summary
-    [field: LabelOverride("Sound Sources"), SerializeField]
-    public AudioSource[] SoundSources { get; set; }
+    public AudioSource[] SoundSources
+    {
+        get => soundSources;
+        set => soundSources = value;
+    }
 
+    [SerializeField]
+    protected string[] soundNames;
     //TODO: add summary
-    [field: LabelOverride("Audio Manager"), SerializeField]
-    protected string[] SoundNames { get; set; }
+    public string[] SoundNames
+    {
+        get => soundNames;
+        protected set => soundNames = value;
+    }
 
     protected void Awake()
     {
