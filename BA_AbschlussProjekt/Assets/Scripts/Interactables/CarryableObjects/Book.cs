@@ -41,4 +41,12 @@ public class Book : GrabInteractable, IUseable
         }
         return true;
     }
+
+    public override void PutDown(InteractionScript player)
+    {
+        bookToRead.SetActive(false);
+        isBookOpened = false;
+
+        base.PutDown(player);
+    }
 }
