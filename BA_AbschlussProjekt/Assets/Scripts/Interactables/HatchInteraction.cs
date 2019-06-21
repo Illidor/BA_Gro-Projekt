@@ -46,7 +46,7 @@ public class HatchInteraction : InteractionFoundation, ICombinable
     {
         player.GUIInteractionFeedbackHandler.StandardCrosshair.SetActive(false);
         player.GUIInteractionFeedbackHandler.InteractionCrosshair.SetActive(true);
-        player.GUIInteractionFeedbackHandler.ActionDescription.text = "Click to combine " + DisplayName + " with " + currentlyHolding.DisplayName;
+        player.GUIInteractionFeedbackHandler.ActionDescription.text = "Click to combine " + currentlyHolding.DisplayName + " with " + DisplayName;
 
         if (CTRLHub.InteractDown)
             return Combine(player, currentlyHolding);

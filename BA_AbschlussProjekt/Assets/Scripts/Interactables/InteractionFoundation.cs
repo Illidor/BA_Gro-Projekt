@@ -34,4 +34,10 @@ public class InteractionFoundation : MonoBehaviour
         if (AudioManager == null)
             AudioManager = FindObjectOfType<AudioManager>();
     }
+
+    protected enum SoundTypes
+    {
+        pickup = 0,
+        drop = 1 //TODO: override
+    }
 }
