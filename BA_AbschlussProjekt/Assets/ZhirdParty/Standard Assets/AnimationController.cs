@@ -16,7 +16,7 @@ public class AnimationController : MonoBehaviour
     void OnAnimatorIK(int layerIndex)//Todo:idk why not used
     {
         Debug.Log("onanimatorik");
-        GetComponent<Crutch>().OnAnimatorIKFunc();
+        GetComponent<Crutch>()?.OnAnimatorIKFunc();
     }
     // Update is called once per frame
     //void Update()
