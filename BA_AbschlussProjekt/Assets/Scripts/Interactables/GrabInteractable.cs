@@ -102,7 +102,7 @@ public class GrabInteractable : BaseInteractable
                 else
                 {
                     // ... and it's not pointing upwards (eg a wall), then put the object down inbetween it and the player
-                    transform.position = raycastHit.point - screenCenterRay.direction;
+                    transform.position = Camera.main.transform.position + screenCenterRay.direction * ((Camera.main.transform.position + raycastHit.point).magnitude / 2f );
                 }
             }
             else
