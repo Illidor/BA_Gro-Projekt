@@ -2,19 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PictureInteraction : MonoBehaviour, ICombinable
+public class PictureInteraction : InteractionFoundation, ICombinable
 {
-    private new MeshRenderer renderer;
-
     public GameObject objectToInteract;
-
-    public GameObject boxToOpen;
-
-    void Start()
-    {
-        renderer = GetComponent<MeshRenderer>();
-        renderer.enabled = false;
-    }
 
     public bool Combine(InteractionScript player, BaseInteractable interactingComponent)
     {
@@ -25,9 +15,20 @@ public class PictureInteraction : MonoBehaviour, ICombinable
             interactingComponent.transform.SetParent(transform);
             interactingComponent.transform.localPosition = Vector3.zero;
             interactingComponent.transform.localEulerAngles = Vector3.zero;
-            boxToOpen.GetComponent<Animation>().Play();
             return true;
         }
+        return false;
+    }
+
+    public bool HandleCombine(InteractionScript player, BaseInteractable currentlyHolding)
+    {
+        player.GUIInteractionFeedbackHandler.StandardCrosshair.SetActive(false);
+        player.GUIInteractionFeedbackHandler.InteractionCrosshair.SetActive(true);
+        player.GUIInteractionFeedbackHandler.ActionDescription.text = "Click to combine " + currentlyHolding.DisplayName + " with " + DisplayName;
+
+        if (CTRLHub.InteractDown)
+            return Combine(player, currentlyHolding);
+
         return false;
     }
 }

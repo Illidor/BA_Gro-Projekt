@@ -24,13 +24,9 @@ public class GrabInteractable : BaseInteractable
     protected Rigidbody rigidbodyPulling;
 
     //Sound
-    protected AudioManager audioManager;
     [SerializeField]
     protected float velocity;
     [SerializeField]
-    public AudioSource[] soundSources;
-    [SerializeField]
-    protected string[] soundNames;
 
     public bool IsBeeingCarried { get; protected set; }
 
@@ -43,10 +39,11 @@ public class GrabInteractable : BaseInteractable
     }
 
 
-    protected void Awake()
+    protected new void Awake()
     {
         rigid = GetComponent<Rigidbody>();
-        audioManager = FindObjectOfType<AudioManager>();
+
+        base.Awake();
     }
 
     public override bool Interact(InteractionScript player)
@@ -57,7 +54,7 @@ public class GrabInteractable : BaseInteractable
         {
             if (GetComponent<AudioSource>() != null)
             {
-                audioManager.PlaySound(soundNames[(int)SoundTypes.pickup], this);
+                AudioManager.PlaySound(SoundNames[(int)SoundTypes.pickup], this);
             }
             return CarryOutInteraction_Carry(player);
         }
@@ -137,6 +134,7 @@ public class GrabInteractable : BaseInteractable
 
     }
 
+    // Wait, why is this gone?
     ///// <summary>
     ///// Play a sound of a type eg. pickup, drop
     ///// </summary>
@@ -154,7 +152,7 @@ public class GrabInteractable : BaseInteractable
     //            }
     //            else
     //            {
-    //                audioManager.AddSound(soundType, this.gameObject);
+    //                AudioManager.AddSound(soundType, this.gameObject);
     //                sounds = GetComponents<AudioSource>();
     //                sounds.First(audios => audios.name == soundType).Play();
     //            }
@@ -162,7 +160,7 @@ public class GrabInteractable : BaseInteractable
     //    }
     //    else
     //    {
-    //        audioManager.AddSound(soundType, this.gameObject);
+    //        AudioManager.AddSound(soundType, this.gameObject);
     //        sounds = GetComponents<AudioSource>();
     //        sounds[0].Play();
     //    }
@@ -177,7 +175,7 @@ public class GrabInteractable : BaseInteractable
         {
             if(GetComponent<AudioSource>() != null)
             {
-                audioManager.PlaySound(soundNames[(int)SoundTypes.drop], this);
+                AudioManager.PlaySound(SoundNames[(int)SoundTypes.drop], this);
             }
         }
     }

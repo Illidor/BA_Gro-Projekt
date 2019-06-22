@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class HatchInteraction : MonoBehaviour, ICombinable
+public class HatchInteraction : InteractionFoundation, ICombinable
 {
     public List<BaseInteractable> thingsToInteractWtih;
     public List<GameObject> correlatingGameObjects;
@@ -16,7 +16,8 @@ public class HatchInteraction : MonoBehaviour, ICombinable
             {
                 try
                 {
-                    this.gameObject.GetComponent<Animation>().Play();
+                    this.GetComponent<Animator>().SetTrigger("open"); ;
+                    //AudioManager.audioManager.Play("snd_openattic_ladder");
                 }
                 catch (System.Exception){}
 
@@ -26,7 +27,7 @@ public class HatchInteraction : MonoBehaviour, ICombinable
                 {
                     try
                     {
-                        cgO.GetComponent<Animation>().Play();
+                        cgO.GetComponent<Animator>().SetTrigger("open");
                     }
                     catch (System.Exception) { }
                 }
@@ -41,4 +42,15 @@ public class HatchInteraction : MonoBehaviour, ICombinable
         return false;
     }
 
+    public bool HandleCombine(InteractionScript player, BaseInteractable currentlyHolding)
+    {
+        player.GUIInteractionFeedbackHandler.StandardCrosshair.SetActive(false);
+        player.GUIInteractionFeedbackHandler.InteractionCrosshair.SetActive(true);
+        player.GUIInteractionFeedbackHandler.ActionDescription.text = "Click to combine " + currentlyHolding.DisplayName + " with " + DisplayName;
+
+        if (CTRLHub.InteractDown)
+            return Combine(player, currentlyHolding);
+
+        return false;
+    }
 }

@@ -13,7 +13,11 @@ public class AnimationController : MonoBehaviour
     {
         controller = this.gameObject.GetComponent<UnityStandardAssets.Characters.FirstPerson.RigidbodyFirstPersonController>();   
     }
-
+    void OnAnimatorIK(int layerIndex)//Todo:idk why not used
+    {
+        Debug.Log("onanimatorik");
+        GetComponent<Crutch>()?.OnAnimatorIKFunc();
+    }
     // Update is called once per frame
     //void Update()
     //{

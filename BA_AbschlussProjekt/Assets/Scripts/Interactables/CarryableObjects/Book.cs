@@ -9,9 +9,25 @@ public class Book : GrabInteractable, IUseable
 
     private bool isBookOpened = false;
 
+    protected new void Awake()
+    {
+        textToDisplayOnHover = "Click to pick up " + DisplayName;
+        base.Awake();
+    }
+
+    public void HandleUse(InteractionScript player)
+    {
+        player.GUIInteractionFeedbackHandler.StandardCrosshair.SetActive(false);
+        player.GUIInteractionFeedbackHandler.InteractionCrosshair.SetActive(true);
+        player.GUIInteractionFeedbackHandler.ActionDescription.text = "Click to use " + DisplayName; //Inherit from InteractionFoundation (or BaseInteractable) to have access to DisplayName
+
+        if (CTRLHub.InteractDown)
+            Use(player);
+    }
+
     public bool Use(InteractionScript player)
     {
-        if(!isBookOpened)
+        if (!isBookOpened)
         {
             bookToRead.SetActive(true);
             isBookOpened = true;
@@ -24,5 +40,13 @@ public class Book : GrabInteractable, IUseable
             isBookOpened = false;
         }
         return true;
+    }
+
+    public override void PutDown(InteractionScript player)
+    {
+        bookToRead.SetActive(false);
+        isBookOpened = false;
+
+        base.PutDown(player);
     }
 }

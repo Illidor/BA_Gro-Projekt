@@ -20,8 +20,8 @@ public class BuildScript
         string dateTime = System.DateTime.Now.ToString();
         dateTime = dateTime.Replace(":", "-");
         dateTime = dateTime.Replace("/", "_");
-        string buildPath = "C:/Studium/Endprojekt_Material/Autodeploy/" + dateTime + "/";
-        //string buildPath = "C:/Users/MattManco/Desktop/Gro0projekt/Builds/Autodeploy/" + dateTime + "/";
+        //string buildPath = "C:/Studium/Endprojekt_Material/Autodeploy/" + dateTime + "/";
+        string buildPath = "C:/Users/Bo/Desktop/Build/" + dateTime + "/";
 
         if (!Directory.Exists(buildPath))
         {
