@@ -25,11 +25,11 @@ public class InteractionScript : MonoBehaviour
     public bool IsCarrying { get; private set; }
     public bool IsPushing { get; private set; }
 
-    private float grabingReach;
+    public float GrabingReach { get; private set; }
 
     protected void Awake()
     {
-        grabingReach = emptyHandedGrabingReach;
+        GrabingReach = emptyHandedGrabingReach;
 
         if (GUIInteractionFeedbackHandler == null)
             GUIInteractionFeedbackHandler = GetComponentInChildren<GUIInteractionFeedbackHandler>();
@@ -53,7 +53,7 @@ public class InteractionScript : MonoBehaviour
         Ray screenCenterRay = Camera.main.ScreenPointToRay(Input.mousePosition);
 
         RaycastHit raycastHit;
-        bool didRaycastHit = Physics.Raycast(screenCenterRay, out raycastHit, grabingReach);
+        bool didRaycastHit = Physics.Raycast(screenCenterRay, out raycastHit, GrabingReach);
 
         if (IsCarrying == false)
         {
@@ -94,17 +94,12 @@ public class InteractionScript : MonoBehaviour
 
     public void IncreaseReach(float reachToAdd)
     {
-        grabingReach += reachToAdd;
+        GrabingReach += reachToAdd;
     }
 
     public void ResetReachToDefault()
     {
-        grabingReach = emptyHandedGrabingReach;
-    }
-
-    public float GetReach()
-    {
-        return grabingReach;
+        GrabingReach = emptyHandedGrabingReach;
     }
 }
 
