@@ -5,13 +5,20 @@ using UnityEngine;
 
 public class LadderInteraction : ConditionedInteractable
 {
+
     [SerializeField]
     private float climbingSpeed = 0.001f;
-    [Space]
+    [SerializeField][Tooltip("The minimal distance from the bottom of the ladder the player snaps onto")]
+    private Vector3 ladderSnapOffsetFromBelow = new Vector3(0, 0.075f, 0);
+    [SerializeField][Tooltip("The minimal distance from the top of the ladder the player snaps onto")]
+    private Vector3 ladderSnapOffsetFromAbove = new Vector3(0, -1f, 0);
+    [Space] // Serialized Fields that don't need to be touched to be tweeked
     [SerializeField]
     private Transform startPoint;
     [SerializeField]
     private Transform endPoint;
+
+    public float CurrentClimbingSpeed { get; protected set; }
 
     private InteractionScript currentClimber;
     private bool isBeeingClimbed;
@@ -29,8 +36,8 @@ public class LadderInteraction : ConditionedInteractable
 
     private void OnValidate()
     {
-        if (climbingSpeed <= 0)
-            climbingSpeed = 0.001f;
+        if (CurrentClimbingSpeed <= 0)
+            CurrentClimbingSpeed = 0.001f;
     }
 
     // Audio ticker that plays sound after X seconds when player is on ladder
@@ -42,10 +49,16 @@ public class LadderInteraction : ConditionedInteractable
         if (!IsBeeingClimbed)
             return;
 
-        currentClimber.transform.localPosition += (endPoint.position - startPoint.position).normalized * (climbingSpeed * CTRLHub.VerticalAxis);
+        currentClimber.transform.localPosition += (endPoint.position - startPoint.position).normalized * (CurrentClimbingSpeed * CTRLHub.VerticalAxis);
+
+        if (currentClimber.transform.position.y < startPoint.position.y ||
+            currentClimber.transform.position.y > endPoint.position.y     )
+        {
+            DetachFromLadder();
+        }
 
 
-        // Ladder audio handling
+        // <Ladder audio handling>
         climbTicker += Time.deltaTime;
 
         if(climbTicker > climbAudioThreshold && (Input.GetAxis("Vertical") > 0.1f || Input.GetAxis("Vertical") < -0.1f))
@@ -53,23 +66,15 @@ public class LadderInteraction : ConditionedInteractable
             climbTicker = 0f;
             //AudioManager.audioManager.Play("snd_climbing_ladder");
         }
-
-        if (currentClimber.transform.position.y < startPoint.position.y)
-        {
-            //Vector3 ladderDetachOffset = transform.parent.position - startPoint.position;
-            //ladderDetachOffset.y = startPoint.position.y;
-            DetachFromLadder();
-        }
-        else if (currentClimber.transform.position.y > endPoint.position.y)
-        {
-            DetachFromLadder();
-        }
+        // </Ladder audio handling>
     }
 
     private void DetachFromLadder()
     {
-        currentClimber.GetComponent<Rigidbody>().isKinematic = false;
-        currentClimber.GetComponent<Rigidbody>().useGravity = true;
+        Rigidbody currentClimblerRigidbody = currentClimber.GetComponent<Rigidbody>();
+        currentClimblerRigidbody.isKinematic = false;
+        currentClimblerRigidbody.useGravity = true;
+
         IsBeeingClimbed = false;
         currentClimber = null;
     }
@@ -77,8 +82,9 @@ public class LadderInteraction : ConditionedInteractable
     public override bool CarryOutInteraction(InteractionScript player)
     {
         currentClimber = player;
-        currentClimber.GetComponent<Rigidbody>().isKinematic = true;
-        currentClimber.GetComponent<Rigidbody>().useGravity = false;
+        Rigidbody currentClimblerRigidbody = currentClimber.GetComponent<Rigidbody>();
+        currentClimblerRigidbody.isKinematic = true;
+        currentClimblerRigidbody.useGravity = false;
 
         //Snap Player onto nearest Pos on Ladder
         Vector3 heading = endPoint.position - startPoint.position;
@@ -89,10 +95,15 @@ public class LadderInteraction : ConditionedInteractable
         dotProd = Mathf.Clamp(dotProd, 0f, magnitudeMax);
         Vector3 ladderMountingPos = startPoint.position + heading * dotProd;
 
-        if (ladderMountingPos.y <= startPoint.position.y)
-            ladderMountingPos = startPoint.position + new Vector3(0, 0.075f, 0);
-        else if (ladderMountingPos.y >= startPoint.position.y)
-            ladderMountingPos = startPoint.position + new Vector3(0, -0.075f, 0);
+        if (ladderMountingPos.y <= startPoint.position.y + ladderSnapOffsetFromBelow.y)
+        {
+            ladderMountingPos = startPoint.position + ladderSnapOffsetFromBelow;
+        }
+        else if (ladderMountingPos.y > endPoint.position.y + ladderSnapOffsetFromAbove.y)
+        {
+            ladderMountingPos = endPoint.position + ladderSnapOffsetFromAbove;
+        }
+
         currentClimber.transform.position = ladderMountingPos;
 
         IsBeeingClimbed = true;
