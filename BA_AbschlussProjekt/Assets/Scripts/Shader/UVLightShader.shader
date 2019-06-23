@@ -12,6 +12,8 @@
     SubShader
     {
         Tags {"Queue" = "Transparent" "RenderType" = "Transparent" }
+        ZWrite On
+        ZTest LEqual
         LOD 200
 
         CGPROGRAM

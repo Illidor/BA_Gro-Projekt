@@ -10,7 +10,7 @@ public abstract class BaseInteractable : InteractionFoundation
 {
     protected string textToDisplayOnHover = "";
 
-    protected void Awake()
+    protected new void Awake()
     {
         if (textToDisplayOnHover.Equals(""))
             textToDisplayOnHover =  "Click to interact with " + DisplayName;
