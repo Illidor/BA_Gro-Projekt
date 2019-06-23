@@ -49,6 +49,8 @@ public class LadderInteraction : ConditionedInteractable
         if (!IsBeeingClimbed)
             return;
 
+        CurrentClimbingSpeed = climbingSpeed;
+
         currentClimber.transform.localPosition += (endPoint.position - startPoint.position).normalized * (CurrentClimbingSpeed * CTRLHub.VerticalAxis);
 
         if (currentClimber.transform.position.y < startPoint.position.y ||
