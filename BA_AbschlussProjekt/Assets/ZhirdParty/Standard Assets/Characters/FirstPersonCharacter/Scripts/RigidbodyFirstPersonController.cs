@@ -132,7 +132,7 @@ namespace UnityStandardAssets.Characters.FirstPerson
         {
             RotateView();
 
-            if (CrossPlatformInputManager.GetButtonDown("Jump") && !m_Jump)
+            if (CrossPlatformInputManager.GetButtonDown("Jump") && !m_Jump && m_IsGrounded)
             {
                 m_Jump = true;
             }
@@ -297,25 +297,25 @@ namespace UnityStandardAssets.Characters.FirstPerson
             {
                 movementSettings.ForwardSpeed = defaultForwardSpeed;
                 movementSettings.BackwardSpeed = defaultBackwardSpeed;
-                movementSettings.ForwardSpeed = defaultForwardSpeed;
+                movementSettings.StrafeSpeed = defaultStrafeSpeed;
             }
             else if (playerHealth.getCondition(Conditions.LowerBodyCondition) > 1f)
             {
                 movementSettings.ForwardSpeed = defaultForwardSpeed / 2f;
                 movementSettings.BackwardSpeed = defaultBackwardSpeed / 2f;
-                movementSettings.ForwardSpeed = defaultForwardSpeed / 2f;
+                movementSettings.StrafeSpeed = defaultStrafeSpeed / 2f;
             }
             else if(playerHealth.getCondition(Conditions.LowerBodyCondition) > 0)
             {
                 movementSettings.ForwardSpeed = defaultForwardSpeed / 3f;
                 movementSettings.BackwardSpeed = defaultBackwardSpeed / 3f;
-                movementSettings.ForwardSpeed = defaultForwardSpeed / 3f;
+                movementSettings.StrafeSpeed = defaultStrafeSpeed / 3f;
             }
             else
             {
                 movementSettings.ForwardSpeed = 0f;
                 movementSettings.BackwardSpeed = 0f;
-                movementSettings.ForwardSpeed = 0f;
+                movementSettings.StrafeSpeed = 0f;
             }
 
         }

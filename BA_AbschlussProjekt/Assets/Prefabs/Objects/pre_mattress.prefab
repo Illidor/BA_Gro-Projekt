@@ -2147,8 +2147,8 @@ SkinnedMeshRenderer:
   m_BlendShapeWeights: []
   m_RootBone: {fileID: 0}
   m_AABB:
-    m_Center: {x: 0.00000023841858, y: 0, z: -0.00000047683716}
-    m_Extent: {x: 1.2224905, y: 0.06964874, z: 1.2390915}
+    m_Center: {x: 0.00000011920929, y: 0, z: 0.0000009536743}
+    m_Extent: {x: 0.41643503, y: 0.06964874, z: 0.83991456}
   m_DirtyAABB: 0
 --- !u!114 &7186798870273332767
 MonoBehaviour:
@@ -2162,10 +2162,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 81351d73e10160843abb07dc325e5936, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  <DisplayName>k__BackingField: 
+  <DisplayName>k__BackingField: Mattress
   <AudioManager>k__BackingField: {fileID: 0}
-  <SoundSources>k__BackingField: []
-  <SoundNames>k__BackingField: []
-  possibleConditionsToCarry: -1
-  possibleConditionsToPush: 0
+  soundSources: []
+  soundNames:
+  - snd_mattress
+  - snd_mattress
+  - snd_mattress
+  possibleConditionsToCarry: 0
+  possibleConditionsToPush: -1
   velocity: 0
