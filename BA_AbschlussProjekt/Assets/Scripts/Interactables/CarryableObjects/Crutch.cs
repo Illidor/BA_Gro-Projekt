@@ -38,6 +38,7 @@ public class Crutch : GrabInteractable
         attachingToObj = false;
         wasAttached = false;
         base.PutDown(player);
+        GetComponent<Sound>().playSound(0);
     }
     private void Update()
     {
