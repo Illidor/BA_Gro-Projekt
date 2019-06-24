@@ -12,18 +12,18 @@ public abstract class ConditionedInteractable : BaseInteractable
     [EnumFlag]
     public InteractionConditions possibleConditionsToInteract = InteractionConditions.All;
 
-    public override bool Interact(InteractionScript player)
+    public override bool Interact(InteractionScript player, Conditions condition, float minCondition)
     {
-        if (CheckConditions(player))     
+        if (CheckConditions(player, condition) > minCondition)     
             return CarryOutInteraction(player);
 
         return false;
     }
 
-    protected virtual bool CheckConditions(InteractionScript player)
+    protected virtual float CheckConditions(InteractionScript player, Conditions condition)
     {
-        InteractionConditions playersConditions = player.PlayerHealth.GetInjuriesAsInteractionConditions();
-        return possibleConditionsToInteract.HasFlag(playersConditions);
+        float playersConditions = player.PlayerHealth.getCondition(condition);
+        return playersConditions;
     }
 
     /// <summary>

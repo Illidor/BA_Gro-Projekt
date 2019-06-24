@@ -112,4 +112,9 @@ public class LadderInteraction : ConditionedInteractable
 
         return true;
     }
+
+    public override bool Interact(InteractionScript player, Conditions condition, float minCondition)
+    {
+        throw new NotImplementedException();
+    }
 }
