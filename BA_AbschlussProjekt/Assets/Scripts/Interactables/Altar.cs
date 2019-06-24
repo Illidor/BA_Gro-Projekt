@@ -20,31 +20,39 @@ public class Altar : BaseInteractable
 
     public bool SecondInteract(InteractionScript interactionScript)
     {
-        foreach (Transform item in GetComponentInChildren<Transform>())
+        if (triggerObject.childCount > 0)
         {
-            Destroy(item.gameObject);
+            Destroy(triggerObject.GetChild(0).gameObject);
         }
-        Destroy(gameObject);
+        //foreach (Transform item in GetComponentInChildren<Transform>())
+        //{
+        //    Destroy(item.gameObject);
+        //}
+        //Destroy(gameObject);
         return true;
     }
 
     public override void HandleInteraction(InteractionScript player)
     {
 
-        player.GUIInteractionFeedbackHandler.StandardCrosshair.SetActive(false);
-        player.GUIInteractionFeedbackHandler.InteractionCrosshair.SetActive(true);
-        player.GUIInteractionFeedbackHandler.ActionDescription.text = "Press E to Destroy " + DisplayName;
+        //player.GUIInteractionFeedbackHandler.StandardCrosshair.SetActive(false);
+        //player.GUIInteractionFeedbackHandler.InteractionCrosshair.SetActive(true);
+        //player.GUIInteractionFeedbackHandler.ActionDescription.text = "Press E to Destroy " + DisplayName;
 
 
         if(triggerObject.childCount > 0)
         {
+            player.GUIInteractionFeedbackHandler.InteractionCrosshair.SetActive(true);
+            player.GUIInteractionFeedbackHandler.ActionDescription.text = "Press E to Destroy " + triggerObject.GetChild(0).GetComponent<Picture>().DisplayName;
             player.GUIInteractionFeedbackHandler.SecondActionDescription.text = "Click to Pray at " + DisplayName;
             if (CTRLHub.InteractDown)
             {
                 Interact(player);
             }
+            else if (CTRLHub.SecondInteractDown)
+                SecondInteract(player);
         }
-        else if (CTRLHub.SecondInteractDown)
-            SecondInteract(player);
+        //else if (CTRLHub.SecondInteractDown)
+        //    SecondInteract(player);
     }
 }
