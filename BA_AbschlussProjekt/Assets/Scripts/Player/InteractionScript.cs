@@ -71,18 +71,20 @@ public class InteractionScript : MonoBehaviour
             }
 
             UsedObject?.GetComponent<IUseable>()?.HandleUse(this);
-            StartCoroutine(iKToObject(UsedObject.GetComponent<BaseInteractable>().getIKPoint()));
+            StartCoroutine(IKToObject(UsedObject.GetComponent<BaseInteractable>().getIKPoint()));
         }
     }
 
-    public IEnumerator iKToObject(Transform point)
+    public IEnumerator IKToObject(Transform point)
     {
         Debug.Log("Coroutine started");
         if(point != null)
         {
             Debug.Log("Point isnt null");
-            int timer = 120;
+            int timer = 120; // int -> how long is the grabbing time in frames
 
+
+            //ToDo: if Condition > 1, this for if Condition <= 1 use left Hand
             for (int i = 0; i < timer; i++)
             {
                 Debug.Log(timer);
