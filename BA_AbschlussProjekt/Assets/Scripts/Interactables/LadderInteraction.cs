@@ -89,7 +89,7 @@ public class LadderInteraction : BaseInteractable
 
     public override bool Interact(InteractionScript player, Conditions condition, float minCondition)
     {
-        if ((float)condition < minCondition)
+        if (player.PlayerHealth.getCondition(condition) < minCondition)
             SetClimbingSpeedToSlow();
         else
             ResetClimbingSpeedToStandard();
