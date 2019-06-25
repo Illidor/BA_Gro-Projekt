@@ -5,9 +5,10 @@ using UnityEngine;
 
 public class LadderInteraction : BaseInteractable
 {
-
     [SerializeField]
-    private float climbingSpeed = 0.001f;
+    private float standardClimbingSpeed = 0.01f;
+    [SerializeField]
+    private float slowClimbingSpeed = 0.005f;
     [SerializeField][Tooltip("The minimal distance from the bottom of the ladder the player snaps onto")]
     private Vector3 ladderSnapOffsetFromBelow = new Vector3(0, 0.075f, 0);
     [SerializeField][Tooltip("The minimal distance from the top of the ladder the player snaps onto")]
@@ -36,20 +37,25 @@ public class LadderInteraction : BaseInteractable
 
     private void OnValidate()
     {
-        if (CurrentClimbingSpeed <= 0)
-            CurrentClimbingSpeed = 0.001f;
+        if (standardClimbingSpeed <= 0)
+            standardClimbingSpeed = 0.001f;
     }
 
     // Audio ticker that plays sound after X seconds when player is on ladder
     private float climbTicker = 5f;
     private float climbAudioThreshold = 0.75f;
 
+    private new void Awake()
+    {
+        CurrentClimbingSpeed = standardClimbingSpeed;
+
+        base.Awake();
+    }
+
     void Update()
     {
         if (!IsBeeingClimbed)
             return;
-
-        CurrentClimbingSpeed = climbingSpeed;
 
         currentClimber.transform.localPosition += (endPoint.position - startPoint.position).normalized * (CurrentClimbingSpeed * CTRLHub.VerticalAxis);
 
@@ -83,6 +89,11 @@ public class LadderInteraction : BaseInteractable
 
     public override bool Interact(InteractionScript player, Conditions condition, float minCondition)
     {
+        if ((float)condition < minCondition)
+            SetClimbingSpeedToSlow();
+        else
+            ResetClimbingSpeedToStandard();
+
         currentClimber = player;
         Rigidbody currentClimblerRigidbody = currentClimber.GetComponent<Rigidbody>();
         currentClimblerRigidbody.isKinematic = true;
@@ -111,5 +122,15 @@ public class LadderInteraction : BaseInteractable
         IsBeeingClimbed = true;
 
         return true;
+    }
+
+    public void ResetClimbingSpeedToStandard()
+    {
+        CurrentClimbingSpeed = standardClimbingSpeed;
+    }
+
+    public void SetClimbingSpeedToSlow()
+    {
+        CurrentClimbingSpeed = slowClimbingSpeed;
     }
 }
