@@ -77,17 +77,14 @@ public class InteractionScript : MonoBehaviour
 
     public IEnumerator IKToObject(Transform point)
     {
-        Debug.Log("Coroutine started");
         if(point != null)
         {
-            Debug.Log("Point isnt null");
             int timer = 120; // int -> how long is the grabbing time in frames
 
 
             //ToDo: if Condition > 1, this for if Condition <= 1 use left Hand
             for (int i = 0; i < timer; i++)
             {
-                Debug.Log(timer);
                 HandIKRight.position = Vector3.Lerp(HandIKRight.position, point.position, 0.1f);
                 HandIKRight.eulerAngles = Vector3.Lerp(HandIKRight.eulerAngles, point.eulerAngles, 0.1f);
                 yield return new WaitForEndOfFrame();

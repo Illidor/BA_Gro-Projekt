@@ -17,6 +17,9 @@ public class Crutch : GrabInteractable
     [SerializeField]
     private float attachTime = 0;
 
+    private bool isMusicPlaying = false;
+    [SerializeField] Sound bgMusic;
+
     private new void Awake()
     {
         playerAnim = FindObjectOfType<AnimationController>().animator;
@@ -27,6 +30,11 @@ public class Crutch : GrabInteractable
         player.IncreaseReach(reachIncreaseOnCarry);
         attachingToObj = true;
         GetComponent<Sound>().playSound(0);
+
+        if(isMusicPlaying == false) {
+            isMusicPlaying = true;
+            bgMusic.playSound(0);
+        }
 
         //return base.CarryOutInteraction_Carry(player);
         return true;

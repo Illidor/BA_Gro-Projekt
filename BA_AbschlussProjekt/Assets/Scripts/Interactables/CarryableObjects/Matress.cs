@@ -11,6 +11,8 @@ public class Matress : GrabInteractable
         pull = 2
     }
 
+    private Sound matressSound;
+
     // Update is called once per frame
     void Update()
     {
@@ -20,6 +22,7 @@ public class Matress : GrabInteractable
             if (SoundSources[0].mute == true)
             {
                 SoundSources[0].mute = false;
+                matressSound.playSound(0);
             }
         }
         else

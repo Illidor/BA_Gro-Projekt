@@ -84,8 +84,9 @@ public class Sound : MonoBehaviour
 
     private IEnumerator destroySoundComponent(AudioSource source)
     {
-        Debug.Log("Playing Sound");
+        //Debug.Log("Playing Sound");
         yield return new WaitUntil(() => source.isPlaying == false);
+        Debug.Log("DestroySFX");
         Destroy(source);
         source = null;
     }
