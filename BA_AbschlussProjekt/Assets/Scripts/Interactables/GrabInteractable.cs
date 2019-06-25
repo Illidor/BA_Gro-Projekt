@@ -37,6 +37,9 @@ public class GrabInteractable : BaseInteractable
 
     protected new Collider collider;
 
+    [SerializeField]
+    private bool carriable;
+
     public bool IsBeeingCarried { get; protected set; }
 
     public bool IsBeeingPulled { get; protected set; }
@@ -54,12 +57,11 @@ public class GrabInteractable : BaseInteractable
     {
         float playersConditions = player.PlayerHealth.getCondition(Conditions.UpperBodyCondition);
 
-        if (player.GetComponent<PlayerHealth>().getCondition(condition) > minCondition)
+        if (carriable && player.PlayerHealth.getCondition(condition) > minCondition)
         {
             return CarryOutInteraction_Carry(player);
         }
-
-        if (player.GetComponent<PlayerHealth>().getCondition(condition) > minCondition)
+        else if (player.PlayerHealth.getCondition(condition) > minCondition)
         {
             return CarryOutInteraction_Push(player);
         }
