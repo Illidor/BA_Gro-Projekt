@@ -25,8 +25,9 @@ public class Sound : MonoBehaviour
 
     public AudioMixerGroup mixerGroup;
 
-    [HideInInspector]
-    public AudioSource source;
+    
+    private AudioSource source;
+    private AudioSource sourceTwo;
 
     /// <summary>
     /// Playing the Sound File on the index. Put it to the Place where the Sound should be triggered
@@ -45,11 +46,43 @@ public class Sound : MonoBehaviour
 
         if(source != null)
         {
-            StartCoroutine(destroySoundComponent());
+            StartCoroutine(destroySoundComponent(source));
         }
     }
 
-    private IEnumerator destroySoundComponent()
+    public void playSound(int index, int audioSourceIndex) {
+
+        if(audioSourceIndex == 1) {
+            if (source == null) {
+                source = gameObject.AddComponent<AudioSource>();
+            }
+
+            if (index < clips.Count) {
+                source.clip = clips[index];
+                source.Play();
+            }
+
+            if (source != null) {
+                StartCoroutine(destroySoundComponent(source));
+            }
+        }
+        else if(audioSourceIndex == 2) {
+            if (sourceTwo == null) {
+                sourceTwo = gameObject.AddComponent<AudioSource>();
+            }
+
+            if (index < clips.Count) {
+                sourceTwo.clip = clips[index];
+                sourceTwo.Play();
+            }
+
+            if (sourceTwo != null) {
+                StartCoroutine(destroySoundComponent(sourceTwo));
+            }
+        }
+    }
+
+    private IEnumerator destroySoundComponent(AudioSource source)
     {
         Debug.Log("Playing Sound");
         yield return new WaitUntil(() => source.isPlaying == false);

@@ -19,6 +19,9 @@ public class PlayerHealth : MonoBehaviour
     private float upperBodyCondition;
     private float lowerBodyCondition;
 
+    [SerializeField] Sound smallConditionSound;
+    [SerializeField] Sound bigConditionSound;
+
     private void Awake()
     {
         upperBodyCondition = 2f;
@@ -34,6 +37,19 @@ public class PlayerHealth : MonoBehaviour
                 if (upperBodyCondition - value > 0)
                 {
                     upperBodyCondition -= value;
+                    // Check which sound to play
+                    if(Mathf.Approximately(upperBodyCondition, 1.5f)){
+                        smallConditionSound.playSound(0);
+                    }
+                    else if(Mathf.Approximately(upperBodyCondition, 1f)) {
+                        bigConditionSound.playSound(0);
+                    }
+                    else if (Mathf.Approximately(upperBodyCondition, 0.5f)) {
+                        smallConditionSound.playSound(0);
+                    }
+                    else if (Mathf.Approximately(upperBodyCondition, 0f)) {
+                        bigConditionSound.playSound(0);
+                    }
                 }
                 else
                 {
@@ -46,6 +62,20 @@ public class PlayerHealth : MonoBehaviour
                 if (lowerBodyCondition - value > 0)
                 {
                     lowerBodyCondition -= value;
+
+                    // Check which sound to play
+                    if (Mathf.Approximately(lowerBodyCondition, 1.5f)) {
+                        smallConditionSound.playSound(0);
+                    }
+                    else if (Mathf.Approximately(lowerBodyCondition, 1f)) {
+                        bigConditionSound.playSound(0);
+                    }
+                    else if (Mathf.Approximately(lowerBodyCondition, 0.5f)) {
+                        smallConditionSound.playSound(0);
+                    }
+                    else if (Mathf.Approximately(lowerBodyCondition, 0f)) {
+                        bigConditionSound.playSound(0);
+                    }
                 }
                 else
                 {
