@@ -274,7 +274,7 @@ namespace UnityStandardAssets.Characters.FirstPerson
                 if (m_RigidBody.velocity.y < -10f && hitInfo.collider.material.bounciness < 0.6f)
                 {
                     playerHealth.changeCondition(Conditions.LowerBodyCondition, 0.5f);
-                    playerHealth.PlaySound(); //ToDo
+                    //playerHealth.PlaySound(); //ToDo
                 } 
             }
             else

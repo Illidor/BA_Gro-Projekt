@@ -15,9 +15,9 @@ public class Carryable : ObjectInteraction
 
     
 
-    public override bool Interact(InteractionScript interactionScript)
+    public override bool Interact(InteractionScript player, Conditions condition, float minCondition)
     {
-        Grab(interactionScript);
+        Grab(player);
         return true;
     }
 

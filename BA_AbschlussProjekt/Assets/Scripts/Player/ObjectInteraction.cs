@@ -33,7 +33,6 @@ public class ObjectInteraction : BaseInteractable
         rigidbody = GetComponent<Rigidbody>();
         collider = GetComponent<Collider>();
         //playerRigidbody = InteractionScript.Get().transform.GetComponent<Rigidbody>();
-        AudioManager = FindObjectOfType<AudioManager>();
 
         base.Awake();
     }
@@ -44,7 +43,7 @@ public class ObjectInteraction : BaseInteractable
     /// </summary>
     /// <param name="interactionScript"></param>
     /// <returns>Returns if Successful</returns>
-    public override bool Interact(InteractionScript interactionScript)
+    public override bool Interact(InteractionScript player, Conditions condition, float minCondition)
     {
         //switch (objectParameters)
         //{
@@ -139,7 +138,6 @@ public class ObjectInteraction : BaseInteractable
                 }
                 else
                 {
-                    AudioManager.AddSound(soundType, this.gameObject);
                     SoundSources = GetComponents<AudioSource>();
                     SoundSources.First(audios => audios.name == soundType).Play();
                 }
@@ -147,7 +145,6 @@ public class ObjectInteraction : BaseInteractable
         }
         else
         {
-            AudioManager.AddSound(soundType, this.gameObject);
             GetComponent<AudioSource>().Play();
         }
     }

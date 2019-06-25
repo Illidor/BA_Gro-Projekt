@@ -7,7 +7,7 @@ public class Altar : BaseInteractable
     [SerializeField]
     private Transform triggerObject;
 
-    public override bool Interact(InteractionScript interactionScript)
+    public override bool Interact(InteractionScript player, Conditions condition, float minCondition)
     {
         //TODO: implement praying 
         if (GetComponent<Animation>().isPlaying == false)
@@ -32,7 +32,7 @@ public class Altar : BaseInteractable
         return true;
     }
 
-    public override void HandleInteraction(InteractionScript player)
+    public override void HandleInteraction(InteractionScript player, Conditions condition)
     {
 
         //player.GUIInteractionFeedbackHandler.StandardCrosshair.SetActive(false);
@@ -47,7 +47,7 @@ public class Altar : BaseInteractable
             player.GUIInteractionFeedbackHandler.SecondActionDescription.text = "Click to Pray at " + DisplayName;
             if (CTRLHub.InteractDown)
             {
-                Interact(player);
+                Interact(player, condition, minCondition);
             }
             else if (CTRLHub.SecondInteractDown)
                 SecondInteract(player);

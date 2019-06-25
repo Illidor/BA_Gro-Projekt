@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class LadderInteraction : ConditionedInteractable
+public class LadderInteraction : BaseInteractable
 {
 
     [SerializeField]
@@ -81,7 +81,7 @@ public class LadderInteraction : ConditionedInteractable
         currentClimber = null;
     }
 
-    public override bool CarryOutInteraction(InteractionScript player)
+    public override bool Interact(InteractionScript player, Conditions condition, float minCondition)
     {
         currentClimber = player;
         Rigidbody currentClimblerRigidbody = currentClimber.GetComponent<Rigidbody>();
