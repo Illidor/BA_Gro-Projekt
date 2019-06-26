@@ -40,6 +40,7 @@ public class Picture : GrabInteractable
             else if (velocity < -2)
             {
                 //Todo: Play Sound
+                GetComponent<Sound>().playSound(0);
             }
         }
     }

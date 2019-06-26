@@ -41,6 +41,7 @@ public class Sound : MonoBehaviour
         if(index < clips.Count)
         {
             source.clip = clips[index];
+            source.outputAudioMixerGroup = mixerGroup;
             source.Play();
         }
 
@@ -59,6 +60,7 @@ public class Sound : MonoBehaviour
 
             if (index < clips.Count) {
                 source.clip = clips[index];
+                source.outputAudioMixerGroup = mixerGroup;
                 source.Play();
             }
 
@@ -73,6 +75,7 @@ public class Sound : MonoBehaviour
 
             if (index < clips.Count) {
                 sourceTwo.clip = clips[index];
+                source.outputAudioMixerGroup = mixerGroup;
                 sourceTwo.Play();
             }
 
