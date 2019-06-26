@@ -17,6 +17,9 @@ public class Crutch : GrabInteractable
     [SerializeField]
     private float attachTime = 0;
 
+    private bool isMusicPlaying = false;
+    [SerializeField] Sound bgMusic;
+
     private new void Awake()
     {
         playerAnim = FindObjectOfType<AnimationController>().animator;
@@ -26,7 +29,12 @@ public class Crutch : GrabInteractable
     {
         player.IncreaseReach(reachIncreaseOnCarry);
         attachingToObj = true;
-        //audioManager.PlaySound(soundNames[(int)SoundTypes.pickup], this);
+        GetComponent<Sound>().playSound(0);
+
+        if(isMusicPlaying == false) {
+            isMusicPlaying = true;
+            bgMusic.playSound(0);
+        }
 
         //return base.CarryOutInteraction_Carry(player);
         return true;
@@ -38,6 +46,7 @@ public class Crutch : GrabInteractable
         attachingToObj = false;
         wasAttached = false;
         base.PutDown(player);
+        GetComponent<Sound>().playSound(0);
     }
     private void Update()
     {
@@ -49,8 +58,6 @@ public class Crutch : GrabInteractable
         if (attachingToObj && !wasAttached)
         {
             wasAttached = true;
-            Debug.Log("anim");
-            playerAnim.SetTrigger("Grab");
             //playerAnim.Play("character@Grab", 0);
             attachTime += Time.deltaTime;
         }
@@ -60,7 +67,6 @@ public class Crutch : GrabInteractable
             if (attachTime > 2.2f)
             {
                 attachTime = 0;
-                AudioManager.PlaySound(SoundNames[(int)SoundTypes.pickup], this);
                 base.CarryOutInteraction_Carry(FindObjectOfType<InteractionScript>());
             }
             if (attachTime > 0)

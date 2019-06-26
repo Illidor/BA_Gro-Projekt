@@ -9,14 +9,9 @@ public class DoorKeyInteraction : InteractionFoundation, ICombinable        // I
     [SerializeField]
     string objectToInteractWith;
 
-    protected AudioManager audioManager;
     [SerializeField]
     protected string interactSound;
 
-    private void Awake()
-    {
-        audioManager = FindObjectOfType<AudioManager>();
-    }
     public bool Combine(InteractionScript player, BaseInteractable interactingComponent)
     {
         if(interactingComponent.name == objectToInteractWith)
@@ -29,14 +24,6 @@ public class DoorKeyInteraction : InteractionFoundation, ICombinable        // I
             return true;
         }
         return false;
-    }
-    protected void PlaySound(string soundType)
-    {
-        if (GetComponent<AudioSource>() == null)
-        {
-            audioManager.AddSound(soundType, this.gameObject);
-            GetComponent<AudioSource>().Play();
-        }
     }
 
     public bool HandleCombine(InteractionScript player, BaseInteractable currentlyHolding)

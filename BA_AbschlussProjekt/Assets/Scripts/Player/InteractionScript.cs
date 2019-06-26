@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 public class InteractionScript : MonoBehaviour
@@ -25,6 +26,8 @@ public class InteractionScript : MonoBehaviour
     public bool IsCarrying { get; private set; }
     public bool IsPushing { get; private set; }
 
+    public Transform HandIKLeft;
+    public Transform HandIKRight;
     public float GrabingReach { get; private set; }
 
     protected void Awake()
@@ -57,7 +60,7 @@ public class InteractionScript : MonoBehaviour
 
         if (IsCarrying == false)
         {
-            raycastHit.collider?.GetComponent<BaseInteractable>()?.HandleInteraction(this);
+            raycastHit.collider?.GetComponent<BaseInteractable>()?.HandleInteraction(this, Conditions.UpperBodyCondition);
         }
         else
         {
@@ -68,7 +71,26 @@ public class InteractionScript : MonoBehaviour
             }
 
             UsedObject?.GetComponent<IUseable>()?.HandleUse(this);
+            StartCoroutine(IKToObject(UsedObject.GetComponent<BaseInteractable>().getIKPoint()));
         }
+    }
+
+    public IEnumerator IKToObject(Transform point)
+    {
+        if(point != null)
+        {
+            int timer = 120; // int -> how long is the grabbing time in frames
+
+
+            //ToDo: if Condition > 1, this for if Condition <= 1 use left Hand
+            for (int i = 0; i < timer; i++)
+            {
+                HandIKRight.position = Vector3.Lerp(HandIKRight.position, point.position, 0.1f);
+                HandIKRight.eulerAngles = Vector3.Lerp(HandIKRight.eulerAngles, point.eulerAngles, 0.1f);
+                yield return new WaitForEndOfFrame();
+            }
+        }
+        yield return new WaitForFixedUpdate();
     }
 
     public void SetCarriedObject(GrabInteractable objectToCarry)

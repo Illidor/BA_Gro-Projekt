@@ -7,6 +7,12 @@ public class HatchInteraction : InteractionFoundation, ICombinable
     public List<BaseInteractable> thingsToInteractWtih;
     public List<GameObject> correlatingGameObjects;
 
+    private Sound hatchOpenSound;
+
+    private void Start() {
+        hatchOpenSound = GetComponent<Sound>();
+    }
+
     public bool Combine(InteractionScript player, BaseInteractable interactingComponent)
     {
         Debug.Log("Hatch Combine");
@@ -17,6 +23,7 @@ public class HatchInteraction : InteractionFoundation, ICombinable
                 try
                 {
                     this.GetComponent<Animator>().SetTrigger("open"); ;
+                    hatchOpenSound.playSound(0);
                     //AudioManager.audioManager.Play("snd_openattic_ladder");
                 }
                 catch (System.Exception){}
@@ -28,6 +35,7 @@ public class HatchInteraction : InteractionFoundation, ICombinable
                     try
                     {
                         cgO.GetComponent<Animator>().SetTrigger("open");
+                        //hatchOpenSound.playSound(0);
                     }
                     catch (System.Exception) { }
                 }

@@ -37,6 +37,9 @@ public class GrabInteractable : BaseInteractable
 
     protected new Collider collider;
 
+    [SerializeField]
+    private bool carriable;
+
     public bool IsBeeingCarried { get; protected set; }
 
     public bool IsBeeingPulled { get; protected set; }
@@ -50,20 +53,15 @@ public class GrabInteractable : BaseInteractable
         base.Awake();
     }
 
-    public override bool Interact(InteractionScript player)
+    public override bool Interact(InteractionScript player, Conditions condition, float minCondition)
     {
-        InteractionConditions playersConditions = player.PlayerHealth.GetInjuriesAsInteractionConditions();
+        float playersConditions = player.PlayerHealth.getCondition(Conditions.UpperBodyCondition);
 
-        if (possibleConditionsToCarry.HasFlag(playersConditions))
+        if (carriable && player.PlayerHealth.getCondition(condition) > minCondition)
         {
-            if (GetComponent<AudioSource>() != null)
-            {
-                AudioManager.PlaySound(SoundNames[(int)SoundTypes.pickup], this);
-            }
             return CarryOutInteraction_Carry(player);
         }
-
-        if (possibleConditionsToPush.HasFlag(playersConditions))
+        else if (player.PlayerHealth.getCondition(condition) > minCondition)
         {
             return CarryOutInteraction_Push(player);
         }
@@ -200,10 +198,7 @@ public class GrabInteractable : BaseInteractable
     {
         if (velocity < -2)      // Why having a variable "velocity" instead of using "rigid.velocity" directly? 
         {
-            if(GetComponent<AudioSource>() != null)
-            {
-                AudioManager.PlaySound(SoundNames[(int)SoundTypes.drop], this);
-            }
+            //ToDo: Play Sound
         }
     }
 

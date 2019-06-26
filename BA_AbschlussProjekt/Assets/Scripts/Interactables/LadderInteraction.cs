@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class LadderInteraction : ConditionedInteractable
+public class LadderInteraction : BaseInteractable
 {
 
     [SerializeField]
@@ -34,15 +34,21 @@ public class LadderInteraction : ConditionedInteractable
         }
     }
 
+    // climbing audio
+    private Sound climbingSound;
+    private float climbingSoundTicker = 1f;
+    private float climbingSoundThreshold = 1.5f;
+    private int climbCount = 0;
+
+    private void Start() {
+        climbingSound = GetComponent<Sound>();
+    }
+
     private void OnValidate()
     {
         if (CurrentClimbingSpeed <= 0)
             CurrentClimbingSpeed = 0.001f;
     }
-
-    // Audio ticker that plays sound after X seconds when player is on ladder
-    private float climbTicker = 5f;
-    private float climbAudioThreshold = 0.75f;
 
     void Update()
     {
@@ -59,14 +65,18 @@ public class LadderInteraction : ConditionedInteractable
             DetachFromLadder();
         }
 
-
         // <Ladder audio handling>
-        climbTicker += Time.deltaTime;
-
-        if(climbTicker > climbAudioThreshold && (Input.GetAxis("Vertical") > 0.1f || Input.GetAxis("Vertical") < -0.1f))
-        {
-            climbTicker = 0f;
-            //AudioManager.audioManager.Play("snd_climbing_ladder");
+        climbingSoundTicker += Time.deltaTime; 
+        if (climbingSoundTicker > climbingSoundThreshold && (Input.GetAxis("Vertical") > 0.1f || Input.GetAxis("Vertical") < -0.1f)) {
+            climbingSoundTicker = 0f;
+            climbCount++;
+            // Play sounds at different audio sources so they don't get killed before fully played
+            if (climbCount % 2 == 0) {
+                climbingSound.playSound(0, 1);
+            }
+            else {
+                climbingSound.playSound(0, 2);
+            }
         }
         // </Ladder audio handling>
     }
@@ -81,7 +91,7 @@ public class LadderInteraction : ConditionedInteractable
         currentClimber = null;
     }
 
-    public override bool CarryOutInteraction(InteractionScript player)
+    public override bool Interact(InteractionScript player, Conditions condition, float minCondition)
     {
         currentClimber = player;
         Rigidbody currentClimblerRigidbody = currentClimber.GetComponent<Rigidbody>();

@@ -13,12 +13,6 @@ public class InteractionFoundation : MonoBehaviour
     [field: LabelOverride("Display Name"), SerializeField, Tooltip("The name to use for displaying this object to the player")]
     public string DisplayName { get; protected set; }
 
-    /// <summary>
-    /// Handler for all Audio related buissness. Needs to be available on every object the player has any sort of interaction with (be it IUseable, ICombinable or derived from BaseInteraction)
-    /// </summary>
-    [field: LabelOverride("Audio Manager"), SerializeField, Tooltip("Handler for all Audio related buissness. Should exist only once, therefor should be found somewhere in Globals")]
-    public AudioManager AudioManager { get; protected set; }
-
     [SerializeField]
     protected AudioSource[] soundSources;
     //TODO: add summary
@@ -41,9 +35,6 @@ public class InteractionFoundation : MonoBehaviour
     {
         if (DisplayName.Equals(""))
             DisplayName = name;
-
-        if (AudioManager == null)
-            AudioManager = FindObjectOfType<AudioManager>();
     }
 
     protected enum SoundTypes

@@ -10,12 +10,8 @@ public class Matress : GrabInteractable
         drop = 1,
         pull = 2
     }
-    // Start is called before the first frame update
-    void Start()
-    {
-        AudioManager.PlaySound(SoundNames[(int)SoundTypes.pull], this);
-        GetComponent<AudioSource>().mute = true;
-    }
+
+    private Sound matressSound;
 
     // Update is called once per frame
     void Update()
@@ -26,6 +22,7 @@ public class Matress : GrabInteractable
             if (SoundSources[0].mute == true)
             {
                 SoundSources[0].mute = false;
+                matressSound.playSound(0);
             }
         }
         else

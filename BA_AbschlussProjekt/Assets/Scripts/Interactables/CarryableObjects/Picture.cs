@@ -39,20 +39,13 @@ public class Picture : GrabInteractable
             }
             else if (velocity < -2)
             {
-                AudioManager.PlaySound(SoundNames[(int)SoundTypes.drop], this);
+                //Todo: Play Sound
             }
         }
     }
 
     private void Break()
     {
-        try
-        {
-            AudioManager.PlaySound(SoundNames[(int)SoundTypes.destroy], this);
-        }
-        catch { }
-
-
         broken = true;
         foreach (GameObject part in pictureParts)
         {
