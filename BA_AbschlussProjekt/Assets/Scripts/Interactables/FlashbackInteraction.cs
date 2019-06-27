@@ -1,10 +1,13 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.UI;
 
 public class FlashbackInteraction : BaseInteractable
 {
+    public static event UnityAction StartFlashBack;
+
     [SerializeField]
     private float flashbackTimer;
     [SerializeField]
@@ -25,10 +28,15 @@ public class FlashbackInteraction : BaseInteractable
     {
         foreach (Sprite item in flashbackSprites)
         {
-            image.enabled = true;
-            image.sprite = item;
-            yield return new WaitForSeconds(flashbackTimer);
-            image.enabled = false;
+            //old logic
+            //image.enabled = true;
+            //image.sprite = item;
+            //yield return new WaitForSeconds(flashbackTimer);
+            //image.enabled = false;
+
+            //cutscene logic
+            if (StartFlashBack != null)
+                StartFlashBack();
         }
 
         secondInteraction?.Interact(player, condition, minCondition);
