@@ -1904,6 +1904,12 @@ MonoBehaviour:
   mixerGroup: {fileID: -6836437550479822473, guid: 6872fd114135b4f46bccacb6c64a5036,
     type: 2}
   source: {fileID: 0}
+--- !u!65 &641572371 stripped
+BoxCollider:
+  m_CorrespondingSourceObject: {fileID: 5803064361858066920, guid: 1651d9862a83f0b41877a2bf6d9b2d49,
+    type: 3}
+  m_PrefabInstance: {fileID: 853412726}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &666656855
 GameObject:
   m_ObjectHideFlags: 0
@@ -2923,6 +2929,11 @@ PrefabInstance:
       propertyPath: m_TagString
       value: Player
       objectReference: {fileID: 0}
+    - target: {fileID: 3560991054522834944, guid: 90e53311f6e155b4888e98665830a2f1,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3560991054522678308, guid: 90e53311f6e155b4888e98665830a2f1,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -3052,6 +3063,21 @@ PrefabInstance:
         type: 3}
       propertyPath: advancedSettings.airControl
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3560991054528320994, guid: 90e53311f6e155b4888e98665830a2f1,
+        type: 3}
+      propertyPath: movementSettings.StepHeight
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 3560991054528320994, guid: 90e53311f6e155b4888e98665830a2f1,
+        type: 3}
+      propertyPath: movementSettings.stepTest
+      value: 
+      objectReference: {fileID: 641572371}
+    - target: {fileID: 3560991054528320994, guid: 90e53311f6e155b4888e98665830a2f1,
+        type: 3}
+      propertyPath: movementSettings.stepHeight
+      value: 0.2
       objectReference: {fileID: 0}
     - target: {fileID: 3560991054112577935, guid: 90e53311f6e155b4888e98665830a2f1,
         type: 3}
