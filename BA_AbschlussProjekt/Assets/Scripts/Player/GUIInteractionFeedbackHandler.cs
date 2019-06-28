@@ -29,4 +29,11 @@ public class GUIInteractionFeedbackHandler : MonoBehaviour
         ActionDescription.text = "";
         SecondActionDescription.text = "";
     }
+    public void RemoveGUI()
+    {
+        StandardCrosshair.SetActive(false);
+        InteractionCrosshair.SetActive(false);
+        ActionDescription.text = "";
+        SecondActionDescription.text = "";
+    }
 }

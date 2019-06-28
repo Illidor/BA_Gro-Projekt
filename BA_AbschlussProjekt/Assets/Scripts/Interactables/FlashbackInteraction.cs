@@ -26,9 +26,13 @@ public class FlashbackInteraction : BaseInteractable
         foreach (Sprite item in flashbackSprites)
         {
             image.enabled = true;
+            player.UsedObject = this.gameObject.GetComponent<GrabInteractable>();
+            player.GUIInteractionFeedbackHandler.RemoveGUI();
             image.sprite = item;
             yield return new WaitForSeconds(flashbackTimer);
             image.enabled = false;
+            player.UsedObject = null;
+            player.GUIInteractionFeedbackHandler.ResetGUI();
         }
 
         secondInteraction?.Interact(player, condition, minCondition);

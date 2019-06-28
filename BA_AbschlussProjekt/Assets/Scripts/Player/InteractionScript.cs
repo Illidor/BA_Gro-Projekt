@@ -21,7 +21,7 @@ public class InteractionScript : MonoBehaviour
 
     public PlayerHealth PlayerHealth { get { return playerHealth; } }
 
-    private GrabInteractable UsedObject { get; set; }
+    public GrabInteractable UsedObject { get; set; }
 
     public bool IsCarrying { get; private set; }
     public bool IsPushing { get; private set; }
@@ -40,7 +40,10 @@ public class InteractionScript : MonoBehaviour
 
     protected void Update()
     {
-        HandleActions();
+        if (UsedObject == null)
+        {
+            HandleActions();
+        }
 
         if (IsCarrying || IsPushing)
         {
