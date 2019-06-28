@@ -28,16 +28,20 @@ public class FlashbackInteraction : BaseInteractable
     {
         foreach (Sprite item in flashbackSprites)
         {
-<<<<<<< HEAD
-            image.enabled = true;
-            player.UsedObject = this.gameObject.GetComponent<GrabInteractable>();
-            player.GUIInteractionFeedbackHandler.RemoveGUI();
-            image.sprite = item;
-            yield return new WaitForSeconds(flashbackTimer);
-            image.enabled = false;
-            player.UsedObject = null;
-            player.GUIInteractionFeedbackHandler.ResetGUI();
-=======
+            /* <code from MergeBranch>
+               image.enabled = true;
+               player.UsedObject = this.gameObject.GetComponent<GrabInteractable>();
+               player.GUIInteractionFeedbackHandler.RemoveGUI();
+               image.sprite = item;
+               yield return new WaitForSeconds(flashbackTimer);
+               image.enabled = false;
+               player.UsedObject = null;
+               player.GUIInteractionFeedbackHandler.ResetGUI();
+             </code from MergeBranch> */
+
+
+            // <code from SpringerBranch>:
+
             //old logic
             //image.enabled = true;
             //image.sprite = item;
@@ -45,9 +49,7 @@ public class FlashbackInteraction : BaseInteractable
             //image.enabled = false;
 
             //cutscene logic
-            if (StartFlashBack != null)
-                StartFlashBack();
->>>>>>> origin/Springer
+            StartFlashBack?.Invoke();
         }
 
         secondInteraction?.Interact(player, condition, minCondition);
