@@ -2,12 +2,12 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Altar : BaseInteractable
+public class Altar : ConditionedInteraction
 {
     [SerializeField]
     private Transform triggerObject;
 
-    public override bool Interact(InteractionScript player, Conditions condition, float minCondition)
+    public override bool CarryOutInteraction(InteractionScript player)
     {
         //TODO: implement praying 
         if (GetComponent<Animation>().isPlaying == false)
@@ -18,41 +18,31 @@ public class Altar : BaseInteractable
         return false;
     }
 
-    public bool SecondInteract(InteractionScript interactionScript)
+    public bool CarryOutSecondInteract(InteractionScript interactionScript)
     {
         if (triggerObject.childCount > 0)
         {
             Destroy(triggerObject.GetChild(0).gameObject);
+            return true;
         }
-        //foreach (Transform item in GetComponentInChildren<Transform>())
-        //{
-        //    Destroy(item.gameObject);
-        //}
-        //Destroy(gameObject);
-        return true;
+        return false;
     }
 
-    public override void HandleInteraction(InteractionScript player, Conditions condition)
+    public override void HandleInteraction(InteractionScript player)
     {
-
-        //player.GUIInteractionFeedbackHandler.StandardCrosshair.SetActive(false);
-        //player.GUIInteractionFeedbackHandler.InteractionCrosshair.SetActive(true);
-        //player.GUIInteractionFeedbackHandler.ActionDescription.text = "Press E to Destroy " + DisplayName;
-
-
         if(triggerObject.childCount > 0)
         {
             player.GUIInteractionFeedbackHandler.InteractionCrosshair.SetActive(true);
             player.GUIInteractionFeedbackHandler.ActionDescription.text = "Press E to Destroy " + triggerObject.GetChild(0).GetComponent<Picture>().DisplayName;
             player.GUIInteractionFeedbackHandler.SecondActionDescription.text = "Click to Pray at " + DisplayName;
-            if (CTRLHub.InteractDown)
+            if (CTRLHub.InteractDown && player.PlayerHealth.GetCondition(conditionsTypeNeededToInteract) > minCondition)
             {
-                Interact(player, condition, minCondition);
+                CarryOutInteraction(player);
             }
-            else if (CTRLHub.SecondInteractDown)
-                SecondInteract(player);
+            else if (CTRLHub.SecondInteractDown && player.PlayerHealth.GetCondition(conditionsTypeNeededToInteract) > minCondition)
+            {
+                CarryOutSecondInteract(player);
+            }
         }
-        //else if (CTRLHub.SecondInteractDown)
-        //    SecondInteract(player);
     }
 }

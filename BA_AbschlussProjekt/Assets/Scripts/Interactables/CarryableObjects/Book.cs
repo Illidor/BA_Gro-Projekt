@@ -5,7 +5,8 @@ using Pixelplacement;
 
 public class Book : GrabInteractable, IUseable
 {
-    [SerializeField] GameObject bookToRead;
+    [SerializeField] [Tooltip("Propably named BookToInteract")]
+    GameObject bookToRead;
 
     private bool isBookOpened = false;
 

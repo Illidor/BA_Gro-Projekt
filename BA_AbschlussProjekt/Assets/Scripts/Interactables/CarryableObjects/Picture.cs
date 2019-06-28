@@ -11,12 +11,6 @@ public class Picture : GrabInteractable
     public List<GameObject> pictureParts = new List<GameObject>();
     private MeshRenderer pictureUnbroken;
     private BoxCollider interactionCollider;
-    protected new enum SoundTypes
-    {
-        pickup = 0,
-        drop = 1,
-        destroy = 2
-    }
 
     void Start()
     {
@@ -26,7 +20,7 @@ public class Picture : GrabInteractable
         textToDisplayOnHover = "Click to pick up " + DisplayName;
     }
 
-    private new void OnCollisionEnter(Collision other)
+    private void OnCollisionEnter(Collision other)
     {
         // Check for Physics Material            no idea what this comment means, maybe a todo? The code had nothing to do with physics materials... I'll leave it in just in case
         if(IsBeeingCarried == false)
@@ -40,7 +34,7 @@ public class Picture : GrabInteractable
             else if (velocity < -2)
             {
                 //Todo: Play Sound
-                GetComponent<Sound>().playSound(0);
+                GetComponent<Sound>().PlaySound(0);
             }
         }
     }

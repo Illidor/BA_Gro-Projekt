@@ -23,7 +23,7 @@ public class HatchInteraction : InteractionFoundation, ICombinable
                 try
                 {
                     this.GetComponent<Animator>().SetTrigger("open"); ;
-                    hatchOpenSound.playSound(0);
+                    hatchOpenSound.PlaySound(0);
                     //AudioManager.audioManager.Play("snd_openattic_ladder");
                 }
                 catch (System.Exception){}

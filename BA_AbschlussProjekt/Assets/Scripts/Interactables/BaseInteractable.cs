@@ -9,8 +9,9 @@ using UnityEngine.Serialization;
 public abstract class BaseInteractable : InteractionFoundation
 {
     protected string textToDisplayOnHover = "";
+
     [SerializeField]
-    protected float minCondition;
+    protected Conditions conditionsTypeNeededToInteract = Conditions.UpperBodyCondition;
 
     protected new void Awake()
     {
@@ -25,20 +26,22 @@ public abstract class BaseInteractable : InteractionFoundation
     /// </summary>
     /// <param name="interactionScript">The script calling the function (just type "this"), in other words the player</param>
     /// <returns>Whether the Interaction was successfull (true) or not (false)</returns>
-    public abstract bool Interact(InteractionScript player, Conditions condition, float minCondition);
+    public abstract bool CarryOutInteraction(InteractionScript player);
 
     /// <summary>
     /// Call to make the players UI show the possible interaction via text and crosshair change. Should fire "Interact" when necessary 
     /// </summary>
     /// <param name="guiInteractionFeedbackHandler">Collection of references of GUI elements used for interaction feedback inside the gui. Should be present in the current "InteractionScript"</param>
-    public virtual void HandleInteraction(InteractionScript player, Conditions condition)
+    public virtual void HandleInteraction(InteractionScript player)
     {
         player.GUIInteractionFeedbackHandler.StandardCrosshair.SetActive(false);
         player.GUIInteractionFeedbackHandler.InteractionCrosshair.SetActive(true);
         player.GUIInteractionFeedbackHandler.ActionDescription.text = textToDisplayOnHover;
 
         if (CTRLHub.InteractDown)
-            Interact(player, condition, minCondition);
+        {
+            CarryOutInteraction(player);
+        }
     }
 
 
@@ -46,7 +49,7 @@ public abstract class BaseInteractable : InteractionFoundation
     {
         List<Transform> transforms = new List<Transform>();
 
-        foreach (var item in GetComponentsInChildren<Transform>())
+        foreach (Transform item in GetComponentsInChildren<Transform>())
         {
             if(item.tag == "IK")
             {

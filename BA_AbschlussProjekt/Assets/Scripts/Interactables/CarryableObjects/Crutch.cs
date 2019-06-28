@@ -29,15 +29,14 @@ public class Crutch : GrabInteractable
     {
         player.IncreaseReach(reachIncreaseOnCarry);
         attachingToObj = true;
-        GetComponent<Sound>().playSound(0);
+        GetComponent<Sound>().PlaySound(0);
 
         if(isMusicPlaying == false) {
             isMusicPlaying = true;
-            bgMusic.playSound(0);
+            bgMusic.PlaySound(0);
         }
 
-        //return base.CarryOutInteraction_Carry(player);
-        return true;
+        return base.CarryOutInteraction_Carry(player);
     }
 
     public override void PutDown(InteractionScript player)
@@ -46,7 +45,7 @@ public class Crutch : GrabInteractable
         attachingToObj = false;
         wasAttached = false;
         base.PutDown(player);
-        GetComponent<Sound>().playSound(0);
+        GetComponent<Sound>().PlaySound(0);
     }
     private void Update()
     {

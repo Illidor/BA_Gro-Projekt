@@ -3,12 +3,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class LadderInteraction : BaseInteractable
+public class LadderInteraction : ConditionedInteraction
 {
     [SerializeField]
     private float standardClimbingSpeed = 0.01f;
     [SerializeField]
     private float slowClimbingSpeed = 0.005f;
+    [SerializeField]
+    private float minConditionToClimbFast = 1.5f;
     [SerializeField][Tooltip("The minimal distance from the bottom of the ladder the player snaps onto")]
     private Vector3 ladderSnapOffsetFromBelow = new Vector3(0, 0.075f, 0);
     [SerializeField][Tooltip("The minimal distance from the top of the ladder the player snaps onto")]
@@ -82,10 +84,10 @@ public class LadderInteraction : BaseInteractable
             climbCount++;
             // Play sounds at different audio sources so they don't get killed before fully played
             if (climbCount % 2 == 0) {
-                climbingSound.playSound(0, 1);
+                climbingSound.PlaySound(0, 1);
             }
             else {
-                climbingSound.playSound(0, 2);
+                climbingSound.PlaySound(0, 2);
             }
         }
         // </Ladder audio handling>
@@ -101,13 +103,18 @@ public class LadderInteraction : BaseInteractable
         currentClimber = null;
     }
 
-    public override bool Interact(InteractionScript player, Conditions condition, float minCondition)
+    public override void HandleInteraction(InteractionScript player)
     {
-        if (player.PlayerHealth.getCondition(condition) < minCondition)
-            SetClimbingSpeedToSlow();
-        else
+        if (player.PlayerHealth.GetSummedCondition() > minConditionToClimbFast)
             ResetClimbingSpeedToStandard();
+        else
+            SetClimbingSpeedToSlow();
 
+        base.HandleInteraction(player);
+    }
+
+    public override bool CarryOutInteraction(InteractionScript player)
+    {
         currentClimber = player;
         Rigidbody currentClimblerRigidbody = currentClimber.GetComponent<Rigidbody>();
         currentClimblerRigidbody.isKinematic = true;

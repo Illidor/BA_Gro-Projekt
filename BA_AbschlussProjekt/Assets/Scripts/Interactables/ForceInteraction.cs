@@ -14,12 +14,12 @@ public class ForceInteraction : BaseInteractable
 
     private bool alreadyForcedInteraction = false;
 
-    public override bool Interact(InteractionScript player, Conditions condition, float minCondition)
+    public override bool CarryOutInteraction(InteractionScript player)
     {
         if (oneTimeOnly && alreadyForcedInteraction)
             return false;
         alreadyForcedInteraction = true;
 
-        return (bool)toForceInteractionOn?.Interact(player, condition, minCondition);
+        return (bool)toForceInteractionOn?.CarryOutInteraction(player);
     }
 }

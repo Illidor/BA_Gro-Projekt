@@ -13,14 +13,13 @@ public enum Conditions
 
 public class PlayerHealth : MonoBehaviour
 {
-
-
-
     private float upperBodyCondition;
     private float lowerBodyCondition;
 
-    [SerializeField] Sound smallConditionSound;
-    [SerializeField] Sound bigConditionSound;
+    [SerializeField]
+    private Sound smallConditionSound;
+    [SerializeField]
+    private Sound bigConditionSound;
 
     private void Awake()
     {
@@ -28,7 +27,7 @@ public class PlayerHealth : MonoBehaviour
         lowerBodyCondition = 2f;
     }
 
-    public void changeCondition(Conditions which, float value)
+    public void ChangeCondition(Conditions which, float value)
     {
         switch (which)
         {
@@ -39,16 +38,16 @@ public class PlayerHealth : MonoBehaviour
                     upperBodyCondition -= value;
                     // Check which sound to play
                     if(Mathf.Approximately(upperBodyCondition, 1.5f)){
-                        smallConditionSound.playSound(0);
+                        smallConditionSound.PlaySound(0);
                     }
                     else if(Mathf.Approximately(upperBodyCondition, 1f)) {
-                        bigConditionSound.playSound(0);
+                        bigConditionSound.PlaySound(0);
                     }
                     else if (Mathf.Approximately(upperBodyCondition, 0.5f)) {
-                        smallConditionSound.playSound(0);
+                        smallConditionSound.PlaySound(0);
                     }
                     else if (Mathf.Approximately(upperBodyCondition, 0f)) {
-                        bigConditionSound.playSound(0);
+                        bigConditionSound.PlaySound(0);
                     }
                 }
                 else
@@ -65,16 +64,16 @@ public class PlayerHealth : MonoBehaviour
 
                     // Check which sound to play
                     if (Mathf.Approximately(lowerBodyCondition, 1.5f)) {
-                        smallConditionSound.playSound(0);
+                        smallConditionSound.PlaySound(0);
                     }
                     else if (Mathf.Approximately(lowerBodyCondition, 1f)) {
-                        bigConditionSound.playSound(0);
+                        bigConditionSound.PlaySound(0);
                     }
                     else if (Mathf.Approximately(lowerBodyCondition, 0.5f)) {
-                        smallConditionSound.playSound(0);
+                        smallConditionSound.PlaySound(0);
                     }
                     else if (Mathf.Approximately(lowerBodyCondition, 0f)) {
-                        bigConditionSound.playSound(0);
+                        bigConditionSound.PlaySound(0);
                     }
                 }
                 else
@@ -86,7 +85,7 @@ public class PlayerHealth : MonoBehaviour
         }
     }
 
-    public float getCondition(Conditions which)
+    public float GetCondition(Conditions which)
     {
         switch (which)
         {
@@ -99,6 +98,11 @@ public class PlayerHealth : MonoBehaviour
                 return lowerBodyCondition;
         }
         return 0f;
+    }
+
+    public float GetSummedCondition()
+    {
+        return upperBodyCondition + lowerBodyCondition;
     }
 
     //ToDo: Play Sound

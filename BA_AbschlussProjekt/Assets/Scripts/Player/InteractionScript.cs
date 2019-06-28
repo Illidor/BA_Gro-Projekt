@@ -11,35 +11,44 @@ public class InteractionScript : MonoBehaviour
         LabelOverride("Grabing Point"), SerializeField, Tooltip("Hand the carried object is parented to")]
     public Transform GrabingPoint { get; private set; }
 
-    [SerializeField]
-    [Tooltip("Handler of the players injuries")]
-    private PlayerHealth playerHealth;
-
     [field: LabelOverride("GUI Interaction Feedback Handler"), SerializeField,
         Tooltip("The GUI Interaction Feedback Handler of the player. If not supplied the script will search on this gameobject and it's children")]
     public GUIInteractionFeedbackHandler GUIInteractionFeedbackHandler { get; private set; }
 
-    public PlayerHealth PlayerHealth { get { return playerHealth; } }
+    [field: LabelOverride("Player Health"), SerializeField,
+        Tooltip("Handler of the players injuries. If not supplied the script will search on this gameobject and it's children")]
+    public PlayerHealth PlayerHealth { get; protected set; }
 
     public GrabInteractable UsedObject { get; set; }
 
     public bool IsCarrying { get; private set; }
     public bool IsPushing { get; private set; }
 
+    public bool IsFrozen { get; set; }
+
     public Transform HandIKLeft;
     public Transform HandIKRight;
+
     public float GrabingReach { get; private set; }
 
     protected void Awake()
     {
         GrabingReach = emptyHandedGrabingReach;
 
+        IsFrozen = false;
+
         if (GUIInteractionFeedbackHandler == null)
             GUIInteractionFeedbackHandler = GetComponentInChildren<GUIInteractionFeedbackHandler>();
+
+        if (PlayerHealth == null)
+            PlayerHealth = GetComponentInChildren<PlayerHealth>();
     }
 
     protected void Update()
     {
+        if (IsFrozen)
+            return;
+
         HandleActions();
 
         if (IsCarrying || IsPushing)
@@ -60,7 +69,7 @@ public class InteractionScript : MonoBehaviour
 
         if (IsCarrying == false)
         {
-            raycastHit.collider?.GetComponent<BaseInteractable>()?.HandleInteraction(this, Conditions.UpperBodyCondition);
+            raycastHit.collider?.GetComponent<BaseInteractable>()?.HandleInteraction(this);
         }
         else
         {

@@ -189,10 +189,10 @@ namespace UnityStandardAssets.Characters.FirstPerson
                     footstepSoundCount++;
                     // Play sounds at different audio sources so they don't get killed before fully played
                     if(footstepSoundCount % 2 == 0) {
-                        footstepSound.playSound(UnityEngine.Random.Range(0, footstepSound.clips.Count), 1);
+                        footstepSound.PlaySound(UnityEngine.Random.Range(0, footstepSound.clips.Count), 1);
                     }
                     else {
-                        footstepSound.playSound(UnityEngine.Random.Range(0, footstepSound.clips.Count), 2);
+                        footstepSound.PlaySound(UnityEngine.Random.Range(0, footstepSound.clips.Count), 2);
                     }
                 }
             }
@@ -293,7 +293,7 @@ namespace UnityStandardAssets.Characters.FirstPerson
                 //FootSprainedCheck
                 if (m_RigidBody.velocity.y < -10f && hitInfo.collider.material.bounciness < 0.6f)
                 {
-                    playerHealth.changeCondition(Conditions.LowerBodyCondition, 0.5f);
+                    playerHealth.ChangeCondition(Conditions.LowerBodyCondition, 0.5f);
                     //playerHealth.PlaySound(); //ToDo
                 } 
             }
@@ -313,19 +313,19 @@ namespace UnityStandardAssets.Characters.FirstPerson
 
         private void checkMovability()
         {
-            if(playerHealth.getCondition(Conditions.LowerBodyCondition) > 1.5f)
+            if(playerHealth.GetCondition(Conditions.LowerBodyCondition) > 1.5f)
             {
                 movementSettings.ForwardSpeed = defaultForwardSpeed;
                 movementSettings.BackwardSpeed = defaultBackwardSpeed;
                 movementSettings.StrafeSpeed = defaultStrafeSpeed;
             }
-            else if (playerHealth.getCondition(Conditions.LowerBodyCondition) > 1f)
+            else if (playerHealth.GetCondition(Conditions.LowerBodyCondition) > 1f)
             {
                 movementSettings.ForwardSpeed = defaultForwardSpeed / 2f;
                 movementSettings.BackwardSpeed = defaultBackwardSpeed / 2f;
                 movementSettings.StrafeSpeed = defaultStrafeSpeed / 2f;
             }
-            else if(playerHealth.getCondition(Conditions.LowerBodyCondition) > 0)
+            else if(playerHealth.GetCondition(Conditions.LowerBodyCondition) > 0)
             {
                 movementSettings.ForwardSpeed = defaultForwardSpeed / 3f;
                 movementSettings.BackwardSpeed = defaultBackwardSpeed / 3f;

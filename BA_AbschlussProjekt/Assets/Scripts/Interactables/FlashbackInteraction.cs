@@ -17,14 +17,14 @@ public class FlashbackInteraction : BaseInteractable
     [SerializeField]
     public BaseInteractable secondInteraction;
 
-    public override bool Interact(InteractionScript player, Conditions condition, float minCondition)
+    public override bool CarryOutInteraction(InteractionScript player)
     {
         Debug.Log("Interacted");
-        StartCoroutine(showFLashback(player, condition, minCondition));
+        StartCoroutine(showFLashback(player));
         return true;
     }
     
-    private IEnumerator showFLashback(InteractionScript player, Conditions condition, float minCondition)
+    private IEnumerator showFLashback(InteractionScript player)
     {
         foreach (Sprite item in flashbackSprites)
         {
@@ -37,7 +37,8 @@ public class FlashbackInteraction : BaseInteractable
                image.enabled = false;
                player.UsedObject = null;
                player.GUIInteractionFeedbackHandler.ResetGUI();
-             </code from MergeBranch> */
+               </code from MergeBranch> 
+            */
 
 
             // <code from SpringerBranch>:
@@ -52,7 +53,7 @@ public class FlashbackInteraction : BaseInteractable
             StartFlashBack?.Invoke();
         }
 
-        secondInteraction?.Interact(player, condition, minCondition);
+        secondInteraction?.CarryOutInteraction(player);
 
         yield return null;
     }
