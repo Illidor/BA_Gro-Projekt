@@ -111,8 +111,8 @@ namespace UnityStandardAssets.Characters.FirstPerson
         [SerializeField] private CapsuleCollider crouchCollider;
         private PlayerHealth playerHealth;
         private Sound footstepSound;
-        private float footstepSoundTicker = 1f;
-        private float footstepSoundThreshold = 0.65f;
+        [SerializeField] private float footstepSoundTicker = 1f;
+        [SerializeField] private float footstepSoundThreshold = 0.65f;
         private int footstepSoundCount = 0;
 
         // used for saving before reducing the speed with health conditions

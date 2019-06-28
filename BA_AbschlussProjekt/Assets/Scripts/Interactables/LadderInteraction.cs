@@ -37,8 +37,8 @@ public class LadderInteraction : BaseInteractable
 
     // climbing audio
     private Sound climbingSound;
-    private float climbingSoundTicker = 1f;
-    private float climbingSoundThreshold = 1.5f;
+    [SerializeField] private float climbingSoundTicker = 1f;
+    [SerializeField] private float climbingSoundThreshold = 1.5f;
     private int climbCount = 0;
 
     private void Start() {
