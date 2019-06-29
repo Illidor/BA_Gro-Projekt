@@ -36,8 +36,16 @@ public class Crutch : FlashbackedGrabInteractable
             bgMusic.PlaySound(0);
         }
 
-        return base.CarryOutInteraction_Carry(player);
-    }
+        gameObject.layer = LayerMask.NameToLayer("NoPlayerCollision");
+        transform.parent = player.GrabingPoint.transform;
+        transform.localPosition = new Vector3(-0.159f, -0.06506f, 0.348f);
+        transform.localEulerAngles = new Vector3(119.955f, -349.499f, 345.164f);
+        rigidbody.isKinematic = true;
+        player.SetCarriedObject(this);
+        IsBeeingCarried = true;
+
+        return true;
+}
 
     public override void PutDown(InteractionScript player)
     {
