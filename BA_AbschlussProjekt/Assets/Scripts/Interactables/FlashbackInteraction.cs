@@ -1,9 +1,11 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.UI;
 
+[Obsolete]
 public class FlashbackInteraction : BaseInteractable
 {
     public static event UnityAction StartFlashBack;

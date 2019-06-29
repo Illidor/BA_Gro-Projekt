@@ -49,13 +49,13 @@ public class InteractionScript : MonoBehaviour
         if (IsFrozen)
             return;
 
-        HandleActions();
-
         if (IsCarrying || IsPushing)
         {
             if (CTRLHub.DropUp)
                 UsedObject.PutDown(this);
         }
+
+        HandleActions();
     }
 
     private void HandleActions()
@@ -75,6 +75,7 @@ public class InteractionScript : MonoBehaviour
         {
             if (didRaycastHit)
             {
+                Debug.Log("want to combine???!?!? " + raycastHit.collider.name + "   " + raycastHit.collider.GetComponent<InteractionFoundation>().name);
                 if (raycastHit.collider.GetComponent<ICombinable>()?.HandleCombine(this, UsedObject) == true)
                     return;
             }
