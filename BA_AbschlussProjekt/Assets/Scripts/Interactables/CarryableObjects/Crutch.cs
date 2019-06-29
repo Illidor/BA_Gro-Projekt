@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Crutch : GrabInteractable
+public class Crutch : FlashbackedGrabInteractable
 {
     [SerializeField]
     private float reachIncreaseOnCarry = 1;
@@ -59,19 +59,6 @@ public class Crutch : GrabInteractable
             wasAttached = true;
             //playerAnim.Play("character@Grab", 0);
             attachTime += Time.deltaTime;
-        }
-        else if(attachingToObj && wasAttached)
-        {
-            
-            if (attachTime > 2.2f)
-            {
-                attachTime = 0;
-                base.CarryOutInteraction_Carry(FindObjectOfType<InteractionScript>());
-            }
-            if (attachTime > 0)
-            {
-                attachTime += Time.deltaTime;
-            }
         }
     }
     public void OnAnimatorIKFunc()
