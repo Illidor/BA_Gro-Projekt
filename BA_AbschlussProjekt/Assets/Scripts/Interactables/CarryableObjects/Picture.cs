@@ -2,19 +2,20 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public class Picture : GrabInteractable
 {
     [SerializeField]
-    private bool broken = false;
+    private List<GameObject> pictureParts = new List<GameObject>();
+    [SerializeField]
+    private GameObject pictureUnbroken;
 
-    public List<GameObject> pictureParts = new List<GameObject>();
-    private MeshRenderer pictureUnbroken;
     private BoxCollider interactionCollider;
+    private bool broken = false;
 
     void Start()
     {
-        pictureUnbroken = GetComponent<MeshRenderer>();
         interactionCollider = GetComponent<BoxCollider>();
 
         textToDisplayOnHover = "Click to pick up " + DisplayName;
@@ -42,14 +43,13 @@ public class Picture : GrabInteractable
     private void Break()
     {
         broken = true;
+        interactionCollider.enabled = false;
         foreach (GameObject part in pictureParts)
         {
-            pictureUnbroken.enabled = false;
-            interactionCollider.enabled = false;
             part.SetActive(true);
-            part.GetComponent<Rigidbody>().AddForce(new Vector3(UnityEngine.Random.Range(-0.1f, 0.1f), UnityEngine.Random.Range(-0.1f, 0.1f), UnityEngine.Random.Range(-0.1f, 0.1f)));
+            part.GetComponent<Rigidbody>().AddForce(new Vector3(Random.Range(-0.1f, 0.1f), Random.Range(-0.1f, 0.1f), Random.Range(-0.1f, 0.1f)));
         }
 
-        this.enabled = false;
+        enabled = false;
     }
 }
