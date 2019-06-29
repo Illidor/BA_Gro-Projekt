@@ -11,10 +11,13 @@ public class PictureInteraction : InteractionFoundation, ICombinable
         if(interactingComponent.name == objectToInteract.name)
         {
             ((GrabInteractable)interactingComponent).PutDown(player);
-            interactingComponent.gameObject.GetComponent<Rigidbody>().isKinematic = true;
+            interactingComponent.GetComponent<Rigidbody>().isKinematic = true;
+            interactingComponent.GetComponent<Collider>().enabled = false;
             interactingComponent.transform.SetParent(transform);
             interactingComponent.transform.localPosition = Vector3.zero;
             interactingComponent.transform.localEulerAngles = Vector3.zero;
+
+            GetComponent<Collider>().enabled = false;
             return true;
         }
         return false;

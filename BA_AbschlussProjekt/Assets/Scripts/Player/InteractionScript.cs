@@ -75,7 +75,6 @@ public class InteractionScript : MonoBehaviour
         {
             if (didRaycastHit)
             {
-                Debug.Log("want to combine???!?!? " + raycastHit.collider.name + "   " + raycastHit.collider.GetComponent<InteractionFoundation>().name);
                 if (raycastHit.collider.GetComponent<ICombinable>()?.HandleCombine(this, UsedObject) == true)
                     return;
             }

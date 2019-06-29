@@ -4,21 +4,20 @@ using UnityEngine;
 
 public class UVLampScript : MonoBehaviour
 {
-    public Light UVVisible;
-    public Light UVLight;
+    [SerializeField]
+    [Range(0, 100)]
+    private float stateToggleChanceInPercent = 10;
+    [Space]
+    [SerializeField]
+    private Light UVVisible;
+    [SerializeField]
+    private Light UVLight;
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
+    private void Update()
     {
         int randomNumber = Random.Range(1, 100);
         
-        if(randomNumber > 90)
+        if(randomNumber > (100 - stateToggleChanceInPercent))
         {
             UVVisible.enabled = !UVLight.enabled;
             UVLight.enabled = !UVLight.enabled;

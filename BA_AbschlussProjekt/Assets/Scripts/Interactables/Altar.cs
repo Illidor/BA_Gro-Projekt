@@ -6,16 +6,15 @@ public class Altar : ConditionedInteraction
 {
     [SerializeField]
     private Transform triggerObject;
+    [SerializeField]
+    private KeyBox keyBox;
 
     public override bool CarryOutInteraction(InteractionScript player)
     {
-        //TODO: implement praying 
-        if (GetComponent<Animation>().isPlaying == false)
-        {
-            GetComponent<Animation>().Play();
-            return true;
-        }
-        return false;
+        if (keyBox.IsOpen == false)
+            keyBox.OpenKeyBox();
+
+        return keyBox.IsOpen;
     }
 
     public bool CarryOutSecondInteract(InteractionScript interactionScript)
@@ -32,6 +31,7 @@ public class Altar : ConditionedInteraction
     {
         if(triggerObject.childCount > 0)
         {
+            player.GUIInteractionFeedbackHandler.StandardCrosshair.SetActive(false);
             player.GUIInteractionFeedbackHandler.InteractionCrosshair.SetActive(true);
             player.GUIInteractionFeedbackHandler.ActionDescription.text = "Press E to Destroy " + triggerObject.GetChild(0).GetComponent<Picture>().DisplayName;
             player.GUIInteractionFeedbackHandler.SecondActionDescription.text = "Click to Pray at " + DisplayName;
