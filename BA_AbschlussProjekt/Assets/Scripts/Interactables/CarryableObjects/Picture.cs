@@ -7,6 +7,10 @@ using Random = UnityEngine.Random;
 public class Picture : GrabInteractable
 {
     [SerializeField]
+    private float materialBouncinessThreshholdToNotBreak = 0.6f;
+    [SerializeField]
+    private float velocityThreshholdToNotBreak = -10;
+    [SerializeField]
     private List<GameObject> pictureParts = new List<GameObject>();
     [SerializeField]
     private GameObject pictureUnbroken;
@@ -27,7 +31,7 @@ public class Picture : GrabInteractable
         if(IsBeeingCarried == false)
         {
             Debug.Log("Not carried drop");
-            if (other.collider.material.bounciness < 0.6 && !broken && velocity < -10)
+            if (other.collider.material.bounciness < materialBouncinessThreshholdToNotBreak && !broken && velocity < velocityThreshholdToNotBreak)
             {
                 Debug.Log("Break");
                 Break();

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Pixelplacement;
 
-public class Book : GrabInteractable, IUseable
+public class Book : GrabInteractable
 {
     [SerializeField] [Tooltip("Propably named BookToInteract")]
     GameObject bookToRead;
@@ -26,13 +26,14 @@ public class Book : GrabInteractable, IUseable
             Use(player);
     }
 
+    // Method use: Not in use. Removed usable on Book, reading by ui is unimmersive 
     public bool Use(InteractionScript player)
     {
         if (!isBookOpened)
         {
             bookToRead.SetActive(true);
             isBookOpened = true;
-
+        
             return true;
         }
         else
