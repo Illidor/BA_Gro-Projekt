@@ -62,6 +62,7 @@ public class GrabInteractable : BaseInteractable
     /// </summary>
     protected virtual bool CarryOutInteraction_Carry(InteractionScript player)
     {
+        Debug.Log("carrying");
         gameObject.layer = LayerMask.NameToLayer("NoPlayerCollision");
         transform.parent = player.GrabingPoint.transform;
         transform.localPosition = Vector3.zero;
@@ -74,6 +75,8 @@ public class GrabInteractable : BaseInteractable
 
     public virtual void PutDown(InteractionScript player)  //TODO: better putDown implementation instead of simply droping the object
     {
+        Debug.Log("put down");
+
         if (IsBeeingCarried)
         {
             transform.SetParent(InstancePool.transform, true);

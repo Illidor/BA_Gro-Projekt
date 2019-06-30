@@ -49,13 +49,13 @@ public class InteractionScript : MonoBehaviour
         if (IsFrozen)
             return;
 
-        HandleActions();
-
         if (IsCarrying || IsPushing)
         {
             if (CTRLHub.DropUp)
                 UsedObject.PutDown(this);
         }
+
+        HandleActions();
     }
 
     private void HandleActions()

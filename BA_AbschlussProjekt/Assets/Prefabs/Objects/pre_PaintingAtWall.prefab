@@ -11,12 +11,12 @@ GameObject:
   - component: {fileID: 8007955375350935804}
   - component: {fileID: 1331656205473925834}
   - component: {fileID: 4703577875574175283}
-  - component: {fileID: 3052116952721646362}
   - component: {fileID: 3052116952721646361}
+  - component: {fileID: 7339059499342489181}
   m_Layer: 0
-  m_Name: PaintingAtWall
+  m_Name: pre_PaintingAtWall
   m_TagString: Untagged
-  m_Icon: {fileID: 0}
+  m_Icon: {fileID: -964228994112308473, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -27,9 +27,9 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6447642994864423663}
-  m_LocalRotation: {x: -0.00000005760124, y: -0.7071057, z: -0.00000005760109, w: 0.7071079}
+  m_LocalRotation: {x: 0, y: -0.7071068, z: 0, w: 0.7071068}
   m_LocalPosition: {x: -7.832145, y: 0.618, z: -1.272146}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1.177696, y: 1.886727, z: 1.177696}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -49,7 +49,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6447642994864423663}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -61,7 +61,7 @@ MeshRenderer:
   m_Materials:
   - {fileID: -681132614480344848, guid: 797bf2dcb27baa74d8d9a1236779e437, type: 3}
   - {fileID: 2688456280696028412, guid: 797bf2dcb27baa74d8d9a1236779e437, type: 3}
-  - {fileID: -5131512367502145845, guid: 797bf2dcb27baa74d8d9a1236779e437, type: 3}
+  - {fileID: 2100000, guid: 1d097cc5aec193945b89094de484db7b, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -81,19 +81,6 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!65 &3052116952721646362
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6447642994864423663}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 0.75583434, y: 0.8142854, z: 0.07014368}
-  m_Center: {x: 0, y: 7.33507e-21, z: -0.005145408}
 --- !u!114 &3052116952721646361
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -106,4 +93,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a4d9eb465033e034eb6958aba224cd0e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  <DisplayName>k__BackingField: Altar
   objectToInteract: {fileID: 0}
+--- !u!135 &7339059499342489181
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6447642994864423663}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.40714276
+  m_Center: {x: 0, y: -0.00000047683207, z: -0.005145528}
