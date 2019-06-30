@@ -15,6 +15,8 @@ public class KeyBox : MonoBehaviour
     private Material greenLampMaterial;
     [SerializeField]
     private Material redLampMaterial;
+    [SerializeField]
+    private GameObject lampInsideBox;
 
     public bool IsOpen { get; private set; }
 
@@ -34,6 +36,8 @@ public class KeyBox : MonoBehaviour
 
         GetComponent<Animator>().SetBool("open", true);
 
+        lampInsideBox.SetActive(true);
+
         IsOpen = true;
     }
 
@@ -43,6 +47,8 @@ public class KeyBox : MonoBehaviour
         redLampMaterial.SetColor("_EmissionColor", redLampOnEmissionColor);
 
         GetComponent<Animator>().SetBool("open", false);
+
+        lampInsideBox.SetActive(false);
 
         IsOpen = false;
     }
