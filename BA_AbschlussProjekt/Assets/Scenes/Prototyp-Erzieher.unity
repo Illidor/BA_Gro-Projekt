@@ -1759,11 +1759,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Book
       objectReference: {fileID: 0}
-    - target: {fileID: 6060855905823981009, guid: d4e14965adcb1fe42a6f05ac003c5b1e,
-        type: 3}
-      propertyPath: m_Layer
-      value: 11
-      objectReference: {fileID: 0}
     - target: {fileID: 7081670227840307138, guid: d4e14965adcb1fe42a6f05ac003c5b1e,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1819,6 +1814,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 2.434
       objectReference: {fileID: 0}
+    - target: {fileID: 6060855905823981011, guid: d4e14965adcb1fe42a6f05ac003c5b1e,
+        type: 3}
+      propertyPath: bookToRead
+      value: 
+      objectReference: {fileID: 369426394}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d4e14965adcb1fe42a6f05ac003c5b1e, type: 3}
 --- !u!1 &171318438
@@ -4357,6 +4357,12 @@ Light:
   m_UseBoundingSphereOverride: 0
   m_ShadowRadius: 0
   m_ShadowAngle: 0
+--- !u!1 &369426394 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 295914502737165879, guid: 90e53311f6e155b4888e98665830a2f1,
+    type: 3}
+  m_PrefabInstance: {fileID: 898820640}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &374211745
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -10051,6 +10057,11 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 11
       objectReference: {fileID: 0}
+    - target: {fileID: 295914502231152363, guid: 90e53311f6e155b4888e98665830a2f1,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3208365495163738513, guid: 90e53311f6e155b4888e98665830a2f1,
         type: 3}
       propertyPath: m_RootOrder
@@ -10086,7 +10097,14 @@ PrefabInstance:
       propertyPath: clips.Array.data[3]
       value: 
       objectReference: {fileID: 8300000, guid: e8f847b4a1d38d0478b1fa7bc055af33, type: 3}
-    m_RemovedComponents: []
+    - target: {fileID: 3621919276131577564, guid: 90e53311f6e155b4888e98665830a2f1,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 295914502737165876, guid: 90e53311f6e155b4888e98665830a2f1, type: 3}
+    - {fileID: 8590916090503857746, guid: 90e53311f6e155b4888e98665830a2f1, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 90e53311f6e155b4888e98665830a2f1, type: 3}
 --- !u!4 &898820641 stripped
 Transform:
