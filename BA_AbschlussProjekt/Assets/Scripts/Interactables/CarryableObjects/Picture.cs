@@ -35,7 +35,11 @@ public class Picture : GrabInteractable
             else if (velocity < -2)
             {
                 //Todo: Play Sound
-                GetComponent<Sound>().PlaySound(0);
+                try
+                {
+                    GetComponent<Sound>().PlaySound(0);
+                }
+                catch (System.Exception) { }
             }
         }
     }
