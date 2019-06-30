@@ -186,7 +186,7 @@ namespace DitzelGames.FastIK
                 Bones[i].position = Positions[i];
             }
         }
-
+#if UNITY_EDITOR
         void OnDrawGizmos()
         {
             var current = this.transform;
@@ -200,6 +200,6 @@ namespace DitzelGames.FastIK
             }
         }
 
-
+#endif
     }
 }
