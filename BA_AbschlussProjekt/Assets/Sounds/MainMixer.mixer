@@ -1,5 +1,33 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!244 &-9221475753364999830
+AudioMixerEffectController:
+  m_ObjectHideFlags: 3
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: 
+  m_EffectID: debb22a2eb050fc4086e681166cc00cf
+  m_EffectName: Duck Volume
+  m_MixLevel: 281cf48552f67fd4b8157dde32ad47c9
+  m_Parameters:
+  - m_ParameterName: Threshold
+    m_GUID: 984131d4b37e7aa41adf03b3bd9c7945
+  - m_ParameterName: Ratio
+    m_GUID: 8caaaf65b50643a40ac5b08987814893
+  - m_ParameterName: Attack Time
+    m_GUID: e8462a1dcd83aef48aef2be6d3ab6d07
+  - m_ParameterName: Release Time
+    m_GUID: f3102f6e0142ef74d885a1da8e153049
+  - m_ParameterName: Make-up Gain
+    m_GUID: e81bee64249cbeb459ec810f9d902a5f
+  - m_ParameterName: Knee
+    m_GUID: 673309784b18ba74f83a1c37e2d94902
+  - m_ParameterName: Sidechain Mix
+    m_GUID: d6decaae4bb484c4d8d9f2a6ec668ea5
+  m_SendTarget: {fileID: 0}
+  m_EnableWetMix: 0
+  m_Bypass: 0
 --- !u!243 &-9101280998079847220
 AudioMixerGroupController:
   m_ObjectHideFlags: 0
@@ -15,6 +43,7 @@ AudioMixerGroupController:
   m_Send: 00000000000000000000000000000000
   m_Effects:
   - {fileID: -2104278171429432613}
+  - {fileID: -9221475753364999830}
   m_UserColorIndex: 0
   m_Mute: 0
   m_Solo: 0
@@ -237,12 +266,12 @@ AudioMixerSnapshotController:
   m_AudioMixer: {fileID: 24100000}
   m_SnapshotID: a3461b4de9c34244cb18298410afda53
   m_FloatValues:
-    fdf70100d38d90b4a81de6d054ba5eed: 8.614072
-    7e677e915c5d9234c8eae3c50ae37a45: -35
-    2e73aed1b9d7bd947b3f1923ef5db2b7: -1.0800337
+    fdf70100d38d90b4a81de6d054ba5eed: -6.5566154
+    7e677e915c5d9234c8eae3c50ae37a45: -3.2641246
+    2e73aed1b9d7bd947b3f1923ef5db2b7: -0.02577656
     70de93e384981974fafd961756e461a1: -0.025776558
-    868a7c27b341701428bb5d0f57392ada: 14.9016905
-    7560842dfb6e11f40a4058cb6d3a05ea: -3.8468575
+    868a7c27b341701428bb5d0f57392ada: -0.10231405
+    7560842dfb6e11f40a4058cb6d3a05ea: 0.58972603
   m_TransitionOverrides: {}
 --- !u!244 &125765979235987723
 AudioMixerEffectController:

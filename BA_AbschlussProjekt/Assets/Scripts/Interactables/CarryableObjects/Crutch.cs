@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Crutch : GrabInteractable
+public class Crutch : FlashbackedGrabInteractable
 {
     [SerializeField]
     private float reachIncreaseOnCarry = 1;
@@ -29,16 +29,23 @@ public class Crutch : GrabInteractable
     {
         player.IncreaseReach(reachIncreaseOnCarry);
         attachingToObj = true;
-        GetComponent<Sound>().playSound(0);
+        GetComponent<Sound>().PlaySound(0);
 
         if(isMusicPlaying == false) {
             isMusicPlaying = true;
-            bgMusic.playSound(0);
+            bgMusic.PlaySound(0);
         }
 
-        //return base.CarryOutInteraction_Carry(player);
+        gameObject.layer = LayerMask.NameToLayer("NoPlayerCollision");
+        transform.parent = player.GrabingPoint.transform;
+        transform.localPosition = new Vector3(-0.159f, -0.06506f, 0.348f);
+        transform.localEulerAngles = new Vector3(119.955f, -349.499f, 345.164f);
+        rigidbody.isKinematic = true;
+        player.SetCarriedObject(this);
+        IsBeeingCarried = true;
+
         return true;
-    }
+}
 
     public override void PutDown(InteractionScript player)
     {
@@ -46,7 +53,7 @@ public class Crutch : GrabInteractable
         attachingToObj = false;
         wasAttached = false;
         base.PutDown(player);
-        GetComponent<Sound>().playSound(0);
+        GetComponent<Sound>().PlaySound(0);
     }
     private void Update()
     {
@@ -60,19 +67,6 @@ public class Crutch : GrabInteractable
             wasAttached = true;
             //playerAnim.Play("character@Grab", 0);
             attachTime += Time.deltaTime;
-        }
-        else if(attachingToObj && wasAttached)
-        {
-            
-            if (attachTime > 2.2f)
-            {
-                attachTime = 0;
-                base.CarryOutInteraction_Carry(FindObjectOfType<InteractionScript>());
-            }
-            if (attachTime > 0)
-            {
-                attachTime += Time.deltaTime;
-            }
         }
     }
     public void OnAnimatorIKFunc()

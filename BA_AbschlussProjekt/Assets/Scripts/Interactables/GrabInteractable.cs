@@ -15,30 +15,20 @@ public class GrabInteractable : BaseInteractable
     /// </summary>
     private readonly float putDownOnTopDefinitionOffsetInDegrees = 45f; 
 
-    /// <summary>
-    /// Able to carry object if player condition matches any of the selected
-    /// </summary>
-    [EnumFlag]
-    public InteractionConditions possibleConditionsToCarry = InteractionConditions.All;
-    
-    /// <summary>
-    /// Able to carry object if player condition matches any of the selected
-    /// </summary>
-    [EnumFlag]
-    public InteractionConditions possibleConditionsToPush = InteractionConditions.Unable;
 
     //Sound     //please add a <summary> to serialized fields
     [SerializeField]
     protected float velocity;
 
+    [SerializeField]
+    protected float minConditionToCarry = 0.5f;
+    [SerializeField] [Tooltip("If over 2, pushing is not possible")]
+    protected float minConditionToPush = 3;
 
-    protected Rigidbody rigid;
+    protected new Rigidbody rigidbody;
     protected Rigidbody rigidbodyPulling;
 
     protected new Collider collider;
-
-    [SerializeField]
-    private bool carriable;
 
     public bool IsBeeingCarried { get; protected set; }
 
@@ -47,21 +37,19 @@ public class GrabInteractable : BaseInteractable
 
     protected new void Awake()
     {
-        rigid = GetComponent<Rigidbody>();
+        rigidbody = GetComponent<Rigidbody>();
         collider = GetComponent<Collider>();
 
         base.Awake();
     }
 
-    public override bool Interact(InteractionScript player, Conditions condition, float minCondition)
+    public override bool CarryOutInteraction(InteractionScript player)
     {
-        float playersConditions = player.PlayerHealth.getCondition(Conditions.UpperBodyCondition);
-
-        if (carriable && player.PlayerHealth.getCondition(condition) > minCondition)
+        if (player.PlayerHealth.GetCondition(conditionsTypeNeededToInteract) >= minConditionToCarry)
         {
             return CarryOutInteraction_Carry(player);
         }
-        else if (player.PlayerHealth.getCondition(condition) > minCondition)
+        else if (player.PlayerHealth.GetCondition(conditionsTypeNeededToInteract) >= minConditionToPush)
         {
             return CarryOutInteraction_Push(player);
         }
@@ -69,12 +57,16 @@ public class GrabInteractable : BaseInteractable
         return false;
     }
 
+    /// <summary>
+    /// Carry out interaction carry
+    /// </summary>
     protected virtual bool CarryOutInteraction_Carry(InteractionScript player)
     {
+        Debug.Log("carrying");
         gameObject.layer = LayerMask.NameToLayer("NoPlayerCollision");
         transform.parent = player.GrabingPoint.transform;
         transform.localPosition = Vector3.zero;
-        rigid.isKinematic = true;
+        rigidbody.isKinematic = true;
         player.SetCarriedObject(this);
         IsBeeingCarried = true;
 
@@ -83,6 +75,8 @@ public class GrabInteractable : BaseInteractable
 
     public virtual void PutDown(InteractionScript player)  //TODO: better putDown implementation instead of simply droping the object
     {
+        Debug.Log("put down");
+
         if (IsBeeingCarried)
         {
             transform.SetParent(InstancePool.transform, true);
@@ -116,7 +110,8 @@ public class GrabInteractable : BaseInteractable
         {
             transform.parent = InstancePool.transform;
         }
-        rigid.isKinematic = false;
+
+        rigidbody.isKinematic = false;
         player.StopUsingObject();
 
         IsBeeingPulled = false;
@@ -138,7 +133,7 @@ public class GrabInteractable : BaseInteractable
 
     private void FixedUpdate()
     {
-        velocity = rigid.velocity.y;
+        velocity = rigidbody.velocity.y;
         //TODO: better implementation of pulling. Maybe considering objects weight and players conditions
         //if (IsBeeingPulled)
         //    rigid.velocity = rigidbodyPulling.velocity;
@@ -156,50 +151,5 @@ public class GrabInteractable : BaseInteractable
     protected void ResetLayer()
     {
         gameObject.layer = LayerMask.NameToLayer("Default");
-
     }
-
-    // Wait, why is this gone? And if that's okey, why is it still here?
-    ///// <summary>
-    ///// Play a sound of a type eg. pickup, drop
-    ///// </summary>
-    ///// <param name="soundType">type eg. pickup, drop</param>
-    //public void PlaySound(string soundType)
-    //{
-    //    if (GetComponent<AudioSource>() != null)
-    //    {
-    //        sounds = GetComponents<AudioSource>();
-    //        foreach (AudioSource sound in sounds)
-    //        {
-    //            if (sound.clip.name == soundType)
-    //            {
-    //                sound.Play();
-    //            }
-    //            else
-    //            {
-    //                AudioManager.AddSound(soundType, this.gameObject);
-    //                sounds = GetComponents<AudioSource>();
-    //                sounds.First(audios => audios.name == soundType).Play();
-    //            }
-    //        }
-    //    }
-    //    else
-    //    {
-    //        AudioManager.AddSound(soundType, this.gameObject);
-    //        sounds = GetComponents<AudioSource>();
-    //        sounds[0].Play();
-    //    }
-    //}
-
-    /// <summary>
-    /// play dropsound when falling from high
-    /// </summary>
-    protected void OnCollisionEnter(Collision other)
-    {
-        if (velocity < -2)      // Why having a variable "velocity" instead of using "rigid.velocity" directly? 
-        {
-            //ToDo: Play Sound
-        }
-    }
-
 }

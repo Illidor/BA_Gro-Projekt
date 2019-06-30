@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 6857673082592309575}
   - component: {fileID: 6857673082592309574}
   - component: {fileID: 6857673082592309573}
-  - component: {fileID: 7186798870273332767}
+  - component: {fileID: 4874747016358395243}
   m_Layer: 0
   m_Name: pre_mattress
   m_TagString: Untagged
@@ -2147,10 +2147,10 @@ SkinnedMeshRenderer:
   m_BlendShapeWeights: []
   m_RootBone: {fileID: 0}
   m_AABB:
-    m_Center: {x: 0.00000011920929, y: 0, z: 0.0000009536743}
-    m_Extent: {x: 0.41643503, y: 0.06964874, z: 0.83991456}
+    m_Center: {x: 0, y: 0, z: -0.00000023841858}
+    m_Extent: {x: 0.41581434, y: 0.06964874, z: 0.83960736}
   m_DirtyAABB: 0
---- !u!114 &7186798870273332767
+--- !u!114 &4874747016358395243
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -2159,16 +2159,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 6857673082592309571}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 81351d73e10160843abb07dc325e5936, type: 3}
+  m_Script: {fileID: 11500000, guid: d8bdc993e595ec845b9a429a2b6ef257, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   <DisplayName>k__BackingField: Mattress
-  <AudioManager>k__BackingField: {fileID: 0}
-  soundSources: []
-  soundNames:
-  - snd_mattress
-  - snd_mattress
-  - snd_mattress
-  possibleConditionsToCarry: 0
-  possibleConditionsToPush: -1
+  conditionsTypeNeededToInteract: 0
   velocity: 0
+  minConditionToCarry: 3
+  minConditionToPush: 1.5

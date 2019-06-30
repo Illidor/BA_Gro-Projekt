@@ -1,10 +1,15 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.UI;
 
+[Obsolete]
 public class FlashbackInteraction : BaseInteractable
 {
+    public static event UnityAction StartFlashBack;
+
     [SerializeField]
     private float flashbackTimer;
     [SerializeField]
@@ -14,24 +19,43 @@ public class FlashbackInteraction : BaseInteractable
     [SerializeField]
     public BaseInteractable secondInteraction;
 
-    public override bool Interact(InteractionScript player, Conditions condition, float minCondition)
+    public override bool CarryOutInteraction(InteractionScript player)
     {
         Debug.Log("Interacted");
-        StartCoroutine(showFLashback(player, condition, minCondition));
+        StartCoroutine(showFLashback(player));
         return true;
     }
     
-    private IEnumerator showFLashback(InteractionScript player, Conditions condition, float minCondition)
+    private IEnumerator showFLashback(InteractionScript player)
     {
         foreach (Sprite item in flashbackSprites)
         {
-            image.enabled = true;
-            image.sprite = item;
-            yield return new WaitForSeconds(flashbackTimer);
-            image.enabled = false;
+            /* <code from MergeBranch>
+               image.enabled = true;
+               player.UsedObject = this.gameObject.GetComponent<GrabInteractable>();
+               player.GUIInteractionFeedbackHandler.RemoveGUI();
+               image.sprite = item;
+               yield return new WaitForSeconds(flashbackTimer);
+               image.enabled = false;
+               player.UsedObject = null;
+               player.GUIInteractionFeedbackHandler.ResetGUI();
+               </code from MergeBranch> 
+            */
+
+
+            // <code from SpringerBranch>:
+
+            //old logic
+            //image.enabled = true;
+            //image.sprite = item;
+            //yield return new WaitForSeconds(flashbackTimer);
+            //image.enabled = false;
+
+            //cutscene logic
+            StartFlashBack?.Invoke();
         }
 
-        secondInteraction?.Interact(player, condition, minCondition);
+        secondInteraction?.CarryOutInteraction(player);
 
         yield return null;
     }

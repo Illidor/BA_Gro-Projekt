@@ -25,7 +25,7 @@ public class Door : BaseInteractable
         base.Awake();
     }
 
-    public override bool Interact(InteractionScript player, Conditions condition, float minCondition)
+    public override bool CarryOutInteraction(InteractionScript player)
     {
         return OpenDoor();
     }
@@ -73,5 +73,5 @@ public class Door : BaseInteractable
     }
 
     // if combining door with key to unlock is needed, inherit ICombinable
-    
+
 }

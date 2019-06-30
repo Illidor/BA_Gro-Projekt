@@ -3,11 +3,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class LadderInteraction : BaseInteractable
+public class LadderInteraction : ConditionedInteraction
 {
-
     [SerializeField]
-    private float climbingSpeed = 0.001f;
+    private float standardClimbingSpeed = 0.01f;
+    [SerializeField]
+    private float slowClimbingSpeed = 0.005f;
+    [SerializeField]
+    private float minConditionToClimbFast = 1.5f;
     [SerializeField][Tooltip("The minimal distance from the bottom of the ladder the player snaps onto")]
     private Vector3 ladderSnapOffsetFromBelow = new Vector3(0, 0.075f, 0);
     [SerializeField][Tooltip("The minimal distance from the top of the ladder the player snaps onto")]
@@ -36,8 +39,8 @@ public class LadderInteraction : BaseInteractable
 
     // climbing audio
     private Sound climbingSound;
-    private float climbingSoundTicker = 1f;
-    private float climbingSoundThreshold = 1.5f;
+    [SerializeField] private float climbingSoundTicker = 1f;
+    [SerializeField] private float climbingSoundThreshold = 1.5f;
     private int climbCount = 0;
 
     private void Start() {
@@ -46,16 +49,25 @@ public class LadderInteraction : BaseInteractable
 
     private void OnValidate()
     {
-        if (CurrentClimbingSpeed <= 0)
-            CurrentClimbingSpeed = 0.001f;
+        if (standardClimbingSpeed <= 0)
+            standardClimbingSpeed = 0.001f;
+    }
+
+    // Audio ticker that plays sound after X seconds when player is on ladder
+    private float climbTicker = 5f;
+    private float climbAudioThreshold = 0.75f;
+
+    private new void Awake()
+    {
+        CurrentClimbingSpeed = standardClimbingSpeed;
+
+        base.Awake();
     }
 
     void Update()
     {
         if (!IsBeeingClimbed)
             return;
-
-        CurrentClimbingSpeed = climbingSpeed;
 
         currentClimber.transform.localPosition += (endPoint.position - startPoint.position).normalized * (CurrentClimbingSpeed * CTRLHub.VerticalAxis);
 
@@ -72,10 +84,10 @@ public class LadderInteraction : BaseInteractable
             climbCount++;
             // Play sounds at different audio sources so they don't get killed before fully played
             if (climbCount % 2 == 0) {
-                climbingSound.playSound(0, 1);
+                climbingSound.PlaySound(0, 1);
             }
             else {
-                climbingSound.playSound(0, 2);
+                climbingSound.PlaySound(0, 2);
             }
         }
         // </Ladder audio handling>
@@ -91,7 +103,17 @@ public class LadderInteraction : BaseInteractable
         currentClimber = null;
     }
 
-    public override bool Interact(InteractionScript player, Conditions condition, float minCondition)
+    public override void HandleInteraction(InteractionScript player)
+    {
+        if (player.PlayerHealth.GetSummedCondition() > minConditionToClimbFast)
+            ResetClimbingSpeedToStandard();
+        else
+            SetClimbingSpeedToSlow();
+
+        base.HandleInteraction(player);
+    }
+
+    public override bool CarryOutInteraction(InteractionScript player)
     {
         currentClimber = player;
         Rigidbody currentClimblerRigidbody = currentClimber.GetComponent<Rigidbody>();
@@ -121,5 +143,15 @@ public class LadderInteraction : BaseInteractable
         IsBeeingClimbed = true;
 
         return true;
+    }
+
+    public void ResetClimbingSpeedToStandard()
+    {
+        CurrentClimbingSpeed = standardClimbingSpeed;
+    }
+
+    public void SetClimbingSpeedToSlow()
+    {
+        CurrentClimbingSpeed = slowClimbingSpeed;
     }
 }

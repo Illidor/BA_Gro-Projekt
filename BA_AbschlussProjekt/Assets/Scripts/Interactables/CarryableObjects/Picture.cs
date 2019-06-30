@@ -2,31 +2,26 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public class Picture : GrabInteractable
 {
     [SerializeField]
-    private bool broken = false;
+    private List<GameObject> pictureParts = new List<GameObject>();
+    [SerializeField]
+    private GameObject pictureUnbroken;
 
-    public List<GameObject> pictureParts = new List<GameObject>();
-    private MeshRenderer pictureUnbroken;
     private BoxCollider interactionCollider;
-    protected new enum SoundTypes
-    {
-        pickup = 0,
-        drop = 1,
-        destroy = 2
-    }
+    private bool broken = false;
 
     void Start()
     {
-        pictureUnbroken = GetComponent<MeshRenderer>();
         interactionCollider = GetComponent<BoxCollider>();
 
         textToDisplayOnHover = "Click to pick up " + DisplayName;
     }
 
-    private new void OnCollisionEnter(Collision other)
+    private void OnCollisionEnter(Collision other)
     {
         // Check for Physics Material            no idea what this comment means, maybe a todo? The code had nothing to do with physics materials... I'll leave it in just in case
         if(IsBeeingCarried == false)
@@ -40,6 +35,7 @@ public class Picture : GrabInteractable
             else if (velocity < -2)
             {
                 //Todo: Play Sound
+                GetComponent<Sound>().PlaySound(0);
             }
         }
     }
@@ -47,14 +43,13 @@ public class Picture : GrabInteractable
     private void Break()
     {
         broken = true;
+        interactionCollider.enabled = false;
         foreach (GameObject part in pictureParts)
         {
-            pictureUnbroken.enabled = false;
-            interactionCollider.enabled = false;
             part.SetActive(true);
-            part.GetComponent<Rigidbody>().AddForce(new Vector3(UnityEngine.Random.Range(-0.1f, 0.1f), UnityEngine.Random.Range(-0.1f, 0.1f), UnityEngine.Random.Range(-0.1f, 0.1f)));
+            part.GetComponent<Rigidbody>().AddForce(new Vector3(Random.Range(-0.1f, 0.1f), Random.Range(-0.1f, 0.1f), Random.Range(-0.1f, 0.1f)));
         }
 
-        this.enabled = false;
+        enabled = false;
     }
 }

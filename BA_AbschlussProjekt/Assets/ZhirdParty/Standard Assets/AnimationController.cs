@@ -1,17 +1,18 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityStandardAssets.Characters.FirstPerson;
 using UnityStandardAssets.CrossPlatformInput;
 
 public class AnimationController : MonoBehaviour
 {
-    private UnityStandardAssets.Characters.FirstPerson.RigidbodyFirstPersonController controller;
+    private RigidbodyFirstPersonController controller;
     public Animator animator;
 
     // Start is called before the first frame update
     void Start()
     {
-        controller = this.gameObject.GetComponent<UnityStandardAssets.Characters.FirstPerson.RigidbodyFirstPersonController>();   
+        controller = GetComponent<RigidbodyFirstPersonController>();   
     }
     void OnAnimatorIK(int layerIndex)//Todo:idk why not used
     {

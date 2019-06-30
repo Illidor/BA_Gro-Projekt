@@ -12,11 +12,11 @@ GameObject:
   - component: {fileID: 4158781226884560699}
   - component: {fileID: 7677084951217408962}
   - component: {fileID: 4953806788259280209}
-  - component: {fileID: 4455260979416429345}
   - component: {fileID: 550987202819973051}
-  - component: {fileID: 5082395126307957410}
+  - component: {fileID: 3892048228484268818}
+  - component: {fileID: 1297271950753311819}
   m_Layer: 0
-  m_Name: prel_crutch
+  m_Name: pre_crutch
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -97,23 +97,6 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1.4596933, y: 0.051687967, z: 0.93386453}
   m_Center: {x: 0.3713406, y: -0.000000024996382, z: -0.12807749}
---- !u!114 &4455260979416429345
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8265981195374673694}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a68ae63d5f874dc4c817282a65512dbd, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  flashbackTimer: 4
-  flashbackSprites:
-  - {fileID: 21300000, guid: edd1a29a12d96a341946f4c4d254322f, type: 3}
-  image: {fileID: 0}
-  secondInteraction: {fileID: 5082395126307957410}
 --- !u!54 &550987202819973051
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -130,7 +113,7 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 1
---- !u!114 &5082395126307957410
+--- !u!114 &3892048228484268818
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -142,11 +125,37 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6f626df8b0dfd804081d6f6b78703810, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  possibleConditionsToCarry: 1610612719
-  possibleConditionsToPush: 0
+  <DisplayName>k__BackingField: Crutch
+  conditionsTypeNeededToInteract: 0
   velocity: 0
-  sounds: []
-  soundNames:
-  - snd_painting_crutch
-  - snd_painting_crutch
+  minConditionToCarry: 0.5
+  minConditionToPush: 3
+  flashbackSprite: {fileID: 21300000, guid: c31f5577a992d0644b57ba5972a9bd7f, type: 3}
+  image: {fileID: 0}
   reachIncreaseOnCarry: 1
+  objectAttachpoint: {fileID: 0}
+  attachingToObj: 0
+  wasAttached: 0
+  playerAnim: {fileID: 0}
+  attachTime: 0
+  bgMusic: {fileID: 1297271950753311819}
+--- !u!114 &1297271950753311819
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8265981195374673694}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9b6d2cdd667f7204aabb934c567dcd10, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  clips: []
+  volume: 0.75
+  volumeVariance: 0.1
+  pitch: 1
+  pitchVariance: 0.1
+  loop: 0
+  playOnAwake: 0
+  mixerGroup: {fileID: 0}

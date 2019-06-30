@@ -11,42 +11,51 @@ public class InteractionScript : MonoBehaviour
         LabelOverride("Grabing Point"), SerializeField, Tooltip("Hand the carried object is parented to")]
     public Transform GrabingPoint { get; private set; }
 
-    [SerializeField]
-    [Tooltip("Handler of the players injuries")]
-    private PlayerHealth playerHealth;
-
     [field: LabelOverride("GUI Interaction Feedback Handler"), SerializeField,
         Tooltip("The GUI Interaction Feedback Handler of the player. If not supplied the script will search on this gameobject and it's children")]
     public GUIInteractionFeedbackHandler GUIInteractionFeedbackHandler { get; private set; }
 
-    public PlayerHealth PlayerHealth { get { return playerHealth; } }
+    [field: LabelOverride("Player Health"), SerializeField,
+        Tooltip("Handler of the players injuries. If not supplied the script will search on this gameobject and it's children")]
+    public PlayerHealth PlayerHealth { get; protected set; }
 
-    private GrabInteractable UsedObject { get; set; }
+    public GrabInteractable UsedObject { get; set; }
 
     public bool IsCarrying { get; private set; }
     public bool IsPushing { get; private set; }
 
+    public bool IsFrozen { get; set; }
+
     public Transform HandIKLeft;
     public Transform HandIKRight;
+
     public float GrabingReach { get; private set; }
 
     protected void Awake()
     {
         GrabingReach = emptyHandedGrabingReach;
 
+        IsFrozen = false;
+
         if (GUIInteractionFeedbackHandler == null)
             GUIInteractionFeedbackHandler = GetComponentInChildren<GUIInteractionFeedbackHandler>();
+
+        if (PlayerHealth == null)
+            PlayerHealth = GetComponentInChildren<PlayerHealth>();
     }
 
     protected void Update()
     {
-        HandleActions();
+        if (IsFrozen)
+            return;
 
         if (IsCarrying || IsPushing)
         {
             if (CTRLHub.DropUp)
                 UsedObject.PutDown(this);
         }
+
+        HandleActions();
     }
 
     private void HandleActions()
@@ -60,7 +69,7 @@ public class InteractionScript : MonoBehaviour
 
         if (IsCarrying == false)
         {
-            raycastHit.collider?.GetComponent<BaseInteractable>()?.HandleInteraction(this, Conditions.UpperBodyCondition);
+            raycastHit.collider?.GetComponent<BaseInteractable>()?.HandleInteraction(this);
         }
         else
         {
@@ -80,7 +89,6 @@ public class InteractionScript : MonoBehaviour
         if(point != null)
         {
             int timer = 120; // int -> how long is the grabbing time in frames
-
 
             //ToDo: if Condition > 1, this for if Condition <= 1 use left Hand
             for (int i = 0; i < timer; i++)
@@ -130,251 +138,3 @@ public class InteractionScript : MonoBehaviour
 
 
 
-
-
-
-
-
-
-//﻿using System;
-//using System.Collections;
-//using System.Collections.Generic;
-//using UnityEngine;
-//using System.Linq;
-
-//public class InteractionScript : MonoBehaviour
-//{
-//    [SerializeField]
-//    [Tooltip("Max distance to objects the player is able to grab")]
-//    private float grabingReach = 1.5f;
-
-
-//    private ObjectInteraction usedObject;
-//    public ObjectInteraction UsedObject
-//    {
-//        get { return usedObject; }
-//        set
-//        {
-//            usedObject = value;
-//            IsInteracting = (value == null ? false : true);
-//        }
-//    }
-
-//    public bool IsInteracting { get; set; }
-
-//    private void Update()
-//    {
-//        if (CTRLHub.InteractDown)
-//            CheckInteraction();
-
-//        if (IsInteracting)
-//            HandledDrop();
-//    }
-
-//    private void CheckInteraction()
-//    {
-//        Ray screenCenterRay = Camera.main.ScreenPointToRay(Input.mousePosition);
-
-//        if (Physics.Raycast(screenCenterRay, out RaycastHit hit, grabingReach))
-//        {
-//            BaseInteractable interactableToInteractWith = hit.collider.GetComponent<BaseInteractable>();
-
-//            if (interactableToInteractWith != null)
-//            {
-//                if (IsCarrying)
-//                {
-//                    Debug.Log("combine " + CarriedObject.name + " with " + interactableToInteractWith.name);
-//                    //CarriedObject.Combine(this, interactableToInteractWith);
-
-//                    interactableToInteractWith.gameObject.GetComponent<BaseInteractable>().Combine(CarriedObject.gameObject);
-//                }
-//                else if (interactableToInteractWith.gameObject.GetComponent<FlashbackInteraction>() == null)
-//                {
-//                    interactableToInteractWith.Interact(this);
-//                }
-//                else
-//                {
-//                    interactableToInteractWith.gameObject.GetComponent<FlashbackInteraction>().Interact(this);
-//                }
-//            }
-//        }
-//        else
-//        {
-//            if (IsCarrying)
-//            {
-//                CarriedObject.gameObject.GetComponent<BaseInteractable>().Use();
-//            }
-//        }
-//    }
-
-//    private void HandledDrop()
-//    {
-//        if (CTRLHub.ThrowUp)
-//        {
-//            UsedObject.PutDown(this);
-//        }
-//    }
-//}
-
-/*
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using System.Linq;
-
-public class InteractionScript : MonoBehaviour
-{
-    [SerializeField] [Tooltip("Max distance to objects the player is able to grab empty handed")]
-    private float emptyHandedGrabingReach = 1.5f;
-    [SerializeField] [Tooltip("Hand the carried object is parented to")]
-    private Transform grabingPoint;
-    [SerializeField] [Tooltip("Handler of the players injuries")]
-    private PlayerHealth playerHealth;
-
-    public PlayerHealth PlayerHealth { get { return playerHealth; } }
-
-    private GrabInteractable UsedObject { get; set; }
-
-    public bool IsCarrying { get; private set; }
-    public bool IsPushing  { get; private set; }
-
-    public Transform GrabingPoint { get { return grabingPoint; } }
-
-    private float grabingReach;
-
-    private void Awake()
-    {
-        grabingReach = emptyHandedGrabingReach;
-    }
-
-    private void Update()
-    {
-        if (CTRLHub.InteractDown)
-            CheckInteraction();
-
-        if (IsCarrying || IsPushing)
-        {
-            if (CTRLHub.DropUp)
-                UsedObject.PutDown(this);
-        }
-    }
-
-    private void CheckInteraction()
-    {
-        Ray screenCenterRay = Camera.main.ScreenPointToRay(Input.mousePosition);
-
-        RaycastHit raycastHit;
-        bool didRaycastHit = Physics.Raycast(screenCenterRay, out raycastHit, grabingReach);
-
-        if (IsCarrying == false)
-        {
-            raycastHit.collider?.GetComponent<BaseInteractable>()?.Interact(this);
-        }
-        else
-        {
-            if (didRaycastHit)
-            {
-                ICombinable objectToCombineWith = raycastHit.collider.GetComponent<ICombinable>();
-                if (objectToCombineWith != null &&
-                    objectToCombineWith.Combine(this, UsedObject))
-                    return;
-            }
-
-            if(UsedObject != null)
-            {
-                UsedObject.GetComponent<IUseable>()?.Use(this);
-            }
-            else
-            {
-                //UsedObject
-            }
-        }
-    }
-
-    public void SetCarriedObject(GrabInteractable objectToCarry)
-    {
-        UsedObject = objectToCarry;
-        IsCarrying = true;
-        IsPushing = false;
-    }
-
-    public void SetPushedObject(GrabInteractable objectToPush)
-    {
-        UsedObject = objectToPush;
-        IsPushing = true;
-        IsCarrying = false;
-    }
-
-    public void StopUsingObject()
-    {
-        UsedObject = null;
-        IsCarrying = false;
-        IsPushing = false;
-    }
-
-    public void IncreaseReach(float reachToAdd)
-    {
-        grabingReach += reachToAdd;
-    }
-
-    public void ResetReachToDefault()
-    {
-        grabingReach = emptyHandedGrabingReach;
-    }
-
-    public float GetReach()
-    {
-        return grabingReach;
-    }
-}
-*/
-
-
-
-/* old CheckInteraction
-private void CheckInteraction()
-{
-    Ray screenCenterRay = Camera.main.ScreenPointToRay(Input.mousePosition);
-
-    if (Physics.Raycast(screenCenterRay, out RaycastHit hit, grabingReach))
-    {
-        BaseInteractable interactableToInteractWith = hit.collider.GetComponent<BaseInteractable>();
-
-        if (interactableToInteractWith != null)
-        {
-            if (IsInteracting)
-            {
-                Debug.Log("combine " + UsedObject.name + " with " + interactableToInteractWith.name);
-                UsedObject.Combine(this, interactableToInteractWith);
-
-                //interactableToInteractWith.gameObject.GetComponent<BaseInteractable>().Combine(UsedObject.gameObject);
-            }
-            else
-            {
-                interactableToInteractWith.Interact(this);
-            }
-        }
-        else if (UsedObject != null)
-        {
-            //UsedObject.Use();
-        }
-    }
-    else if (UsedObject != null)
-    {
-        //UsedObject.Use();
-    }
-}
-*/
-
-/*
-
- BaseInteractable interactable = hit.collider.GetComponent<BaseInteractable>();
- if (interactable != null)
-    interactable.Interact(this);
-
-    == 
- 
-hit.collider.GetComponent<BaseInteractable>()?.Interact(this);
-
- */

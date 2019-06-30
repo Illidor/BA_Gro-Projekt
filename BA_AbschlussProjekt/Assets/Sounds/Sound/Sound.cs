@@ -5,7 +5,6 @@ using System.Collections;
 
 public class Sound : MonoBehaviour
 {
-
     //public string name;
 
     public List<AudioClip> clips;
@@ -32,7 +31,7 @@ public class Sound : MonoBehaviour
     /// <summary>
     /// Playing the Sound File on the index. Put it to the Place where the Sound should be triggered
     /// </summary>
-    public void playSound(int index)
+    public void PlaySound(int index)
     {
         if(source == null)
         {
@@ -41,16 +40,17 @@ public class Sound : MonoBehaviour
         if(index < clips.Count)
         {
             source.clip = clips[index];
+            source.outputAudioMixerGroup = mixerGroup;
             source.Play();
         }
 
         if(source != null)
         {
-            StartCoroutine(destroySoundComponent(source));
+            StartCoroutine(DestroySoundComponent(source));
         }
     }
 
-    public void playSound(int index, int audioSourceIndex) {
+    public void PlaySound(int index, int audioSourceIndex) {
 
         if(audioSourceIndex == 1) {
             if (source == null) {
@@ -59,11 +59,12 @@ public class Sound : MonoBehaviour
 
             if (index < clips.Count) {
                 source.clip = clips[index];
+                source.outputAudioMixerGroup = mixerGroup;
                 source.Play();
             }
 
             if (source != null) {
-                StartCoroutine(destroySoundComponent(source));
+                StartCoroutine(DestroySoundComponent(source));
             }
         }
         else if(audioSourceIndex == 2) {
@@ -73,16 +74,17 @@ public class Sound : MonoBehaviour
 
             if (index < clips.Count) {
                 sourceTwo.clip = clips[index];
+                source.outputAudioMixerGroup = mixerGroup;
                 sourceTwo.Play();
             }
 
             if (sourceTwo != null) {
-                StartCoroutine(destroySoundComponent(sourceTwo));
+                StartCoroutine(DestroySoundComponent(sourceTwo));
             }
         }
     }
 
-    private IEnumerator destroySoundComponent(AudioSource source)
+    private IEnumerator DestroySoundComponent(AudioSource source)
     {
         //Debug.Log("Playing Sound");
         yield return new WaitUntil(() => source.isPlaying == false);
