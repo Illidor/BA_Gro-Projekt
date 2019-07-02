@@ -120,6 +120,10 @@ namespace UnityStandardAssets.Characters.FirstPerson
         private float defaultBackwardSpeed;
         private float defaultStrafeSpeed;
 
+        //used to lock PlayerMovement
+        public bool freezePlayerCamera = true;
+        public bool freezePlayerMovement = true;
+
         private void Start()
         {
             m_RigidBody = GetComponent<Rigidbody>();
@@ -136,7 +140,8 @@ namespace UnityStandardAssets.Characters.FirstPerson
 
         private void Update()
         {
-            RotateView();
+            if(!freezePlayerCamera)
+                RotateView();
 
             if (CrossPlatformInputManager.GetButtonDown("Jump") && !m_Jump && m_IsGrounded)
             {
@@ -165,37 +170,45 @@ namespace UnityStandardAssets.Characters.FirstPerson
         private void FixedUpdate()
         {
             GroundCheck();
+
             Vector2 input = GetInput();
 
-            if ((Mathf.Abs(input.x) > float.Epsilon || Mathf.Abs(input.y) > float.Epsilon) && (advancedSettings.airControl || m_IsGrounded))
+            if(!freezePlayerMovement)
             {
-                // always move along the camera forward as it is the direction that it being aimed at
-                Vector3 desiredMove = cam.transform.forward*input.y + cam.transform.right*input.x;
-                desiredMove = Vector3.ProjectOnPlane(desiredMove, m_GroundContactNormal).normalized;
-
-                desiredMove.x = desiredMove.x*movementSettings.CurrentTargetSpeed;
-                desiredMove.z = desiredMove.z*movementSettings.CurrentTargetSpeed;
-                desiredMove.y = /*desiredMove.y*movementSettings.CurrentTargetSpeed;*/0f;
-                if (m_RigidBody.velocity.sqrMagnitude <
-                    (movementSettings.CurrentTargetSpeed*movementSettings.CurrentTargetSpeed))
+                if ((Mathf.Abs(input.x) > float.Epsilon || Mathf.Abs(input.y) > float.Epsilon) && (advancedSettings.airControl || m_IsGrounded))
                 {
-                    m_RigidBody.AddForce(desiredMove*SlopeMultiplier() / 2f, ForceMode.VelocityChange);
-                }
+                    // always move along the camera forward as it is the direction that it being aimed at
+                    Vector3 desiredMove = cam.transform.forward * input.y + cam.transform.right * input.x;
+                    desiredMove = Vector3.ProjectOnPlane(desiredMove, m_GroundContactNormal).normalized;
 
-                // Footstep audio logic with increasing ticker and threshold
-                footstepSoundTicker += Time.deltaTime;
-                if(footstepSoundTicker > footstepSoundThreshold) {
-                    footstepSoundTicker = 0f;
-                    footstepSoundCount++;
-                    // Play sounds at different audio sources so they don't get killed before fully played
-                    if(footstepSoundCount % 2 == 0) {
-                        footstepSound.PlaySound(UnityEngine.Random.Range(0, footstepSound.clips.Count), 1);
+                    desiredMove.x = desiredMove.x * movementSettings.CurrentTargetSpeed;
+                    desiredMove.z = desiredMove.z * movementSettings.CurrentTargetSpeed;
+                    desiredMove.y = /*desiredMove.y*movementSettings.CurrentTargetSpeed;*/0f;
+                    if (m_RigidBody.velocity.sqrMagnitude <
+                        (movementSettings.CurrentTargetSpeed * movementSettings.CurrentTargetSpeed))
+                    {
+                        m_RigidBody.AddForce(desiredMove * SlopeMultiplier() / 2f, ForceMode.VelocityChange);
                     }
-                    else {
-                        footstepSound.PlaySound(UnityEngine.Random.Range(0, footstepSound.clips.Count), 2);
+
+                    // Footstep audio logic with increasing ticker and threshold
+                    footstepSoundTicker += Time.deltaTime;
+                    if (footstepSoundTicker > footstepSoundThreshold)
+                    {
+                        footstepSoundTicker = 0f;
+                        footstepSoundCount++;
+                        // Play sounds at different audio sources so they don't get killed before fully played
+                        if (footstepSoundCount % 2 == 0)
+                        {
+                            footstepSound.PlaySound(UnityEngine.Random.Range(0, footstepSound.clips.Count), 1);
+                        }
+                        else
+                        {
+                            footstepSound.PlaySound(UnityEngine.Random.Range(0, footstepSound.clips.Count), 2);
+                        }
                     }
                 }
             }
+            
 
             if ( m_IsGrounded)
             {

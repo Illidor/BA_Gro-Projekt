@@ -4,7 +4,7 @@ using UnityEngine;
 using CustomEnums;
 using System;
 using UnityEngine.Events;
-
+using UnityEngine.Rendering.PostProcessing;
 
 public enum Conditions
 {
@@ -27,18 +27,70 @@ public class PlayerHealth : MonoBehaviour
     public Camera monitorRoomCamera;
     public Camera mainCamera;
 
+    private Animator anim;
+    private PostProcessVolume ppVolume;
+    private Vignette vignette;
+    private float lerpTimer = 1f;
+    private bool shrinkVignette = true;
+    private bool unshrinkVignette = false;
+
     private void Awake()
     {
         upperBodyCondition = 2f;
         lowerBodyCondition = 2f;
+
+
+    }
+
+    private void Start()
+    {
+        vignette = ScriptableObject.CreateInstance<Vignette>();
+        vignette.enabled.Override(true);
+        vignette.intensity.Override(1f);
+
+        ppVolume = PostProcessManager.instance.QuickVolume(gameObject.layer, 100f, vignette);
+
+        anim = GetComponentInChildren<Animator>();
+
     }
 
     private void Update()
     {
         if(Input.GetKeyDown(KeyCode.P))
         {
-            PlayerDeath();
+            PlayerDeathThirdPerson();
         }
+
+        if(Input.GetKeyDown(KeyCode.O))
+        {
+            PlayerDeathFirstPerson();
+        }
+
+        if(unshrinkVignette)
+        {
+            lerpTimer += Time.deltaTime / 10f;
+            vignette.intensity.value = lerpTimer;
+
+            if (lerpTimer >= 1f)
+            {
+                unshrinkVignette = false;
+                lerpTimer = 1f;
+            }
+        }
+
+        if(shrinkVignette)
+        {
+            lerpTimer -= Time.deltaTime / 10f;
+            vignette.intensity.value = lerpTimer;
+
+            if(lerpTimer <= 0f)
+            {
+                shrinkVignette = false;
+                lerpTimer = 0f;
+            }
+
+        }
+
     }
 
     public void ChangeCondition(Conditions which, float value)
@@ -119,9 +171,8 @@ public class PlayerHealth : MonoBehaviour
         return upperBodyCondition + lowerBodyCondition;
     }
 
-    public void PlayerDeath()
+    private void PlayerDeathThirdPerson()
     {
-        Debug.Log("He dead");
         mainCamera.enabled = false;
         monitorRoomCamera.enabled = true;
 
@@ -129,16 +180,23 @@ public class PlayerHealth : MonoBehaviour
             PlayerDied();
     }
 
+    private void PlayerDeathFirstPerson()
+    {
+        anim.SetTrigger("Die");
+        unshrinkVignette = true;
+
+        vignette.intensity.value = 1f;
+    }
     //ToDo: Play Sound
 
     private void OnEnable()
     {
-        Picture.PlayerFailed += PlayerDeath;
+        Picture.PlayerFailed += PlayerDeathThirdPerson;
     }
 
     private void OnDisable()
     {
-        Picture.PlayerFailed -= PlayerDeath;
+        Picture.PlayerFailed -= PlayerDeathThirdPerson;
     }
 
 }
