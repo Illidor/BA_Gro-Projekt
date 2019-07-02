@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using CustomEnums;
 using System;
+using UnityEngine.Events;
 
 
 public enum Conditions
@@ -13,6 +14,8 @@ public enum Conditions
 
 public class PlayerHealth : MonoBehaviour
 {
+    public static event UnityAction PlayerDied;
+
     private float upperBodyCondition;
     private float lowerBodyCondition;
 
@@ -21,10 +24,21 @@ public class PlayerHealth : MonoBehaviour
     [SerializeField]
     private Sound bigConditionSound;
 
+    public Camera monitorRoomCamera;
+    public Camera mainCamera;
+
     private void Awake()
     {
         upperBodyCondition = 2f;
         lowerBodyCondition = 2f;
+    }
+
+    private void Update()
+    {
+        if(Input.GetKeyDown(KeyCode.P))
+        {
+            PlayerDeath();
+        }
     }
 
     public void ChangeCondition(Conditions which, float value)
@@ -105,5 +119,26 @@ public class PlayerHealth : MonoBehaviour
         return upperBodyCondition + lowerBodyCondition;
     }
 
+    public void PlayerDeath()
+    {
+        Debug.Log("He dead");
+        mainCamera.enabled = false;
+        monitorRoomCamera.enabled = true;
+
+        if (PlayerDied != null)
+            PlayerDied();
+    }
+
     //ToDo: Play Sound
+
+    private void OnEnable()
+    {
+        Picture.PlayerFailed += PlayerDeath;
+    }
+
+    private void OnDisable()
+    {
+        Picture.PlayerFailed -= PlayerDeath;
+    }
+
 }

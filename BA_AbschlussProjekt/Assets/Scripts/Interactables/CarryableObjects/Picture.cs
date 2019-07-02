@@ -3,9 +3,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Random = UnityEngine.Random;
+using UnityEngine.Events;
 
 public class Picture : GrabInteractable
 {
+    public static event UnityAction PlayerFailed;
+
     [SerializeField]
     private List<GameObject> pictureParts = new List<GameObject>();
     [SerializeField]
@@ -26,13 +29,13 @@ public class Picture : GrabInteractable
         // Check for Physics Material            no idea what this comment means, maybe a todo? The code had nothing to do with physics materials... I'll leave it in just in case
         if(IsBeeingCarried == false)
         {
-            Debug.Log("Not carried drop");
-            if (other.collider.material.bounciness < 0.6 && !broken && velocity < -10)
+            //this is a check for the physics material bro LG Robin 
+            if (other.collider.material.bounciness < 0.6 && !broken && velocity < -10f)
             {
                 Debug.Log("Break");
                 Break();
             }
-            else if (velocity < -2)
+            else if (velocity < -2f)
             {
                 //Todo: Play Sound
                 GetComponent<Sound>().PlaySound(0);
@@ -51,5 +54,8 @@ public class Picture : GrabInteractable
         }
 
         enabled = false;
+
+        if (PlayerFailed != null)
+            PlayerFailed();
     }
 }
