@@ -10,6 +10,10 @@ public class Picture : GrabInteractable
     public static event UnityAction PlayerFailed;
 
     [SerializeField]
+    private float materialBouncinessThreshholdToNotBreak = 0.6f;
+    [SerializeField]
+    private float velocityThreshholdToNotBreak = -10;
+    [SerializeField]
     private List<GameObject> pictureParts = new List<GameObject>();
     [SerializeField]
     private GameObject pictureUnbroken;
@@ -29,8 +33,13 @@ public class Picture : GrabInteractable
         // Check for Physics Material            no idea what this comment means, maybe a todo? The code had nothing to do with physics materials... I'll leave it in just in case
         if(IsBeeingCarried == false)
         {
+<<<<<<< HEAD
             //this is a check for the physics material bro LG Robin 
             if (other.collider.material.bounciness < 0.6 && !broken && velocity < -10f)
+=======
+            Debug.Log("Not carried drop");
+            if (other.collider.material.bounciness < materialBouncinessThreshholdToNotBreak && !broken && velocity < velocityThreshholdToNotBreak)
+>>>>>>> Sebastian
             {
                 Debug.Log("Break");
                 Break();
