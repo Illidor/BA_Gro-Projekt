@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 2827575862130141004}
   - component: {fileID: 2827575862130141007}
   - component: {fileID: 6060855905823981011}
+  - component: {fileID: 1466393300}
   m_Layer: 11
   m_Name: pre_Book
   m_TagString: Untagged
@@ -117,7 +118,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6060855905823981009}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5f6167261fba3f247b8e4d9bef7865cc, type: 3}
   m_Name: 
@@ -128,3 +129,20 @@ MonoBehaviour:
   minConditionToCarry: 0.5
   minConditionToPush: 3
   bookToRead: {fileID: 0}
+--- !u!114 &1466393300
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6060855905823981009}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d8bdc993e595ec845b9a429a2b6ef257, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  <DisplayName>k__BackingField: Book
+  conditionsTypeNeededToInteract: 0
+  velocity: 0
+  minConditionToCarry: 0.5
+  minConditionToPush: 3

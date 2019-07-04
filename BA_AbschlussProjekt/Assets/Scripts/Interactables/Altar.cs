@@ -21,7 +21,7 @@ public class Altar : ConditionedInteraction
     {
         if (triggerObject.childCount > 0)
         {
-            Destroy(triggerObject.GetChild(0).gameObject);
+            Picture.InvolePlayerFailed();
             return true;
         }
         return false;

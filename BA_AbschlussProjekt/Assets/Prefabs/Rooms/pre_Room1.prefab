@@ -7186,8 +7186,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   <DisplayName>k__BackingField: Teddy Bear
-  soundSources: []
-  soundNames: []
   conditionsTypeNeededToInteract: 0
   velocity: 0
   minConditionToCarry: 0.5
@@ -7385,8 +7383,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   <DisplayName>k__BackingField: Door
-  soundSources: []
-  soundNames: []
   keyInLock: {fileID: 2626513477417650330}
   objectToInteractWith: pre_Key
   interactSound: 
@@ -7477,14 +7473,14 @@ PrefabInstance:
       propertyPath: m_LocalScale.z
       value: 0.9900994
       objectReference: {fileID: 0}
-    - target: {fileID: 6408996236247847747, guid: 793019747f32db24cb1ef21e3e3d5468,
-        type: 3}
-      propertyPath: m_Enabled
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 6408996236247847745, guid: 793019747f32db24cb1ef21e3e3d5468,
         type: 3}
       propertyPath: m_UseGravity
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6408996236247847747, guid: 793019747f32db24cb1ef21e3e3d5468,
+        type: 3}
+      propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6408996236247847746, guid: 793019747f32db24cb1ef21e3e3d5468,
@@ -8374,11 +8370,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 8766855728305970500, guid: d88670ca85fbb874babccacb0dc15eb3,
-        type: 3}
-      propertyPath: m_LocalPosition.y
-      value: -0.095
-      objectReference: {fileID: 0}
     - target: {fileID: 4382165271318205127, guid: d88670ca85fbb874babccacb0dc15eb3,
         type: 3}
       propertyPath: m_Intensity
@@ -8393,6 +8384,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_CullingMask.m_Bits
       value: 823
+      objectReference: {fileID: 0}
+    - target: {fileID: 8766855728305970500, guid: d88670ca85fbb874babccacb0dc15eb3,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.095
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d88670ca85fbb874babccacb0dc15eb3, type: 3}
@@ -9994,20 +9990,25 @@ PrefabInstance:
       propertyPath: m_Name
       value: Nailed_teddy
       objectReference: {fileID: 0}
+    - target: {fileID: 5025975165486694351, guid: 84c9e381d12571f4f8b2436fc7d05c79,
+        type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: 8350940415986372060, guid: 84c9e381d12571f4f8b2436fc7d05c79,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 9.294762
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8350940415986372060, guid: 84c9e381d12571f4f8b2436fc7d05c79,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: -1.0490417
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8350940415986372060, guid: 84c9e381d12571f4f8b2436fc7d05c79,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -0.27229977
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8350940415986372060, guid: 84c9e381d12571f4f8b2436fc7d05c79,
         type: 3}

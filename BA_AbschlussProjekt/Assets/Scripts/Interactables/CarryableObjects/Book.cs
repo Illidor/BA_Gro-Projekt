@@ -1,8 +1,7 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using Pixelplacement;
+﻿using UnityEngine;
+using System;
 
+[Obsolete]
 public class Book : GrabInteractable
 {
     [SerializeField] [Tooltip("Propably named BookToInteract")]
