@@ -1,5 +1,6 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class InteractionScript : MonoBehaviour
 {
@@ -46,6 +47,9 @@ public class InteractionScript : MonoBehaviour
 
     protected void Update()
     {
+        if (Input.GetKeyDown(KeyCode.I))
+            SceneManager.LoadScene(1);
+
         if (IsFrozen)
             return;
 

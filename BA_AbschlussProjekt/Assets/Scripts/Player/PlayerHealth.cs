@@ -3,7 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using CustomEnums;
 using System;
-
+using UnityEngine.Events;
+using UnityEngine.Rendering.PostProcessing;
 
 public enum Conditions
 {
@@ -13,6 +14,8 @@ public enum Conditions
 
 public class PlayerHealth : MonoBehaviour
 {
+    public static event UnityAction PlayerDied;
+
     private float upperBodyCondition;
     private float lowerBodyCondition;
 
@@ -21,10 +24,73 @@ public class PlayerHealth : MonoBehaviour
     [SerializeField]
     private Sound bigConditionSound;
 
+    public Camera monitorRoomCamera;
+    public Camera mainCamera;
+
+    private Animator anim;
+    private PostProcessVolume ppVolume;
+    private Vignette vignette;
+    private float lerpTimer = 1f;
+    private bool shrinkVignette = true;
+    private bool unshrinkVignette = false;
+
     private void Awake()
     {
         upperBodyCondition = 2f;
         lowerBodyCondition = 2f;
+
+
+    }
+
+    private void Start()
+    {
+        vignette = ScriptableObject.CreateInstance<Vignette>();
+        vignette.enabled.Override(true);
+        vignette.intensity.Override(1f);
+
+        ppVolume = PostProcessManager.instance.QuickVolume(gameObject.layer, 100f, vignette);
+
+        anim = GetComponentInChildren<Animator>();
+
+    }
+
+    private void Update()
+    {
+        if(Input.GetKeyDown(KeyCode.P))
+        {
+            PlayerDeathThirdPerson();
+        }
+
+        if(Input.GetKeyDown(KeyCode.O))
+        {
+            PlayerDeathFirstPerson();
+        }
+
+        if(unshrinkVignette)
+        {
+            lerpTimer += Time.deltaTime / 10f;
+            vignette.intensity.value = lerpTimer;
+
+            if (lerpTimer >= 1f)
+            {
+                unshrinkVignette = false;
+                lerpTimer = 1f;
+            }
+        }
+
+        if(shrinkVignette)
+        {
+            lerpTimer -= Time.deltaTime / 10f;
+            vignette.intensity.value = lerpTimer;
+
+            if(lerpTimer <= 0f)
+            {
+                shrinkVignette = false;
+                lerpTimer = 0f;
+            }
+
+        }
+
     }
 
     public void ChangeCondition(Conditions which, float value)
@@ -105,5 +171,31 @@ public class PlayerHealth : MonoBehaviour
         return upperBodyCondition + lowerBodyCondition;
     }
 
+    private void PlayerDeathThirdPerson()
+    {
+        mainCamera.enabled = false;
+        monitorRoomCamera.enabled = true;
+
+        PlayerDied?.Invoke();
+    }
+
+    private void PlayerDeathFirstPerson()
+    {
+        anim.SetTrigger("Die");
+        unshrinkVignette = true;
+
+        vignette.intensity.value = 1f;
+    }
     //ToDo: Play Sound
+
+    private void OnEnable()
+    {
+        Picture.PlayerFailed += PlayerDeathThirdPerson;
+    }
+
+    private void OnDisable()
+    {
+        Picture.PlayerFailed -= PlayerDeathThirdPerson;
+    }
+
 }

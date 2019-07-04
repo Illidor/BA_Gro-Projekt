@@ -88,7 +88,6 @@ public class Sound : MonoBehaviour
     {
         //Debug.Log("Playing Sound");
         yield return new WaitUntil(() => source.isPlaying == false);
-        Debug.Log("DestroySFX");
         Destroy(source);
         source = null;
     }
