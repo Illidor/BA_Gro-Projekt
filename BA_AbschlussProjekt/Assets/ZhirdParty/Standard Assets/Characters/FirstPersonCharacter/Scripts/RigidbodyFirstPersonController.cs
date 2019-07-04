@@ -13,7 +13,7 @@ namespace UnityStandardAssets.Characters.FirstPerson
 			public float ForwardSpeed = 8.0f;   // Speed when walking forward
 			public float BackwardSpeed = 4.0f;  // Speed when walking backwards
 			public float StrafeSpeed = 4.0f;    // Speed when walking sideways
-			public float RunMultiplier = 1.5f;   // Speed when sprinting
+			public float RunMultiplier = 1.5f;  // Speed when sprinting
 			public KeyCode RunKey = KeyCode.LeftShift;
 			public float stepHeight = 1;
 			public float JumpForce = 60f;
@@ -105,8 +105,7 @@ namespace UnityStandardAssets.Characters.FirstPerson
 
 		// Custom
 		private bool isCrouching = false;
-		private Vector3 cameraStandPosition = new Vector3(0f, 1.651f, 0.155f);
-		private Vector3 cameraCrouchPosition = new Vector3(0f, 0.65f, 0.155f);
+		[SerializeField] private Vector3 cameraCrouchPositionOffset = new Vector3(0f, -0.5f, 0);
 		[SerializeField] private CapsuleCollider standCollider;
 		[SerializeField] private CapsuleCollider crouchCollider;
 		private PlayerHealth playerHealth;
@@ -153,7 +152,7 @@ namespace UnityStandardAssets.Characters.FirstPerson
 				isCrouching = true;
 				crouchCollider.enabled = true;
 				standCollider.enabled = false;
-				cam.transform.localPosition = cameraCrouchPosition;
+				cam.transform.localPosition = cameraCrouchPositionOffset;
 			}
 
 			if (m_Jump == false && CrossPlatformInputManager.GetButtonUp("Crouch") && isCrouching)
@@ -161,7 +160,7 @@ namespace UnityStandardAssets.Characters.FirstPerson
 				isCrouching = false;
 				standCollider.enabled = true;
 				crouchCollider.enabled = false;
-				cam.transform.localPosition = cameraStandPosition;
+				cam.transform.localPosition = Vector3.zero;
 			}
 
 			CheckMovability();
