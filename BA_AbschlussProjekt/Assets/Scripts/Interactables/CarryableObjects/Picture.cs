@@ -33,13 +33,10 @@ public class Picture : GrabInteractable
         // Check for Physics Material            no idea what this comment means, maybe a todo? The code had nothing to do with physics materials... I'll leave it in just in case
         if(IsBeeingCarried == false)
         {
-<<<<<<< HEAD
-            //this is a check for the physics material bro LG Robin 
-            if (other.collider.material.bounciness < 0.6 && !broken && velocity < -10f)
-=======
             Debug.Log("Not carried drop");
-            if (other.collider.material.bounciness < materialBouncinessThreshholdToNotBreak && !broken && velocity < velocityThreshholdToNotBreak)
->>>>>>> Sebastian
+            if (other.collider.material.bounciness < materialBouncinessThreshholdToNotBreak && 
+                !broken && 
+                velocity < velocityThreshholdToNotBreak)
             {
                 Debug.Log("Break");
                 Break();
@@ -64,7 +61,6 @@ public class Picture : GrabInteractable
 
         enabled = false;
 
-        if (PlayerFailed != null)
-            PlayerFailed();
+        PlayerFailed?.Invoke();
     }
 }
