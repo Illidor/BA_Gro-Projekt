@@ -176,8 +176,7 @@ public class PlayerHealth : MonoBehaviour
         mainCamera.enabled = false;
         monitorRoomCamera.enabled = true;
 
-        if (PlayerDied != null)
-            PlayerDied();
+        PlayerDied?.Invoke();
     }
 
     private void PlayerDeathFirstPerson()
