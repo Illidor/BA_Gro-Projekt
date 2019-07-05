@@ -24,6 +24,8 @@ public class GrabInteractable : BaseInteractable
     protected float minConditionToCarry = 0.5f;
     [SerializeField] [Tooltip("If over 2, pushing is not possible")]
     protected float minConditionToPush = 3;
+    [SerializeField][Tooltip("Will search on this gameobject if not provided.")]
+    protected Sound soundToPlayOnInteract;
 
     protected new Rigidbody rigidbody;
     protected Rigidbody rigidbodyPulling;
@@ -39,6 +41,9 @@ public class GrabInteractable : BaseInteractable
     {
         rigidbody = GetComponent<Rigidbody>();
         collider = GetComponent<Collider>();
+
+        if (soundToPlayOnInteract == null)
+            soundToPlayOnInteract = GetComponent<Sound>();
 
         base.Awake();
     }
@@ -69,6 +74,8 @@ public class GrabInteractable : BaseInteractable
         rigidbody.isKinematic = true;
         player.SetCarriedObject(this);
         IsBeeingCarried = true;
+
+        soundToPlayOnInteract?.PlaySound(0);
 
         return true;
     }
