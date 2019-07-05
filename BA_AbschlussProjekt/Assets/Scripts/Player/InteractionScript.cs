@@ -90,8 +90,9 @@ public class InteractionScript : MonoBehaviour
 
     public IEnumerator IKToObject(Transform point)
     {
-        if(point != null)
-        {
+
+        if (point != null)
+        {          
             int timer = 120; // int -> how long is the grabbing time in frames
 
             //ToDo: if Condition > 1, this for if Condition <= 1 use left Hand
