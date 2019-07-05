@@ -4,6 +4,10 @@ using UnityEngine;
 
 public class FootstepsOtherRoom : MonoBehaviour
 {
+    [SerializeField]
+    private  float testForSoundToPlayIntervallInSeconds = 60f;
+    [SerializeField]
+    private float percentageToPlaySound = 50f;
     private AudioSource footsteps;
 
     private bool isCorRunning = false;
@@ -23,9 +27,9 @@ public class FootstepsOtherRoom : MonoBehaviour
     private IEnumerator FootstepDelay()
     {
         isCorRunning = true;
-        yield return new WaitForSeconds(60f);
+        yield return new WaitForSeconds(testForSoundToPlayIntervallInSeconds);
 
-        if(Random.Range(0,2) == 1)
+        if(Random.Range(0, 100) < percentageToPlaySound)
         {
             footsteps.Play();
         }
