@@ -46,9 +46,9 @@ public abstract class BaseInteractable : InteractionFoundation
     }
 
 
-    public virtual Transform getIKPoint()
+    public virtual Transform GetIKPoint(Transform playerGrabPoint)
     {
-        List<Transform> transforms = new List<Transform>();
+        List<Transform> transforms = new List<Transform>();     
 
         foreach (Transform item in GetComponentsInChildren<Transform>())
         {
@@ -66,9 +66,26 @@ public abstract class BaseInteractable : InteractionFoundation
         {
             return transforms[0];
         }
-        //todo: find nearest Point!
-
-
-        return null;
+        else
+        {
+            float distance = -1;
+            Transform returnTransform = transforms[0];
+            foreach (Transform objGrabPoint in transforms)
+            {
+                if (distance == -1)
+                {
+                    returnTransform = objGrabPoint;
+                    distance = (objGrabPoint.position - playerGrabPoint.position).sqrMagnitude;
+                    Debug.Log("Distance: " + distance);
+                }
+                else if ((objGrabPoint.position - playerGrabPoint.position).sqrMagnitude <= distance)
+                {
+                    distance = (objGrabPoint.position - playerGrabPoint.position).sqrMagnitude;
+                    returnTransform = objGrabPoint;
+                    Debug.Log("Distance: " + distance);
+                }
+            }
+            return returnTransform;
+        }
     }
 }
