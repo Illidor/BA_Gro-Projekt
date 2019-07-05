@@ -35,8 +35,9 @@ public abstract class BaseInteractable : InteractionFoundation
     public virtual void HandleInteraction(InteractionScript player)
     {
         player.GUIInteractionFeedbackHandler.StandardCrosshair.SetActive(false);
-        player.GUIInteractionFeedbackHandler.InteractionCrosshair.SetActive(true);
-        player.GUIInteractionFeedbackHandler.ActionDescription.text = textToDisplayOnHover;
+        //player.GUIInteractionFeedbackHandler.InteractionCrosshair.SetActive(true);
+        //player.GUIInteractionFeedbackHandler.ActionDescription.text = textToDisplayOnHover;
+        player.GUIInteractionFeedbackHandler.InteractionSymbolHand.SetActive(true);
 
         if (CTRLHub.InteractDown)
         {
