@@ -86,14 +86,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   <DisplayName>k__BackingField: Ladder
-  soundSources: []
-  soundNames: []
+  conditionsTypeNeededToInteract: 0
   minCondition: 0
-  climbingSpeed: 0.05
+  standardClimbingSpeed: 0.01
+  slowClimbingSpeed: 0.005
+  minConditionToClimbFast: 1.5
   ladderSnapOffsetFromBelow: {x: 0, y: 0.075, z: 0}
   ladderSnapOffsetFromAbove: {x: 0, y: -1, z: 0}
   startPoint: {fileID: 894915633}
   endPoint: {fileID: 1618613191}
+  climbingSoundTicker: 1
+  climbingSoundThreshold: 1.5
 --- !u!114 &351380422
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -107,7 +110,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   clips:
-  - {fileID: 8300000, guid: dcd2799c0994c9548a5b0129f1e0c44f, type: 3}
+  - {fileID: 8300000, guid: 82a36a29edf449842935a35a21fe3da9, type: 3}
   volume: 0.75
   volumeVariance: 0.1
   pitch: 1
@@ -142,10 +145,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   <DisplayName>k__BackingField: Hatch
-  soundSources: []
-  soundNames: []
-  thingsToInteractWtih:
-  - {fileID: 0}
   correlatingGameObjects: []
 --- !u!114 &351380428
 MonoBehaviour:
@@ -212,11 +211,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: mdl_atticHatch
       objectReference: {fileID: 0}
-    - target: {fileID: -6057140222963153312, guid: 0b643a6776a36d74cb6266d7f9375b18,
-        type: 3}
-      propertyPath: m_Controller
-      value: 
-      objectReference: {fileID: 9100000, guid: 8d824523db96e4649ada2ea6382923dc, type: 2}
     - target: {fileID: -4216859302048453862, guid: 0b643a6776a36d74cb6266d7f9375b18,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -287,21 +281,6 @@ PrefabInstance:
       propertyPath: m_LocalScale.z
       value: 0.8025775
       objectReference: {fileID: 0}
-    - target: {fileID: -2397996973257786244, guid: 0b643a6776a36d74cb6266d7f9375b18,
-        type: 3}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: 2100000, guid: a9e6cb64467bbdb4f99901964ec72086, type: 2}
-    - target: {fileID: -1504981713932161579, guid: 0b643a6776a36d74cb6266d7f9375b18,
-        type: 3}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: 2100000, guid: 57eca327477dca74689804ad571a8839, type: 2}
-    - target: {fileID: 1066910053003865102, guid: 0b643a6776a36d74cb6266d7f9375b18,
-        type: 3}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: 2100000, guid: a9e6cb64467bbdb4f99901964ec72086, type: 2}
     - target: {fileID: 2498326036907817780, guid: 0b643a6776a36d74cb6266d7f9375b18,
         type: 3}
       propertyPath: m_LocalRotation.x
@@ -342,6 +321,26 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.x
       value: 0.60300004
       objectReference: {fileID: 0}
+    - target: {fileID: -1504981713932161579, guid: 0b643a6776a36d74cb6266d7f9375b18,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 57eca327477dca74689804ad571a8839, type: 2}
+    - target: {fileID: -6057140222963153312, guid: 0b643a6776a36d74cb6266d7f9375b18,
+        type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: 8d824523db96e4649ada2ea6382923dc, type: 2}
+    - target: {fileID: -2397996973257786244, guid: 0b643a6776a36d74cb6266d7f9375b18,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: a9e6cb64467bbdb4f99901964ec72086, type: 2}
+    - target: {fileID: 1066910053003865102, guid: 0b643a6776a36d74cb6266d7f9375b18,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: a9e6cb64467bbdb4f99901964ec72086, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0b643a6776a36d74cb6266d7f9375b18, type: 3}
 --- !u!1 &1986613560309512890 stripped
