@@ -30,13 +30,9 @@ public class DeathScene : MonoBehaviour
     {
         for (int i = 0; i < playerPoses.Count; i++)
         {
-            if(i != 0)
-            {
                 playerPoses[i].SetActive(true);
-                playerPoses[i - 1].SetActive(false);
-            }
 
-            yield return new WaitForSeconds(2.5f);
+            yield return new WaitForSeconds(2f);
         }
 
         isSceneFinished = true;
