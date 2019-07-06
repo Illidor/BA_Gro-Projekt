@@ -7,6 +7,9 @@ public class PlayerAnimationEvents : MonoBehaviour
 {
     private RigidbodyFirstPersonController fpController;
 
+    [SerializeField] AudioSource dyingSound;
+    [SerializeField] AudioSource collapseSound;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -31,6 +34,16 @@ public class PlayerAnimationEvents : MonoBehaviour
     private void UnfreezCamera()
     {
         fpController.freezePlayerCamera = false;
+    }
+
+    private void PlayDyingSound()
+    {
+        dyingSound.Play();
+    }
+
+    private void PlayCollapseSound()
+    {
+        collapseSound.Play();
     }
 
 }
