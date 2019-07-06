@@ -12,9 +12,12 @@ public class DeathScene : MonoBehaviour
 
     private bool isSceneFinished = false;
 
+    [SerializeField] AudioSource deadSceneMusic;
+
     private void PlayerDied()
     {
         StartCoroutine(DelayPositionSwap());
+        deadSceneMusic.Play();
     }
 
     private void Update()
