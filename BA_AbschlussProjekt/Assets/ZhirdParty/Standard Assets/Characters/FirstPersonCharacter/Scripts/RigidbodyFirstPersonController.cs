@@ -250,7 +250,7 @@ namespace UnityStandardAssets.Characters.FirstPerson
 			RaycastHit hitInfo;
 			if (Physics.SphereCast(transform.position + Vector3.up / 2f, standCollider.radius * (1.0f - advancedSettings.shellOffset), Vector3.down, out hitInfo,
 								   ((standCollider.height/2f) - standCollider.radius) +
-								   advancedSettings.stickToGroundHelperDistance, Physics.AllLayers, QueryTriggerInteraction.Ignore))
+								   advancedSettings.stickToGroundHelperDistance, /* Physics.AllLayers */ 0b_111001111, QueryTriggerInteraction.Ignore))
 			{
 				if (Mathf.Abs(Vector3.Angle(hitInfo.normal, Vector3.up)) < 85f)
 				{

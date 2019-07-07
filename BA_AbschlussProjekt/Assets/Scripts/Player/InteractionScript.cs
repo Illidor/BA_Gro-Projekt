@@ -64,7 +64,7 @@ public class InteractionScript : MonoBehaviour
 
         if(UsedObject == null && cR_isRunning)
         {
-            StopCoroutine(IKToObject(UsedObject.GetComponent<BaseInteractable>().GetIKPoint(GrabingPoint.transform)));
+            StopCoroutine(IKToObject(UsedObject.GetIKPoint(GrabingPoint.transform)));
             cR_isRunning = false;
 
             StartCoroutine(IKToObject(HandIKRight.parent));
@@ -88,6 +88,7 @@ public class InteractionScript : MonoBehaviour
         {
             if (didRaycastHit)
             {
+                Debug.Log(raycastHit.collider.GetComponent<ICombinable>());
                 if (raycastHit.collider.GetComponent<ICombinable>()?.HandleCombine(this, UsedObject) == true)
                     return;
             }
@@ -96,7 +97,7 @@ public class InteractionScript : MonoBehaviour
 
             if (!cR_isRunning)
             {
-                StartCoroutine(IKToObject(UsedObject.GetComponent<BaseInteractable>().GetIKPoint(GrabingPoint.transform)));
+                StartCoroutine(IKToObject(UsedObject.GetIKPoint(GrabingPoint.transform)));
             }
         }
     }
@@ -111,7 +112,8 @@ public class InteractionScript : MonoBehaviour
 
         while (elapsedTime < time)
         {
-            
+
+            Debug.Log(HandIKRight.name);
             HandIKRight.transform.position = Vector3.Lerp(HandIKRight.position, point.position, distance);
             HandIKRight.transform.LookAt(point); 
             elapsedTime += Time.deltaTime;
@@ -139,7 +141,7 @@ public class InteractionScript : MonoBehaviour
     {
         if (cR_isRunning)
         {
-            StopCoroutine(IKToObject(UsedObject.GetComponent<BaseInteractable>().GetIKPoint(GrabingPoint.transform)));
+            StopCoroutine(IKToObject(UsedObject.GetIKPoint(GrabingPoint.transform)));
             cR_isRunning = false;
         }
 
