@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Playables;
 
 public class DoorKeyInteraction : InteractionFoundation, ICombinable        // I implemented ICombinable because there was a combine method ~Seb
 {
@@ -36,7 +37,7 @@ public class DoorKeyInteraction : InteractionFoundation, ICombinable        // I
     {
         yield return new WaitForSeconds(timeToWaitUntilDoorOpens);
 
-        GetComponent<Animator>().SetTrigger("open");
+        GetComponent<PlayableDirector>().Play();
     }
 
     public bool HandleCombine(InteractionScript player, BaseInteractable currentlyHolding)
