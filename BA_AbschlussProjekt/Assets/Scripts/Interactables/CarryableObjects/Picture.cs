@@ -20,6 +20,8 @@ public class Picture : GrabInteractable
     private List<GameObject> pictureParts = new List<GameObject>();
     [SerializeField]
     private GameObject pictureUnbroken;
+    [SerializeField]
+    private Sound breakSound;
 
     private BoxCollider interactionCollider;
     private bool broken = false;
@@ -52,6 +54,7 @@ public class Picture : GrabInteractable
                     GetComponent<Sound>().PlaySound(0);
                 }
                 catch (System.Exception) { }
+                breakSound?.PlaySound(0);
             }
         }
     }

@@ -13,8 +13,8 @@ GameObject:
   - component: {fileID: 5485571645649537293}
   - component: {fileID: 2827575862130141004}
   - component: {fileID: 2827575862130141007}
-  - component: {fileID: 6060855905823981011}
   - component: {fileID: 1466393300}
+  - component: {fileID: 277875244162876528}
   m_Layer: 11
   m_Name: pre_Book
   m_TagString: Untagged
@@ -111,24 +111,6 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.27, y: 0.031541735, z: 0.187}
   m_Center: {x: 0, y: 0.0093155, z: 0}
---- !u!114 &6060855905823981011
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6060855905823981009}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5f6167261fba3f247b8e4d9bef7865cc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  <DisplayName>k__BackingField: Book
-  conditionsTypeNeededToInteract: 0
-  velocity: 0
-  minConditionToCarry: 0.5
-  minConditionToPush: 3
-  bookToRead: {fileID: 0}
 --- !u!114 &1466393300
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -146,3 +128,26 @@ MonoBehaviour:
   velocity: 0
   minConditionToCarry: 0.5
   minConditionToPush: 3
+  soundToPlayOnInteract: {fileID: 277875244162876528}
+--- !u!114 &277875244162876528
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6060855905823981009}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9b6d2cdd667f7204aabb934c567dcd10, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  clips:
+  - {fileID: 8300000, guid: e25364716be8d5a4d9e8c876221c504c, type: 3}
+  volume: 0.75
+  volumeVariance: 0.1
+  pitch: 1
+  pitchVariance: 0.1
+  loop: 0
+  playOnAwake: 0
+  mixerGroup: {fileID: -6836437550479822473, guid: 6872fd114135b4f46bccacb6c64a5036,
+    type: 2}

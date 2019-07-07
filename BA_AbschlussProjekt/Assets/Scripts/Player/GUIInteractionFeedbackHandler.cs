@@ -6,7 +6,6 @@ using UnityEngine.UI;
 
 public class GUIInteractionFeedbackHandler : MonoBehaviour
 {
-
     [field: LabelOverride("Standart Crosshair"), SerializeField, Tooltip("Reference to the standard crosshair")]
     public GameObject StandardCrosshair { get; private set; }
 
@@ -18,6 +17,9 @@ public class GUIInteractionFeedbackHandler : MonoBehaviour
 
     [field: LabelOverride("Second Action Description"), SerializeField, Tooltip("Reference to the text used to display the second description of an action")]
     public Text SecondActionDescription { get; set; }
+
+    [field: LabelOverride("Interaction Symbol Hand"), SerializeField, Tooltip("Symbol of the hand used to indicate an interaction")]
+    public GameObject InteractionSymbolHand { get; private set; }
 
     private bool stopResetingGUI = false;
 
@@ -31,17 +33,20 @@ public class GUIInteractionFeedbackHandler : MonoBehaviour
         if (stopResetingGUI)
             return;
 
-        StandardCrosshair.SetActive(true);
-        InteractionCrosshair.SetActive(false);
+        StandardCrosshair?.SetActive(true);
+        InteractionCrosshair?.SetActive(false);
         ActionDescription.text = "";
         SecondActionDescription.text = "";
+        InteractionSymbolHand?.SetActive(false);
     }
+
     public void RemoveGUI()
     {
-        StandardCrosshair.SetActive(false);
-        InteractionCrosshair.SetActive(false);
+        StandardCrosshair?.SetActive(false);
+        InteractionCrosshair?.SetActive(false);
         ActionDescription.text = "";
         SecondActionDescription.text = "";
+        InteractionSymbolHand?.SetActive(false);
     }
 
     private void DisableInteractionGUI()
@@ -52,6 +57,7 @@ public class GUIInteractionFeedbackHandler : MonoBehaviour
         Destroy(InteractionCrosshair);
         Destroy(ActionDescription);
         Destroy(SecondActionDescription);
+        Destroy(InteractionSymbolHand);
     }
 
     private void OnEnable()
