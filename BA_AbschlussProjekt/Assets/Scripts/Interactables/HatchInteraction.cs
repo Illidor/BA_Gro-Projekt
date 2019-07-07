@@ -38,6 +38,7 @@ public class HatchInteraction : InteractionFoundation, ICombinable
 
     public bool HandleCombine(InteractionScript player, BaseInteractable currentlyHolding)
     {
+        Debug.Log("handle combine hatch");
         player.GUIInteractionFeedbackHandler.StandardCrosshair.SetActive(false);
         player.GUIInteractionFeedbackHandler.InteractionCrosshair.SetActive(true);
         player.GUIInteractionFeedbackHandler.ActionDescription.text = "Click to combine " + currentlyHolding.DisplayName + " with " + DisplayName;

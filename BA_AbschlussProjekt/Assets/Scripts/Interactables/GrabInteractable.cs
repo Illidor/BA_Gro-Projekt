@@ -75,6 +75,8 @@ public class GrabInteractable : BaseInteractable
         player.SetCarriedObject(this);
         IsBeeingCarried = true;
 
+        collider.enabled = false;
+
         soundToPlayOnInteract?.PlaySound(0);
 
         return true;
@@ -125,7 +127,9 @@ public class GrabInteractable : BaseInteractable
         IsBeeingCarried = false;
         rigidbodyPulling = null;
 
-        Invoke("ResetLayer", 2f); //TODO: Switch to better implementation of invoking ResetLayer. (Maybe with trigger or distance check)
+        collider.enabled = true;
+
+        //Invoke("ResetLayer", 2f); //TODO: Switch to better implementation of invoking ResetLayer. (Maybe with trigger or distance check)
     }
 
     protected virtual bool CarryOutInteraction_Push(InteractionScript player)
@@ -138,7 +142,7 @@ public class GrabInteractable : BaseInteractable
         return true;
     }
 
-    private void FixedUpdate()
+    protected void FixedUpdate()
     {
         velocity = rigidbody.velocity.y;
         //TODO: better implementation of pulling. Maybe considering objects weight and players conditions

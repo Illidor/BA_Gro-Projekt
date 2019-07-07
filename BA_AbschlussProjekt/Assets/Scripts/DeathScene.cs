@@ -13,7 +13,7 @@ public class DeathScene : MonoBehaviour
     private bool isSceneFinished = false;
 
     [SerializeField] AudioSource deadSceneMusic;
-    [SerializeField] AudioSource bodyOnFloor;
+    //[SerializeField] AudioSource bodyOnFloor;
 
     private void PlayerDied()
     {
@@ -36,8 +36,8 @@ public class DeathScene : MonoBehaviour
         {
                 playerPoses[i].SetActive(true);
 
-            if (i == playerPoses.Count)
-                bodyOnFloor.Play();
+            // if (i == playerPoses.Count)  // makes no sense ~Robin
+            //     bodyOnFloor.Play();
 
             yield return new WaitForSeconds(2f);
         }
