@@ -11,7 +11,8 @@ public class DayNightCycle : MonoBehaviour
     private bool day;
 
     private bool isPlayerDead = false;
-
+    [SerializeField]
+    Color nightColor;
     [SerializeField] Color dayColor;
 
     // Update is called once per frame
@@ -20,7 +21,7 @@ public class DayNightCycle : MonoBehaviour
         if(isPlayerDead)
         {
             if (day)
-                lerptimer += Time.deltaTime / 7.5f;
+                lerptimer += Time.deltaTime / 15f;
             else
                 lerptimer -= Time.deltaTime / 7.5f;
 
@@ -32,7 +33,7 @@ public class DayNightCycle : MonoBehaviour
 
             foreach (Light light in pointLights)
             {
-                light.color = Color.Lerp(dayColor, Color.blue, lerptimer);
+                light.color = Color.Lerp(dayColor, nightColor, lerptimer);
             }
         }
     }
