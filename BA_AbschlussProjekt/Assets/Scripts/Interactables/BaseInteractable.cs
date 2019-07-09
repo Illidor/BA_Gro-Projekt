@@ -41,7 +41,11 @@ public abstract class BaseInteractable : InteractionFoundation
 
         if (CTRLHub.InteractDown)
         {
-            CarryOutInteraction(player);
+            if (!player.cR_isRunning)
+            {
+                player.cR_isRunning = true;
+                StartCoroutine(player.IKToObject(this));
+            }
         }
     }
 

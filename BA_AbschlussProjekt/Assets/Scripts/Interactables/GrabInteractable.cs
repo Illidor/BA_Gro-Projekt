@@ -70,7 +70,7 @@ public class GrabInteractable : BaseInteractable
         Debug.Log("carrying");
         gameObject.layer = LayerMask.NameToLayer("NoPlayerCollision");
         transform.parent = player.GrabingPoint.transform;
-        transform.localPosition = Vector3.zero;
+        //transform.localPosition = Vector3.zero;
         rigidbody.isKinematic = true;
         player.SetCarriedObject(this);
         IsBeeingCarried = true;

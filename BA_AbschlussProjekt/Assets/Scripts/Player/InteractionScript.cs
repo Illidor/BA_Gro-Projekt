@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -7,7 +8,8 @@ public class InteractionScript : MonoBehaviour
     [SerializeField]
     [Tooltip("Max distance to objects the player is able to grab empty handed")]
     private float emptyHandedGrabingReach = 1.5f;
-    private bool cR_isRunning = false;
+    [SerializeField]
+    private float iKSpeed = 2f;
 
     [field: Space,
         LabelOverride("Grabing Point"), SerializeField, Tooltip("Hand the carried object is parented to")]
@@ -30,6 +32,8 @@ public class InteractionScript : MonoBehaviour
 
     public Transform HandIKLeft;
     public Transform HandIKRight;
+    public bool cR_isRunning = false;
+
 
     public float GrabingReach { get; private set; }
 
@@ -62,13 +66,10 @@ public class InteractionScript : MonoBehaviour
 
         HandleActions();
 
-        if(UsedObject == null && cR_isRunning)
-        {
-            StopCoroutine(IKToObject(UsedObject.GetComponent<BaseInteractable>().GetIKPoint(GrabingPoint.transform)));
-            cR_isRunning = false;
-
-            StartCoroutine(IKToObject(HandIKRight.parent));
-        }
+        //if(UsedObject == null && !cR_isRunning)
+        //{
+        //    StartCoroutine(IKToObject(null));
+        //}
     }
 
     private void HandleActions()
@@ -82,7 +83,10 @@ public class InteractionScript : MonoBehaviour
 
         if (IsCarrying == false)
         {
-            raycastHit.collider?.GetComponent<BaseInteractable>()?.HandleInteraction(this);
+            if (!cR_isRunning)
+            {
+                raycastHit.collider?.GetComponent<BaseInteractable>()?.HandleInteraction(this);
+            }
         }
         else
         {
@@ -93,31 +97,46 @@ public class InteractionScript : MonoBehaviour
             }
 
             UsedObject?.GetComponent<IUseable>()?.HandleUse(this);
-
-            if (!cR_isRunning)
-            {
-                StartCoroutine(IKToObject(UsedObject.GetComponent<BaseInteractable>().GetIKPoint(GrabingPoint.transform)));
-            }
         }
     }
 
-    public IEnumerator IKToObject(Transform point)
+    public IEnumerator IKToObject(BaseInteractable objecToInteractWith)
     {
         cR_isRunning = true;
-
-        float time = 2f;
-        float elapsedTime = 0f;
-        float distance = Time.deltaTime/time;
-
-        while (elapsedTime < time)
+        Transform point;
+        if (objecToInteractWith == null)
         {
-            
-            HandIKRight.transform.position = Vector3.Lerp(HandIKRight.position, point.position, distance);
-            HandIKRight.transform.LookAt(point); 
-            elapsedTime += Time.deltaTime;
+            point = HandIKRight.parent;
+        }
+        else
+        {
+            point = objecToInteractWith.GetIKPoint(GrabingPoint.transform);
+        }
+
+        float distance = iKSpeed/Time.deltaTime;
+
+        while ((HandIKRight.position - point.position).magnitude > 5f || (HandIKRight.eulerAngles - point.eulerAngles).magnitude > 5f)
+        {
+            HandIKRight.transform.position = Vector3.MoveTowards(HandIKRight.position, point.position, distance);
+            HandIKRight.rotation = Quaternion.Lerp(HandIKRight.rotation, point.rotation, distance);
             yield return new WaitForEndOfFrame();
         }
+
+        HandIKRight.rotation = point.rotation;
         yield return new WaitForEndOfFrame();
+        objecToInteractWith?.CarryOutInteraction(this);
+
+        while (((objecToInteractWith.transform.position - GrabingPoint.position).magnitude > 5f || ((objecToInteractWith.transform.eulerAngles - GrabingPoint.eulerAngles).magnitude > 5f) ) && objecToInteractWith != null)
+        {
+
+            objecToInteractWith.transform.position = Vector3.MoveTowards(objecToInteractWith.transform.position, GrabingPoint.transform.position, distance);
+            objecToInteractWith.transform.rotation = Quaternion.Lerp(objecToInteractWith.transform.rotation, GrabingPoint.transform.rotation, distance);
+
+            HandIKRight.transform.position = Vector3.MoveTowards(HandIKRight.position, point.position, distance);
+            HandIKRight.rotation = Quaternion.Lerp(HandIKRight.rotation, point.rotation, distance);
+            yield return new WaitForEndOfFrame();
+        }
+        Debug.Log("cR_End");
         cR_isRunning = false;
     }
 
@@ -139,7 +158,7 @@ public class InteractionScript : MonoBehaviour
     {
         if (cR_isRunning)
         {
-            StopCoroutine(IKToObject(UsedObject.GetComponent<BaseInteractable>().GetIKPoint(GrabingPoint.transform)));
+            StopCoroutine(IKToObject(UsedObject));
             cR_isRunning = false;
         }
 
@@ -147,7 +166,8 @@ public class InteractionScript : MonoBehaviour
         IsCarrying = false;
         IsPushing = false;
 
-        StartCoroutine(IKToObject(HandIKRight.parent));
+        //StartCoroutine(IKToObject(HandIKRight.parent));
+        StartCoroutine(IKToObject(null));
     }
 
     public void IncreaseReach(float reachToAdd)
