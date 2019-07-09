@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityStandardAssets.Characters.FirstPerson;
 
 public class InteractionScript : MonoBehaviour
 {
@@ -10,6 +11,7 @@ public class InteractionScript : MonoBehaviour
     private float emptyHandedGrabingReach = 1.5f;
     [SerializeField]
     private float iKSpeed = 2f;
+    private RigidbodyFirstPersonController fPSController;
 
     [field: Space,
         LabelOverride("Grabing Point"), SerializeField, Tooltip("Hand the carried object is parented to")]
@@ -48,6 +50,8 @@ public class InteractionScript : MonoBehaviour
 
         if (PlayerHealth == null)
             PlayerHealth = GetComponentInChildren<PlayerHealth>();
+
+        fPSController = gameObject.GetComponent<RigidbodyFirstPersonController>();
     }
 
     protected void Update()
@@ -111,12 +115,16 @@ public class InteractionScript : MonoBehaviour
         else
         {
             point = objecToInteractWith.GetIKPoint(GrabingPoint.transform);
+
+            fPSController.freezePlayerCamera = true;
+            fPSController.freezePlayerMovement = true;
         }
 
         float distance = iKSpeed/Time.deltaTime;
 
         while ((HandIKRight.position - point.position).magnitude > 5f || (HandIKRight.eulerAngles - point.eulerAngles).magnitude > 5f)
         {
+            Debug.Log("Mag: " + (HandIKRight.position - GrabingPoint.position).magnitude);
             HandIKRight.transform.position = Vector3.MoveTowards(HandIKRight.position, point.position, distance);
             HandIKRight.rotation = Quaternion.Lerp(HandIKRight.rotation, point.rotation, distance);
             yield return new WaitForEndOfFrame();
@@ -126,18 +134,23 @@ public class InteractionScript : MonoBehaviour
         yield return new WaitForEndOfFrame();
         objecToInteractWith?.CarryOutInteraction(this);
 
-        while (((objecToInteractWith.transform.position - GrabingPoint.position).magnitude > 5f || ((objecToInteractWith.transform.eulerAngles - GrabingPoint.eulerAngles).magnitude > 5f) ) && objecToInteractWith != null)
+        if(objecToInteractWith != null && UsedObject != null)
         {
+            while ((objecToInteractWith.transform.position - GrabingPoint.position).magnitude > 5f || ((objecToInteractWith.transform.eulerAngles - GrabingPoint.eulerAngles).magnitude > 5f))
+            {
+                objecToInteractWith.transform.position = Vector3.MoveTowards(objecToInteractWith.transform.position, GrabingPoint.transform.position, distance);
+                objecToInteractWith.transform.rotation = Quaternion.Lerp(objecToInteractWith.transform.rotation, GrabingPoint.transform.rotation, distance);
 
-            objecToInteractWith.transform.position = Vector3.MoveTowards(objecToInteractWith.transform.position, GrabingPoint.transform.position, distance);
-            objecToInteractWith.transform.rotation = Quaternion.Lerp(objecToInteractWith.transform.rotation, GrabingPoint.transform.rotation, distance);
-
-            HandIKRight.transform.position = Vector3.MoveTowards(HandIKRight.position, point.position, distance);
-            HandIKRight.rotation = Quaternion.Lerp(HandIKRight.rotation, point.rotation, distance);
-            yield return new WaitForEndOfFrame();
+                HandIKRight.transform.position = Vector3.MoveTowards(HandIKRight.position, point.position, distance);
+                HandIKRight.rotation = Quaternion.Lerp(HandIKRight.rotation, point.rotation, distance);
+                yield return new WaitForEndOfFrame();
+            }
         }
         Debug.Log("cR_End");
         cR_isRunning = false;
+
+        fPSController.freezePlayerCamera = false;
+        fPSController.freezePlayerMovement = false;
     }
 
     public void SetCarriedObject(GrabInteractable objectToCarry)
