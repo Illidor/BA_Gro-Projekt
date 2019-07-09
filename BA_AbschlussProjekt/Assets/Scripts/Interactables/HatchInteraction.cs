@@ -8,9 +8,22 @@ public class HatchInteraction : InteractionFoundation, ICombinable
 
     private Sound hatchOpenSound;
 
+    private float dustParticleTicker = 0f;
+    private float dustParticleThreshold = 2f;
+    [SerializeField] ParticleSystem dustPs;
+
     private void Start()
     {
         hatchOpenSound = GetComponent<Sound>();
+    }
+
+    private void Update() {
+        dustParticleTicker += Time.deltaTime;
+
+        if(dustParticleTicker > dustParticleThreshold) {
+            dustParticleTicker = 0f;
+            dustPs.Emit(15);
+        }
     }
 
     public bool Combine(InteractionScript player, BaseInteractable interactingComponent)
