@@ -13,6 +13,8 @@ public class HatchLever : BaseInteractable, ICombinable
     private HingeJoint hinge;
     [SerializeField]
     private Sound soundToPlayOnLeverFlip;
+    [SerializeField]
+    private Sound soundToPlayOnLeverCraft;
 
     public bool IsLeverDown { get; private set; }
 
@@ -27,6 +29,13 @@ public class HatchLever : BaseInteractable, ICombinable
             levelCombinables[ i ].corespondingObjectToDisplay.SetActive(false);
 
         soundToPlayOnLeverFlip = GetComponent<Sound>();
+
+        Sound[] allSoundComponents = GetComponents<Sound>();
+        if (allSoundComponents.Length >= 1)
+            soundToPlayOnLeverCraft = allSoundComponents[ allSoundComponents.Length - 1 ];
+
+
+        soundToPlayOnLeverCraft = GetComponents<Sound>().GetLast();
     }
 
     public bool HandleCombine(InteractionScript player, BaseInteractable currentlyHolding)
@@ -52,6 +61,8 @@ public class HatchLever : BaseInteractable, ICombinable
 
                 player.StopUsingObject();
                 Destroy(interactingComponent.gameObject);
+
+                soundToPlayOnLeverCraft?.PlaySound(0);
 
                 return true;
             }
