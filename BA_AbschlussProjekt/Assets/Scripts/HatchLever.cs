@@ -102,10 +102,8 @@ public class HatchLever : BaseInteractable, ICombinable
     [Serializable]
     private class LevelCombinatables
     {
-#if UNITY_EDITOR
         [HideInInspector]
         public string name;
-#endif
         public GrabInteractable objectToCombineWith;
         public GameObject corespondingObjectToDisplay;
     }
