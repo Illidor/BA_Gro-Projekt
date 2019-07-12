@@ -15,10 +15,14 @@ public class LightLever : GrabInteractable
     private float lightOffStrength;
 
     private AudioSource switchSound;
+    private Animator animator;
 
     private void Start()
     {
         switchSound = GetComponent<AudioSource>();
+        animator = GetComponent<Animator>();
+
+        ChangeLight(true);
     }
 
     public override bool CarryOutInteraction(InteractionScript player)
@@ -26,20 +30,20 @@ public class LightLever : GrabInteractable
         leverOn = leverOn == false ? true : false;
         if (leverOn)
         {
-            GetComponent<Animator>().SetTrigger("TurnOn");
-            StartCoroutine(ChangeLight(player, true));
+            animator.SetTrigger("TurnOn");
+            StartCoroutine(ChangeLight(true));
             switchSound.Play();
         }
         else
         {
-            GetComponent<Animator>().SetTrigger("TurnOff");
-            StartCoroutine(ChangeLight(player, false));
+            animator.SetTrigger("TurnOff");
+            StartCoroutine(ChangeLight(false));
             switchSound.Play();
         }
         return true;
     }
 
-    private IEnumerator ChangeLight(InteractionScript player, bool state)
+    private IEnumerator ChangeLight(bool state)
     {
         yield return new WaitForSeconds(0.6f);
         if (state)
