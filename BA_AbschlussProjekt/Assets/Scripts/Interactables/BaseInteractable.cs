@@ -12,6 +12,8 @@ public abstract class BaseInteractable : InteractionFoundation
 
     [SerializeField]
     protected Conditions conditionsTypeNeededToInteract = Conditions.UpperBodyCondition;
+    [SerializeField]
+    protected bool isBothHanded;
 
     protected new void Awake()
     {
@@ -45,13 +47,13 @@ public abstract class BaseInteractable : InteractionFoundation
             if (!player.cR_isRunning)
             {
                 player.cR_isRunning = true;
-                StartCoroutine(player.IKToObject(this));
+                StartCoroutine(player.IKToObject(this, isBothHanded));
             }
         }
     }
 
 
-    public virtual Transform GetIKPoint(Transform playerGrabPoint)
+    public virtual Transform GetIKPoint(Transform playerGrabPoint, bool leftHand)
     {
         List<Transform> transforms = new List<Transform>();     
 
@@ -88,6 +90,24 @@ public abstract class BaseInteractable : InteractionFoundation
                     distance = (objGrabPoint.position - playerGrabPoint.position).sqrMagnitude;
                     returnTransform = objGrabPoint;
                     Debug.Log("Distance: " + distance);
+                }
+            }
+
+            if (leftHand)
+            {
+                Transform leftReturnTransform = transforms[0];
+                foreach (Transform objGrabPoint in transforms)
+                {
+                    if (distance == -1)
+                    {
+                        leftReturnTransform = objGrabPoint;
+                        distance = (objGrabPoint.position - playerGrabPoint.position).sqrMagnitude;
+                        Debug.Log("Distance: " + distance);
+                    }
+                    else if (objGrabPoint != returnTransform)
+                    {
+                        return objGrabPoint;
+                    }
                 }
             }
             return returnTransform;
