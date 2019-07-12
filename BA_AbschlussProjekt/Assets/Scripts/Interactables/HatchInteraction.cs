@@ -6,23 +6,37 @@ public class HatchInteraction : InteractionFoundation, ICombinable
 {
     public List<GameObject> correlatingGameObjects;
 
-    private Sound hatchOpenSound;
+    [SerializeField]
+    ParticleSystem dustPs;
+    [SerializeField]
+    Sound dustParticleSound;
+    [SerializeField] [Tooltip("will automatically use first on gameobject")]
+    Sound hatchOpenSound;
+    [SerializeField] [Tooltip("will automatically use last on gameobject")]
+    Sound knockingSound;
 
+    private int knockingCountToUnlock = 2;
     private float dustParticleTicker = 0f;
     private float dustParticleThreshold = 30f;
     private bool isEmitting = true;
-    [SerializeField] ParticleSystem dustPs;
-    [SerializeField] Sound dustParticleSound;
+
+    private int knockCOunter = 0;
 
     private void Start()
     {
-        hatchOpenSound = GetComponent<Sound>();
+        if (hatchOpenSound == null)
+            hatchOpenSound = GetComponent<Sound>();
+
+        if (knockingSound == null)
+            knockingSound = GetComponents<Sound>().GetLast();
     }
 
-    private void Update() {
+    private void Update()
+    {
         dustParticleTicker += Time.deltaTime;
 
-        if(dustParticleTicker > dustParticleThreshold && isEmitting) {
+        if (dustParticleTicker > dustParticleThreshold && isEmitting)
+        {
             dustParticleTicker = 0f;
             dustPs.Emit(10);
             dustParticleSound.PlaySound(0);
@@ -31,6 +45,13 @@ public class HatchInteraction : InteractionFoundation, ICombinable
 
     public bool Combine(InteractionScript player, BaseInteractable interactingComponent)
     {
+        if (knockCOunter < knockingCountToUnlock - 1)
+        {
+            knockCOunter++;
+            knockingSound.PlaySound(0);
+            return false;
+        }
+
         try
         {
             GetComponent<Animator>().SetTrigger("open");
@@ -64,10 +85,8 @@ public class HatchInteraction : InteractionFoundation, ICombinable
  
     public bool HandleCombine(InteractionScript player, BaseInteractable currentlyHolding)
     {
-        Debug.Log("handle combine hatch");
-        player.GUIInteractionFeedbackHandler.StandardCrosshair.SetActive(false);
-        player.GUIInteractionFeedbackHandler.InteractionCrosshair.SetActive(true);
-        player.GUIInteractionFeedbackHandler.ActionDescription.text = "Click to combine " + currentlyHolding.DisplayName + " with " + DisplayName;
+        player.GUIInteractionFeedbackHandler.StandardCrosshair.SetActive(   false);
+        player.GUIInteractionFeedbackHandler.InteractionCrosshair.SetActive(true );
 
         if (CTRLHub.InteractDown)
             return Combine(player, currentlyHolding);
