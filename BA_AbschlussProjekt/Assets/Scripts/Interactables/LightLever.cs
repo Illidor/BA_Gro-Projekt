@@ -3,14 +3,15 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class LightLever : GrabInteractable
-    
 {
     [SerializeField]
     private bool leverOn = false;
     [SerializeField]
-    private float[] lightStrengths;
+    private Light[] lightsSources;
     [SerializeField]
-    private GameObject[] lightsSources;
+    private bool useInitialLightStrengthInstead;
+    [SerializeField]
+    private float[] lightStrengths;
     [SerializeField]
     private float lightOffStrength;
 
@@ -22,12 +23,25 @@ public class LightLever : GrabInteractable
         switchSound = GetComponent<AudioSource>();
         animator = GetComponent<Animator>();
 
-        StartCoroutine(ChangeLight(false));
+        if (lightStrengths.Length != lightsSources.Length)  // if lightStrengths wasn't set properly, don't use it
+        {
+            useInitialLightStrengthInstead = true;
+            lightStrengths = new float[ lightsSources.Length ];
+        }
+
+        if (useInitialLightStrengthInstead) // use the strength already present on the lights, if set to true
+        {
+            for (int i = 0; i < lightsSources.Length; i++)
+                lightStrengths[ i ] = lightsSources[ i ].intensity;
+        }
+
+        StartCoroutine(ChangeLight(false)); // turn lights of on game start
     }
 
     public override bool CarryOutInteraction(InteractionScript player)
     {
-        leverOn = leverOn == false ? true : false;
+        leverOn = !leverOn;
+
         if (leverOn)
         {
             animator.SetTrigger("TurnOn");
@@ -48,20 +62,13 @@ public class LightLever : GrabInteractable
         yield return new WaitForSeconds(0.6f);
         if (state)
         {
-            int i = 0;
-            foreach (GameObject light in lightsSources)
-            {
-                light.GetComponent<Light>().intensity = lightStrengths[i];
-                i++;
-            }
+            for (int i = 0; i < lightsSources.Length; i++)
+                lightsSources[ i ].intensity = lightStrengths[ i ];
         }
         else
         {
-            foreach (GameObject light in lightsSources)
-            {
-                light.GetComponent<Light>().intensity = lightOffStrength;
-            }
+            foreach (Light light in lightsSources)
+                light.intensity = lightOffStrength;
         }
-        yield return null;
     }
 }
