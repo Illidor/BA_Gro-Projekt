@@ -22,7 +22,7 @@ public class LightLever : GrabInteractable
         switchSound = GetComponent<AudioSource>();
         animator = GetComponent<Animator>();
 
-        ChangeLight(true);
+        StartCoroutine(ChangeLight(false));
     }
 
     public override bool CarryOutInteraction(InteractionScript player)
