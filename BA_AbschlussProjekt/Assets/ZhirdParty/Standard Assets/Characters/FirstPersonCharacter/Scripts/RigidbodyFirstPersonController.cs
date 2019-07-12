@@ -77,7 +77,7 @@ namespace UnityStandardAssets.Characters.FirstPerson
 		private Rigidbody m_RigidBody;
 		private float m_YRotation;
 		private Vector3 m_GroundContactNormal;
-		private bool m_Jump, m_PreviouslyGrounded, m_Jumping, m_IsGrounded;
+		//private bool m_Jump, m_PreviouslyGrounded, m_Jumping, m_IsGrounded;
 
 
 		public Vector3 Velocity
@@ -85,15 +85,15 @@ namespace UnityStandardAssets.Characters.FirstPerson
 			get { return m_RigidBody.velocity; }
 		}
 
-		public bool Grounded
-		{
-			get { return m_IsGrounded; }
-		}
+		//public bool Grounded
+		//{
+		//	get { return m_IsGrounded; }
+		//}
 
-		public bool Jumping
-		{
-			get { return m_Jumping; }
-		}
+		//public bool Jumping
+		//{
+		//	get { return m_Jumping; }
+		//}
 
 		public bool Running
 		{
@@ -142,12 +142,12 @@ namespace UnityStandardAssets.Characters.FirstPerson
 			if(!freezePlayerCamera)
 				RotateView();
 
-			if (CrossPlatformInputManager.GetButtonDown("Jump") && !m_Jump && m_IsGrounded)
-			{
-				m_Jump = true;
-			}
+			//if (CrossPlatformInputManager.GetButtonDown("Jump") && !m_Jump && m_IsGrounded)
+			//{
+			//	m_Jump = true;
+			//}
 
-			if (m_Jump == false && CrossPlatformInputManager.GetButtonDown("Crouch") && isCrouching == false)
+			if (/*m_Jump == false && */CrossPlatformInputManager.GetButtonDown("Crouch") && isCrouching == false)
 			{
 				isCrouching = true;
 				crouchCollider.enabled = true;
@@ -155,7 +155,7 @@ namespace UnityStandardAssets.Characters.FirstPerson
 				cam.transform.localPosition = cameraCrouchPositionOffset;
 			}
 
-			if (m_Jump == false && CrossPlatformInputManager.GetButtonUp("Crouch") && isCrouching)
+			if (/*m_Jump == false && */CrossPlatformInputManager.GetButtonUp("Crouch") && isCrouching)
 			{
 				isCrouching = false;
 				standCollider.enabled = true;
@@ -174,7 +174,7 @@ namespace UnityStandardAssets.Characters.FirstPerson
 
 			if(!freezePlayerMovement)
 			{
-				if ((Mathf.Abs(input.x) > float.Epsilon || Mathf.Abs(input.y) > float.Epsilon) && (advancedSettings.airControl || m_IsGrounded))
+				if ((Mathf.Abs(input.x) > float.Epsilon || Mathf.Abs(input.y) > float.Epsilon) /*&& (advancedSettings.airControl || m_IsGrounded)*/)
 				{
 					// always move along the camera forward as it is the direction that it being aimed at
 					Vector3 desiredMove = cam.transform.forward * input.y + cam.transform.right * input.x;
@@ -186,6 +186,7 @@ namespace UnityStandardAssets.Characters.FirstPerson
 					if (m_RigidBody.velocity.sqrMagnitude <
 						(movementSettings.CurrentTargetSpeed * movementSettings.CurrentTargetSpeed))
 					{
+                        Debug.Log(SlopeMultiplier());
 						m_RigidBody.AddForce(desiredMove * SlopeMultiplier() / 2f, ForceMode.VelocityChange);
 					}
 
@@ -209,39 +210,38 @@ namespace UnityStandardAssets.Characters.FirstPerson
 			}
 			
 
-			if ( m_IsGrounded)
-			{
-				m_RigidBody.drag = 5f;
+			//if ( m_IsGrounded)
+			//{
+			//	//m_RigidBody.drag = 5f;
 
-				//if (false)//m_Jump
+			//	//if (false)//m_Jump
+			//	//{
+			//	//	m_RigidBody.drag = 0f;
+			//	//	m_RigidBody.velocity = new Vector3(m_RigidBody.velocity.x, 0f, m_RigidBody.velocity.z);
+			//	//	m_RigidBody.AddForce(new Vector3(0f, movementSettings.JumpForce, 0f), ForceMode.Impulse);
+			//	//	m_Jumping = true;
+			//	//}
+
+			//	if (!m_Jumping && Mathf.Abs(input.x) < float.Epsilon && Mathf.Abs(input.y) < float.Epsilon && m_RigidBody.velocity.magnitude < 1f)
+			//	{
+			//		m_RigidBody.Sleep();
+			//	}
+			//}
+			//else
+			//{
+				//m_RigidBody.drag = 0f;
+				//if (m_PreviouslyGrounded && !m_Jumping)
 				//{
-				//	m_RigidBody.drag = 0f;
-				//	m_RigidBody.velocity = new Vector3(m_RigidBody.velocity.x, 0f, m_RigidBody.velocity.z);
-				//	m_RigidBody.AddForce(new Vector3(0f, movementSettings.JumpForce, 0f), ForceMode.Impulse);
-				//	m_Jumping = true;
+				//	StickToGroundHelper();
 				//}
-
-				if (!m_Jumping && Mathf.Abs(input.x) < float.Epsilon && Mathf.Abs(input.y) < float.Epsilon && m_RigidBody.velocity.magnitude < 1f)
-				{
-					m_RigidBody.Sleep();
-				}
-			}
-			else
-			{
-				m_RigidBody.drag = 0f;
-				if (m_PreviouslyGrounded && !m_Jumping)
-				{
-					StickToGroundHelper();
-				}
-			}
-			m_Jump = false;
+			//}
+			//m_Jump = false;
 		}
 
 
 		private float SlopeMultiplier()
 		{
-			float angle = Vector3.Angle(m_GroundContactNormal, Vector3.up);
-			return movementSettings.SlopeCurveModifier.Evaluate(angle);
+            return 0.78f;
 		}
 
 
@@ -283,23 +283,23 @@ namespace UnityStandardAssets.Characters.FirstPerson
 
 			mouseLook.LookRotation (transform, cam.transform);
 
-			if (m_IsGrounded || advancedSettings.airControl)
-			{
-				// Rotate the rigidbody velocity to match the new direction that the character is looking
-				Quaternion velRotation = Quaternion.AngleAxis(transform.eulerAngles.y - oldYRotation, Vector3.up);
-				m_RigidBody.velocity = velRotation*m_RigidBody.velocity;
-			}
-		}
+            //if (m_IsGrounded || advancedSettings.airControl)
+            //{
+            //    // Rotate the rigidbody velocity to match the new direction that the character is looking
+            //    Quaternion velRotation = Quaternion.AngleAxis(transform.eulerAngles.y - oldYRotation, Vector3.up);
+            //    m_RigidBody.velocity = velRotation * m_RigidBody.velocity;
+            //}
+        }
 
 		/// sphere cast down just beyond the bottom of the capsule to see if the capsule is colliding round the bottom
 		private void GroundCheck()
 		{
-			m_PreviouslyGrounded = m_IsGrounded;
+			//m_PreviouslyGrounded = m_IsGrounded;
 			RaycastHit hitInfo;
 			if (Physics.SphereCast(transform.position + Vector3.up / 2f, standCollider.radius * (1.0f - advancedSettings.shellOffset), Vector3.down, out hitInfo,
 								   ((standCollider.height/2f) - standCollider.radius) + advancedSettings.groundCheckDistance, Physics.AllLayers, QueryTriggerInteraction.Ignore))
 			{
-				m_IsGrounded = true;
+				//m_IsGrounded = true;
 				m_GroundContactNormal = hitInfo.normal;
 
 				//FootSprainedCheck
@@ -311,16 +311,16 @@ namespace UnityStandardAssets.Characters.FirstPerson
 			}
 			else
 			{
-				m_IsGrounded = false;
+				//m_IsGrounded = false;
 				m_GroundContactNormal = Vector3.up;
 			}
 
 			// Landing
-			if (!m_PreviouslyGrounded && m_IsGrounded && m_Jumping)
-			{
-				//AudioManager.audioManager.Play("snd_landingjump");
-				m_Jumping = false;
-			}
+			//if (!m_PreviouslyGrounded && m_IsGrounded && m_Jumping)
+			//{
+			//	//AudioManager.audioManager.Play("snd_landingjump");
+			//	m_Jumping = false;
+			//}
 		}
 
 		private void CheckMovability()
@@ -345,6 +345,7 @@ namespace UnityStandardAssets.Characters.FirstPerson
 			}
 			else
 			{
+                Debug.Log("Broken");
 				movementSettings.ForwardSpeed = 0f;
 				movementSettings.BackwardSpeed = 0f;
 				movementSettings.StrafeSpeed = 0f;
