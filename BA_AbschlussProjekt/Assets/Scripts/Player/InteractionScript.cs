@@ -69,11 +69,6 @@ public class InteractionScript : MonoBehaviour
         }
 
         HandleActions();
-
-        //if(UsedObject == null && !cR_isRunning)
-        //{
-        //    StartCoroutine(IKToObject(null));
-        //}
     }
 
     private void HandleActions()
@@ -96,6 +91,7 @@ public class InteractionScript : MonoBehaviour
         {
             if (didRaycastHit)
             {
+                Debug.Log(raycastHit.collider.GetComponent<ICombinable>());
                 if (raycastHit.collider.GetComponent<ICombinable>()?.HandleCombine(this, UsedObject) == true)
                     return;
             }
@@ -126,6 +122,7 @@ public class InteractionScript : MonoBehaviour
         {
             HandIKRight.transform.position = Vector3.MoveTowards(HandIKRight.position, point.position, distance);
             HandIKRight.rotation = Quaternion.Lerp(HandIKRight.rotation, point.rotation, distance);
+
             yield return new WaitForEndOfFrame();
         }
 
@@ -171,6 +168,7 @@ public class InteractionScript : MonoBehaviour
         if (cR_isRunning)
         {
             StopCoroutine(IKToObject(UsedObject));
+
             cR_isRunning = false;
         }
 

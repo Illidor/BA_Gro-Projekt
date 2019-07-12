@@ -1711,16 +1711,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 2786639637101333829}
     m_Modifications:
-    - target: {fileID: 6060855905823981009, guid: d4e14965adcb1fe42a6f05ac003c5b1e,
-        type: 3}
-      propertyPath: m_Name
-      value: Book
-      objectReference: {fileID: 0}
-    - target: {fileID: 6060855905823981009, guid: d4e14965adcb1fe42a6f05ac003c5b1e,
-        type: 3}
-      propertyPath: m_Layer
-      value: 11
-      objectReference: {fileID: 0}
     - target: {fileID: 7081670227840307138, guid: d4e14965adcb1fe42a6f05ac003c5b1e,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1775,6 +1765,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 2.434
+      objectReference: {fileID: 0}
+    - target: {fileID: 6060855905823981009, guid: d4e14965adcb1fe42a6f05ac003c5b1e,
+        type: 3}
+      propertyPath: m_Name
+      value: Book
+      objectReference: {fileID: 0}
+    - target: {fileID: 6060855905823981009, guid: d4e14965adcb1fe42a6f05ac003c5b1e,
+        type: 3}
+      propertyPath: m_Layer
+      value: 11
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d4e14965adcb1fe42a6f05ac003c5b1e, type: 3}
@@ -2889,7 +2889,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 125e586b501b0b94ca993dc3a24600a0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  animator: {fileID: 166375312998390998}
 --- !u!1001 &250702779
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -10400,12 +10399,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 03ca45bb53dc94f478358a1b6475653d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ChainLength: 2
-  Target: {fileID: 2249714386040084238}
-  Pole: {fileID: 3464281921941365206}
-  Iterations: 10
-  Delta: 0.001
-  SnapBackStrength: 1
+  ikActive: 0
+  rightIK: {fileID: 0}
+  rightHintIK: {fileID: 0}
 --- !u!1001 &837962814
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -10868,6 +10864,11 @@ PrefabInstance:
       propertyPath: image
       value: 
       objectReference: {fileID: 390448562}
+    - target: {fileID: 2238741782790887183, guid: 1651d9862a83f0b41877a2bf6d9b2d49,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 853412730, guid: 1651d9862a83f0b41877a2bf6d9b2d49, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 1651d9862a83f0b41877a2bf6d9b2d49, type: 3}
@@ -20468,12 +20469,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 03ca45bb53dc94f478358a1b6475653d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ChainLength: 2
-  Target: {fileID: 5936215791954615927}
-  Pole: {fileID: 6598124945171797716}
-  Iterations: 10
-  Delta: 0.001
-  SnapBackStrength: 1
+  ikActive: 0
+  rightIK: {fileID: 0}
+  rightHintIK: {fileID: 0}
 --- !u!4 &1807781434 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -4216859302048453862, guid: 121354edef439574f9c7360f86abd764,
@@ -23100,6 +23098,11 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3707426798783697660, guid: 1651d9862a83f0b41877a2bf6d9b2d49,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2238741782790887183, guid: 1651d9862a83f0b41877a2bf6d9b2d49,
         type: 3}
       propertyPath: m_IsActive
       value: 1
@@ -25829,7 +25832,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 125e586b501b0b94ca993dc3a24600a0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  animator: {fileID: 166375312998390998}
 --- !u!4 &1917437718307974499
 Transform:
   m_ObjectHideFlags: 0
@@ -25861,6 +25863,7 @@ MonoBehaviour:
   <InteractionCrosshair>k__BackingField: {fileID: 711853722}
   <ActionDescription>k__BackingField: {fileID: 711853721}
   <SecondActionDescription>k__BackingField: {fileID: 711853720}
+  <InteractionSymbolHand>k__BackingField: {fileID: 0}
 --- !u!4 &1952568003702347773
 Transform:
   m_ObjectHideFlags: 0
@@ -28914,7 +28917,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 125e586b501b0b94ca993dc3a24600a0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  animator: {fileID: 1245125176547661914}
 --- !u!1 &5632203633868768667
 GameObject:
   m_ObjectHideFlags: 0

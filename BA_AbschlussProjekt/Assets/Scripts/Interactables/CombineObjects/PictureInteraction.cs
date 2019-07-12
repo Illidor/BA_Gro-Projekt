@@ -4,20 +4,37 @@ using UnityEngine;
 
 public class PictureInteraction : InteractionFoundation, ICombinable
 {
-    public GameObject objectToInteract;
+    [SerializeField]
+    private GameObject objectToInteract;
+    [Space]
+    [SerializeField]
+    private GameObject pictureOnStand;
+
+    private new void Awake()
+    {
+        pictureOnStand?.SetActive(false);
+
+        base.Awake();
+    }
 
     public bool Combine(InteractionScript player, BaseInteractable interactingComponent)
     {
         if(interactingComponent.name == objectToInteract.name)
         {
             ((GrabInteractable)interactingComponent).PutDown(player);
-            interactingComponent.GetComponent<Rigidbody>().isKinematic = true;
-            interactingComponent.GetComponent<Collider>().enabled = false;
-            interactingComponent.transform.SetParent(transform);
-            interactingComponent.transform.localPosition = Vector3.zero;
-            interactingComponent.transform.localEulerAngles = Vector3.zero;
+
+            // the following is the old method. I now put a picture duplicate there to be activated.
+            //interactingComponent.GetComponent<Rigidbody>().isKinematic = true;
+            //interactingComponent.GetComponent<Collider>().enabled = false;
+            //interactingComponent.transform.SetParent(transform);
+            //interactingComponent.transform.localPosition = Vector3.zero;
+            //interactingComponent.transform.localEulerAngles = Vector3.zero;
+
+            pictureOnStand?.SetActive(true);
+            Destroy(interactingComponent.gameObject);
 
             GetComponent<Collider>().enabled = false;
+
             return true;
         }
         return false;

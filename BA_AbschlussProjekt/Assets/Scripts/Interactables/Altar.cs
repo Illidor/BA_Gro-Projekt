@@ -33,7 +33,7 @@ public class Altar : ConditionedInteraction
         {
             player.GUIInteractionFeedbackHandler.StandardCrosshair.SetActive(false);
             player.GUIInteractionFeedbackHandler.InteractionCrosshair.SetActive(true);
-            player.GUIInteractionFeedbackHandler.ActionDescription.text = "Press E to Destroy " + triggerObject.GetChild(0).GetComponent<Picture>().DisplayName;
+            player.GUIInteractionFeedbackHandler.ActionDescription.text = "Press E to Destroy Picture";
             player.GUIInteractionFeedbackHandler.SecondActionDescription.text = "Click to Pray at " + DisplayName;
             if (CTRLHub.InteractDown && player.PlayerHealth.GetCondition(conditionsTypeNeededToInteract) > minCondition)
             {
