@@ -124,7 +124,6 @@ public class InteractionScript : MonoBehaviour
 
         while ((HandIKRight.position - point.position).magnitude > 5f || (HandIKRight.eulerAngles - point.eulerAngles).magnitude > 5f)
         {
-            Debug.Log("Mag: " + (HandIKRight.position - GrabingPoint.position).magnitude);
             HandIKRight.transform.position = Vector3.MoveTowards(HandIKRight.position, point.position, distance);
             HandIKRight.rotation = Quaternion.Lerp(HandIKRight.rotation, point.rotation, distance);
             yield return new WaitForEndOfFrame();
