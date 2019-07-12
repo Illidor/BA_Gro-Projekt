@@ -24,7 +24,7 @@ public class GrabInteractable : BaseInteractable
     protected float minConditionToCarry = 0.5f;
     [SerializeField] [Tooltip("If over 2, pushing is not possible")]
     protected float minConditionToPush = 3;
-    [SerializeField][Tooltip("Will search on this gameobject if not provided.")]
+    [SerializeField] [Tooltip("Will search on this gameobject if not provided.")]
     protected Sound soundToPlayOnInteract;
 
     protected new Rigidbody rigidbody;

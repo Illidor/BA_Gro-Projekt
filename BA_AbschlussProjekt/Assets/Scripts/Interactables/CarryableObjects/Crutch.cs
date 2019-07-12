@@ -25,6 +25,7 @@ public class Crutch : GrabInteractable
         transform.localEulerAngles = new Vector3(119.955f, -349.499f, 345.164f);
         rigidbody.isKinematic = true;
         player.SetCarriedObject(this);
+        collider.enabled = false;
         IsBeeingCarried = true;
 
         return true;
