@@ -19,13 +19,15 @@ public class Crutch : GrabInteractable
             bgMusic.PlaySound(0);
         }
 
-        gameObject.layer = LayerMask.NameToLayer("NoPlayerCollision");
-        transform.parent = player.GrabingPoint.transform;
-        transform.localPosition = new Vector3(-0.159f, -0.06506f, 0.348f);
-        transform.localEulerAngles = new Vector3(119.955f, -349.499f, 345.164f);
-        rigidbody.isKinematic = true;
-        player.SetCarriedObject(this);
-        IsBeeingCarried = true;
+        base.CarryOutInteraction_Carry(player);
+
+        //gameObject.layer = LayerMask.NameToLayer("NoPlayerCollision");
+        //transform.parent = player.GrabingPoint.transform;
+        //transform.localPosition = new Vector3(-0.159f, -0.06506f, 0.348f);
+        //transform.localEulerAngles = new Vector3(119.955f, -349.499f, 345.164f);
+        //rigidbody.isKinematic = true;
+        //player.SetCarriedObject(this);
+        //IsBeeingCarried = true;
 
         return true;
     }

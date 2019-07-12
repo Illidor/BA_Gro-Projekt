@@ -69,7 +69,7 @@ public class GrabInteractable : BaseInteractable
     {
         Debug.Log("carrying");
         gameObject.layer = LayerMask.NameToLayer("NoPlayerCollision");
-        transform.parent = player.GrabingPoint.transform;
+        transform.parent.SetParent(player.GrabingPoint.transform);
         //transform.localPosition = Vector3.zero;
         rigidbody.isKinematic = true;
         player.SetCarriedObject(this);
@@ -88,7 +88,7 @@ public class GrabInteractable : BaseInteractable
 
         if (IsBeeingCarried)
         {
-            transform.SetParent(InstancePool.transform, true);
+            transform.parent.SetParent(InstancePool.transform, true);
 
             Ray screenCenterRay = Camera.main.ScreenPointToRay(Input.mousePosition);
 
