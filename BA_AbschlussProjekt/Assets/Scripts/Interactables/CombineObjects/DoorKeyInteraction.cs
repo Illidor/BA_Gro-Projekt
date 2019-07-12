@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Playables;
 
-public class DoorKeyInteraction : InteractionFoundation, ICombinable        // I implemented ICombinable because there was a combine method ~Seb
+public class DoorKeyInteraction : BaseInteractable, ICombinable   
 {
     [SerializeField]
     private float timeToWaitUntilDoorOpens = 1.65f;
@@ -15,6 +15,8 @@ public class DoorKeyInteraction : InteractionFoundation, ICombinable        // I
 
     [SerializeField]
     protected Sound interactSound;
+    [SerializeField]
+    protected Sound doorOpeningSound;
 
     public bool Combine(InteractionScript player, BaseInteractable interactingComponent)
     {
@@ -50,5 +52,14 @@ public class DoorKeyInteraction : InteractionFoundation, ICombinable        // I
             return Combine(player, currentlyHolding);
 
         return false;
+    }
+
+    public override bool CarryOutInteraction(InteractionScript player)
+    {
+        if (interactSound == null)
+            return false;
+
+        interactSound.PlaySound(0);
+        return true;
     }
 }

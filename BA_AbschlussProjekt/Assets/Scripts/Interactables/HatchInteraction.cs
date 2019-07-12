@@ -8,9 +8,25 @@ public class HatchInteraction : InteractionFoundation, ICombinable
 
     private Sound hatchOpenSound;
 
+    private float dustParticleTicker = 0f;
+    private float dustParticleThreshold = 30f;
+    private bool isEmitting = true;
+    [SerializeField] ParticleSystem dustPs;
+    [SerializeField] Sound dustParticleSound;
+
     private void Start()
     {
         hatchOpenSound = GetComponent<Sound>();
+    }
+
+    private void Update() {
+        dustParticleTicker += Time.deltaTime;
+
+        if(dustParticleTicker > dustParticleThreshold && isEmitting) {
+            dustParticleTicker = 0f;
+            dustPs.Emit(10);
+            dustParticleSound.PlaySound(0);
+        }
     }
 
     public bool Combine(InteractionScript player, BaseInteractable interactingComponent)
@@ -19,6 +35,9 @@ public class HatchInteraction : InteractionFoundation, ICombinable
         {
             GetComponent<Animator>().SetTrigger("open");
             hatchOpenSound.PlaySound(0);
+            dustParticleSound.PlaySound(0);
+            isEmitting = false;
+            StartCoroutine(DelayDustEffect(0.25f));
             //AudioManager.audioManager.Play("snd_openattic_ladder");
         }
         catch (System.Exception) { }
@@ -36,6 +55,13 @@ public class HatchInteraction : InteractionFoundation, ICombinable
         return true;
     }
 
+    private IEnumerator DelayDustEffect(float delay)
+    {
+        yield return new WaitForSeconds(delay);
+        dustParticleSound.PlaySound(0);
+        dustPs.Emit(40);
+    }
+ 
     public bool HandleCombine(InteractionScript player, BaseInteractable currentlyHolding)
     {
         Debug.Log("handle combine hatch");
