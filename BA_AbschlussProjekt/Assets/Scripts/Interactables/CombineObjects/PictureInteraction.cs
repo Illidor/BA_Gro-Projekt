@@ -10,9 +10,13 @@ public class PictureInteraction : InteractionFoundation, ICombinable
     [SerializeField]
     private GameObject pictureOnStand;
 
+    public bool IsPictureOnStand { get; private set; }
+
     private new void Awake()
     {
         pictureOnStand?.SetActive(false);
+
+        IsPictureOnStand = false;
 
         base.Awake();
     }
@@ -34,6 +38,8 @@ public class PictureInteraction : InteractionFoundation, ICombinable
             Destroy(interactingComponent.gameObject);
 
             GetComponent<Collider>().enabled = false;
+
+            IsPictureOnStand = true;
 
             return true;
         }

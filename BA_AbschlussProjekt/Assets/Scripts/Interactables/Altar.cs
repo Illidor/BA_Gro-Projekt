@@ -8,6 +8,16 @@ public class Altar : ConditionedInteraction
     private Transform triggerObject;
     [SerializeField]
     private KeyBox keyBox;
+    [SerializeField]
+    private PictureInteraction pictureInteraction;
+
+    private new void Awake()
+    {
+        if (pictureInteraction == null)
+            pictureInteraction = GetComponentInChildren<PictureInteraction>();
+
+        base.Awake();
+    }
 
     public override bool CarryOutInteraction(InteractionScript player)
     {
@@ -29,20 +39,21 @@ public class Altar : ConditionedInteraction
 
     public override void HandleInteraction(InteractionScript player)
     {
-        if(triggerObject.childCount > 0)
+        if (pictureInteraction.IsPictureOnStand == false)
+            return;
+
+        player.GUIInteractionFeedbackHandler.StandardCrosshair.SetActive(false);
+        player.GUIInteractionFeedbackHandler.InteractionCrosshair.SetActive(true);
+        player.GUIInteractionFeedbackHandler.ActionDescription.text = "Press E to Destroy Picture";
+        player.GUIInteractionFeedbackHandler.SecondActionDescription.text = "Click to Pray at " + DisplayName;
+
+        if (CTRLHub.InteractDown && player.PlayerHealth.GetCondition(conditionsTypeNeededToInteract) > minCondition)
         {
-            player.GUIInteractionFeedbackHandler.StandardCrosshair.SetActive(false);
-            player.GUIInteractionFeedbackHandler.InteractionCrosshair.SetActive(true);
-            player.GUIInteractionFeedbackHandler.ActionDescription.text = "Press E to Destroy Picture";
-            player.GUIInteractionFeedbackHandler.SecondActionDescription.text = "Click to Pray at " + DisplayName;
-            if (CTRLHub.InteractDown && player.PlayerHealth.GetCondition(conditionsTypeNeededToInteract) > minCondition)
-            {
-                CarryOutInteraction(player);
-            }
-            else if (CTRLHub.SecondInteractDown && player.PlayerHealth.GetCondition(conditionsTypeNeededToInteract) > minCondition)
-            {
-                CarryOutSecondInteract(player);
-            }
+            CarryOutInteraction(player);
+        }
+        else if (CTRLHub.SecondInteractDown && player.PlayerHealth.GetCondition(conditionsTypeNeededToInteract) > minCondition)
+        {
+            CarryOutSecondInteract(player);
         }
     }
 }
