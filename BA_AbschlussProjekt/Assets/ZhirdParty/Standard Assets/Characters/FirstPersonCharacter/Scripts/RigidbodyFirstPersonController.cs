@@ -186,7 +186,6 @@ namespace UnityStandardAssets.Characters.FirstPerson
 					if (m_RigidBody.velocity.sqrMagnitude <
 						(movementSettings.CurrentTargetSpeed * movementSettings.CurrentTargetSpeed))
 					{
-                        Debug.Log(SlopeMultiplier());
 						m_RigidBody.AddForce(desiredMove * SlopeMultiplier() / 2f, ForceMode.VelocityChange);
 					}
 
@@ -345,7 +344,6 @@ namespace UnityStandardAssets.Characters.FirstPerson
 			}
 			else
 			{
-                Debug.Log("Broken");
 				movementSettings.ForwardSpeed = 0f;
 				movementSettings.BackwardSpeed = 0f;
 				movementSettings.StrafeSpeed = 0f;
