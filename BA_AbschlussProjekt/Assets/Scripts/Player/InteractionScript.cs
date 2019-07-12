@@ -130,16 +130,23 @@ public class InteractionScript : MonoBehaviour
         yield return new WaitForEndOfFrame();
         objecToInteractWith?.CarryOutInteraction(this);
 
+
         if(objecToInteractWith != null && UsedObject != null)
         {
-            while ((objecToInteractWith.transform.position - GrabingPoint.position).magnitude > 5f || ((objecToInteractWith.transform.eulerAngles - GrabingPoint.eulerAngles).magnitude > 5f))
-            {
-                objecToInteractWith.transform.position = Vector3.MoveTowards(objecToInteractWith.transform.position, GrabingPoint.transform.position, distance);
-                objecToInteractWith.transform.rotation = Quaternion.Lerp(objecToInteractWith.transform.rotation, GrabingPoint.transform.rotation, distance);
+            Transform FixPoint = objecToInteractWith.transform.parent;
+            print("FixPoint: " + FixPoint);
 
-                HandIKRight.transform.position = Vector3.MoveTowards(HandIKRight.position, point.position, distance);
-                HandIKRight.rotation = Quaternion.Lerp(HandIKRight.rotation, point.rotation, distance);
-                yield return new WaitForEndOfFrame();
+            if (FixPoint != null && FixPoint.gameObject.tag == "FixPoint")
+            {
+                while ((FixPoint.transform.position - GrabingPoint.position).magnitude > 5f || ((FixPoint.transform.eulerAngles - GrabingPoint.eulerAngles).magnitude > 5f))
+                {
+                    FixPoint.transform.position = Vector3.MoveTowards(FixPoint.transform.position, GrabingPoint.transform.position, distance);
+                    FixPoint.transform.rotation = Quaternion.Lerp(FixPoint.transform.rotation, GrabingPoint.transform.rotation, distance);
+
+                    HandIKRight.transform.position = Vector3.MoveTowards(HandIKRight.position, point.position, distance);
+                    HandIKRight.rotation = Quaternion.Lerp(HandIKRight.rotation, point.rotation, distance);
+                    yield return new WaitForEndOfFrame();
+                }
             }
         }
         Debug.Log("cR_End");
