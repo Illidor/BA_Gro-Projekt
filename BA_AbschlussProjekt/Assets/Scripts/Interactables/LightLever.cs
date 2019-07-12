@@ -14,6 +14,13 @@ public class LightLever : GrabInteractable
     [SerializeField]
     private float lightOffStrength;
 
+    private AudioSource switchSound;
+
+    private void Start()
+    {
+        switchSound = GetComponent<AudioSource>();
+    }
+
     public override bool CarryOutInteraction(InteractionScript player)
     {
         leverOn = leverOn == false ? true : false;
@@ -21,11 +28,13 @@ public class LightLever : GrabInteractable
         {
             GetComponent<Animator>().SetTrigger("TurnOn");
             StartCoroutine(ChangeLight(player, true));
+            switchSound.Play();
         }
         else
         {
             GetComponent<Animator>().SetTrigger("TurnOff");
             StartCoroutine(ChangeLight(player, false));
+            switchSound.Play();
         }
         return true;
     }
