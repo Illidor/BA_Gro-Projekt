@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 6857673082592309574}
   - component: {fileID: 6857673082592309573}
   - component: {fileID: 4874747016358395243}
+  - component: {fileID: 350459256}
   m_Layer: 0
   m_Name: pre_mattress
   m_TagString: Untagged
@@ -43,7 +44,7 @@ MeshFilter:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6857673082592309571}
-  m_Mesh: {fileID: -1757156869164857017, guid: 4f58e79c434146f418586726cd1d1be0, type: 3}
+  m_Mesh: {fileID: -1757156869164857017, guid: 3dceeda05f1298c47b8049b31f7317d1, type: 3}
 --- !u!54 &6857673082592309592
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -2118,7 +2119,7 @@ SkinnedMeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 670224309865224971, guid: 4f58e79c434146f418586726cd1d1be0, type: 3}
+  - {fileID: 2100000, guid: 3e3e0ca853ecddb44896aad96990856b, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -2147,8 +2148,8 @@ SkinnedMeshRenderer:
   m_BlendShapeWeights: []
   m_RootBone: {fileID: 0}
   m_AABB:
-    m_Center: {x: 0, y: 0, z: -0.00000023841858}
-    m_Extent: {x: 0.41581434, y: 0.06964874, z: 0.83960736}
+    m_Center: {x: 0, y: 0, z: 0}
+    m_Extent: {x: 0.41578484, y: 0.06964874, z: 0.83959293}
   m_DirtyAABB: 0
 --- !u!114 &4874747016358395243
 MonoBehaviour:
@@ -2167,3 +2168,26 @@ MonoBehaviour:
   velocity: 0
   minConditionToCarry: 3
   minConditionToPush: 1.5
+  soundToPlayOnInteract: {fileID: 0}
+--- !u!114 &350459256
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6857673082592309571}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9b6d2cdd667f7204aabb934c567dcd10, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  clips:
+  - {fileID: 8300000, guid: a5dd28d7b39593f458bca26ab120fd2c, type: 3}
+  volume: 0.75
+  volumeVariance: 0.1
+  pitch: 1
+  pitchVariance: 0.1
+  loop: 0
+  playOnAwake: 0
+  mixerGroup: {fileID: -6836437550479822473, guid: 6872fd114135b4f46bccacb6c64a5036,
+    type: 2}
