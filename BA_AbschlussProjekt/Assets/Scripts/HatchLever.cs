@@ -85,7 +85,7 @@ public class HatchLever : BaseInteractable, ICombinable
 
             if (!alreadyOpend)
             {
-                hatch.Combine(player, this);
+                hatch.OpenHatch();
                 alreadyOpend = true;
             }
         }

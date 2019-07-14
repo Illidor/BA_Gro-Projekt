@@ -66,6 +66,13 @@ public class HatchInteraction : InteractionFoundation, ICombinable
             return false;
         }
 
+        OpenHatch();
+
+        return true;
+    }
+
+    public void OpenHatch()
+    {
         try
         {
             GetComponent<Animator>().SetTrigger("open");
@@ -86,8 +93,6 @@ public class HatchInteraction : InteractionFoundation, ICombinable
             }
             catch (System.Exception) { }
         }
-
-        return true;
     }
 
     private IEnumerator DelayDustEffect(float delay)
