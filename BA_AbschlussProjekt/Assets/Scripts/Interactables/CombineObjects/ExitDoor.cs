@@ -18,6 +18,8 @@ public class ExitDoor : BaseInteractable, ICombinable
     [SerializeField]
     protected Sound doorOpeningSound;
 
+    private bool isOpen = false;
+
     public bool Combine(InteractionScript player, BaseInteractable interactingComponent)
     {
         if (interactingComponent is Crowbar crowbar)
@@ -27,13 +29,16 @@ public class ExitDoor : BaseInteractable, ICombinable
         if (interactingComponent.name == nameOfKeysGameobject)
         {
             keyInLock.SetActive(true);
+
             ((GrabInteractable)interactingComponent).PutDown(player);
             Destroy(interactingComponent.gameObject);
 
             interactSound?.PlaySound(0);
 
             StartCoroutine(OpenDoor(player, interactingComponent));
-            
+
+            isOpen = true;
+
             return true;
         }
         return false;
@@ -60,10 +65,10 @@ public class ExitDoor : BaseInteractable, ICombinable
 
     public override bool CarryOutInteraction(InteractionScript player)
     {
-        if (interactSound == null)
+        if (isOpen)
             return false;
 
-        interactSound.PlaySound(0);
+        interactSound?.PlaySound(0);
         return true;
     }
 }
