@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Playables;
 
 public class LightLever : GrabInteractable
 {
@@ -16,12 +17,14 @@ public class LightLever : GrabInteractable
     private float lightOffStrength;
 
     private AudioSource switchSound;
-    private Animator animator;
+    //private Animator animator;
+    private PlayableDirector playableDirector;
 
     private void Start()
     {
         switchSound = GetComponent<AudioSource>();
-        animator = GetComponent<Animator>();
+        //animator = GetComponent<Animator>();
+        playableDirector = GetComponentInChildren<PlayableDirector>();
 
         if (lightStrengths.Length != lightsSources.Length)  // if lightStrengths wasn't set properly, don't use it
         {
@@ -44,13 +47,15 @@ public class LightLever : GrabInteractable
 
         if (leverOn)
         {
-            animator.SetTrigger("TurnOn");
+            //animator.SetTrigger("TurnOn");
+            transform.GetChild(0).localPosition = new Vector3(0, 0.02579773f, 0);
             StartCoroutine(ChangeLight(true));
             switchSound.Play();
         }
         else
         {
-            animator.SetTrigger("TurnOff");
+            //animator.SetTrigger("TurnOff");
+            transform.GetChild(0).localPosition = new Vector3(0, -0.02579773f, 0);
             StartCoroutine(ChangeLight(false));
             switchSound.Play();
         }
