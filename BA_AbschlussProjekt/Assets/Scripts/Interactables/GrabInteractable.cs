@@ -16,10 +16,6 @@ public class GrabInteractable : BaseInteractable
     private readonly float putDownOnTopDefinitionOffsetInDegrees = 45f; 
 
 
-    //Sound     //please add a <summary> to serialized fields
-    [SerializeField]
-    protected float velocity;
-
     [SerializeField]
     protected float minConditionToCarry = 0.5f;
     [SerializeField] [Tooltip("If over 2, pushing is not possible")]
@@ -144,7 +140,6 @@ public class GrabInteractable : BaseInteractable
 
     protected void FixedUpdate()
     {
-        velocity = rigidbody.velocity.y;
         //TODO: better implementation of pulling. Maybe considering objects weight and players conditions
         //if (IsBeeingPulled)
         //    rigid.velocity = rigidbodyPulling.velocity;
