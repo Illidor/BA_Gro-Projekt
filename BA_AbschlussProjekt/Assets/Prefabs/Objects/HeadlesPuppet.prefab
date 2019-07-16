@@ -43,10 +43,32 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <DisplayName>k__BackingField: Headless Puppet
   conditionsTypeNeededToInteract: 0
-  velocity: 0
   minConditionToCarry: 0.5
   minConditionToPush: 3
-  soundToPlayOnInteract: {fileID: 0}
+  soundToPlayOnInteractAndDrop: {fileID: 2870594377656636327}
+--- !u!114 &2870594377656636327
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8803643430135660594}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9b6d2cdd667f7204aabb934c567dcd10, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  clips:
+  - {fileID: 8300000, guid: 98f195bbb8bc85b42b6394a0ec864b5c, type: 3}
+  - {fileID: 8300000, guid: 46fbc35ecf21c114f8e7a775ff2b0d9c, type: 3}
+  volume: 0.75
+  volumeVariance: 0.1
+  pitch: 1
+  pitchVariance: 0.1
+  loop: 0
+  playOnAwake: 0
+  mixerGroup: {fileID: -6836437550479822473, guid: 6872fd114135b4f46bccacb6c64a5036,
+    type: 2}
 --- !u!1001 &652245794786597179
 PrefabInstance:
   m_ObjectHideFlags: 0
