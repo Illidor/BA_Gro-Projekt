@@ -5,21 +5,19 @@ using UnityEngine;
 public class ToggleSkybox : MonoBehaviour
 {
     [SerializeField]
-    private Material skyboxMaterial;
+    private Material daytimeSkyboxMaterial;
     [SerializeField]
-    private Texture dayTimeTexture;
-    [SerializeField]
-    private Texture nightTimeTexture;
+    private Material nighttimeSkyboxMaterial;
 
     public void SetDaytimeSkybox()
     {
-        skyboxMaterial.SetTexture(3, dayTimeTexture);
+        RenderSettings.skybox = daytimeSkyboxMaterial;
     }
 
     public void SetNightTimeSkybox()
     {
-        skyboxMaterial.SetTexture(3, nightTimeTexture);
+        RenderSettings.skybox = nighttimeSkyboxMaterial;
     }
 
-    
+
 }
