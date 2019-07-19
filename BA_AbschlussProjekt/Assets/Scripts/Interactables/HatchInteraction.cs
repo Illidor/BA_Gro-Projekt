@@ -24,7 +24,7 @@ public class HatchInteraction : InteractionFoundation, ICombinable
     private float dustParticleThreshold = 30f;
     private bool isEmitting = true;
 
-    private int knockCOunter = 0;
+    private int knockCounter = 0;
 
     private float timeOfLastKnock;
 
@@ -53,12 +53,11 @@ public class HatchInteraction : InteractionFoundation, ICombinable
     {
         knockingSound?.PlaySound(0);
 
-        if (knockCOunter < knockingCountToUnlock - 1 &&
+        if (knockCounter < knockingCountToUnlock - 1 &&
             (Time.time - timeOfLastKnock) > timeDelayBetweenKnocksInSeconds)
         {
             timeOfLastKnock = Time.time;
-
-            knockCOunter++;
+            knockCounter++;
 
             dustPs.Emit(10);
             dustParticleSound.PlaySound(0);

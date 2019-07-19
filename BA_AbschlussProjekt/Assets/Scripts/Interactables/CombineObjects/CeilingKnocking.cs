@@ -5,7 +5,11 @@ using UnityEngine;
 public class CeilingKnocking : InteractionFoundation, ICombinable
 {
     [SerializeField]
+    private float timeDelayBetweenKnocksInSeconds = 0.5f;
+    [SerializeField]
     private Sound soundOnKnock;
+
+    private float timeOfLastKnock;
 
     private new void Awake()
     {
@@ -17,9 +21,13 @@ public class CeilingKnocking : InteractionFoundation, ICombinable
 
     public bool Combine(InteractionScript player, BaseInteractable interactingComponent)
     {
-        if (interactingComponent is Crutch)
+        if (interactingComponent is Crutch &&
+           (Time.time - timeOfLastKnock) > timeDelayBetweenKnocksInSeconds)
         {
+            timeOfLastKnock = Time.time;
+
             soundOnKnock?.PlaySound(0);
+
             return true;
         }
 
