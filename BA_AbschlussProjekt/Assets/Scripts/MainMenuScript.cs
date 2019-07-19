@@ -52,8 +52,4 @@ public class MainMenuScript : MonoBehaviour
             Cursor.lockState = CursorLockMode.Locked;
         }
     }
-<<<<<<< HEAD
 }
-=======
-}
->>>>>>> Merge

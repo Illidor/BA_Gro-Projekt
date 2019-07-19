@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Playables;
 
-public class LightLever : GrabInteractable
+public class LightLever : BaseInteractable
 {
     [SerializeField]
     private bool leverOn = false;
