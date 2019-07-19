@@ -20,8 +20,8 @@ public class GrabInteractable : BaseInteractable
     protected float minConditionToCarry = 0.5f;
     [SerializeField] [Tooltip("If over 2, pushing is not possible")]
     protected float minConditionToPush = 3;
-    [SerializeField] [Tooltip("Will search on this gameobject if not provided.")]
-    protected Sound soundToPlayOnInteract;
+    [SerializeField] [Tooltip("Will use the first in the list to play on interact and the second on drop. Will search on this gameobject if not provided.")]
+    protected Sound soundToPlayOnInteractAndDrop;
 
     protected new Rigidbody rigidbody;
     protected Rigidbody rigidbodyPulling;
@@ -38,8 +38,8 @@ public class GrabInteractable : BaseInteractable
         rigidbody = GetComponent<Rigidbody>();
         collider = GetComponent<Collider>();
 
-        if (soundToPlayOnInteract == null)
-            soundToPlayOnInteract = GetComponent<Sound>();
+        if (soundToPlayOnInteractAndDrop == null)
+            soundToPlayOnInteractAndDrop = GetComponent<Sound>();
 
         base.Awake();
     }
@@ -73,7 +73,7 @@ public class GrabInteractable : BaseInteractable
 
         collider.enabled = false;
 
-        soundToPlayOnInteract?.PlaySound(0);
+        soundToPlayOnInteractAndDrop?.PlaySound(0);
 
         return true;
     }
@@ -125,7 +125,7 @@ public class GrabInteractable : BaseInteractable
 
         collider.enabled = true;
 
-        //Invoke("ResetLayer", 2f); //TODO: Switch to better implementation of invoking ResetLayer. (Maybe with trigger or distance check)
+        soundToPlayOnInteractAndDrop?.PlaySound(1);
     }
 
     protected virtual bool CarryOutInteraction_Push(InteractionScript player)

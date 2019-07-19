@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 6408996236247847745}
   - component: {fileID: 6408996236247847746}
   - component: {fileID: 6408996236247847747}
+  - component: {fileID: 7164656231244034964}
   m_Layer: 8
   m_Name: pre_Key
   m_TagString: Untagged
@@ -122,7 +123,31 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d8bdc993e595ec845b9a429a2b6ef257, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  possibleConditionsToCarry: -1
-  possibleConditionsToPush: 0
-  velocity: 0
-  sounds: []
+  <DisplayName>k__BackingField: Key
+  conditionsTypeNeededToInteract: 0
+  minConditionToCarry: 0.5
+  minConditionToPush: 3
+  soundToPlayOnInteractAndDrop: {fileID: 7164656231244034964}
+--- !u!114 &7164656231244034964
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3157226785062857768}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9b6d2cdd667f7204aabb934c567dcd10, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  clips:
+  - {fileID: 8300000, guid: cda8daf948df90344a734851c61bca13, type: 3}
+  - {fileID: 8300000, guid: a5feba902df06644fa4a27468644c48c, type: 3}
+  volume: 0.75
+  volumeVariance: 0.1
+  pitch: 1
+  pitchVariance: 0.1
+  loop: 0
+  playOnAwake: 0
+  mixerGroup: {fileID: -6836437550479822473, guid: 6872fd114135b4f46bccacb6c64a5036,
+    type: 2}
