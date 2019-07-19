@@ -11,7 +11,9 @@ GameObject:
   - component: {fileID: 7566570576069419470}
   - component: {fileID: 1466728060635405304}
   - component: {fileID: 5144892039674898177}
-  - component: {fileID: 1137595544}
+  - component: {fileID: 8722910696723249149}
+  - component: {fileID: 7219960086578583500}
+  - component: {fileID: 4829207665049966240}
   m_Layer: 0
   m_Name: pre_bed
   m_TagString: Untagged
@@ -78,8 +80,8 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!64 &1137595544
-MeshCollider:
+--- !u!65 &8722910696723249149
+BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -88,7 +90,32 @@ MeshCollider:
   m_Material: {fileID: 13400000, guid: e4779379c910aab45b657a763e061292, type: 2}
   m_IsTrigger: 0
   m_Enabled: 1
-  serializedVersion: 3
-  m_Convex: 0
-  m_CookingOptions: 14
-  m_Mesh: {fileID: 6467158826280699559, guid: 14cb9eb68703a0c489fe7a39b1810755, type: 3}
+  serializedVersion: 2
+  m_Size: {x: 0.9132199, y: 0.3, z: 1.8426337}
+  m_Center: {x: 0.024022207, y: 0.15, z: 0.012945443}
+--- !u!65 &7219960086578583500
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6870947124815369181}
+  m_Material: {fileID: 13400000, guid: e4779379c910aab45b657a763e061292, type: 2}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.9132199, y: 0.1, z: 1.8426337}
+  m_Center: {x: 0.024022207, y: 1.025, z: 0.012945443}
+--- !u!65 &4829207665049966240
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6870947124815369181}
+  m_Material: {fileID: 13400000, guid: e4779379c910aab45b657a763e061292, type: 2}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.9132199, y: 0.1, z: 1.8426337}
+  m_Center: {x: 0.024022207, y: 1.8125, z: 0.012945443}
