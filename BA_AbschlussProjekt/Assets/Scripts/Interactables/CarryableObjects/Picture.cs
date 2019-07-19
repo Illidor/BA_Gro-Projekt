@@ -36,7 +36,10 @@ public class Picture : GrabInteractable
     private void OnCollisionEnter(Collision other)
     {
         // Check for Physics Material            no idea what this comment means, maybe a todo? The code had nothing to do with physics materials... I'll leave it in just in case
-        if(IsBeeingCarried == false)
+
+        float velocity = rigidbody.velocity.y;
+
+        if (IsBeeingCarried == false)
         {
             Debug.Log("Not carried drop");
             if (other.collider.material.bounciness < materialBouncinessThreshholdToNotBreak && 

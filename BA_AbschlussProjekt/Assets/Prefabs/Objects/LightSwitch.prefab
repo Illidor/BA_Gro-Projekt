@@ -57,7 +57,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4715203193173355083}
   m_LocalRotation: {x: -0, y: 0.13052596, z: -0, w: 0.99144495}
-  m_LocalPosition: {x: -0.29, y: -0.005, z: -0.854}
+  m_LocalPosition: {x: -0.302, y: -0.0099, z: -0.872}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 5549937926499206191}
@@ -75,7 +75,7 @@ Light:
   m_Type: 0
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_Intensity: 10
-  m_Range: 0.9759604
+  m_Range: 0.91
   m_SpotAngle: 6.539715
   m_InnerSpotAngle: 1
   m_CookieSize: 10
@@ -180,7 +180,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: fae66c9466dcd4a4a93d11222d501003, type: 2}
+  - {fileID: 2100000, guid: ae3d70ad4ba804c4eb62a65772e4d897, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -215,6 +215,7 @@ GameObject:
   - component: {fileID: 659298141263582962}
   - component: {fileID: 8092044375729868838}
   - component: {fileID: 74970138}
+  - component: {fileID: 1481234725}
   m_Layer: 0
   m_Name: mdl_lightswitch
   m_TagString: Untagged
@@ -262,7 +263,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 8bc9e188a881d204e84bee058c28dab4, type: 2}
+  - {fileID: 2100000, guid: 895a9ba637f01bf4a831ebe82e7611ad, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -292,7 +293,7 @@ Animator:
   m_GameObject: {fileID: 5742746971358244641}
   m_Enabled: 1
   m_Avatar: {fileID: 9000000, guid: 75cf94fce85ee5e489da1fd832d5cb94, type: 3}
-  m_Controller: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: eaf8ea285b2ae8741a3e383ba9f257b1, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -320,8 +321,16 @@ MonoBehaviour:
   minConditionToPush: 3
   soundToPlayOnInteract: {fileID: 0}
   leverOn: 0
-  lightStrengths: []
-  lightsSources: []
+  lightStrengths:
+  - 1.2
+  - 1.2
+  - 1.2
+  - 1.2
+  lightsSources:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
   lightOffStrength: 0
 --- !u!54 &8092044375729868838
 Rigidbody:
@@ -334,10 +343,10 @@ Rigidbody:
   m_Mass: 1
   m_Drag: 0
   m_AngularDrag: 0.05
-  m_UseGravity: 1
-  m_IsKinematic: 0
+  m_UseGravity: 0
+  m_IsKinematic: 1
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 126
   m_CollisionDetection: 0
 --- !u!82 &74970138
 AudioSource:
@@ -435,3 +444,16 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!65 &1481234725
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5742746971358244641}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.044692744, y: 0.35076472, z: 0.21000472}
+  m_Center: {x: -0.0034836177, y: 0, z: 0}

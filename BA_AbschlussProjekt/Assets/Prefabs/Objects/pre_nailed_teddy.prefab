@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 3935641255124034971}
   - component: {fileID: 3935641255124034964}
   - component: {fileID: 7521974822298399065}
+  - component: {fileID: 2488525878549965172}
   m_Layer: 0
   m_Name: pre_nailed_teddy
   m_TagString: Untagged
@@ -123,6 +124,29 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <DisplayName>k__BackingField: Teddy
   conditionsTypeNeededToInteract: 0
-  velocity: 0
   minConditionToCarry: 0.5
   minConditionToPush: 3
+  soundToPlayOnInteractAndDrop: {fileID: 2488525878549965172}
+--- !u!114 &2488525878549965172
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5025975165486694351}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9b6d2cdd667f7204aabb934c567dcd10, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  clips:
+  - {fileID: 8300000, guid: a466aaa47c8ba4d458588663668f6c75, type: 3}
+  - {fileID: 8300000, guid: d6507f56fd1e4184cb8d1d3ef72fb0f6, type: 3}
+  volume: 0.75
+  volumeVariance: 0.1
+  pitch: 1
+  pitchVariance: 0.1
+  loop: 0
+  playOnAwake: 0
+  mixerGroup: {fileID: -6836437550479822473, guid: 6872fd114135b4f46bccacb6c64a5036,
+    type: 2}

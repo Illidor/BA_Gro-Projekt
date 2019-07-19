@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -6,6 +7,10 @@ public class HatchInteraction : InteractionFoundation, ICombinable
 {
     public List<GameObject> correlatingGameObjects;
 
+    [SerializeField]
+    private float timeDelayBetweenKnocksInSeconds = 1;
+    [SerializeField]
+    private int knockingCountToUnlock = 2;
     [SerializeField]
     ParticleSystem dustPs;
     [SerializeField]
@@ -15,12 +20,13 @@ public class HatchInteraction : InteractionFoundation, ICombinable
     [SerializeField] [Tooltip("will automatically use last on gameobject")]
     Sound knockingSound;
 
-    private int knockingCountToUnlock = 2;
     private float dustParticleTicker = 0f;
     private float dustParticleThreshold = 30f;
     private bool isEmitting = true;
 
     private int knockCOunter = 0;
+
+    private float timeOfLastKnock;
 
     private void Start()
     {
@@ -45,18 +51,33 @@ public class HatchInteraction : InteractionFoundation, ICombinable
 
     public bool Combine(InteractionScript player, BaseInteractable interactingComponent)
     {
-        if (knockCOunter < knockingCountToUnlock - 1)
+        knockingSound?.PlaySound(0);
+
+        if (knockCOunter < knockingCountToUnlock - 1 &&
+            (Time.time - timeOfLastKnock) > timeDelayBetweenKnocksInSeconds)
         {
+            timeOfLastKnock = Time.time;
+
             knockCOunter++;
-            knockingSound.PlaySound(0);
+
+            dustPs.Emit(10);
+            dustParticleSound.PlaySound(0);
+
             return false;
         }
 
+        OpenHatch();
+
+        return true;
+    }
+
+    public void OpenHatch()
+    {
         try
         {
             GetComponent<Animator>().SetTrigger("open");
-            hatchOpenSound.PlaySound(0);
-            dustParticleSound.PlaySound(0);
+            hatchOpenSound?.PlaySound(0);
+            dustParticleSound?.PlaySound(0);
             isEmitting = false;
             StartCoroutine(DelayDustEffect(0.25f));
             //AudioManager.audioManager.Play("snd_openattic_ladder");
@@ -72,19 +93,20 @@ public class HatchInteraction : InteractionFoundation, ICombinable
             }
             catch (System.Exception) { }
         }
-
-        return true;
     }
 
     private IEnumerator DelayDustEffect(float delay)
     {
         yield return new WaitForSeconds(delay);
-        dustParticleSound.PlaySound(0);
+        dustParticleSound?.PlaySound(0);
         dustPs.Emit(40);
     }
  
     public bool HandleCombine(InteractionScript player, BaseInteractable currentlyHolding)
     {
+        if ((Time.time - timeOfLastKnock) < timeDelayBetweenKnocksInSeconds)
+            return false;
+
         player.GUIInteractionFeedbackHandler.StandardCrosshair.SetActive(   false);
         player.GUIInteractionFeedbackHandler.InteractionCrosshair.SetActive(true );
 

@@ -36,7 +36,6 @@ public abstract class BaseInteractable : InteractionFoundation
     /// <param name="guiInteractionFeedbackHandler">Collection of references of GUI elements used for interaction feedback inside the gui. Should be present in the current "InteractionScript"</param>
     public virtual void HandleInteraction(InteractionScript player)
     {
-        Debug.Log("hey?");
         player.GUIInteractionFeedbackHandler.StandardCrosshair.SetActive(false);
         //player.GUIInteractionFeedbackHandler.InteractionCrosshair.SetActive(true);
         //player.GUIInteractionFeedbackHandler.ActionDescription.text = textToDisplayOnHover;

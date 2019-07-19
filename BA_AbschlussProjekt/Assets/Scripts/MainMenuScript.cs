@@ -11,11 +11,19 @@ public class MainMenuScript : MonoBehaviour
     private GameObject controllsButton;
     [SerializeField]
     private GameObject controllsPanel;
+    [SerializeField]
+    private Sound menuSound;
+
     private bool mouseLock = false;
+
+    private void Awake()
+    {
+        menuSound?.PlaySound(0);
+    }
 
     private void Update()
     {
-        LockMouse(mouseLock);           
+        LockMouse(mouseLock);
     }
 
     public void onStartGameClicked()
@@ -44,4 +52,8 @@ public class MainMenuScript : MonoBehaviour
             Cursor.lockState = CursorLockMode.Locked;
         }
     }
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> Merge

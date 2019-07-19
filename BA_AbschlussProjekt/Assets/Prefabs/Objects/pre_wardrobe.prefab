@@ -158,8 +158,10 @@ GameObject:
   - component: {fileID: 4384470458743040407}
   - component: {fileID: 1596141997281712351}
   - component: {fileID: 3577241894646346680}
-  - component: {fileID: 1205720121802106815}
+  - component: {fileID: 4149731509822867012}
   - component: {fileID: 4503747339775749255}
+  - component: {fileID: 8545717516055787742}
+  - component: {fileID: 7011940007426755026}
   m_Layer: 0
   m_Name: mdl_wardrobe_door_left
   m_TagString: Untagged
@@ -226,7 +228,7 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!114 &1205720121802106815
+--- !u!114 &4149731509822867012
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -235,15 +237,19 @@ MonoBehaviour:
   m_GameObject: {fileID: 3097370065080329717}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 43673ea6bfbb7644fb84d94664621c4f, type: 3}
+  m_Script: {fileID: 11500000, guid: 6960b848444c23f4ab11f77fbcc95d44, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   <DisplayName>k__BackingField: Wardrobe Door
   conditionsTypeNeededToInteract: 0
   minLocalRotation: 0
-  maxLocalRotation: 120
+  maxLocalRotation: 129
   axis: {x: 0, y: 1, z: 0}
   transformToHinge: {fileID: 4384470458743040407}
+  wardrobeKeyName: WardrobeKey
+  otherDoor: {fileID: 813065485064807089}
+  doorBreakOpenSound: {fileID: 8545717516055787742}
+  unlockWithKeySound: {fileID: 7011940007426755026}
 --- !u!65 &4503747339775749255
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -257,6 +263,50 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.10313568, y: 1.8633758, z: 0.6485172}
   m_Center: {x: -0.020934407, y: -0.10215324, z: -0.3242585}
+--- !u!114 &8545717516055787742
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3097370065080329717}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9b6d2cdd667f7204aabb934c567dcd10, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  clips:
+  - {fileID: 8300000, guid: e79fd6ae8654c45459ead65282b28c4a, type: 3}
+  volume: 0.75
+  volumeVariance: 0.1
+  pitch: 1
+  pitchVariance: 0.1
+  loop: 0
+  playOnAwake: 0
+  mixerGroup: {fileID: -5150181079327529033, guid: 6872fd114135b4f46bccacb6c64a5036,
+    type: 2}
+--- !u!114 &7011940007426755026
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3097370065080329717}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9b6d2cdd667f7204aabb934c567dcd10, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  clips:
+  - {fileID: 8300000, guid: a3f33bbb30b7d61498f57fb53bdbacb5, type: 3}
+  volume: 0.75
+  volumeVariance: 0.1
+  pitch: 1
+  pitchVariance: 0.1
+  loop: 0
+  playOnAwake: 0
+  mixerGroup: {fileID: -5150181079327529033, guid: 6872fd114135b4f46bccacb6c64a5036,
+    type: 2}
 --- !u!1 &4557055158177431691
 GameObject:
   m_ObjectHideFlags: 0
@@ -269,9 +319,9 @@ GameObject:
   - component: {fileID: 3331886670370359708}
   - component: {fileID: 4800536642653180455}
   - component: {fileID: 7415446302401121695}
+  - component: {fileID: 7360032584062393592}
   - component: {fileID: 2678700368205804208}
   - component: {fileID: 957719782246006062}
-  - component: {fileID: 7360032584062393592}
   m_Layer: 0
   m_Name: "mdl_wardrobe_r\xFCckwand"
   m_TagString: Untagged
@@ -351,6 +401,22 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.010026872, y: 0.63693094, z: 1.2242374}
   m_Center: {x: 0.00000008940697, y: -0.00019022822, z: -0.00001707673}
+--- !u!54 &7360032584062393592
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4557055158177431691}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 1
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 3
 --- !u!114 &2678700368205804208
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -365,6 +431,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <DisplayName>k__BackingField: Wardobe Back
   conditionsTypeNeededToInteract: 0
+  smashStrength: 1
   wardrobeBackBreakSound: {fileID: 957719782246006062}
 --- !u!114 &957719782246006062
 MonoBehaviour:
@@ -388,22 +455,6 @@ MonoBehaviour:
   playOnAwake: 0
   mixerGroup: {fileID: -5150181079327529033, guid: 6872fd114135b4f46bccacb6c64a5036,
     type: 2}
---- !u!54 &7360032584062393592
-Rigidbody:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4557055158177431691}
-  serializedVersion: 2
-  m_Mass: 1
-  m_Drag: 0
-  m_AngularDrag: 0.05
-  m_UseGravity: 1
-  m_IsKinematic: 1
-  m_Interpolate: 0
-  m_Constraints: 0
-  m_CollisionDetection: 3
 --- !u!1 &6522882414863157641
 GameObject:
   m_ObjectHideFlags: 0
@@ -449,8 +500,10 @@ GameObject:
   - component: {fileID: 7447380483171646356}
   - component: {fileID: 8734885427093097593}
   - component: {fileID: 263256475154456044}
-  - component: {fileID: 6528890891814909362}
+  - component: {fileID: 813065485064807089}
   - component: {fileID: 852535224208419173}
+  - component: {fileID: 170590703207985631}
+  - component: {fileID: 2106846760698035868}
   m_Layer: 0
   m_Name: mdl_wardrobe_door_right
   m_TagString: Untagged
@@ -517,7 +570,7 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!114 &6528890891814909362
+--- !u!114 &813065485064807089
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -526,7 +579,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 8009110981417934328}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 43673ea6bfbb7644fb84d94664621c4f, type: 3}
+  m_Script: {fileID: 11500000, guid: 6960b848444c23f4ab11f77fbcc95d44, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   <DisplayName>k__BackingField: Wardrobe Door
@@ -535,6 +588,10 @@ MonoBehaviour:
   maxLocalRotation: -120
   axis: {x: 0, y: 1, z: 0}
   transformToHinge: {fileID: 7447380483171646356}
+  wardrobeKeyName: WardrobeKey
+  otherDoor: {fileID: 4149731509822867012}
+  doorBreakOpenSound: {fileID: 170590703207985631}
+  unlockWithKeySound: {fileID: 2106846760698035868}
 --- !u!65 &852535224208419173
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -548,3 +605,47 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.103680804, y: 1.8633758, z: 0.6497385}
   m_Center: {x: -0.021161744, y: -0.0430122, z: 0.32486928}
+--- !u!114 &170590703207985631
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8009110981417934328}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9b6d2cdd667f7204aabb934c567dcd10, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  clips:
+  - {fileID: 8300000, guid: e79fd6ae8654c45459ead65282b28c4a, type: 3}
+  volume: 0.75
+  volumeVariance: 0.1
+  pitch: 1
+  pitchVariance: 0.1
+  loop: 0
+  playOnAwake: 0
+  mixerGroup: {fileID: -5150181079327529033, guid: 6872fd114135b4f46bccacb6c64a5036,
+    type: 2}
+--- !u!114 &2106846760698035868
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8009110981417934328}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9b6d2cdd667f7204aabb934c567dcd10, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  clips:
+  - {fileID: 8300000, guid: a3f33bbb30b7d61498f57fb53bdbacb5, type: 3}
+  volume: 0.75
+  volumeVariance: 0.1
+  pitch: 1
+  pitchVariance: 0.1
+  loop: 0
+  playOnAwake: 0
+  mixerGroup: {fileID: -5150181079327529033, guid: 6872fd114135b4f46bccacb6c64a5036,
+    type: 2}

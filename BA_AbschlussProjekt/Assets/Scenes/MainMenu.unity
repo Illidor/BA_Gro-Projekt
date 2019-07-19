@@ -1110,8 +1110,9 @@ GameObject:
   - component: {fileID: 1973882191}
   - component: {fileID: 1973882190}
   - component: {fileID: 1973882189}
+  - component: {fileID: 1973882193}
   m_Layer: 0
-  m_Name: EventSystem
+  m_Name: MainMenuLogic and EventSystem
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1132,6 +1133,7 @@ MonoBehaviour:
   startGameButton: {fileID: 1895159565}
   controllsButton: {fileID: 778627689}
   controllsPanel: {fileID: 1536417027}
+  menuSound: {fileID: 1973882193}
 --- !u!114 &1973882190
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1180,3 +1182,25 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1973882193
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1973882188}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9b6d2cdd667f7204aabb934c567dcd10, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  clips:
+  - {fileID: 8300000, guid: 24b7d68f05585a74db484ef82500dc85, type: 3}
+  volume: 0.75
+  volumeVariance: 0.1
+  pitch: 1
+  pitchVariance: 0.1
+  loop: 0
+  playOnAwake: 0
+  mixerGroup: {fileID: -9101280998079847220, guid: 6872fd114135b4f46bccacb6c64a5036,
+    type: 2}
