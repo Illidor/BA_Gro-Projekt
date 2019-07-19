@@ -78,7 +78,7 @@ public class HatchInteraction : InteractionFoundation, ICombinable
     {
         try
         {
-            GetComponent<Animator>().SetTrigger("open");
+            transform.parent.GetComponent<Animator>().SetTrigger("open");
             hatchOpenSound?.PlaySound(0);
             EmitDust(10);
             isEmitting = false;
