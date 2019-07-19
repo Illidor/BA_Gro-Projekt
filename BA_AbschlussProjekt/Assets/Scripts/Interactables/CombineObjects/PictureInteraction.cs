@@ -23,9 +23,9 @@ public class PictureInteraction : InteractionFoundation, ICombinable
 
     public bool Combine(InteractionScript player, BaseInteractable interactingComponent)
     {
-        if(interactingComponent.name == objectToInteract.name)
+        if(interactingComponent is Picture picture)
         {
-            ((GrabInteractable)interactingComponent).PutDown(player);
+            picture.PutDown(player);
 
             // the following is the old method. I now put a picture duplicate there to be activated.
             //interactingComponent.GetComponent<Rigidbody>().isKinematic = true;

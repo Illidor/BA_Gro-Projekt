@@ -15,7 +15,7 @@ public class InteractionScript : MonoBehaviour
     private bool lastGrabWasBothHanded;
 
     [field: Space,
-        LabelOverride("Grabing Point"), SerializeField, Tooltip("Hand the carried object is parented to")]
+        LabelOverride("Grabing Point"), SerializeField, Tooltip("Object the carried object is parented to")]
     public Transform GrabingPoint { get; private set; }
 
     [field: LabelOverride("GUI Interaction Feedback Handler"), SerializeField,
@@ -93,7 +93,6 @@ public class InteractionScript : MonoBehaviour
         {
             if (didRaycastHit)
             {
-                Debug.Log(raycastHit.collider.GetComponent<ICombinable>());
                 if (raycastHit.collider.GetComponent<ICombinable>()?.HandleCombine(this, UsedObject) == true)
                     return;
             }
@@ -107,7 +106,7 @@ public class InteractionScript : MonoBehaviour
         cR_isRunning = true;
         Transform pointRight;
         Transform pointLeft = null;
-        if (objecToInteractWith == null)
+        if (objecToInteractWith == null) //Resetting the arms when droping a item
         {
             pointRight = HandIKRight.parent;
             pointLeft = HandIKLeft.parent;
@@ -129,14 +128,14 @@ public class InteractionScript : MonoBehaviour
 
         if (pointRight != null)
         {
-            while ((HandIKRight.position - pointRight.position).magnitude > 5f || (HandIKRight.eulerAngles - pointRight.eulerAngles).magnitude > 5f)
+            while ((HandIKRight.position - pointRight.position).magnitude > .2f || (HandIKRight.eulerAngles - pointRight.eulerAngles).magnitude > .2f)
             {
-                HandIKRight.transform.position = Vector3.MoveTowards(HandIKRight.position, pointRight.position, distance);
+                HandIKRight.position = Vector3.MoveTowards(HandIKRight.position, pointRight.position, distance);
                 HandIKRight.rotation = Quaternion.Lerp(HandIKRight.rotation, pointRight.rotation, distance);
 
                 if (bothHanded)
                 {
-                    HandIKLeft.transform.position = Vector3.MoveTowards(HandIKLeft.position, pointLeft.position, distance);
+                    HandIKLeft.position = Vector3.MoveTowards(HandIKLeft.position, pointLeft.position, distance);
                     HandIKLeft.rotation = Quaternion.Lerp(HandIKLeft.rotation, pointLeft.rotation, distance);
                 }
 
@@ -151,12 +150,11 @@ public class InteractionScript : MonoBehaviour
 
         if (pointRight != null && objecToInteractWith != null && UsedObject != null)
         {
-            Transform FixPoint = objecToInteractWith.transform.parent;
-            print("FixPoint: " + FixPoint);
+            Transform FixPoint = objecToInteractWith.transform;
 
             if (FixPoint != null && FixPoint.gameObject.tag == "FixPoint")
             {
-                while ((FixPoint.transform.position - GrabingPoint.position).magnitude > 5f || ((FixPoint.transform.eulerAngles - GrabingPoint.eulerAngles).magnitude > 5f))
+                while ((FixPoint.transform.position - GrabingPoint.position).magnitude > .2f || ((FixPoint.transform.eulerAngles - GrabingPoint.eulerAngles).magnitude > .2f))
                 {
                     FixPoint.transform.position = Vector3.MoveTowards(FixPoint.transform.position, GrabingPoint.transform.position, distance);
                     FixPoint.transform.rotation = Quaternion.Lerp(FixPoint.transform.rotation, GrabingPoint.transform.rotation, distance);

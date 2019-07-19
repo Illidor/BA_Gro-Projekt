@@ -11,6 +11,9 @@ GameObject:
   - component: {fileID: 8256540550637420062}
   - component: {fileID: 6582694617833258579}
   - component: {fileID: 605422488064115370}
+  - component: {fileID: 4381686572753897747}
+  - component: {fileID: 2885596176216527891}
+  - component: {fileID: 8863469830296055735}
   m_Layer: 12
   m_Name: WardrobeKey
   m_TagString: FixPoint
@@ -79,6 +82,53 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+--- !u!54 &4381686572753897747
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3864739323809950927}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 1
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
+--- !u!114 &2885596176216527891
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3864739323809950927}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d8bdc993e595ec845b9a429a2b6ef257, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  <DisplayName>k__BackingField: 
+  conditionsTypeNeededToInteract: 0
+  isBothHanded: 0
+  minConditionToCarry: 0.5
+  minConditionToPush: 3
+  soundToPlayOnInteractAndDrop: {fileID: 0}
+--- !u!65 &8863469830296055735
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3864739323809950927}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.040487293, y: 0.27925122, z: 0.11291377}
+  m_Center: {x: 0.00015847944, y: -0.03946227, z: 0.000000007450581}
 --- !u!1 &5559474994613633235
 GameObject:
   m_ObjectHideFlags: 0
@@ -88,9 +138,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 725195125309428226}
-  - component: {fileID: 2100509864981633689}
-  - component: {fileID: 8172414767583712034}
-  - component: {fileID: 447049901675650344}
   m_Layer: 8
   m_Name: WardrobeKey
   m_TagString: Untagged
@@ -114,53 +161,6 @@ Transform:
   m_Father: {fileID: 8256540550637420062}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 90}
---- !u!65 &2100509864981633689
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5559474994613633235}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 0.040487293, y: 0.27925122, z: 0.11291377}
-  m_Center: {x: 0.00015847944, y: -0.03946227, z: 0.000000007450581}
---- !u!54 &8172414767583712034
-Rigidbody:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5559474994613633235}
-  serializedVersion: 2
-  m_Mass: 1
-  m_Drag: 0
-  m_AngularDrag: 0.05
-  m_UseGravity: 1
-  m_IsKinematic: 1
-  m_Interpolate: 0
-  m_Constraints: 0
-  m_CollisionDetection: 0
---- !u!114 &447049901675650344
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5559474994613633235}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d8bdc993e595ec845b9a429a2b6ef257, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  <DisplayName>k__BackingField: 
-  conditionsTypeNeededToInteract: 0
-  isBothHanded: 0
-  minConditionToCarry: 0.5
-  minConditionToPush: 3
-  soundToPlayOnInteractAndDrop: {fileID: 0}
 --- !u!1 &7385598712606003696
 GameObject:
   m_ObjectHideFlags: 0

@@ -71,16 +71,15 @@ public class GrabInteractable : BaseInteractable
     /// </summary>
     protected virtual bool CarryOutInteraction_Carry(InteractionScript player)
     {
-        Debug.Log("carrying");
-        gameObject.layer = LayerMask.NameToLayer("NoPlayerCollision");
-        if(transform.parent.gameObject.tag == "FixPoint")
-        {
-            transform.parent.SetParent(player.GrabingPoint.transform);
-        }
-        else
-        {
-            transform.SetParent(player.GrabingPoint.transform);
-        }
+        //gameObject.layer = LayerMask.NameToLayer("NoPlayerCollision");
+
+        //if(transform.parent != null)
+        //{
+        //    transform.SetParent(null);
+        //}
+        print("Parenting to: " + player.GrabingPoint.name);
+        transform.SetParent(player.GrabingPoint.transform);
+       
         //transform.localPosition = Vector3.zero;
         rigidbody.isKinematic = true;
         player.SetCarriedObject(this);
@@ -99,7 +98,7 @@ public class GrabInteractable : BaseInteractable
 
         if (IsBeeingCarried)
         {
-            transform.parent.SetParent(InstancePool.transform, true);
+            transform.SetParent(InstancePool.transform, true);
 
             Ray screenCenterRay = Camera.main.ScreenPointToRay(Input.mousePosition);
 
@@ -130,7 +129,6 @@ public class GrabInteractable : BaseInteractable
         {
             transform.parent = InstancePool.transform;
         }
-        StartCoroutine(ResetFixPoints());
 
         rigidbody.isKinematic = false;
         player.StopUsingObject();
@@ -142,19 +140,6 @@ public class GrabInteractable : BaseInteractable
         collider.enabled = true;
 
         soundToPlayOnInteractAndDrop?.PlaySound(1);
-    }
-
-    private IEnumerator ResetFixPoints()
-    {
-        transform.SetParent(null);
-
-        print("Blah:: " + positionDelta);
-        yield return new WaitWhile(() => rigidbody.velocity.sqrMagnitude < 0f);
-        print("Blah2:: " + positionDelta);
-        FixPoint.eulerAngles = transform.eulerAngles - rotationDelta;
-        FixPoint.position = transform.position - positionDelta;
-
-        transform.SetParent(FixPoint);
     }
 
     protected virtual bool CarryOutInteraction_Push(InteractionScript player)

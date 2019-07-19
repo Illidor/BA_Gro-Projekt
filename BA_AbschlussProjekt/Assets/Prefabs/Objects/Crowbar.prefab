@@ -86,12 +86,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 199623261116416413}
-  - component: {fileID: 4259157293860435686}
-  - component: {fileID: 4873003370040944582}
-  - component: {fileID: 7531929956640163107}
-  - component: {fileID: 7352586888323664387}
-  - component: {fileID: 1901391501937406410}
-  - component: {fileID: 1901391501937406409}
   m_Layer: 8
   m_Name: Crowbar
   m_TagString: Untagged
@@ -106,130 +100,14 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6943074660391955875}
-  m_LocalRotation: {x: -0.0020476878, y: 0.05907026, z: -0.9954278, w: -0.07503381}
-  m_LocalPosition: {x: 1.8491689, y: 11.829081, z: 1.656637}
+  m_LocalRotation: {x: -0.0047619944, y: 0.025424452, z: -0.99663824, w: -0.07773816}
+  m_LocalPosition: {x: 1.854686, y: 11.847778, z: 1.621465}
   m_LocalScale: {x: 99.999985, y: 100, z: 99.99998}
   m_Children:
   - {fileID: 2163434812598873186}
   m_Father: {fileID: 1776156801793994840}
   m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 59.744003, y: -54.867004, z: 0}
---- !u!65 &4259157293860435686
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6943074660391955875}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 0.07230967, y: 0.7741907, z: 0.0632959}
-  m_Center: {x: 0.0019091778, y: 0.0054324567, z: -0.000000692904}
---- !u!54 &4873003370040944582
-Rigidbody:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6943074660391955875}
-  serializedVersion: 2
-  m_Mass: 1
-  m_Drag: 0
-  m_AngularDrag: 0.05
-  m_UseGravity: 1
-  m_IsKinematic: 1
-  m_Interpolate: 0
-  m_Constraints: 0
-  m_CollisionDetection: 0
---- !u!114 &7531929956640163107
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6943074660391955875}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8f5bf4f8f62acaa4bbb2e0fced37dc9a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  <DisplayName>k__BackingField: Crowbar
-  conditionsTypeNeededToInteract: 0
-  isBothHanded: 0
-  minConditionToCarry: 0.5
-  minConditionToPush: 3
-  soundToPlayOnInteractAndDrop: {fileID: 1901391501937406409}
-  crowbarBreakSound: {fileID: 1901391501937406410}
---- !u!114 &7352586888323664387
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6943074660391955875}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9b6d2cdd667f7204aabb934c567dcd10, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  clips:
-  - {fileID: 8300000, guid: 98f195bbb8bc85b42b6394a0ec864b5c, type: 3}
-  - {fileID: 8300000, guid: 46fbc35ecf21c114f8e7a775ff2b0d9c, type: 3}
-  volume: 0.75
-  volumeVariance: 0.1
-  pitch: 1
-  pitchVariance: 0.1
-  loop: 0
-  playOnAwake: 0
-  mixerGroup: {fileID: -6836437550479822473, guid: 6872fd114135b4f46bccacb6c64a5036,
-    type: 2}
---- !u!114 &1901391501937406410
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6943074660391955875}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9b6d2cdd667f7204aabb934c567dcd10, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  clips:
-  - {fileID: 8300000, guid: 46fbc35ecf21c114f8e7a775ff2b0d9c, type: 3}
-  volume: 0.75
-  volumeVariance: 0.1
-  pitch: 1
-  pitchVariance: 0.1
-  loop: 0
-  playOnAwake: 0
-  mixerGroup: {fileID: -6836437550479822473, guid: 6872fd114135b4f46bccacb6c64a5036,
-    type: 2}
---- !u!114 &1901391501937406409
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6943074660391955875}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9b6d2cdd667f7204aabb934c567dcd10, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  clips:
-  - {fileID: 8300000, guid: 98f195bbb8bc85b42b6394a0ec864b5c, type: 3}
-  - {fileID: 8300000, guid: 46fbc35ecf21c114f8e7a775ff2b0d9c, type: 3}
-  volume: 0.75
-  volumeVariance: 0.1
-  pitch: 1
-  pitchVariance: 0.1
-  loop: 0
-  playOnAwake: 0
-  mixerGroup: {fileID: -6836437550479822473, guid: 6872fd114135b4f46bccacb6c64a5036,
-    type: 2}
+  m_LocalEulerAnglesHint: {x: 177.053, y: -179.682, z: -8.911987}
 --- !u!1 &8807309007820774502
 GameObject:
   m_ObjectHideFlags: 0
@@ -241,6 +119,11 @@ GameObject:
   - component: {fileID: 1776156801793994840}
   - component: {fileID: 7317442404121394535}
   - component: {fileID: 3940735932306735518}
+  - component: {fileID: 484297603589234535}
+  - component: {fileID: 7475877994260120033}
+  - component: {fileID: 753439533334669281}
+  - component: {fileID: 2820027483131372146}
+  - component: {fileID: 4994797971968255324}
   m_Layer: 12
   m_Name: Crowbar
   m_TagString: FixPoint
@@ -255,7 +138,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8807309007820774502}
-  m_LocalRotation: {x: -0.41571763, y: -0.4550483, z: 0.7235988, w: -0.3106682}
+  m_LocalRotation: {x: -0.415717, y: -0.4550476, z: 0.7236, w: -0.31066722}
   m_LocalPosition: {x: -1.0455242, y: 4.385375, z: 0.26721898}
   m_LocalScale: {x: 0.010000002, y: 0.010000003, z: 0.010000003}
   m_Children:
@@ -309,6 +192,99 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+--- !u!65 &484297603589234535
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8807309007820774502}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 11.13, y: 63.46, z: 1.92}
+  m_Center: {x: 0.0019091778, y: 6.82, z: -0.000000692904}
+--- !u!54 &7475877994260120033
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8807309007820774502}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 1
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
+--- !u!114 &753439533334669281
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8807309007820774502}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8f5bf4f8f62acaa4bbb2e0fced37dc9a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  <DisplayName>k__BackingField: Crowbar
+  conditionsTypeNeededToInteract: 0
+  isBothHanded: 0
+  minConditionToCarry: 0.5
+  minConditionToPush: 3
+  soundToPlayOnInteractAndDrop: {fileID: 2820027483131372146}
+  crowbarBreakSound: {fileID: 4994797971968255324}
+--- !u!114 &2820027483131372146
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8807309007820774502}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9b6d2cdd667f7204aabb934c567dcd10, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  clips:
+  - {fileID: 8300000, guid: 98f195bbb8bc85b42b6394a0ec864b5c, type: 3}
+  - {fileID: 8300000, guid: 46fbc35ecf21c114f8e7a775ff2b0d9c, type: 3}
+  volume: 0.75
+  volumeVariance: 0.1
+  pitch: 1
+  pitchVariance: 0.1
+  loop: 0
+  playOnAwake: 0
+  mixerGroup: {fileID: -6836437550479822473, guid: 6872fd114135b4f46bccacb6c64a5036,
+    type: 2}
+--- !u!114 &4994797971968255324
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8807309007820774502}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9b6d2cdd667f7204aabb934c567dcd10, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  clips:
+  - {fileID: 8300000, guid: 46fbc35ecf21c114f8e7a775ff2b0d9c, type: 3}
+  volume: 0.75
+  volumeVariance: 0.1
+  pitch: 1
+  pitchVariance: 0.1
+  loop: 0
+  playOnAwake: 0
+  mixerGroup: {fileID: -6836437550479822473, guid: 6872fd114135b4f46bccacb6c64a5036,
+    type: 2}
 --- !u!1001 &6592325036461442936
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -329,37 +305,37 @@ PrefabInstance:
     - target: {fileID: -4216859302048453862, guid: 8ac3b20080f5a4c4e97bb1bebb80339d,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: -0.000024273733
       objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: 8ac3b20080f5a4c4e97bb1bebb80339d,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: -0.00011941036
       objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: 8ac3b20080f5a4c4e97bb1bebb80339d,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: -0.00028752594
       objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: 8ac3b20080f5a4c4e97bb1bebb80339d,
         type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0.00000008146034
+      value: 0.02624269
       objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: 8ac3b20080f5a4c4e97bb1bebb80339d,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0
+      value: -0.000011766793
       objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: 8ac3b20080f5a4c4e97bb1bebb80339d,
         type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0
+      value: -0.0022000545
       objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: 8ac3b20080f5a4c4e97bb1bebb80339d,
         type: 3}
       propertyPath: m_LocalRotation.w
-      value: 1
+      value: 0.9996532
       objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: 8ac3b20080f5a4c4e97bb1bebb80339d,
         type: 3}
@@ -369,17 +345,17 @@ PrefabInstance:
     - target: {fileID: -4216859302048453862, guid: 8ac3b20080f5a4c4e97bb1bebb80339d,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
+      value: 3.0080001
       objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: 8ac3b20080f5a4c4e97bb1bebb80339d,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
+      value: -0.008
       objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: 8ac3b20080f5a4c4e97bb1bebb80339d,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
+      value: -0.252
       objectReference: {fileID: 0}
     - target: {fileID: -1504981713932161579, guid: 8ac3b20080f5a4c4e97bb1bebb80339d,
         type: 3}

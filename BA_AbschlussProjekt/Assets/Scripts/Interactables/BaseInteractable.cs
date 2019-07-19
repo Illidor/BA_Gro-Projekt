@@ -74,42 +74,17 @@ public abstract class BaseInteractable : InteractionFoundation
         }
         else
         {
-            float distance = -1;
-            Transform returnTransform = transforms[0];
-            foreach (Transform objGrabPoint in transforms)
+            if (!leftHand)
             {
-                if (distance == -1)
-                {
-                    returnTransform = objGrabPoint;
-                    distance = (objGrabPoint.position - playerGrabPoint.position).sqrMagnitude;
-                    Debug.Log("Distance: " + distance);
-                }
-                else if ((objGrabPoint.position - playerGrabPoint.position).sqrMagnitude <= distance)
-                {
-                    distance = (objGrabPoint.position - playerGrabPoint.position).sqrMagnitude;
-                    returnTransform = objGrabPoint;
-                    Debug.Log("Distance: " + distance);
-                }
+                return transforms[0];
             }
+         
 
             if (leftHand)
             {
-                Transform leftReturnTransform = transforms[0];
-                foreach (Transform objGrabPoint in transforms)
-                {
-                    if (distance == -1)
-                    {
-                        leftReturnTransform = objGrabPoint;
-                        distance = (objGrabPoint.position - playerGrabPoint.position).sqrMagnitude;
-                        Debug.Log("Distance: " + distance);
-                    }
-                    else if (objGrabPoint != returnTransform)
-                    {
-                        return objGrabPoint;
-                    }
-                }
+                return transforms[1];
             }
-            return returnTransform;
+            return null;
         }
     }
 }

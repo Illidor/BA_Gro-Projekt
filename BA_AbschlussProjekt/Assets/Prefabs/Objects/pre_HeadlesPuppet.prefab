@@ -12,10 +12,6 @@ GameObject:
   - component: {fileID: 6508891620770567822}
   - component: {fileID: 7497470119523372140}
   - component: {fileID: 454586854408047266}
-  - component: {fileID: 7089128153970588915}
-  - component: {fileID: 8516584103023141024}
-  - component: {fileID: 6508891621169927268}
-  - component: {fileID: 2288937530702562081}
   m_Layer: 0
   m_Name: HeadlesPuppet
   m_TagString: Untagged
@@ -86,80 +82,6 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!54 &7089128153970588915
-Rigidbody:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 3520817932653843680, guid: 738bf96d52a69634c9e8575c64b935e1,
-    type: 3}
-  m_PrefabInstance: {fileID: 6508891621169927269}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1401789745096168012}
-  serializedVersion: 2
-  m_Mass: 1
-  m_Drag: 0
-  m_AngularDrag: 0.05
-  m_UseGravity: 1
-  m_IsKinematic: 0
-  m_Interpolate: 0
-  m_Constraints: 0
-  m_CollisionDetection: 0
---- !u!65 &8516584103023141024
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 3161265460004089007, guid: 738bf96d52a69634c9e8575c64b935e1,
-    type: 3}
-  m_PrefabInstance: {fileID: 6508891621169927269}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1401789745096168012}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 0.11690737, y: 0.22466707, z: 0.32649013}
-  m_Center: {x: -0.0065710004, y: 0, z: -0.017734012}
---- !u!114 &6508891621169927268
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 2428987147492674173, guid: 738bf96d52a69634c9e8575c64b935e1,
-    type: 3}
-  m_PrefabInstance: {fileID: 6508891621169927269}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1401789745096168012}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d8bdc993e595ec845b9a429a2b6ef257, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  <DisplayName>k__BackingField: Headless Puppet
-  conditionsTypeNeededToInteract: 0
-  isBothHanded: 0
-  minConditionToCarry: 0.5
-  minConditionToPush: 3
-  soundToPlayOnInteractAndDrop: {fileID: 2288937530702562081}
---- !u!114 &2288937530702562081
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 2870594377656636327, guid: 738bf96d52a69634c9e8575c64b935e1,
-    type: 3}
-  m_PrefabInstance: {fileID: 6508891621169927269}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1401789745096168012}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9b6d2cdd667f7204aabb934c567dcd10, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  clips:
-  - {fileID: 8300000, guid: 98f195bbb8bc85b42b6394a0ec864b5c, type: 3}
-  - {fileID: 8300000, guid: 46fbc35ecf21c114f8e7a775ff2b0d9c, type: 3}
-  volume: 0.75
-  volumeVariance: 0.1
-  pitch: 1
-  pitchVariance: 0.1
-  loop: 0
-  playOnAwake: 0
-  mixerGroup: {fileID: -6836437550479822473, guid: 6872fd114135b4f46bccacb6c64a5036,
-    type: 2}
 --- !u!1 &1841368045357138173
 GameObject:
   m_ObjectHideFlags: 0
@@ -171,8 +93,12 @@ GameObject:
   - component: {fileID: 3447087304589603566}
   - component: {fileID: 5948557041573120216}
   - component: {fileID: 121892372334687265}
+  - component: {fileID: 6709810234178897252}
+  - component: {fileID: 1631558921169175632}
+  - component: {fileID: 3132025257963474019}
+  - component: {fileID: 8986503489306178156}
   m_Layer: 12
-  m_Name: FixPoint
+  m_Name: pre_HeadlesPuppet
   m_TagString: FixPoint
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -239,6 +165,76 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+--- !u!54 &6709810234178897252
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1841368045357138173}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
+--- !u!65 &1631558921169175632
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1841368045357138173}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.11690737, y: 0.22466707, z: 0.32649013}
+  m_Center: {x: -0.0065710004, y: 0, z: -0.017734012}
+--- !u!114 &3132025257963474019
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1841368045357138173}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d8bdc993e595ec845b9a429a2b6ef257, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  <DisplayName>k__BackingField: Headless Puppet
+  conditionsTypeNeededToInteract: 0
+  isBothHanded: 0
+  minConditionToCarry: 0.5
+  minConditionToPush: 3
+  soundToPlayOnInteractAndDrop: {fileID: 0}
+--- !u!114 &8986503489306178156
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1841368045357138173}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9b6d2cdd667f7204aabb934c567dcd10, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  clips:
+  - {fileID: 8300000, guid: 98f195bbb8bc85b42b6394a0ec864b5c, type: 3}
+  - {fileID: 8300000, guid: 46fbc35ecf21c114f8e7a775ff2b0d9c, type: 3}
+  volume: 0.75
+  volumeVariance: 0.1
+  pitch: 1
+  pitchVariance: 0.1
+  loop: 0
+  playOnAwake: 0
+  mixerGroup: {fileID: -6836437550479822473, guid: 6872fd114135b4f46bccacb6c64a5036,
+    type: 2}
 --- !u!1 &8045964520297359227
 GameObject:
   m_ObjectHideFlags: 0
@@ -398,7 +394,8 @@ PrefabInstance:
       propertyPath: m_LocalScale.z
       value: 100.00002
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 0}
   m_SourcePrefab: {fileID: 100100000, guid: 738bf96d52a69634c9e8575c64b935e1, type: 3}
 --- !u!1001 &6508891621803764188
 PrefabInstance:
