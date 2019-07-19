@@ -7,6 +7,8 @@ public class CeilingKnocking : InteractionFoundation, ICombinable
     [SerializeField]
     private float timeDelayBetweenKnocksInSeconds = 0.5f;
     [SerializeField]
+    private HatchInteraction hatch;
+    [SerializeField]
     private Sound soundOnKnock;
 
     private float timeOfLastKnock;
@@ -27,6 +29,8 @@ public class CeilingKnocking : InteractionFoundation, ICombinable
             timeOfLastKnock = Time.time;
 
             soundOnKnock?.PlaySound(0);
+
+            hatch?.EmitDust(10);
 
             return true;
         }
