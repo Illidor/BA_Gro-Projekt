@@ -17,13 +17,31 @@ public class KeyBox : MonoBehaviour
     private Material redLampMaterial;
     [SerializeField]
     private GameObject lampInsideBox;
+    [SerializeField]
+    private Sound keyDropSound;
 
     public bool IsOpen { get; private set; }
 
     private void Awake()
     {
         key.SetActive(false);
+
+        if (keyDropSound == null)
+            keyDropSound = GetComponent<Sound>();
+
         CloseKeyBox();
+    }
+
+    public void CloseKeyBox()
+    {
+        greenLampMaterial.SetColor("_EmissionColor", new Color(0, 0, 0));
+        redLampMaterial.SetColor("_EmissionColor", redLampOnEmissionColor);
+
+        GetComponent<Animator>().SetBool("open", false);
+
+        lampInsideBox.SetActive(false);
+
+        IsOpen = false;
     }
 
     public void OpenKeyBox()
@@ -38,18 +56,8 @@ public class KeyBox : MonoBehaviour
 
         lampInsideBox.SetActive(true);
 
+        keyDropSound?.PlaySound(0);
+
         IsOpen = true;
-    }
-
-    public void CloseKeyBox()
-    {
-        greenLampMaterial.SetColor("_EmissionColor", new Color(0, 0, 0));
-        redLampMaterial.SetColor("_EmissionColor", redLampOnEmissionColor);
-
-        GetComponent<Animator>().SetBool("open", false);
-
-        lampInsideBox.SetActive(false);
-
-        IsOpen = false;
     }
 }
