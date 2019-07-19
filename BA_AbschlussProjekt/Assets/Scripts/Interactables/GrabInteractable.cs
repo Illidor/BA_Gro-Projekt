@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using CustomEnums;
 using UnityEngine;
 
@@ -29,12 +30,19 @@ public class GrabInteractable : BaseInteractable
     protected new Collider collider;
 
     public bool IsBeeingCarried { get; protected set; }
+    private Transform FixPoint;
+    private Vector3 positionDelta;
+    private Vector3 rotationDelta;
 
     public bool IsBeeingPulled { get; protected set; }
 
 
     protected new void Awake()
     {
+        FixPoint = gameObject.transform.parent;
+        positionDelta = transform.position - FixPoint.position;
+        rotationDelta = transform.eulerAngles - FixPoint.eulerAngles;
+
         rigidbody = GetComponent<Rigidbody>();
         collider = GetComponent<Collider>();
 
@@ -65,7 +73,14 @@ public class GrabInteractable : BaseInteractable
     {
         Debug.Log("carrying");
         gameObject.layer = LayerMask.NameToLayer("NoPlayerCollision");
-        transform.parent.SetParent(player.GrabingPoint.transform);
+        if(transform.parent.gameObject.tag == "FixPoint")
+        {
+            transform.parent.SetParent(player.GrabingPoint.transform);
+        }
+        else
+        {
+            transform.SetParent(player.GrabingPoint.transform);
+        }
         //transform.localPosition = Vector3.zero;
         rigidbody.isKinematic = true;
         player.SetCarriedObject(this);
@@ -115,6 +130,7 @@ public class GrabInteractable : BaseInteractable
         {
             transform.parent = InstancePool.transform;
         }
+        StartCoroutine(ResetFixPoints());
 
         rigidbody.isKinematic = false;
         player.StopUsingObject();
@@ -126,6 +142,19 @@ public class GrabInteractable : BaseInteractable
         collider.enabled = true;
 
         soundToPlayOnInteractAndDrop?.PlaySound(1);
+    }
+
+    private IEnumerator ResetFixPoints()
+    {
+        transform.SetParent(null);
+
+        print("Blah:: " + positionDelta);
+        yield return new WaitWhile(() => rigidbody.velocity.sqrMagnitude < 0f);
+        print("Blah2:: " + positionDelta);
+        FixPoint.eulerAngles = transform.eulerAngles - rotationDelta;
+        FixPoint.position = transform.position - positionDelta;
+
+        transform.SetParent(FixPoint);
     }
 
     protected virtual bool CarryOutInteraction_Push(InteractionScript player)

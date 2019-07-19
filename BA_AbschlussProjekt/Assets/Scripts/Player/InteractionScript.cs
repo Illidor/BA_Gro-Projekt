@@ -149,7 +149,6 @@ public class InteractionScript : MonoBehaviour
 
         objecToInteractWith?.CarryOutInteraction(this);
 
-
         if (pointRight != null && objecToInteractWith != null && UsedObject != null)
         {
             Transform FixPoint = objecToInteractWith.transform.parent;
@@ -174,6 +173,7 @@ public class InteractionScript : MonoBehaviour
                 }
             }
         }
+
         lastGrabWasBothHanded = bothHanded;
         Debug.Log("cR_End");
         cR_isRunning = false;
