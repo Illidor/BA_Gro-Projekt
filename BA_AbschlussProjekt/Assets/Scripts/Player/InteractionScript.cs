@@ -36,7 +36,7 @@ public class InteractionScript : MonoBehaviour
     public Transform HandIKLeft;
     public Transform HandIKRight;
     public bool cR_isRunning = false;
-    
+
 
 
     public float GrabingReach { get; private set; }
@@ -125,28 +125,32 @@ public class InteractionScript : MonoBehaviour
             fPSController.freezePlayerMovement = true;
         }
 
-        float distance = iKSpeed/Time.deltaTime;
+        float distance = iKSpeed / Time.deltaTime;
 
-        while ((HandIKRight.position - pointRight.position).magnitude > 5f || (HandIKRight.eulerAngles - pointRight.eulerAngles).magnitude > 5f)
+        if (pointRight != null)
         {
-            HandIKRight.transform.position = Vector3.MoveTowards(HandIKRight.position, pointRight.position, distance);
-            HandIKRight.rotation = Quaternion.Lerp(HandIKRight.rotation, pointRight.rotation, distance);
-
-            if (bothHanded)
+            while ((HandIKRight.position - pointRight.position).magnitude > 5f || (HandIKRight.eulerAngles - pointRight.eulerAngles).magnitude > 5f)
             {
-                HandIKLeft.transform.position = Vector3.MoveTowards(HandIKLeft.position, pointLeft.position,distance);
-                HandIKLeft.rotation = Quaternion.Lerp(HandIKLeft.rotation, pointLeft.rotation, distance);
+                HandIKRight.transform.position = Vector3.MoveTowards(HandIKRight.position, pointRight.position, distance);
+                HandIKRight.rotation = Quaternion.Lerp(HandIKRight.rotation, pointRight.rotation, distance);
+
+                if (bothHanded)
+                {
+                    HandIKLeft.transform.position = Vector3.MoveTowards(HandIKLeft.position, pointLeft.position, distance);
+                    HandIKLeft.rotation = Quaternion.Lerp(HandIKLeft.rotation, pointLeft.rotation, distance);
+                }
+
+                yield return new WaitForEndOfFrame();
             }
 
+            HandIKRight.rotation = pointRight.rotation;
             yield return new WaitForEndOfFrame();
         }
 
-        HandIKRight.rotation = pointRight.rotation;
-        yield return new WaitForEndOfFrame();
         objecToInteractWith?.CarryOutInteraction(this);
 
 
-        if(objecToInteractWith != null && UsedObject != null)
+        if (pointRight != null && objecToInteractWith != null && UsedObject != null)
         {
             Transform FixPoint = objecToInteractWith.transform.parent;
             print("FixPoint: " + FixPoint);
@@ -196,7 +200,7 @@ public class InteractionScript : MonoBehaviour
     {
         if (cR_isRunning)
         {
-            StopCoroutine(IKToObject(UsedObject,lastGrabWasBothHanded));
+            StopCoroutine(IKToObject(UsedObject, lastGrabWasBothHanded));
 
             cR_isRunning = false;
         }
@@ -206,7 +210,7 @@ public class InteractionScript : MonoBehaviour
         IsPushing = false;
 
         //StartCoroutine(IKToObject(HandIKRight.parent));
-        StartCoroutine(IKToObject(null,true));
+        StartCoroutine(IKToObject(null, true));
     }
 
     public void IncreaseReach(float reachToAdd)
@@ -219,9 +223,3 @@ public class InteractionScript : MonoBehaviour
         GrabingReach = emptyHandedGrabingReach;
     }
 }
-
-
-
-
-
-
