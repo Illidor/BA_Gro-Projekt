@@ -80,14 +80,14 @@ public class LadderInteraction : ConditionedInteraction
         Transform leftHandGrabPoint = LeftHandGrabPoints[0];
         foreach (Transform item in LeftHandGrabPoints)
         {
-            if (item.position.y - LeftIKHand.transform.position.y > leftHandGrabPoint.position.y - LeftIKHand.transform.position.y)
+            if (item.position.y - LeftIKHand.transform.position.y < leftHandGrabPoint.position.y - LeftIKHand.transform.position.y)
                 leftHandGrabPoint = item;
         }
 
         Transform rightHandGrabPoint = RightHandGrabPoints[0];
         foreach (Transform item in RightHandGrabPoints)
         {
-            if (item.position.y - RightIKHand.transform.position.y > rightHandGrabPoint.position.y - RightIKHand.transform.position.y)
+            if (item.position.y - RightIKHand.transform.position.y < rightHandGrabPoint.position.y - RightIKHand.transform.position.y)
                 rightHandGrabPoint = item;
         }
 
