@@ -20,6 +20,14 @@ public class LadderInteraction : ConditionedInteraction
     private Transform startPoint;
     [SerializeField]
     private Transform endPoint;
+    [SerializeField]
+    private Transform LeftIKHand;
+    [SerializeField]
+    private Transform RightIKHand;
+    [SerializeField]
+    private List<Transform> LeftHandGrabPoints;
+    [SerializeField]
+    private List<Transform> RightHandGrabPoints;
 
     public float CurrentClimbingSpeed { get; protected set; }
 
@@ -69,6 +77,25 @@ public class LadderInteraction : ConditionedInteraction
         if (!IsBeeingClimbed)
             return;
 
+        Transform leftHandGrabPoint = LeftHandGrabPoints[0];
+        foreach (Transform item in LeftHandGrabPoints)
+        {
+            if (item.position.y - LeftIKHand.transform.position.y > leftHandGrabPoint.position.y - LeftIKHand.transform.position.y)
+                leftHandGrabPoint = item;
+        }
+
+        Transform rightHandGrabPoint = RightHandGrabPoints[0];
+        foreach (Transform item in RightHandGrabPoints)
+        {
+            if (item.position.y - RightIKHand.transform.position.y > rightHandGrabPoint.position.y - RightIKHand.transform.position.y)
+                rightHandGrabPoint = item;
+        }
+
+        LeftIKHand.transform.position = Vector3.MoveTowards(LeftIKHand.transform.position, leftHandGrabPoint.position,1f);
+        LeftIKHand.transform.rotation = Quaternion.Lerp(LeftIKHand.transform.rotation, leftHandGrabPoint.rotation, 1f);
+        RightIKHand.transform.position = Vector3.MoveTowards(RightIKHand.transform.position, rightHandGrabPoint.position, 1f);
+        RightIKHand.transform.rotation = Quaternion.Lerp(RightIKHand.transform.rotation, rightHandGrabPoint.rotation, 1f);
+
         currentClimber.transform.localPosition += (endPoint.position - startPoint.position).normalized * (CurrentClimbingSpeed * CTRLHub.VerticalAxis);
 
         if (currentClimber.transform.position.y < startPoint.position.y ||
@@ -101,6 +128,8 @@ public class LadderInteraction : ConditionedInteraction
 
         IsBeeingClimbed = false;
         currentClimber = null;
+
+        currentClimber.ResetIK();
     }
 
     public override void HandleInteraction(InteractionScript player)

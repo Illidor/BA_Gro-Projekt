@@ -27,6 +27,7 @@ public class InteractionScript : MonoBehaviour
     public PlayerHealth PlayerHealth { get; protected set; }
 
     public GrabInteractable UsedObject { get; set; }
+    private Animator animator;
 
     public bool IsCarrying { get; private set; }
     public bool IsPushing { get; private set; }
@@ -54,6 +55,7 @@ public class InteractionScript : MonoBehaviour
             PlayerHealth = GetComponentInChildren<PlayerHealth>();
 
         fPSController = gameObject.GetComponent<RigidbodyFirstPersonController>();
+        animator = GetComponent<Animator>();
     }
 
     protected void Update()
@@ -99,6 +101,18 @@ public class InteractionScript : MonoBehaviour
 
             UsedObject?.GetComponent<IUseable>()?.HandleUse(this);
         }
+    }
+
+    public void ResetIK()
+    {
+        if (cR_isRunning)
+        {
+            StopCoroutine(IKToObject(UsedObject, lastGrabWasBothHanded));
+
+            cR_isRunning = false;
+        }
+
+        StartCoroutine(IKToObject(null, true));
     }
 
     public IEnumerator IKToObject(BaseInteractable objecToInteractWith, bool bothHanded)
@@ -147,6 +161,7 @@ public class InteractionScript : MonoBehaviour
         }
 
         objecToInteractWith?.CarryOutInteraction(this);
+        animator.SetTrigger("Grab");
 
         if (pointRight != null && objecToInteractWith != null && UsedObject != null)
         {
@@ -196,19 +211,12 @@ public class InteractionScript : MonoBehaviour
 
     public void StopUsingObject()
     {
-        if (cR_isRunning)
-        {
-            StopCoroutine(IKToObject(UsedObject, lastGrabWasBothHanded));
+        ResetIK();
 
-            cR_isRunning = false;
-        }
-
+        animator.ResetTrigger("Grab");
         UsedObject = null;
         IsCarrying = false;
         IsPushing = false;
-
-        //StartCoroutine(IKToObject(HandIKRight.parent));
-        StartCoroutine(IKToObject(null, true));
     }
 
     public void IncreaseReach(float reachToAdd)
