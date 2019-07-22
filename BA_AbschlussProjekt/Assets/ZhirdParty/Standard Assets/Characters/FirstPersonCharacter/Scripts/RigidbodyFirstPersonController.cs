@@ -106,9 +106,6 @@ namespace UnityStandardAssets.Characters.FirstPerson
 
 		// Custom
 		private bool isCrouching = false;
-        private Coroutine crouchingCR;
-        [SerializeField]
-        private float crouchTime;
 		[SerializeField] private Vector3 cameraCrouchPositionOffset = new Vector3(0f, -0.5f, 0);
 		[SerializeField] private CapsuleCollider standCollider;
 		[SerializeField] private CapsuleCollider crouchCollider;
@@ -156,13 +153,6 @@ namespace UnityStandardAssets.Characters.FirstPerson
 				isCrouching = true;
 				crouchCollider.enabled = true;
 				standCollider.enabled = false;
-
-                if(crouchingCR != null)
-                {
-                    StopCoroutine(crouchingCR);
-                    crouchingCR = null;
-                }
-                crouchingCR = StartCoroutine(moveCamTo(cameraCrouchPositionOffset, crouchTime));
 			}
 
 			if (/*m_Jump == false && */CrossPlatformInputManager.GetButtonUp("Crouch") && isCrouching)
@@ -170,31 +160,10 @@ namespace UnityStandardAssets.Characters.FirstPerson
 				isCrouching = false;
 				standCollider.enabled = true;
 				crouchCollider.enabled = false;
-
-                if (crouchingCR != null)
-                {
-                    StopCoroutine(crouchingCR);
-                    crouchingCR = null;
-                }
-                crouchingCR = StartCoroutine(moveCamTo(Vector3.zero, crouchTime));
             }
 
 			CheckMovability();
 		}
-
-        private IEnumerator moveCamTo(Vector3 p_moveTo, float p_duration)
-        {
-            float duration = p_duration;
-
-            while(duration > 0)
-            {
-                cam.transform.localPosition = Vector3.MoveTowards(cam.transform.localPosition, p_moveTo, 1/duration);
-
-                yield return new WaitForFixedUpdate();
-
-                duration -= Time.deltaTime;
-            }
-        }
 
 		private void FixedUpdate()
 		{

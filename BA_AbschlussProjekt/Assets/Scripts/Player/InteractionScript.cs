@@ -118,20 +118,29 @@ public class InteractionScript : MonoBehaviour
     public IEnumerator IKToObject(BaseInteractable objecToInteractWith, bool bothHanded)
     {
         cR_isRunning = true;
+
+        //BackUP
+        bool backUpGrabbing = false;
+
+        if (objecToInteractWith != null && objecToInteractWith.GetIKPoint(false) == null)
+        {
+            backUpGrabbing = true;
+        }
+
         Transform pointRight;
         Transform pointLeft = null;
-        if (objecToInteractWith == null) //Resetting the arms when droping a item
+        if (objecToInteractWith == null || backUpGrabbing) //Resetting the arms when droping a item
         {
             pointRight = HandIKRight.parent;
             pointLeft = HandIKLeft.parent;
         }
         else
         {
-            pointRight = objecToInteractWith.GetIKPoint(GrabingPoint.transform, false);
+            pointRight = objecToInteractWith.GetIKPoint(false);
 
             if (bothHanded)
             {
-                pointLeft = objecToInteractWith.GetIKPoint(GrabingPoint.transform, true);
+                pointLeft = objecToInteractWith.GetIKPoint(true);
             }
 
             fPSController.freezePlayerCamera = true;
@@ -163,7 +172,14 @@ public class InteractionScript : MonoBehaviour
         objecToInteractWith?.CarryOutInteraction(this);
         animator.SetTrigger("Grab");
 
-        if (pointRight != null && objecToInteractWith != null && UsedObject != null)
+
+        if (backUpGrabbing)
+        {
+            objecToInteractWith.transform.SetParent(GrabingPoint);
+            objecToInteractWith.transform.localPosition = fPSController.transform.forward;
+            objecToInteractWith.transform.localEulerAngles = Vector3.zero;
+        }
+        else if (pointRight != null && objecToInteractWith != null && UsedObject != null)
         {
             Transform FixPoint = objecToInteractWith.transform;
 

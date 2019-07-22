@@ -46,13 +46,16 @@ public abstract class BaseInteractable : InteractionFoundation
             if (!player.cR_isRunning)
             {
                 player.cR_isRunning = true;
+               
+             
                 StartCoroutine(player.IKToObject(this, isBothHanded));
+               
             }
         }
     }
 
 
-    public virtual Transform GetIKPoint(Transform playerGrabPoint, bool leftHand)
+    public virtual Transform GetIKPoint( bool leftHand)
     {
         List<Transform> transforms = new List<Transform>();     
 
