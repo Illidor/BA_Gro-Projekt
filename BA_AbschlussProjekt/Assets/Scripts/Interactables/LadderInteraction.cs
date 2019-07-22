@@ -25,6 +25,8 @@ public class LadderInteraction : ConditionedInteraction
     [SerializeField]
     private Transform RightIKHand;
     [SerializeField]
+    private Transform GrabingPoint;
+    [SerializeField]
     private List<Transform> LeftHandGrabPoints;
     [SerializeField]
     private List<Transform> RightHandGrabPoints;
@@ -80,21 +82,21 @@ public class LadderInteraction : ConditionedInteraction
         Transform leftHandGrabPoint = LeftHandGrabPoints[0];
         foreach (Transform item in LeftHandGrabPoints)
         {
-            if (item.position.y - LeftIKHand.transform.position.y < leftHandGrabPoint.position.y - LeftIKHand.transform.position.y)
+            if ((item.position - GrabingPoint.position).magnitude < (leftHandGrabPoint.position - GrabingPoint.position).magnitude)
                 leftHandGrabPoint = item;
         }
 
         Transform rightHandGrabPoint = RightHandGrabPoints[0];
         foreach (Transform item in RightHandGrabPoints)
         {
-            if (item.position.y - RightIKHand.transform.position.y < rightHandGrabPoint.position.y - RightIKHand.transform.position.y)
+            if ((item.position - GrabingPoint.position).magnitude < (rightHandGrabPoint.position - GrabingPoint.position).magnitude)
                 rightHandGrabPoint = item;
         }
 
-        LeftIKHand.transform.position = Vector3.MoveTowards(LeftIKHand.transform.position, leftHandGrabPoint.position,1f);
-        LeftIKHand.transform.rotation = Quaternion.Lerp(LeftIKHand.transform.rotation, leftHandGrabPoint.rotation, 1f);
-        RightIKHand.transform.position = Vector3.MoveTowards(RightIKHand.transform.position, rightHandGrabPoint.position, 1f);
-        RightIKHand.transform.rotation = Quaternion.Lerp(RightIKHand.transform.rotation, rightHandGrabPoint.rotation, 1f);
+        LeftIKHand.transform.position = Vector3.MoveTowards(LeftIKHand.transform.position, leftHandGrabPoint.position, .4f);
+        LeftIKHand.transform.rotation = Quaternion.Lerp(LeftIKHand.transform.rotation, leftHandGrabPoint.rotation, .4f);
+        RightIKHand.transform.position = Vector3.MoveTowards(RightIKHand.transform.position, rightHandGrabPoint.position, .4f);
+        RightIKHand.transform.rotation = Quaternion.Lerp(RightIKHand.transform.rotation, rightHandGrabPoint.rotation, .4f);
 
         currentClimber.transform.localPosition += (endPoint.position - startPoint.position).normalized * (CurrentClimbingSpeed * CTRLHub.VerticalAxis);
 
@@ -125,11 +127,10 @@ public class LadderInteraction : ConditionedInteraction
         Rigidbody currentClimblerRigidbody = currentClimber.GetComponent<Rigidbody>();
         currentClimblerRigidbody.isKinematic = false;
         currentClimblerRigidbody.useGravity = true;
+        currentClimber.ResetIK();
 
         IsBeeingClimbed = false;
         currentClimber = null;
-
-        currentClimber.ResetIK();
     }
 
     public override void HandleInteraction(InteractionScript player)
