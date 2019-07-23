@@ -1,11 +1,15 @@
 using System;
 using System.Collections;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.SceneManagement;
 using UnityStandardAssets.Characters.FirstPerson;
 
 public class InteractionScript : MonoBehaviour
 {
+    public static event UnityAction StartPickup;
+
+
     [SerializeField]
     [Tooltip("Max distance to objects the player is able to grab empty handed")]
     private float emptyHandedGrabingReach = 1.5f;
@@ -28,7 +32,18 @@ public class InteractionScript : MonoBehaviour
 
     public GrabInteractable UsedObject { get; set; }
 
-    public bool IsCarrying { get; private set; }
+    private bool isCarrying;
+    public bool IsCarrying
+    {
+        get => isCarrying;
+
+        private set
+        {
+            isCarrying = value;
+            if (value)
+                StartPickup?.Invoke();
+        }
+    }
     public bool IsPushing { get; private set; }
 
     public bool IsFrozen { get; set; }
@@ -36,8 +51,6 @@ public class InteractionScript : MonoBehaviour
     public Transform HandIKLeft;
     public Transform HandIKRight;
     public bool cR_isRunning = false;
-
-
 
     public float GrabingReach { get; private set; }
 

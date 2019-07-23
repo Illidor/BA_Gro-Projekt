@@ -69,6 +69,10 @@ public class LadderInteraction : ConditionedInteraction
         if (!IsBeeingClimbed)
             return;
 
+        if (CTRLHub.DropDown)
+            DetachFromLadder();
+
+
         currentClimber.transform.localPosition += (endPoint.position - startPoint.position).normalized * (CurrentClimbingSpeed * CTRLHub.VerticalAxis);
 
         if (currentClimber.transform.position.y < startPoint.position.y ||
@@ -153,5 +157,15 @@ public class LadderInteraction : ConditionedInteraction
     public void SetClimbingSpeedToSlow()
     {
         CurrentClimbingSpeed = slowClimbingSpeed;
+    }
+
+    private void OnEnable()
+    {
+        InteractionScript.StartPickup += DetachFromLadder;
+    }
+
+    private void OnDisable()
+    {
+        InteractionScript.StartPickup -= DetachFromLadder;
     }
 }
