@@ -20,6 +20,11 @@ public class HatchInteraction : InteractionFoundation, ICombinable
     [SerializeField] [Tooltip("will automatically use last on gameobject")]
     Sound knockingSound;
 
+    Coroutine cR;
+    [SerializeField] private float animationOffset;
+    [SerializeField] private float animationSpeed;
+
+
     private float dustParticleTicker = 0f;
     private float dustParticleThreshold = 30f;
     private bool isEmitting = true;
@@ -53,9 +58,19 @@ public class HatchInteraction : InteractionFoundation, ICombinable
     {
         knockingSound?.PlaySound(0);
 
+        if(interactingComponent is Crutch)
+        {
+            if (cR == null)
+            {
+                cR = StartCoroutine(KnockAnim(interactingComponent));
+            }
+        }
+
+
         if (knockCounter < knockingCountToUnlock - 1 &&
             (Time.time - timeOfLastKnock) > timeDelayBetweenKnocksInSeconds)
         {
+
             timeOfLastKnock = Time.time;
             knockCounter++;
 
@@ -113,5 +128,34 @@ public class HatchInteraction : InteractionFoundation, ICombinable
             return Combine(player, currentlyHolding);
 
         return false;
+    }
+
+    public IEnumerator KnockAnim(BaseInteractable interactingComponent)
+    {
+        InteractionScript characterInteractionScript = GameObject.FindObjectOfType<InteractionScript>();
+
+        while ((gameObject.transform.position.y - interactingComponent.gameObject.transform.position.y) > animationOffset)
+        {
+            Debug.Log("PRE::" + (gameObject.transform.position.y - interactingComponent.gameObject.transform.position.y));
+
+            characterInteractionScript.HandIKRight.position = Vector3.MoveTowards(characterInteractionScript.HandIKRight.position, interactingComponent.gameObject.transform.position, animationSpeed);
+            characterInteractionScript.HandIKRight.rotation = Quaternion.Lerp(characterInteractionScript.HandIKRight.rotation, interactingComponent.gameObject.transform.rotation, animationSpeed);
+
+
+            interactingComponent.gameObject.transform.position = Vector3.MoveTowards(interactingComponent.gameObject.transform.position, new Vector3
+                                                                                                                    (interactingComponent.gameObject.transform.position.x,
+                                                                                                                    gameObject.transform.position.y,
+                                                                                                                    interactingComponent.gameObject.transform.position.z), animationSpeed);
+
+            //interactingComponent.gameObject.transform.LookAt(new Vector3(interactingComponent.gameObject.transform.position.x, gameObject.transform.position.y, interactingComponent.gameObject.transform.position.z));
+
+            yield return new WaitForEndOfFrame();
+        }
+
+
+        StartCoroutine(characterInteractionScript.IKToObject(interactingComponent, false));
+
+        yield return new WaitForEndOfFrame();
+        cR = null;
     }
 }
