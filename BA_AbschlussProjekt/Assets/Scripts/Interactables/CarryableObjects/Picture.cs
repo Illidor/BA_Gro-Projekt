@@ -41,7 +41,7 @@ public class Picture : GrabInteractable
 
         if (IsBeeingCarried == false)
         {
-            Debug.Log("Not carried drop");
+            //Debug.Log("Not carried drop");
             if (other.collider.material.bounciness < materialBouncinessThreshholdToNotBreak && 
                 !broken && 
                 velocity < velocityThreshholdToNotBreak)
