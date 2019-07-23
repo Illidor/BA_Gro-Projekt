@@ -14,6 +14,7 @@ namespace UnityStandardAssets.Characters.FirstPerson
 			public float ForwardSpeed = 8.0f;   // Speed when walking forward
 			public float BackwardSpeed = 4.0f;  // Speed when walking backwards
 			public float StrafeSpeed = 4.0f;    // Speed when walking sideways
+            public float CrouchSpeed = 2f;    // Speed when crouching
 			public float RunMultiplier = 1.5f;  // Speed when sprinting
 			public KeyCode RunKey = KeyCode.LeftShift;
 			public float stepHeight = 1;
@@ -21,40 +22,32 @@ namespace UnityStandardAssets.Characters.FirstPerson
 			public AnimationCurve SlopeCurveModifier = new AnimationCurve(new Keyframe(-90.0f, 1.0f), new Keyframe(0.0f, 1.0f), new Keyframe(90.0f, 0.0f));
 			[HideInInspector] public float CurrentTargetSpeed = 8f;
 
-			private bool m_Running;
+            public bool IsCrouching = false;
+            private bool m_Running;
 
 			public void UpdateDesiredTargetSpeed(Vector2 input)
 			{
 				if (input == Vector2.zero) return;
-				if (input.x > 0 || input.x < 0)
+
+                if (IsCrouching) {
+                    CurrentTargetSpeed = CrouchSpeed;
+                }
+                else if (input.x > 0 || input.x < 0)
 				{
 					//strafe
 					CurrentTargetSpeed = StrafeSpeed;
 				}
-				if (input.y < 0)
+                else if (input.y < 0)
 				{
 					//backwards
 					CurrentTargetSpeed = BackwardSpeed;
 				}
-				if (input.y > 0)
+                else if (input.y > 0)
 				{
 					//forwards
 					//handled last as if strafing and moving forward at the same time forwards speed should take precedence
 					CurrentTargetSpeed = ForwardSpeed;
 				}
-				if (Input.GetKey(RunKey))
-				{
-
-				}
-				else
-				{
-					m_Running = false;
-				}
-			}
-
-			public bool Running
-			{
-				get { return m_Running; }
 			}
 		}
 
@@ -86,24 +79,6 @@ namespace UnityStandardAssets.Characters.FirstPerson
 			get { return m_RigidBody.velocity; }
 		}
 
-		//public bool Grounded
-		//{
-		//	get { return m_IsGrounded; }
-		//}
-
-		//public bool Jumping
-		//{
-		//	get { return m_Jumping; }
-		//}
-
-		public bool Running
-		{
-			get
-			{
-				return movementSettings.Running;
-			}
-		}
-
 		// Custom
 		private bool isCrouching = false;
         private Coroutine crouchingCR;
@@ -122,6 +97,7 @@ namespace UnityStandardAssets.Characters.FirstPerson
         private float defaultForwardSpeed;
 		private float defaultBackwardSpeed;
 		private float defaultStrafeSpeed;
+        private float defaultCrouchSpeed;
 
 		//used to lock PlayerMovement
 		public bool freezePlayerCamera = true;
@@ -136,8 +112,9 @@ namespace UnityStandardAssets.Characters.FirstPerson
 			defaultForwardSpeed = movementSettings.ForwardSpeed;
 			defaultBackwardSpeed = movementSettings.BackwardSpeed;
 			defaultStrafeSpeed = movementSettings.StrafeSpeed;
+            defaultCrouchSpeed = movementSettings.CrouchSpeed;
 
-			playerHealth = GetComponent<PlayerHealth>();
+            playerHealth = GetComponent<PlayerHealth>();
 			footstepSound = GetComponent<Sound>();
 		}
 
@@ -146,13 +123,9 @@ namespace UnityStandardAssets.Characters.FirstPerson
 			if(!freezePlayerCamera)
 				RotateView();
 
-			//if (CrossPlatformInputManager.GetButtonDown("Jump") && !m_Jump && m_IsGrounded)
-			//{
-			//	m_Jump = true;
-			//}
-
-			if (/*m_Jump == false && */CrossPlatformInputManager.GetButtonDown("Crouch") && isCrouching == false)
+			if (CrossPlatformInputManager.GetButtonDown("Crouch") && isCrouching == false)
 			{
+                movementSettings.IsCrouching = true;
 				isCrouching = true;
 				crouchCollider.enabled = true;
 				standCollider.enabled = false;
@@ -165,9 +138,10 @@ namespace UnityStandardAssets.Characters.FirstPerson
                 crouchingCR = StartCoroutine(moveCamTo(cameraCrouchPositionOffset, crouchTime));
 			}
 
-			if (/*m_Jump == false && */CrossPlatformInputManager.GetButtonUp("Crouch") && isCrouching)
+			if (CrossPlatformInputManager.GetButtonUp("Crouch") && isCrouching)
 			{
-				isCrouching = false;
+                movementSettings.IsCrouching = false;
+                isCrouching = false;
 				standCollider.enabled = true;
 				crouchCollider.enabled = false;
 
@@ -206,18 +180,19 @@ namespace UnityStandardAssets.Characters.FirstPerson
 			{
 				if ((Mathf.Abs(input.x) > float.Epsilon || Mathf.Abs(input.y) > float.Epsilon) /*&& (advancedSettings.airControl || m_IsGrounded)*/)
 				{
-					// always move along the camera forward as it is the direction that it being aimed at
-					Vector3 desiredMove = cam.transform.forward * input.y + cam.transform.right * input.x;
+                    // always move along the camera forward as it is the direction that it being aimed at
+                    Vector3 desiredMove = cam.transform.forward * input.y + cam.transform.right * input.x;
 					desiredMove = Vector3.ProjectOnPlane(desiredMove, m_GroundContactNormal).normalized;
 
-					desiredMove.x = desiredMove.x * movementSettings.CurrentTargetSpeed;
-					desiredMove.z = desiredMove.z * movementSettings.CurrentTargetSpeed;
-					desiredMove.y = /*desiredMove.y*movementSettings.CurrentTargetSpeed;*/0f;
-					if (m_RigidBody.velocity.sqrMagnitude <
+                    desiredMove.x = desiredMove.x * movementSettings.CurrentTargetSpeed;
+                    desiredMove.z = desiredMove.z * movementSettings.CurrentTargetSpeed;
+                    desiredMove.y = 0f;
+
+                    if (m_RigidBody.velocity.sqrMagnitude <
 						(movementSettings.CurrentTargetSpeed * movementSettings.CurrentTargetSpeed))
 					{
-						m_RigidBody.AddForce(desiredMove * SlopeMultiplier() / 2f, ForceMode.VelocityChange);
-					}
+                        m_RigidBody.AddForce(desiredMove * SlopeMultiplier() / 2f, ForceMode.VelocityChange);
+                    }
 
 					// Footstep audio logic with increasing ticker and threshold
 					footstepSoundTicker += Time.deltaTime;
@@ -237,34 +212,6 @@ namespace UnityStandardAssets.Characters.FirstPerson
 					}
 				}
 			}
-			
-
-			//if ( m_IsGrounded)
-			//{
-			//	//m_RigidBody.drag = 5f;
-
-			//	//if (false)//m_Jump
-			//	//{
-			//	//	m_RigidBody.drag = 0f;
-			//	//	m_RigidBody.velocity = new Vector3(m_RigidBody.velocity.x, 0f, m_RigidBody.velocity.z);
-			//	//	m_RigidBody.AddForce(new Vector3(0f, movementSettings.JumpForce, 0f), ForceMode.Impulse);
-			//	//	m_Jumping = true;
-			//	//}
-
-			//	if (!m_Jumping && Mathf.Abs(input.x) < float.Epsilon && Mathf.Abs(input.y) < float.Epsilon && m_RigidBody.velocity.magnitude < 1f)
-			//	{
-			//		m_RigidBody.Sleep();
-			//	}
-			//}
-			//else
-			//{
-				//m_RigidBody.drag = 0f;
-				//if (m_PreviouslyGrounded && !m_Jumping)
-				//{
-				//	StickToGroundHelper();
-				//}
-			//}
-			//m_Jump = false;
 		}
 
 
@@ -311,13 +258,6 @@ namespace UnityStandardAssets.Characters.FirstPerson
 			float oldYRotation = transform.eulerAngles.y;
 
 			mouseLook.LookRotation (transform, cam.transform);
-
-            //if (m_IsGrounded || advancedSettings.airControl)
-            //{
-            //    // Rotate the rigidbody velocity to match the new direction that the character is looking
-            //    Quaternion velRotation = Quaternion.AngleAxis(transform.eulerAngles.y - oldYRotation, Vector3.up);
-            //    m_RigidBody.velocity = velRotation * m_RigidBody.velocity;
-            //}
         }
 
 		/// sphere cast down just beyond the bottom of the capsule to see if the capsule is colliding round the bottom
@@ -343,13 +283,6 @@ namespace UnityStandardAssets.Characters.FirstPerson
 				//m_IsGrounded = false;
 				m_GroundContactNormal = Vector3.up;
 			}
-
-			// Landing
-			//if (!m_PreviouslyGrounded && m_IsGrounded && m_Jumping)
-			//{
-			//	//AudioManager.audioManager.Play("snd_landingjump");
-			//	m_Jumping = false;
-			//}
 		}
 
 		private void CheckMovability()
@@ -359,26 +292,29 @@ namespace UnityStandardAssets.Characters.FirstPerson
 				movementSettings.ForwardSpeed = defaultForwardSpeed;
 				movementSettings.BackwardSpeed = defaultBackwardSpeed;
 				movementSettings.StrafeSpeed = defaultStrafeSpeed;
+                movementSettings.CrouchSpeed = defaultCrouchSpeed;
 			}
 			else if (playerHealth.GetCondition(Conditions.LowerBodyCondition) > 1f)
 			{
-				movementSettings.ForwardSpeed = defaultForwardSpeed / 2f;
+                movementSettings.ForwardSpeed = defaultForwardSpeed / 2f;
 				movementSettings.BackwardSpeed = defaultBackwardSpeed / 2f;
 				movementSettings.StrafeSpeed = defaultStrafeSpeed / 2f;
-			}
+                movementSettings.CrouchSpeed = defaultCrouchSpeed / 2f;
+            }
 			else if(playerHealth.GetCondition(Conditions.LowerBodyCondition) > 0)
 			{
-				movementSettings.ForwardSpeed = defaultForwardSpeed / 3f;
+                movementSettings.ForwardSpeed = defaultForwardSpeed / 3f;
 				movementSettings.BackwardSpeed = defaultBackwardSpeed / 3f;
 				movementSettings.StrafeSpeed = defaultStrafeSpeed / 3f;
-			}
+                movementSettings.CrouchSpeed = defaultCrouchSpeed / 3f;
+            }
 			else
 			{
 				movementSettings.ForwardSpeed = 0f;
 				movementSettings.BackwardSpeed = 0f;
 				movementSettings.StrafeSpeed = 0f;
-			}
-
+                movementSettings.CrouchSpeed = 0f;
+            }
 		}
 		public void OnCollisionEnter(Collision col)
 		{

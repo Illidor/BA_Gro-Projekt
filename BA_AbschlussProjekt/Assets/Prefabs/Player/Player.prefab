@@ -5208,8 +5208,9 @@ MonoBehaviour:
   cam: {fileID: 152286213029140016}
   movementSettings:
     ForwardSpeed: 2
-    BackwardSpeed: 1.5
+    BackwardSpeed: 1
     StrafeSpeed: 1.5
+    CrouchSpeed: 0.85
     RunMultiplier: 0
     RunKey: 0
     stepHeight: 1
@@ -5248,6 +5249,7 @@ MonoBehaviour:
       m_PostInfinity: 2
       m_RotationOrder: 4
     CurrentTargetSpeed: 8
+    IsCrouching: 0
   mouseLook:
     XSensitivity: 2
     YSensitivity: 2
@@ -5263,6 +5265,7 @@ MonoBehaviour:
     slowDownRate: 50
     airControl: 1
     shellOffset: 0
+  crouchTime: 0
   cameraCrouchPositionOffset: {x: 0, y: -0.5, z: 0}
   standCollider: {fileID: 4309658133002816595}
   crouchCollider: {fileID: 6069957258101352019}
