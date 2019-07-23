@@ -112,6 +112,9 @@ public class InteractionScript : MonoBehaviour
             cR_isRunning = false;
         }
 
+        animator.SetBool("Grab", false);
+      
+
         StartCoroutine(IKToObject(null, true));
     }
 
@@ -121,6 +124,24 @@ public class InteractionScript : MonoBehaviour
 
         //BackUP
         bool backUpGrabbing = false;
+
+
+        if (objecToInteractWith != null)
+        {
+            if (!bothHanded)
+            {
+                animator.SetBool("Grab", true);
+                animator.SetFloat("Blend", 0f);
+            }
+            else
+            {
+                animator.SetFloat("Blend", .5f);
+                animator.SetBool("Grab", true);
+            }
+
+
+
+        }
 
         if (objecToInteractWith != null && objecToInteractWith.GetIKPoint(false) == null)
         {
@@ -170,7 +191,6 @@ public class InteractionScript : MonoBehaviour
         }
 
         objecToInteractWith?.CarryOutInteraction(this);
-        animator.SetTrigger("Grab");
 
 
         if (backUpGrabbing)
