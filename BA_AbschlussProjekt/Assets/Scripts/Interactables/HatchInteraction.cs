@@ -3,10 +3,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class HatchInteraction : InteractionFoundation, ICombinable
+public class HatchInteraction : BaseInteractable, ICombinable
 {
-    public List<GameObject> correlatingGameObjects;
-
     [SerializeField]
     private float timeDelayBetweenKnocksInSeconds = 1;
     [SerializeField]
@@ -49,16 +47,13 @@ public class HatchInteraction : InteractionFoundation, ICombinable
         if (dustParticleTicker > dustParticleThreshold && isEmitting)
         {
             dustParticleTicker = 0f;
-            dustPs.Emit(10);
-            dustParticleSound.PlaySound(0);
+            EmitDust(10);
         }
     }
 
     public bool Combine(InteractionScript player, BaseInteractable interactingComponent)
     {
-        knockingSound?.PlaySound(0);
-
-        if(interactingComponent is Crutch)
+        if (interactingComponent is Crutch)
         {
             if (cR == null)
             {
@@ -66,6 +61,17 @@ public class HatchInteraction : InteractionFoundation, ICombinable
             }
         }
 
+        return HandleKnockLogicAndOpening();
+    }
+
+    public override bool CarryOutInteraction(InteractionScript player)
+    {
+        return HandleKnockLogicAndOpening();
+    }
+
+    private bool HandleKnockLogicAndOpening()
+    {
+        knockingSound?.PlaySound(0);
 
         if (knockCounter < knockingCountToUnlock - 1 &&
             (Time.time - timeOfLastKnock) > timeDelayBetweenKnocksInSeconds)
@@ -74,8 +80,7 @@ public class HatchInteraction : InteractionFoundation, ICombinable
             timeOfLastKnock = Time.time;
             knockCounter++;
 
-            dustPs.Emit(10);
-            dustParticleSound.PlaySound(0);
+            EmitDust(10);
 
             return false;
         }
@@ -85,35 +90,25 @@ public class HatchInteraction : InteractionFoundation, ICombinable
         return true;
     }
 
+    public void EmitDust(int emittingStrength)
+    {
+        dustPs.Emit(emittingStrength);
+        dustParticleSound.PlaySound(0);
+    }
+
     public void OpenHatch()
     {
-        try
-        {
-            GetComponent<Animator>().SetTrigger("open");
-            hatchOpenSound?.PlaySound(0);
-            dustParticleSound?.PlaySound(0);
-            isEmitting = false;
-            StartCoroutine(DelayDustEffect(0.25f));
-            //AudioManager.audioManager.Play("snd_openattic_ladder");
-        }
-        catch (System.Exception) { }
-
-        foreach (GameObject cgO in correlatingGameObjects)
-        {
-            try
-            {
-                cgO.GetComponent<Animator>().SetTrigger("open");
-                //hatchOpenSound.playSound(0);
-            }
-            catch (System.Exception) { }
-        }
+        transform.parent?.GetComponent<Animator>()?.SetTrigger("open");
+        hatchOpenSound?.PlaySound(0);
+        EmitDust(10);
+        isEmitting = false;
+        StartCoroutine(DelayDustEffect(0.25f));
     }
 
     private IEnumerator DelayDustEffect(float delay)
     {
         yield return new WaitForSeconds(delay);
-        dustParticleSound?.PlaySound(0);
-        dustPs.Emit(40);
+        EmitDust(40);
     }
  
     public bool HandleCombine(InteractionScript player, BaseInteractable currentlyHolding)
@@ -121,8 +116,8 @@ public class HatchInteraction : InteractionFoundation, ICombinable
         if ((Time.time - timeOfLastKnock) < timeDelayBetweenKnocksInSeconds)
             return false;
 
-        player.GUIInteractionFeedbackHandler.StandardCrosshair.SetActive(   false);
-        player.GUIInteractionFeedbackHandler.InteractionCrosshair.SetActive(true );
+        player.GUIInteractionFeedbackHandler.StandardCrosshair.SetActive(false);
+        player.GUIInteractionFeedbackHandler.InteractionCrosshair.SetActive(true);
 
         if (CTRLHub.InteractDown)
             return Combine(player, currentlyHolding);

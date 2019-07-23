@@ -7,6 +7,8 @@ public class CeilingKnocking : InteractionFoundation, ICombinable
     [SerializeField]
     private float timeDelayBetweenKnocksInSeconds = 0.5f;
     [SerializeField]
+    private HatchInteraction hatch;
+    [SerializeField]
     private Sound soundOnKnock;
 
     Coroutine cR;
@@ -27,16 +29,18 @@ public class CeilingKnocking : InteractionFoundation, ICombinable
     {
         if (interactingComponent is Crutch)
         {
-            if(cR == null)
+            if (cR == null)
             {
                 cR = StartCoroutine(KnockAnim(interactingComponent));
             }
 
-            if(Time.time - timeOfLastKnock > timeDelayBetweenKnocksInSeconds)
+            if (Time.time - timeOfLastKnock > timeDelayBetweenKnocksInSeconds)
             {
                 timeOfLastKnock = Time.time;
 
                 soundOnKnock?.PlaySound(0);
+
+                hatch?.EmitDust(10);
 
                 return true;
             }

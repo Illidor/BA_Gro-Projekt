@@ -41,7 +41,7 @@ public class Picture : GrabInteractable
 
         if (IsBeeingCarried == false)
         {
-            Debug.Log("Not carried drop");
+            //Debug.Log("Not carried drop");
             if (other.collider.material.bounciness < materialBouncinessThreshholdToNotBreak && 
                 !broken && 
                 velocity < velocityThreshholdToNotBreak)
@@ -51,7 +51,6 @@ public class Picture : GrabInteractable
             }
             else if (velocity < -2f)
             {
-                //Todo: Play Sound
                 breakSound?.PlaySound(0);
             }
         }

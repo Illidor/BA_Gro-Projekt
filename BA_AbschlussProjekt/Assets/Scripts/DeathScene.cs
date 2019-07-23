@@ -9,6 +9,7 @@ public class DeathScene : MonoBehaviour
     private List<GameObject> playerPoses = new List<GameObject>();
     [SerializeField]
     private float returnToMenuAfterSequenceEnded = 30f;
+    public GameObject player;
 
     private bool isSceneFinished = false;
 
@@ -17,6 +18,7 @@ public class DeathScene : MonoBehaviour
 
     private void PlayerDied()
     {
+        player.SetActive(false);
         StartCoroutine(DelayPositionSwap());
         deadSceneMusic.Play();
     }

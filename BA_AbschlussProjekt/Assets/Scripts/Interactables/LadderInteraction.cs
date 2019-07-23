@@ -79,6 +79,9 @@ public class LadderInteraction : ConditionedInteraction
         if (!IsBeeingClimbed)
             return;
 
+        if (CTRLHub.DropDown)
+            DetachFromLadder();
+
         Transform leftHandGrabPoint = LeftHandGrabPoints[0];
         foreach (Transform item in LeftHandGrabPoints)
         {
@@ -183,5 +186,15 @@ public class LadderInteraction : ConditionedInteraction
     public void SetClimbingSpeedToSlow()
     {
         CurrentClimbingSpeed = slowClimbingSpeed;
+    }
+
+    private void OnEnable()
+    {
+        InteractionScript.StartPickup += DetachFromLadder;
+    }
+
+    private void OnDisable()
+    {
+        InteractionScript.StartPickup -= DetachFromLadder;
     }
 }
