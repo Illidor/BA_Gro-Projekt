@@ -24,6 +24,5 @@ public class PictureFrame : GrabInteractable
         Debug.Log("Picture broke");
         broken = true;
         
-        //TODO: add a broken frame
     }
 }

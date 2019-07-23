@@ -92,7 +92,7 @@ public class GrabInteractable : BaseInteractable
         return true;
     }
 
-    public virtual void PutDown(InteractionScript player)  //TODO: better putDown implementation instead of simply droping the object
+    public virtual void PutDown(InteractionScript player)
     {
         Debug.Log("put down");
 
@@ -155,10 +155,6 @@ public class GrabInteractable : BaseInteractable
     protected void FixedUpdate()
     {
         //TODO: better implementation of pulling. Maybe considering objects weight and players conditions
-        //if (IsBeeingPulled)
-        //    rigid.velocity = rigidbodyPulling.velocity;
-
-        //new:
         if (IsBeeingPulled)
         {
             Ray r = new Ray(Camera.main.transform.position, Camera.main.transform.forward);
@@ -166,10 +162,5 @@ public class GrabInteractable : BaseInteractable
             pointToPull = new Vector3(pointToPull.x, transform.position.y, pointToPull.z);
             transform.position = Vector3.Lerp(transform.position,pointToPull, 0.3f);
         }
-    }
-
-    protected void ResetLayer()
-    {
-        gameObject.layer = LayerMask.NameToLayer("Default");
     }
 }

@@ -51,7 +51,6 @@ public class Picture : GrabInteractable
             }
             else if (velocity < -2f)
             {
-                //Todo: Play Sound
                 breakSound?.PlaySound(0);
             }
         }

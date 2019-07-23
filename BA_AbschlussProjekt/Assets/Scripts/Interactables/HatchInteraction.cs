@@ -3,10 +3,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class HatchInteraction : InteractionFoundation, ICombinable
+public class HatchInteraction : BaseInteractable, ICombinable
 {
-    public List<GameObject> correlatingGameObjects;
-
     [SerializeField]
     private float timeDelayBetweenKnocksInSeconds = 1;
     [SerializeField]
@@ -50,6 +48,16 @@ public class HatchInteraction : InteractionFoundation, ICombinable
 
     public bool Combine(InteractionScript player, BaseInteractable interactingComponent)
     {
+        return HandleHatchInteractions();
+    }
+
+    public override bool CarryOutInteraction(InteractionScript player)
+    {
+        return HandleHatchInteractions();
+    }
+
+    private bool HandleHatchInteractions()
+    {
         knockingSound?.PlaySound(0);
 
         if (knockCounter < knockingCountToUnlock - 1 &&
@@ -76,26 +84,11 @@ public class HatchInteraction : InteractionFoundation, ICombinable
 
     public void OpenHatch()
     {
-        try
-        {
-            transform.parent.GetComponent<Animator>().SetTrigger("open");
-            hatchOpenSound?.PlaySound(0);
-            EmitDust(10);
-            isEmitting = false;
-            StartCoroutine(DelayDustEffect(0.25f));
-            //AudioManager.audioManager.Play("snd_openattic_ladder");
-        }
-        catch (System.Exception) { }
-
-        foreach (GameObject cgO in correlatingGameObjects)
-        {
-            try
-            {
-                cgO.GetComponent<Animator>().SetTrigger("open");
-                //hatchOpenSound.playSound(0);
-            }
-            catch (System.Exception) { }
-        }
+        transform.parent?.GetComponent<Animator>()?.SetTrigger("open");
+        hatchOpenSound?.PlaySound(0);
+        EmitDust(10);
+        isEmitting = false;
+        StartCoroutine(DelayDustEffect(0.25f));
     }
 
     private IEnumerator DelayDustEffect(float delay)
@@ -109,12 +102,13 @@ public class HatchInteraction : InteractionFoundation, ICombinable
         if ((Time.time - timeOfLastKnock) < timeDelayBetweenKnocksInSeconds)
             return false;
 
-        player.GUIInteractionFeedbackHandler.StandardCrosshair.SetActive(   false);
-        player.GUIInteractionFeedbackHandler.InteractionCrosshair.SetActive(true );
+        player.GUIInteractionFeedbackHandler.StandardCrosshair.SetActive(false);
+        player.GUIInteractionFeedbackHandler.InteractionCrosshair.SetActive(true);
 
         if (CTRLHub.InteractDown)
             return Combine(player, currentlyHolding);
 
         return false;
     }
+
 }

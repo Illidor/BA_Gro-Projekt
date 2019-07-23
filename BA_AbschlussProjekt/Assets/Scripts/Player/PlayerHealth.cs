@@ -186,7 +186,6 @@ public class PlayerHealth : MonoBehaviour
 
         vignette.intensity.value = 1f;
     }
-    //ToDo: Play Sound
 
     private void OnEnable()
     {
