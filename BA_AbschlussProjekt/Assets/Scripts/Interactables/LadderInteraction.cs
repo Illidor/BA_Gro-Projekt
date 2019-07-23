@@ -6,11 +6,11 @@ using UnityEngine;
 public class LadderInteraction : ConditionedInteraction
 {
     [SerializeField]
-    private float standardClimbingSpeed = 0.01f;
+    private float standardClimbingSpeed = 0.1f;
     [SerializeField]
-    private float slowClimbingSpeed = 0.005f;
+    private float slowClimbingSpeed = 0.01f;
     [SerializeField]
-    private float minConditionToClimbFast = 1.5f;
+    private float minConditionToClimbFast = 2f;
     [SerializeField][Tooltip("The minimal distance from the bottom of the ladder the player snaps onto")]
     private Vector3 ladderSnapOffsetFromBelow = new Vector3(0, 0.075f, 0);
     [SerializeField][Tooltip("The minimal distance from the top of the ladder the player snaps onto")]
@@ -71,16 +71,59 @@ public class LadderInteraction : ConditionedInteraction
     {
         CurrentClimbingSpeed = standardClimbingSpeed;
 
+        IsBeeingClimbed = false;
+
         base.Awake();
     }
 
     void Update()
     {
+        // Stop update if ladder is not in use
         if (!IsBeeingClimbed)
             return;
 
+
+        // <drop from ladder cases>
+
         if (CTRLHub.DropDown)
             DetachFromLadder();
+
+        if (currentClimber.transform.position.y < startPoint.position.y ||
+            currentClimber.transform.position.y > endPoint.position.y     )
+        {
+            DetachFromLadder();
+        }
+
+
+        // <actuall climbing>
+
+        currentClimber.transform.localPosition += 
+            (endPoint.position - startPoint.position).normalized * (CurrentClimbingSpeed * CTRLHub.VerticalAxis);
+
+
+        // <Ladder audio handling>
+
+        climbingSoundTicker += Time.deltaTime; 
+        if (climbingSoundTicker > climbingSoundThreshold && (Input.GetAxis("Vertical") > 0.1f || Input.GetAxis("Vertical") < -0.1f))
+        {
+            climbingSoundTicker = 0f;
+            climbCount++;
+            // Play sounds at different audio sources so they don't get killed before fully played
+            if (climbCount % 2 == 0)
+            {
+                climbingSound.PlaySound(0, 1);
+            }
+            else
+            {
+                climbingSound.PlaySound(0, 2);
+            }
+        }
+
+
+        // <IK and animation handling>
+
+        if (LeftHandGrabPoints.Count == 0 || RightHandGrabPoints.Count == 0)
+            return;
 
         Transform leftHandGrabPoint = LeftHandGrabPoints[0];
         foreach (Transform item in LeftHandGrabPoints)
@@ -96,33 +139,10 @@ public class LadderInteraction : ConditionedInteraction
                 rightHandGrabPoint = item;
         }
 
-        LeftIKHand.transform.position = Vector3.MoveTowards(LeftIKHand.transform.position, leftHandGrabPoint.position, .4f);
-        LeftIKHand.transform.rotation = Quaternion.Lerp(LeftIKHand.transform.rotation, leftHandGrabPoint.rotation, .4f);
+        LeftIKHand.transform.position  = Vector3.MoveTowards(LeftIKHand.transform.position, leftHandGrabPoint.position, .4f);
+        LeftIKHand.transform.rotation  = Quaternion.Lerp(LeftIKHand.transform.rotation, leftHandGrabPoint.rotation, .4f);
         RightIKHand.transform.position = Vector3.MoveTowards(RightIKHand.transform.position, rightHandGrabPoint.position, .4f);
         RightIKHand.transform.rotation = Quaternion.Lerp(RightIKHand.transform.rotation, rightHandGrabPoint.rotation, .4f);
-
-        currentClimber.transform.localPosition += (endPoint.position - startPoint.position).normalized * (CurrentClimbingSpeed * CTRLHub.VerticalAxis);
-
-        if (currentClimber.transform.position.y < startPoint.position.y ||
-            currentClimber.transform.position.y > endPoint.position.y     )
-        {
-            DetachFromLadder();
-        }
-
-        // <Ladder audio handling>
-        climbingSoundTicker += Time.deltaTime; 
-        if (climbingSoundTicker > climbingSoundThreshold && (Input.GetAxis("Vertical") > 0.1f || Input.GetAxis("Vertical") < -0.1f)) {
-            climbingSoundTicker = 0f;
-            climbCount++;
-            // Play sounds at different audio sources so they don't get killed before fully played
-            if (climbCount % 2 == 0) {
-                climbingSound.PlaySound(0, 1);
-            }
-            else {
-                climbingSound.PlaySound(0, 2);
-            }
-        }
-        // </Ladder audio handling>
     }
 
     private void DetachFromLadder()
