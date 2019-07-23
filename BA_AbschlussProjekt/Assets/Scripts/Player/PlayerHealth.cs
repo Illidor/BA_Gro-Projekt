@@ -38,8 +38,6 @@ public class PlayerHealth : MonoBehaviour
     {
         upperBodyCondition = 2f;
         lowerBodyCondition = 2f;
-
-
     }
 
     private void Start()
@@ -122,6 +120,7 @@ public class PlayerHealth : MonoBehaviour
                 }
 
                 break;
+
             case (Conditions.LowerBodyCondition):
 
                 if (lowerBodyCondition - value > 0)
