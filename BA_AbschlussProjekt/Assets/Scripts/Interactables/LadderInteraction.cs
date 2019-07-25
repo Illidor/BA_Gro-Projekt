@@ -79,7 +79,7 @@ public class LadderInteraction : ConditionedInteraction
     void Update()
     {
         // Stop update if ladder is not in use
-        if (!IsBeeingClimbed)
+        if (!IsBeeingClimbed || currentClimber == null)
             return;
 
 
