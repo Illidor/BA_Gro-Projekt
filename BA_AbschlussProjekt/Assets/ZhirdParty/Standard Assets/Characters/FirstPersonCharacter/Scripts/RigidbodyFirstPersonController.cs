@@ -71,8 +71,10 @@ namespace UnityStandardAssets.Characters.FirstPerson
 		private Rigidbody m_RigidBody;
 		private float m_YRotation;
 		private Vector3 m_GroundContactNormal;
-		//private bool m_Jump, m_PreviouslyGrounded, m_Jumping, m_IsGrounded;
+        //private bool m_Jump, m_PreviouslyGrounded, m_Jumping, m_IsGrounded;
 
+        [SerializeField] GroundCheck groundCheck;
+        private bool wasPreviouslyGrounded = true;
 
 		public Vector3 Velocity
 		{
@@ -99,6 +101,7 @@ namespace UnityStandardAssets.Characters.FirstPerson
 		//used to lock PlayerMovement
 		public bool freezePlayerCamera = true;
 		public bool freezePlayerMovement = true;
+
 
 		private void Start()
 		{
@@ -141,9 +144,17 @@ namespace UnityStandardAssets.Characters.FirstPerson
 
 		private void FixedUpdate()
 		{
-			GroundCheck();
-
 			Vector2 input = GetInput();
+
+            if(wasPreviouslyGrounded == true && !groundCheck.IsGrounded)
+            {
+                wasPreviouslyGrounded = false;
+            }
+
+            if(wasPreviouslyGrounded == false && groundCheck.IsGrounded)
+            {
+                GroundCheck();
+            }
 
 			if(!freezePlayerMovement)
 			{
@@ -232,7 +243,6 @@ namespace UnityStandardAssets.Characters.FirstPerson
 		/// sphere cast down just beyond the bottom of the capsule to see if the capsule is colliding round the bottom
 		private void GroundCheck()
 		{
-			//m_PreviouslyGrounded = m_IsGrounded;
 			RaycastHit hitInfo;
 			if (Physics.SphereCast(transform.position + Vector3.up / 2f, standCollider.radius * (1.0f - advancedSettings.shellOffset), Vector3.down, out hitInfo,
 								   ((standCollider.height/2f) - standCollider.radius) + advancedSettings.groundCheckDistance, Physics.AllLayers, QueryTriggerInteraction.Ignore))
@@ -244,6 +254,7 @@ namespace UnityStandardAssets.Characters.FirstPerson
 				if (m_RigidBody.velocity.y < -10f && hitInfo.collider.material.bounciness < 0.6f)
 				{
 					playerHealth.ChangeCondition(Conditions.LowerBodyCondition, 0.5f);
+                    Debug.Log("damaged");
 					//playerHealth.PlaySound(); //ToDo
 				} 
 			}

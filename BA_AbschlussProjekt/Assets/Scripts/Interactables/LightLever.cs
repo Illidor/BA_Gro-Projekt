@@ -20,6 +20,8 @@ public class LightLever : BaseInteractable
     //private Animator animator;
     private PlayableDirector playableDirector;
 
+    private bool isVoicelinePlayed = false;
+
     private void Start()
     {
         switchSound = GetComponent<AudioSource>();
@@ -64,11 +66,19 @@ public class LightLever : BaseInteractable
 
     private IEnumerator ChangeLight(bool state)
     {
+        
+
         yield return new WaitForSeconds(0.6f);
         if (state)
         {
             for (int i = 0; i < lightsSources.Length; i++)
                 lightsSources[ i ].intensity = lightStrengths[ i ];
+
+            if (isVoicelinePlayed == false)
+            {
+                PlayerVoicelines.instance.PlayVoiceLine(1, 1.3f);
+                isVoicelinePlayed = true;
+            }
         }
         else
         {
