@@ -57,8 +57,8 @@ public partial class VLight : MonoBehaviour
     public float quadraticAttenuation = 100;
     public float aspect = 1;
     [Header("- only be changed when not playing -")]
-    [Range(2, 3700)]
-    public int slices = 30;
+    [Range(2, 1500)]
+    public int slices = 1500;
     public Color colorTint = Color.white;
     [Tooltip("- scrolling noise and volume texture -")]
     public Vector3 noiseSpeed;

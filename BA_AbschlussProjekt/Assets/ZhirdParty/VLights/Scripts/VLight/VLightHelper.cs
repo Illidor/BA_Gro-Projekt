@@ -88,7 +88,7 @@ public partial class VLight : MonoBehaviour
 					break;
 				}
 
-				AssetDatabase.CreateAsset(bakedShadowMap, "Assets/" + name + "-shadowmap-" + System.DateTime.Now.ToString("HH-MM-ss") + ".asset");
+				AssetDatabase.CreateAsset(bakedShadowMap, "Assets/Materials/Shadowmaps/" + name + "-shadowmap-" + System.DateTime.Now.ToString("HH-MM-ss") + ".asset");
 
 				SafeDestroy(_depthTexture);
 				shadowMode = ShadowMode.Baked;
