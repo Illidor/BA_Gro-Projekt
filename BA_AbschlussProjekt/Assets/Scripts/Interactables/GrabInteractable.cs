@@ -52,6 +52,22 @@ public class GrabInteractable : BaseInteractable
         base.Awake();
     }
 
+    public override void HandleInteraction(InteractionScript player)
+    {
+        player.GUIInteractionFeedbackHandler.StandardCrosshair.SetActive(false);
+        player.GUIInteractionFeedbackHandler.InteractionSymbolHand.SetActive(true);
+
+        if (CTRLHub.InteractDown)
+        {
+            if (!player.cR_isRunning)
+            {
+                player.cR_isRunning = true;
+               
+                StartCoroutine(player.IKToObject(this, isBothHanded));
+            }
+        }
+    }
+
     public override bool CarryOutInteraction(InteractionScript player)
     {
         if (player.PlayerHealth.GetCondition(conditionsTypeNeededToInteract) >= minConditionToCarry)
