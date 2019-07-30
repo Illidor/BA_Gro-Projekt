@@ -76,7 +76,11 @@ public class LightLever : BaseInteractable
 
             if (isVoicelinePlayed == false)
             {
-                PlayerVoicelines.instance?.PlayVoiceLine(1, 1.3f);
+                if(Random.Range(0,2) >= 1)
+                    VoiceLines.instance.PlayVoiceLine(1, 1.3f);
+                else
+                    VoiceLines.instance.PlayVoiceLine(4, 1.3f);
+
                 isVoicelinePlayed = true;
             }
         }
