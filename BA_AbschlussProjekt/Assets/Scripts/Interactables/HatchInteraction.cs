@@ -103,6 +103,8 @@ public class HatchInteraction : BaseInteractable, ICombinable
         EmitDust(10);
         isEmitting = false;
         StartCoroutine(DelayDustEffect(0.25f));
+
+        VoiceLines.instance.PlayVoiceLine(9, 1.3f);
     }
 
     private IEnumerator DelayDustEffect(float delay)
