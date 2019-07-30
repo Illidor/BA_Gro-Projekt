@@ -31,7 +31,7 @@ public class CeilingKnocking : InteractionFoundation, ICombinable
         {
             if (cR == null)
             {
-                cR = StartCoroutine(KnockAnim(interactingComponent));
+                cR = StartCoroutine(KnockAnim(player, interactingComponent));
             }
 
             if (Time.time - timeOfLastKnock > timeDelayBetweenKnocksInSeconds)
@@ -62,16 +62,15 @@ public class CeilingKnocking : InteractionFoundation, ICombinable
         return false;
     }
 
-    public IEnumerator KnockAnim(BaseInteractable interactingComponent)
+    public IEnumerator KnockAnim(InteractionScript player, BaseInteractable interactingComponent)
     {
-        InteractionScript characterInteractionScript = GameObject.FindObjectOfType<InteractionScript>();
 
         while ((gameObject.transform.position.y - interactingComponent.gameObject.transform.position.y) > animationOffset)
         {
             Debug.Log("PRE::" + (gameObject.transform.position.y - interactingComponent.gameObject.transform.position.y));
 
-            characterInteractionScript.HandIKRight.position = Vector3.MoveTowards(characterInteractionScript.HandIKRight.position, interactingComponent.gameObject.transform.position, animationSpeed);
-            characterInteractionScript.HandIKRight.rotation = Quaternion.Lerp(characterInteractionScript.HandIKRight.rotation, interactingComponent.gameObject.transform.rotation, animationSpeed);
+            player.HandIKRight.position = Vector3.MoveTowards(player.HandIKRight.position, interactingComponent.gameObject.transform.position, animationSpeed);
+            player.HandIKRight.rotation = Quaternion.Lerp(player.HandIKRight.rotation, interactingComponent.gameObject.transform.rotation, animationSpeed);
 
 
             interactingComponent.gameObject.transform.position = Vector3.MoveTowards(interactingComponent.gameObject.transform.position, new Vector3
@@ -85,7 +84,7 @@ public class CeilingKnocking : InteractionFoundation, ICombinable
         }
 
 
-        StartCoroutine(characterInteractionScript.IKToObject(interactingComponent, false));
+        StartCoroutine(player.IKToObject(interactingComponent, false));
 
         yield return new WaitForEndOfFrame();
         cR = null;
