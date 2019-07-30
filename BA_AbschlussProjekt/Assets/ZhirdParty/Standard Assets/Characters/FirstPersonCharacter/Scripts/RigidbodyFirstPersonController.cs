@@ -249,14 +249,6 @@ namespace UnityStandardAssets.Characters.FirstPerson
 			{
 				//m_IsGrounded = true;
 				m_GroundContactNormal = hitInfo.normal;
-
-				//FootSprainedCheck
-				if (m_RigidBody.velocity.y < -10f && hitInfo.collider.material.bounciness < 0.6f)
-				{
-					playerHealth.ChangeCondition(Conditions.LowerBodyCondition, 0.5f);
-					Debug.Log("damaged");
-					//playerHealth.PlaySound(); //ToDo
-				} 
 			}
 			else
 			{
