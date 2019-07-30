@@ -81,7 +81,7 @@ public class ExitDoor : BaseInteractable, ICombinable
                 interactSound?.PlaySound(2);
                 break;
             default:
-                VoiceLines.instance.PlayVoiceLine(UnityEngine.Random.Range(10, 12), 0f);
+                VoiceLines.instance.PlayVoiceLine(UnityEngine.Random.Range(10, 13), 0f);
                 break;
         }
         interactionCount++;
