@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class KeyBox : MonoBehaviour
+public class KeyBox : BaseInteractable
 {
     [SerializeField]
     private Color greenLampOnEmissionColor;
@@ -19,6 +19,8 @@ public class KeyBox : MonoBehaviour
     private GameObject lampInsideBox;
     [SerializeField]
     private Sound keyDropSound;
+    [SerializeField]
+    private Sound interactSound;
 
     public bool IsOpen { get; private set; }
 
@@ -30,6 +32,7 @@ public class KeyBox : MonoBehaviour
             keyDropSound = GetComponent<Sound>();
 
         CloseKeyBox();
+        base.Awake();
     }
 
     public void CloseKeyBox()
@@ -59,5 +62,13 @@ public class KeyBox : MonoBehaviour
         keyDropSound?.PlaySound(0);
 
         IsOpen = true;
+    }
+
+    public override bool CarryOutInteraction(InteractionScript player)
+    {
+        Debug.Log("use Keybox");
+        //interactSound?.PlaySound(1);//Todo:activate with right numbers after sound is there
+        //VoiceLines.instance.PlayVoiceLine(13, 1f);
+        return true;
     }
 }
