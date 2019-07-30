@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -58,5 +59,20 @@ public class PictureInteraction : InteractionFoundation, ICombinable
             return Combine(player, currentlyHolding);
 
         return false;
+    }
+
+    private void DestroyPictureOnStand()
+    {
+        Destroy(pictureOnStand);
+    }
+
+    private void OnEnable()
+    {
+        Picture.PlayerFailed += DestroyPictureOnStand;
+    }
+
+    private void OnDisable()
+    {
+        Picture.PlayerFailed -= DestroyPictureOnStand;
     }
 }
