@@ -12,6 +12,7 @@ public class ExitDoor : BaseInteractable, ICombinable
     GameObject keyInLock;
     [SerializeField]
     string nameOfKeysGameobject = "Key";
+    private int interactionCount = 0;
 
     [SerializeField]
     protected Sound interactSound;
@@ -67,8 +68,23 @@ public class ExitDoor : BaseInteractable, ICombinable
     {
         if (isOpen)
             return false;
-
-        interactSound?.PlaySound(0);
+        switch (interactionCount)
+        {
+            case 0:
+                interactSound?.PlaySound(0);
+                VoiceLines.instance.PlayDillenVoiceLine(3, 1f);
+                break;
+            case 1:
+                interactSound?.PlaySound(1);
+                break;
+            case 2:
+                interactSound?.PlaySound(2);
+                break;
+            default:
+                VoiceLines.instance.PlayVoiceLine(UnityEngine.Random.Range(10, 12), 0f);
+                break;
+        }
+        interactionCount++;
         return true;
     }
 }
