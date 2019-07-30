@@ -41,6 +41,8 @@ public class PictureInteraction : InteractionFoundation, ICombinable
 
             IsPictureOnStand = true;
 
+            VoiceLines.instance.PlayDillenVoiceLine(0, 1.3f);
+
             return true;
         }
         return false;
