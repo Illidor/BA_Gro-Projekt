@@ -7,7 +7,7 @@ public class Window : BaseInteractable
     [SerializeField] Sound windowSounds;
 
     private float interactionTicker = 0f;
-    private float interactionThreshold = 1f;
+    private float interactionThreshold = 4f;
 
     public override bool CarryOutInteraction(InteractionScript player) {
         if(interactionTicker > interactionThreshold) {
