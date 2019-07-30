@@ -11,6 +11,8 @@ public class Altar : ConditionedInteraction
     [SerializeField]
     private PictureInteraction pictureInteraction;
 
+    private int refusingCounter = 0;
+
     private new void Awake()
     {
         if (pictureInteraction == null)
@@ -31,8 +33,21 @@ public class Altar : ConditionedInteraction
     {
         if (triggerObject.childCount > 0)
         {
-            VoiceLines.instance.PlayDillenVoiceLine(1, 2);
-            Picture.InvokePlayerFailed();
+            switch (refusingCounter++)
+            {
+                case 0: 
+                    VoiceLines.instance.PlayDillenVoiceLine(1, 2);
+                    break;
+
+                case 1:
+                    VoiceLines.instance.PlayDillenVoiceLine(2, 2);
+                    break;
+
+                default:
+                    Picture.InvokePlayerFailed();
+                    break;
+            }
+
             return true;
         }
         return false;
