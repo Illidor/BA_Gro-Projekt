@@ -43,14 +43,15 @@ public abstract class BaseInteractable : InteractionFoundation
 
         if (CTRLHub.InteractDown)
         {
-            if (!player.cR_isRunning)
-            {
-                player.cR_isRunning = true;
-               
-             
-                StartCoroutine(player.IKToObject(this, isBothHanded));
-               
-            }
+            CarryOutInteraction(player);
+
+            //Disabled IK for non-carryables
+            // if (!player.cR_isRunning)
+            // {
+            //     player.cR_isRunning = true;
+            //    
+            //     StartCoroutine(player.IKToObject(this, isBothHanded));
+            // }
         }
     }
 
@@ -81,7 +82,6 @@ public abstract class BaseInteractable : InteractionFoundation
             {
                 return transforms[0];
             }
-         
 
             if (leftHand)
             {

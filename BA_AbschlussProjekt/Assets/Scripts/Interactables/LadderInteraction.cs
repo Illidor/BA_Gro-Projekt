@@ -53,7 +53,8 @@ public class LadderInteraction : ConditionedInteraction
     [SerializeField] private float climbingSoundThreshold = 1.5f;
     private int climbCount = 0;
 
-    private void Start() {
+    private void Start()
+    {
         climbingSound = GetComponent<Sound>();
     }
 
