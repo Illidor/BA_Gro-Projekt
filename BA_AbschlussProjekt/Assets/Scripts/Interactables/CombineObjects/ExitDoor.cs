@@ -79,6 +79,7 @@ public class ExitDoor : BaseInteractable, ICombinable
                 break;
             case 2:
                 interactSound?.PlaySound(2);
+                player.PlayerHealth.ChangeCondition(Conditions.UpperBodyCondition, 0.5f);
                 break;
             default:
                 VoiceLines.instance.PlayVoiceLine(UnityEngine.Random.Range(10, 13), 0f);
