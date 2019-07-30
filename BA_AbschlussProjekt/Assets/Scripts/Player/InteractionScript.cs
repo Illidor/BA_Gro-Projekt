@@ -14,7 +14,7 @@ public class InteractionScript : MonoBehaviour
     [Tooltip("Max distance to objects the player is able to grab empty handed")]
     private float emptyHandedGrabingReach = 1.5f;
     [SerializeField]
-    private float iKSpeed = 2f;
+    private float iKSpeed = 20f;
     private RigidbodyFirstPersonController fPSController;
     private bool lastGrabWasBothHanded;
 
@@ -144,7 +144,7 @@ public class InteractionScript : MonoBehaviour
             if (!bothHanded)
             {
                 animator.SetBool("Grab", true);
-                animator.SetFloat("Blend", 0f);
+                animator.SetFloat("Blend", 6f);
             }
             else
             {
@@ -181,19 +181,20 @@ public class InteractionScript : MonoBehaviour
             fPSController.freezePlayerMovement = true;
         }
 
-        float distance = iKSpeed / Time.deltaTime;
+        float speed = iKSpeed / Time.deltaTime;
 
         if (pointRight != null)
         {
             while ((HandIKRight.position - pointRight.position).magnitude > .2f || (HandIKRight.eulerAngles - pointRight.eulerAngles).magnitude > .2f)
             {
-                HandIKRight.position = Vector3.MoveTowards(HandIKRight.position, pointRight.position, distance);
-                HandIKRight.rotation = Quaternion.Lerp(HandIKRight.rotation, pointRight.rotation, distance);
+                Debug.Log("closer");
+                HandIKRight.position = Vector3.MoveTowards(HandIKRight.position, pointRight.position, speed);
+                HandIKRight.rotation = Quaternion.Lerp(HandIKRight.rotation, pointRight.rotation, speed);
 
                 if (bothHanded)
                 {
-                    HandIKLeft.position = Vector3.MoveTowards(HandIKLeft.position, pointLeft.position, distance);
-                    HandIKLeft.rotation = Quaternion.Lerp(HandIKLeft.rotation, pointLeft.rotation, distance);
+                    HandIKLeft.position = Vector3.MoveTowards(HandIKLeft.position, pointLeft.position, speed);
+                    HandIKLeft.rotation = Quaternion.Lerp(HandIKLeft.rotation, pointLeft.rotation, speed);
                 }
 
                 yield return new WaitForEndOfFrame();
@@ -220,16 +221,16 @@ public class InteractionScript : MonoBehaviour
             {
                 while ((FixPoint.transform.position - GrabingPoint.position).magnitude > .2f || ((FixPoint.transform.eulerAngles - GrabingPoint.eulerAngles).magnitude > .2f))
                 {
-                    FixPoint.transform.position = Vector3.MoveTowards(FixPoint.transform.position, GrabingPoint.transform.position, distance);
-                    FixPoint.transform.rotation = Quaternion.Lerp(FixPoint.transform.rotation, GrabingPoint.transform.rotation, distance);
+                    FixPoint.transform.position = Vector3.MoveTowards(FixPoint.transform.position, GrabingPoint.transform.position, speed);
+                    FixPoint.transform.rotation = Quaternion.Lerp(FixPoint.transform.rotation, GrabingPoint.transform.rotation, speed);
 
-                    HandIKRight.transform.position = Vector3.MoveTowards(HandIKRight.position, pointRight.position, distance);
-                    HandIKRight.rotation = Quaternion.Lerp(HandIKRight.rotation, pointRight.rotation, distance);
+                    HandIKRight.transform.position = Vector3.MoveTowards(HandIKRight.position, pointRight.position, speed);
+                    HandIKRight.rotation = Quaternion.Lerp(HandIKRight.rotation, pointRight.rotation, speed);
 
                     if (bothHanded)
                     {
-                        HandIKLeft.transform.position = Vector3.MoveTowards(HandIKLeft.position, pointLeft.position, distance);
-                        HandIKLeft.rotation = Quaternion.Lerp(HandIKLeft.rotation, pointLeft.rotation, distance);
+                        HandIKLeft.transform.position = Vector3.MoveTowards(HandIKLeft.position, pointLeft.position, speed);
+                        HandIKLeft.rotation = Quaternion.Lerp(HandIKLeft.rotation, pointLeft.rotation, speed);
                     }
                     yield return new WaitForEndOfFrame();
                 }
