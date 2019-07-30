@@ -17,11 +17,12 @@ public class MainMenuScript : MonoBehaviour
     [SerializeField]
     private Sound menuSound;
 
-    private bool mouseLock = false;
+    public bool mouseLock;
 
     private void Awake()
     {
         menuSound?.PlaySound(0);
+        mouseLock = false;
     }
 
     private void Update()
