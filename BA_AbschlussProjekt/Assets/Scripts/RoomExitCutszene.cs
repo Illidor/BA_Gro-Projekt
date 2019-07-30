@@ -37,6 +37,11 @@ public class RoomExitCutszene : MonoBehaviour
             playerObject = other.gameObject;
             playerTrans.LookAt(lookAtObj.transform);
             StartCoroutine(deleteCam());
+
+            if(Random.Range(0, 2) >= 1)
+                VoiceLines.instance.PlayDillenVoiceLine(4, 0.8f);
+            else
+                VoiceLines.instance.PlayDillenVoiceLine(5, 0.8f);
         }
     }
 
