@@ -11,6 +11,8 @@ public class Altar : ConditionedInteraction
     [SerializeField]
     private PictureInteraction pictureInteraction;
 
+    private int refusingCounter = 0;
+
     private new void Awake()
     {
         if (pictureInteraction == null)
@@ -31,7 +33,21 @@ public class Altar : ConditionedInteraction
     {
         if (triggerObject.childCount > 0)
         {
-            Picture.InvolePlayerFailed();
+            switch (refusingCounter++)
+            {
+                case 0: 
+                    VoiceLines.instance.PlayDillenVoiceLine(1, 2);
+                    break;
+
+                case 1:
+                    VoiceLines.instance.PlayDillenVoiceLine(2, 2);
+                    break;
+
+                default:
+                    Picture.InvokePlayerFailed();
+                    break;
+            }
+
             return true;
         }
         return false;
@@ -44,7 +60,7 @@ public class Altar : ConditionedInteraction
 
         player.GUIInteractionFeedbackHandler.StandardCrosshair.SetActive(false);
         player.GUIInteractionFeedbackHandler.InteractionCrosshair.SetActive(true);
-        player.GUIInteractionFeedbackHandler.ActionDescription.text = "Press E to Destroy Picture";
+        player.GUIInteractionFeedbackHandler.ActionDescription.text = "Press E to refuse praying";
         player.GUIInteractionFeedbackHandler.SecondActionDescription.text = "Click to Pray at " + DisplayName;
 
         if (CTRLHub.InteractDown && player.PlayerHealth.GetCondition(conditionsTypeNeededToInteract) > minCondition)
