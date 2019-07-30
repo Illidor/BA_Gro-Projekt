@@ -8,7 +8,7 @@ using UnityEngine.Events;
 public class Picture : GrabInteractable
 {
     public static event UnityAction PlayerFailed;
-    public static void InvolePlayerFailed() { PlayerFailed?.Invoke(); }
+    public static void InvokePlayerFailed() { PlayerFailed?.Invoke(); }
 
     [SerializeField]
     private bool willTriggerDeathOnDestroy = false;
