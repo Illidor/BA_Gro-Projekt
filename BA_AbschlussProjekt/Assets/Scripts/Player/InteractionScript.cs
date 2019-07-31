@@ -133,6 +133,12 @@ public class InteractionScript : MonoBehaviour
 
     public IEnumerator IKToObject(BaseInteractable objecToInteractWith, bool bothHanded)
     {
+        animator.SetTrigger("GrabAnim");
+        animator.SetFloat("Blend", 0f);
+
+        yield return new WaitForSeconds(1f);
+        animator.SetFloat("Blend", 1f);
+
         cR_isRunning = true;
 
         //BackUP
@@ -144,16 +150,13 @@ public class InteractionScript : MonoBehaviour
             if (!bothHanded)
             {
                 animator.SetBool("Grab", true);
-                animator.SetFloat("Blend", 6f);
+                animator.SetFloat("Blend", 0f);
             }
             else
             {
                 animator.SetFloat("Blend", .5f);
                 animator.SetBool("Grab", true);
             }
-
-
-
         }
 
         if (objecToInteractWith != null && objecToInteractWith.GetIKPoint(false) == null)
@@ -181,13 +184,14 @@ public class InteractionScript : MonoBehaviour
             fPSController.freezePlayerMovement = true;
         }
 
-        float speed = iKSpeed / Time.deltaTime;
+        float speed = 20f / Time.deltaTime;
 
         if (pointRight != null)
         {
+            Debug.Log(Vector3.Distance(HandIKRight.position, pointRight.position));
             while ((HandIKRight.position - pointRight.position).magnitude > .2f || (HandIKRight.eulerAngles - pointRight.eulerAngles).magnitude > .2f)
+            //while (Vector3.Distance(HandIKRight.position, pointRight.position) > 0.4f)
             {
-                Debug.Log("closer");
                 HandIKRight.position = Vector3.MoveTowards(HandIKRight.position, pointRight.position, speed);
                 HandIKRight.rotation = Quaternion.Lerp(HandIKRight.rotation, pointRight.rotation, speed);
 
