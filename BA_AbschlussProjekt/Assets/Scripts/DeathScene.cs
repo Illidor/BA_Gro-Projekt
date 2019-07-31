@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Audio;
 using UnityEngine.SceneManagement;
 
 public class DeathScene : MonoBehaviour
@@ -9,6 +10,8 @@ public class DeathScene : MonoBehaviour
     private List<GameObject> playerPoses = new List<GameObject>();
     [SerializeField]
     private float returnToMenuAfterSequenceEnded = 30f;
+    [SerializeField]
+    private AudioMixerSnapshot deathSnapshot;
     public GameObject player;
 
     private bool isSceneFinished = false;
@@ -20,6 +23,7 @@ public class DeathScene : MonoBehaviour
     {
         player.SetActive(false);
         StartCoroutine(DelayPositionSwap());
+        SwitchToDeathSnap();
         deadSceneMusic.Play();
     }
 
@@ -49,6 +53,10 @@ public class DeathScene : MonoBehaviour
         yield return new WaitForSeconds(returnToMenuAfterSequenceEnded);
 
         LoadSceneAfterDeath();
+    }
+    private void SwitchToDeathSnap()
+    {
+        deathSnapshot.TransitionTo(0f);
     }
 
 #if UNITY_EDITOR
