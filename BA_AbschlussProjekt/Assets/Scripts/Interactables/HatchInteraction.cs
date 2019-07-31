@@ -133,7 +133,6 @@ public class HatchInteraction : BaseInteractable, ICombinable
 
         while ((gameObject.transform.position.y - interactingComponent.gameObject.transform.position.y) > animationOffset)
         {
-            Debug.Log("PRE::" + (gameObject.transform.position.y - interactingComponent.gameObject.transform.position.y));
 
             characterInteractionScript.HandIKRight.position = Vector3.MoveTowards(characterInteractionScript.HandIKRight.position, interactingComponent.gameObject.transform.position, animationSpeed);
             characterInteractionScript.HandIKRight.rotation = Quaternion.Lerp(characterInteractionScript.HandIKRight.rotation, interactingComponent.gameObject.transform.rotation, animationSpeed);

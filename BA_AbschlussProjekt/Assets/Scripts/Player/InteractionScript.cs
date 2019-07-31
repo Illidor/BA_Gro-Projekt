@@ -144,7 +144,7 @@ public class InteractionScript : MonoBehaviour
             if (!bothHanded)
             {
                 animator.SetBool("Grab", true);
-                animator.SetFloat("Blend", 6f);
+                animator.SetFloat("Blend", 0f);
             }
             else
             {
@@ -187,7 +187,6 @@ public class InteractionScript : MonoBehaviour
         {
             while ((HandIKRight.position - pointRight.position).magnitude > .2f || (HandIKRight.eulerAngles - pointRight.eulerAngles).magnitude > .2f)
             {
-                Debug.Log("closer");
                 HandIKRight.position = Vector3.MoveTowards(HandIKRight.position, pointRight.position, speed);
                 HandIKRight.rotation = Quaternion.Lerp(HandIKRight.rotation, pointRight.rotation, speed);
 
