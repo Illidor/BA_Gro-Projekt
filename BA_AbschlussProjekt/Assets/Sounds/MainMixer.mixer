@@ -48,6 +48,20 @@ AudioMixerGroupController:
   m_Mute: 0
   m_Solo: 0
   m_BypassEffects: 0
+--- !u!244 &-8758973303416286028
+AudioMixerEffectController:
+  m_ObjectHideFlags: 3
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: 
+  m_EffectID: 16f762cdab6dd4b4d9d4c6c75eed852f
+  m_EffectName: Attenuation
+  m_MixLevel: 477d23fd4b58d5141b923cf9ec9ffd23
+  m_Parameters: []
+  m_SendTarget: {fileID: 0}
+  m_EnableWetMix: 0
+  m_Bypass: 0
 --- !u!244 &-8284656257091033772
 AudioMixerEffectController:
   m_ObjectHideFlags: 3
@@ -128,6 +142,24 @@ AudioMixerGroupController:
   m_Mute: 0
   m_Solo: 0
   m_BypassEffects: 0
+--- !u!245 &-5984358017941668259
+AudioMixerSnapshotController:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: DeathScene
+  m_AudioMixer: {fileID: 24100000}
+  m_SnapshotID: 633804bd2527fa64bbc91454a167ef98
+  m_FloatValues:
+    fdf70100d38d90b4a81de6d054ba5eed: -6.5566154
+    7e677e915c5d9234c8eae3c50ae37a45: -80
+    2e73aed1b9d7bd947b3f1923ef5db2b7: -0.02577656
+    70de93e384981974fafd961756e461a1: -80
+    868a7c27b341701428bb5d0f57392ada: -0.10231405
+    84b165a90b06b464aa445b3be20f98f7: -3.26
+    7560842dfb6e11f40a4058cb6d3a05ea: -80
+  m_TransitionOverrides: {}
 --- !u!243 &-5150181079327529033
 AudioMixerGroupController:
   m_ObjectHideFlags: 0
@@ -158,6 +190,34 @@ AudioMixerEffectController:
   m_EffectName: Attenuation
   m_MixLevel: 81c9680f830d1ef49b9c629c490bdd78
   m_Parameters: []
+  m_SendTarget: {fileID: 0}
+  m_EnableWetMix: 0
+  m_Bypass: 0
+--- !u!244 &-3003317951074132200
+AudioMixerEffectController:
+  m_ObjectHideFlags: 3
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: 
+  m_EffectID: 70b73c1707c1c664f8e12ce2ae3f1e27
+  m_EffectName: Duck Volume
+  m_MixLevel: b118c3ab8143e39409c03acba067fa98
+  m_Parameters:
+  - m_ParameterName: Threshold
+    m_GUID: 24c17328aa6ce984a9df2c0be43c2cd3
+  - m_ParameterName: Ratio
+    m_GUID: 1bc4c50d78da16249a013b19d8d72308
+  - m_ParameterName: Attack Time
+    m_GUID: 643894ac59f61ad4d9720a7c6da576eb
+  - m_ParameterName: Release Time
+    m_GUID: e50878a022604b24ebc00a100098f369
+  - m_ParameterName: Make-up Gain
+    m_GUID: d61454078bbb0d34ca49e5f86fe2bd3b
+  - m_ParameterName: Knee
+    m_GUID: e5784d3b78b88c54fa9e45c1227e2e21
+  - m_ParameterName: Sidechain Mix
+    m_GUID: aab0c50362bd9834fb5b9b009d0002d3
   m_SendTarget: {fileID: 0}
   m_EnableWetMix: 0
   m_Bypass: 0
@@ -202,6 +262,7 @@ AudioMixerController:
   m_Snapshots:
   - {fileID: 24500006}
   - {fileID: -1819972080031379382}
+  - {fileID: -5984358017941668259}
   m_StartSnapshot: {fileID: 24500006}
   m_SuspendThreshold: -80
   m_EnableSuspend: 1
@@ -217,9 +278,10 @@ AudioMixerController:
     - 5caaa325a816b4043ba18342ea6c6399
     - 0dc9771ad8fb4d94db4b32073a26e5d3
     - 3862d6b3e63c9b243b12d03e727acfbd
+    - 23251f7a600a7714fa939006f0468ae5
     name: View
   m_CurrentViewIndex: 0
-  m_TargetSnapshot: {fileID: 24500006}
+  m_TargetSnapshot: {fileID: -5984358017941668259}
 --- !u!243 &24300002
 AudioMixerGroupController:
   m_ObjectHideFlags: 0
@@ -233,6 +295,7 @@ AudioMixerGroupController:
   - {fileID: -9101280998079847220}
   - {fileID: 8820199791950021776}
   - {fileID: 5178708053223807269}
+  - {fileID: 7427408002380189741}
   m_Volume: eed24deae919c46449597b9bd10766d7
   m_Pitch: 37eb4e493c1ac114baa179f10dd895d2
   m_Send: 00000000000000000000000000000000
@@ -271,6 +334,7 @@ AudioMixerSnapshotController:
     2e73aed1b9d7bd947b3f1923ef5db2b7: -0.02577656
     70de93e384981974fafd961756e461a1: -0.025776558
     868a7c27b341701428bb5d0f57392ada: -0.10231405
+    84b165a90b06b464aa445b3be20f98f7: -3.26
     7560842dfb6e11f40a4058cb6d3a05ea: 0.58972603
   m_TransitionOverrides: {}
 --- !u!244 &125765979235987723
@@ -339,6 +403,26 @@ AudioMixerGroupController:
   m_Send: 00000000000000000000000000000000
   m_Effects:
   - {fileID: -8284656257091033772}
+  m_UserColorIndex: 0
+  m_Mute: 0
+  m_Solo: 0
+  m_BypassEffects: 0
+--- !u!243 &7427408002380189741
+AudioMixerGroupController:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: DeathScene
+  m_AudioMixer: {fileID: 24100000}
+  m_GroupID: 23251f7a600a7714fa939006f0468ae5
+  m_Children: []
+  m_Volume: 84b165a90b06b464aa445b3be20f98f7
+  m_Pitch: 1490422145e38d341946ab8b120211fe
+  m_Send: 00000000000000000000000000000000
+  m_Effects:
+  - {fileID: -8758973303416286028}
+  - {fileID: -3003317951074132200}
   m_UserColorIndex: 0
   m_Mute: 0
   m_Solo: 0
