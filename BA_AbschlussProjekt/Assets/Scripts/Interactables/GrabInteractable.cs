@@ -93,7 +93,6 @@ public class GrabInteractable : BaseInteractable
         //{
         //    transform.SetParent(null);
         //}
-        print("Parenting to: " + player.GrabingPoint.name);
         transform.SetParent(player.GrabingPoint.transform);
        
         //transform.localPosition = Vector3.zero;
