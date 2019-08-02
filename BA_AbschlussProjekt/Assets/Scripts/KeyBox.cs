@@ -1,9 +1,12 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class KeyBox : BaseInteractable
 {
+    public static event UnityAction ShockPlayer;
+
     [SerializeField]
     private Color greenLampOnEmissionColor;
     [SerializeField]
@@ -68,10 +71,12 @@ public class KeyBox : BaseInteractable
     public override bool CarryOutInteraction(InteractionScript player)
     {
         Debug.Log("use Keybox");
+        
         if (!interacted)
         {
             //try to break box
-            //get shocked
+            // Shock Player when he tries to open the Keybox
+            ShockPlayer?.Invoke();
         }
         else
         {

@@ -76,8 +76,10 @@ public class ElectricBracelet : MonoBehaviour
     }
 
     private void OnEnable() {
+        Window.ShockPlayer += GetShockDamage;
     }
 
     private void OnDisable() {
+        Window.ShockPlayer -= GetShockDamage;
     }
 }
