@@ -282,4 +282,19 @@ public class InteractionScript : MonoBehaviour
     {
         GrabingReach = emptyHandedGrabingReach;
     }
+
+    private void PutObjectDownAfterBeingShocked() {
+        if (IsCarrying || IsPushing) {
+            UsedObject.PutDown(this);
+        }
+    }
+
+    private void OnEnable() {
+        ElectricBracelet.DropItemAfterBeingShocked += PutObjectDownAfterBeingShocked;
+    }
+
+    private void OnDisable() 
+    {
+        ElectricBracelet.DropItemAfterBeingShocked -= PutObjectDownAfterBeingShocked;
+    }
 }

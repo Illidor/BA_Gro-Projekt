@@ -102,7 +102,6 @@ namespace UnityStandardAssets.Characters.FirstPerson
 		public bool freezePlayerCamera = true;
 		public bool freezePlayerMovement = true;
 
-
 		private void Start()
 		{
 			m_RigidBody = GetComponent<Rigidbody>();
