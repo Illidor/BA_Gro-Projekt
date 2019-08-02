@@ -27,6 +27,8 @@ public class HatchInteraction : BaseInteractable, ICombinable
     private float dustParticleThreshold = 30f;
     private bool isEmitting = true;
 
+    private bool isOpen = false;
+
     private int knockCounter = 0;
 
     private float timeOfLastKnock;
@@ -85,6 +87,9 @@ public class HatchInteraction : BaseInteractable, ICombinable
             return false;
         }
 
+        if (isOpen)
+            return false;
+
         OpenHatch();
 
         return true;
@@ -98,6 +103,8 @@ public class HatchInteraction : BaseInteractable, ICombinable
 
     public void OpenHatch()
     {
+        isOpen = true;
+
         transform.parent?.GetComponent<Animator>()?.SetTrigger("open");
         hatchOpenSound?.PlaySound(0);
         EmitDust(10);
