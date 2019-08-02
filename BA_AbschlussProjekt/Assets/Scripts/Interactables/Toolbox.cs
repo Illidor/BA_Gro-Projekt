@@ -10,6 +10,7 @@ public class Toolbox : BaseInteractable
     {
         if (!used)
         {
+            used = true;
             GetComponent<Animation>().Play();
             return true;
         }
