@@ -24,12 +24,6 @@ public class ElectricBracelet : MonoBehaviour
         currentHealth = maxHealth;
     }
 
-    private void Update() {
-        if (Input.GetKeyDown(KeyCode.K)) {
-            DropItemAfterBeingShocked?.Invoke();
-        }
-    }
-
     private void GetShockDamage() {
         // Disable Bracelet Lamp
         //braceletLamps[currentHealth - 1].material = disabledLampMaterial;
