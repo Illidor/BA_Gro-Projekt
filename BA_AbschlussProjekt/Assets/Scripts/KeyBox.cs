@@ -21,6 +21,7 @@ public class KeyBox : BaseInteractable
     private Sound keyDropSound;
     [SerializeField]
     private Sound interactSound;
+    private bool interacted = false;
 
     public bool IsOpen { get; private set; }
 
@@ -67,6 +68,15 @@ public class KeyBox : BaseInteractable
     public override bool CarryOutInteraction(InteractionScript player)
     {
         Debug.Log("use Keybox");
+        if (!interacted)
+        {
+            //try to break box
+            //get shocked
+        }
+        else
+        {
+            //dont want to use it and say out loud??falls nicht drin else weg
+        }
         //interactSound?.PlaySound(1);//Todo:activate with right numbers after sound is there
         //VoiceLines.instance.PlayVoiceLine(13, 1f);
         return true;
