@@ -56,6 +56,9 @@ public class LadderInteraction : ConditionedInteraction
     private void Start()
     {
         climbingSound = GetComponent<Sound>();
+
+        RightIKHand = GameObject.Find("ik_arm_R").transform;
+        LeftIKHand = GameObject.Find("ik_arm_L").transform;
     }
 
     private void OnValidate()
