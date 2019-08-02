@@ -1,9 +1,12 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class KeyBox : BaseInteractable
 {
+    public static event UnityAction ShockPlayer;
+
     [SerializeField]
     private Color greenLampOnEmissionColor;
     [SerializeField]
@@ -67,6 +70,8 @@ public class KeyBox : BaseInteractable
     public override bool CarryOutInteraction(InteractionScript player)
     {
         Debug.Log("use Keybox");
+        // Shock Player when he tries to open the Keybox
+        ShockPlayer?.Invoke();
         //interactSound?.PlaySound(1);//Todo:activate with right numbers after sound is there
         //VoiceLines.instance.PlayVoiceLine(13, 1f);
         return true;
