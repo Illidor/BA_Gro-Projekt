@@ -4,9 +4,15 @@ using UnityEngine;
 
 public class Toolbox : BaseInteractable
 {
+    private bool used = false;
+
     public override bool CarryOutInteraction(InteractionScript player)
     {
-        GetComponent<Animation>().Play();
-        return true;
+        if (!used)
+        {
+            GetComponent<Animation>().Play();
+            return true;
+        }
+        return false;
     }
 }
