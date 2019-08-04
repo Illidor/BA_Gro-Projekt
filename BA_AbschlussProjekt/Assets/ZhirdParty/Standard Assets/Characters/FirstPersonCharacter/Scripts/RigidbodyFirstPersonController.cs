@@ -115,7 +115,10 @@ namespace UnityStandardAssets.Characters.FirstPerson
 
 			playerHealth = GetComponent<PlayerHealth>();
 			footstepSound = GetComponent<Sound>();
-		}
+
+            Invoke("defreezeMovement", 7f);
+
+        }
 
 		private void Update()
 		{
@@ -141,7 +144,14 @@ namespace UnityStandardAssets.Characters.FirstPerson
 			CheckMovability();
 		}
 
-		private void FixedUpdate()
+        private void defreezeMovement()
+        {
+            freezePlayerCamera = false;
+            freezePlayerMovement = false;
+        }
+
+
+        private void FixedUpdate()
 		{
 			Vector2 input = GetInput();
 

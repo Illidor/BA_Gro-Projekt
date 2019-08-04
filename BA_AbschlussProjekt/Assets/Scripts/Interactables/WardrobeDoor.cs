@@ -49,14 +49,7 @@ public class WardrobeDoor : HingedInteraction, ICombinable
         else    // if wrong combine object, don't execute code below
         {
             print("Locked");
-            if(gameObject.name == "mdl_wardrobe_door_right")
-            {
-                GetComponent<Animation>().Play();
-            }
-            else
-            {
-                otherDoor.GetComponent<Animation>().Play();
-            }
+
             return false; 
         }
 
@@ -72,7 +65,18 @@ public class WardrobeDoor : HingedInteraction, ICombinable
     public override bool CarryOutInteraction(InteractionScript player)
     {
         if (IsLocked)
+        {
+            if (gameObject.name == "mdl_wardrobe_door_right")
+            {
+                GetComponent<Animation>().Play();
+            }
+            else
+            {
+                otherDoor.GetComponent<Animation>().Play();
+            }
             return false;
+
+        }
 
         return base.CarryOutInteraction(player);
     }
