@@ -71,11 +71,15 @@ public class ExitDoor : BaseInteractable, ICombinable
         switch (interactionCount)
         {
             case 0:
-                interactSound?.PlaySound(1);//rütteln(door_rattle) voiceline(help?), dillen3, voice(iknowthatvoice
-                VoiceLines.instance.PlayDillenVoiceLine(3, 1f);
+                interactSound?.PlaySound(1);                        //rütteln(door_rattle) 
+                VoiceLines.instance.PlayVoiceLine(19, 1f);          // voiceline(help ?), 
+                VoiceLines.instance.PlayDillenVoiceLine(3, 2f);     //dillen3, 
+                VoiceLines.instance.PlayVoiceLine(14, 8f);          //voice(iknowthatvoice)
                 break;
             case 1:
                 interactSound?.PlaySound(2);//hämmern und voiceline, dillen
+                VoiceLines.instance.PlayVoiceLine(20, 1f);
+                VoiceLines.instance.PlayDillenVoiceLine(12, 6f);
                 break;
             case 2:
                 interactSound?.PlaySound(3);//hämmern, verletzen
