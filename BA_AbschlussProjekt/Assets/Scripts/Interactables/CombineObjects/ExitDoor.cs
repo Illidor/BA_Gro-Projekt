@@ -8,6 +8,7 @@ using UnityEngine.Playables;
 public class ExitDoor : BaseInteractable, ICombinable   
 {
     public static event UnityAction<string> OpenDoorAnim;
+    public static event UnityAction<Transform> MovePlayerToTargetPosition;
 
     [SerializeField]
     private float timeToWaitUntilDoorOpens = 1.65f;
@@ -23,6 +24,8 @@ public class ExitDoor : BaseInteractable, ICombinable
     protected Sound doorOpeningSound;
 
     private bool isOpen = false;
+
+    [SerializeField] Transform playerTargetPosition;
 
     public bool Combine(InteractionScript player, BaseInteractable interactingComponent)
     {
@@ -94,6 +97,7 @@ public class ExitDoor : BaseInteractable, ICombinable
         }
 
         OpenDoorAnim?.Invoke("LockedDoor");
+        MovePlayerToTargetPosition?.Invoke(playerTargetPosition);
 
         interactionCount++;
         return true;
