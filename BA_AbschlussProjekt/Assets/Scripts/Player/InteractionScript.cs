@@ -59,6 +59,8 @@ public class InteractionScript : MonoBehaviour
 
     protected void Awake()
     {
+        CanInteract = true;
+
         GrabingReach = emptyHandedGrabingReach;
 
         IsFrozen = false;
