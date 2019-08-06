@@ -14,12 +14,19 @@ public class WardrobeDoor : HingedInteraction, ICombinable
     private Rigidbody handcuffRB;
     [SerializeField]
     private Sound unlockWithKeySound;
+    [SerializeField]
+    private Animation animationToPlay;
+
+
 
     public bool IsLocked { get; set; }
 
     private new void Awake()
     {
-        IsLocked = true;
+        if(handcuffRB != null)
+        {
+            IsLocked = true;
+        }
 
         base.Awake();
     }
@@ -56,8 +63,11 @@ public class WardrobeDoor : HingedInteraction, ICombinable
         IsLocked = false;
         otherDoor.IsLocked = false;
 
-        handcuffRB.useGravity = !IsLocked;
-        handcuffRB.isKinematic = IsLocked;
+        if (handcuffRB != null)
+        {
+            handcuffRB.useGravity = !IsLocked;
+            handcuffRB.isKinematic = IsLocked;
+        }
 
         return true;
     }
@@ -68,11 +78,11 @@ public class WardrobeDoor : HingedInteraction, ICombinable
         {
             if (gameObject.name == "mdl_wardrobe_door_right")
             {
-                GetComponent<Animation>().Play();
+                animationToPlay.Play();
             }
             else
             {
-                otherDoor.GetComponent<Animation>().Play();
+                animationToPlay.Play();
             }
             return false;
 
