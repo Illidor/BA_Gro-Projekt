@@ -73,9 +73,7 @@ public class KeyBox : BaseInteractable
         // try to break box
         // Shock Player when he tries to open the Keybox
         ShockPlayer?.Invoke();
-        
-        //interactSound?.PlaySound(1);//Todo:activate with right numbers after sound is there
-        //VoiceLines.instance.PlayVoiceLine(13, 1f);
+
         return true;
     }
 }
