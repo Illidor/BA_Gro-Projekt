@@ -41,8 +41,8 @@ public class InteractionScript : MonoBehaviour
         private set
         {
             isCarrying = value;
-            //if (value)
-            //    StartPickup?.Invoke();
+            if (value)
+                StartPickup?.Invoke();
         }
     }
     public bool IsPushing { get; private set; }
