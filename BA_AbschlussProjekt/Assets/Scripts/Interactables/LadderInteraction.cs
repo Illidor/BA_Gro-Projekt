@@ -57,12 +57,12 @@ public class LadderInteraction : ConditionedInteraction
     {
         climbingSound = GetComponent<Sound>();
 
-        if(RightIKHand == null)
-        {
-            RightIKHand = GameObject.Find("ik_arm_R").transform;
-            LeftIKHand = GameObject.Find("ik_arm_L").transform;
-            GrabingPoint = GameObject.Find("GrabbingPoint").transform;
-        }
+        //if(RightIKHand == null)
+        //{
+        //    RightIKHand = GameObject.Find("ik_arm_R").transform;
+        //    LeftIKHand = GameObject.Find("ik_arm_L").transform;
+        //    GrabingPoint = GameObject.Find("GrabbingPoint").transform;
+        //}
     }
 
     private void OnValidate()
@@ -155,6 +155,13 @@ public class LadderInteraction : ConditionedInteraction
 
     private void DetachFromLadder()
     {
+        Debug.Log("detatch?");
+
+        if (currentClimber == null)
+            return;
+
+        Debug.Log("fuckingdetatch");
+
         Rigidbody currentClimblerRigidbody = currentClimber.GetComponent<Rigidbody>();
         currentClimblerRigidbody.isKinematic = false;
         currentClimblerRigidbody.useGravity = true;
@@ -162,6 +169,8 @@ public class LadderInteraction : ConditionedInteraction
 
         IsBeeingClimbed = false;
         currentClimber = null;
+
+        InteractionScript.StartPickup -= DetachFromLadder;
     }
 
     public override void HandleInteraction(InteractionScript player)
@@ -203,6 +212,8 @@ public class LadderInteraction : ConditionedInteraction
 
         IsBeeingClimbed = true;
 
+        InteractionScript.StartPickup += DetachFromLadder;
+
         return true;
     }
 
@@ -216,13 +227,4 @@ public class LadderInteraction : ConditionedInteraction
         CurrentClimbingSpeed = slowClimbingSpeed;
     }
 
-    private void OnEnable()
-    {
-        InteractionScript.StartPickup += DetachFromLadder;
-    }
-
-    private void OnDisable()
-    {
-        InteractionScript.StartPickup -= DetachFromLadder;
-    }
 }
