@@ -2,10 +2,13 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.Playables;
 
 public class ExitDoor : BaseInteractable, ICombinable   
 {
+    public static event UnityAction<string> OpenDoorAnim;
+
     [SerializeField]
     private float timeToWaitUntilDoorOpens = 1.65f;
     [SerializeField]
@@ -89,6 +92,9 @@ public class ExitDoor : BaseInteractable, ICombinable
                 VoiceLines.instance.PlayVoiceLine(UnityEngine.Random.Range(10, 13), 0f);
                 break;
         }
+
+        OpenDoorAnim?.Invoke("LockedDoor");
+
         interactionCount++;
         return true;
     }

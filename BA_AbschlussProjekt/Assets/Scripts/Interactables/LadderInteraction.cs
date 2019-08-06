@@ -57,12 +57,12 @@ public class LadderInteraction : ConditionedInteraction
     {
         climbingSound = GetComponent<Sound>();
 
-        if(RightIKHand == null)
-        {
-            RightIKHand = GameObject.Find("ik_arm_R").transform;
-            LeftIKHand = GameObject.Find("ik_arm_L").transform;
-            GrabingPoint = GameObject.Find("GrabbingPoint").transform;
-        }
+        //if(RightIKHand == null)
+        //{
+        //    RightIKHand = GameObject.Find("ik_arm_R").transform;
+        //    LeftIKHand = GameObject.Find("ik_arm_L").transform;
+        //    GrabingPoint = GameObject.Find("GrabbingPoint").transform;
+        //}
     }
 
     private void OnValidate()

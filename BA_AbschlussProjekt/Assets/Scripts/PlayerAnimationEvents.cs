@@ -10,10 +10,13 @@ public class PlayerAnimationEvents : MonoBehaviour
     [SerializeField] AudioSource dyingSound;
     [SerializeField] AudioSource collapseSound;
 
+    private Animator playerAnimator;
+
     // Start is called before the first frame update
     void Start()
     {
         fpController = GetComponentInParent<RigidbodyFirstPersonController>();
+        playerAnimator = GetComponent<Animator>();
     }
 
     private void FreezeMovement()
@@ -46,4 +49,23 @@ public class PlayerAnimationEvents : MonoBehaviour
         collapseSound.Play();
     }
 
+    private void SetAnimatorTrigger(string triggerName)
+    {
+        playerAnimator.SetTrigger(triggerName);
+    }
+
+    private void SetAnimatorBool(string boolName, bool state)
+    {
+        playerAnimator.SetBool(boolName, state);
+    }
+
+    private void OnEnable()
+    {
+        ExitDoor.OpenDoorAnim += SetAnimatorTrigger;
+    }
+
+    private void OnDisable()
+    {
+        ExitDoor.OpenDoorAnim -= SetAnimatorTrigger;
+    }
 }
