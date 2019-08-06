@@ -25,6 +25,7 @@ namespace UnityStandardAssets.Characters.FirstPerson
 			public bool IsCrouching = false;
 			private bool m_Running;
 
+
 			public void UpdateDesiredTargetSpeed(Vector2 input)
 			{
 				if (input == Vector2.zero) return;
@@ -67,8 +68,9 @@ namespace UnityStandardAssets.Characters.FirstPerson
 		public MovementSettings movementSettings = new MovementSettings();
 		public MouseLook mouseLook = new MouseLook();
 		public AdvancedSettings advancedSettings = new AdvancedSettings();
+        private Animator playerAnimator;
 
-		private Rigidbody m_RigidBody;
+        private Rigidbody m_RigidBody;
 		private float m_YRotation;
 		private Vector3 m_GroundContactNormal;
 		//private bool m_Jump, m_PreviouslyGrounded, m_Jumping, m_IsGrounded;
@@ -118,6 +120,7 @@ namespace UnityStandardAssets.Characters.FirstPerson
 
             Invoke("defreezeMovement", 7f);
 
+            playerAnimator = GetComponentInChildren<Animator>();
         }
 
 		private void Update()
@@ -167,10 +170,18 @@ namespace UnityStandardAssets.Characters.FirstPerson
 
 			if(!freezePlayerMovement)
 			{
-				if ((Mathf.Abs(input.x) > float.Epsilon || Mathf.Abs(input.y) > float.Epsilon) /*&& (advancedSettings.airControl || m_IsGrounded)*/)
+                if (Mathf.Abs(input.x) > 0 || Mathf.Abs(input.y) > 0)
+                {
+                    playerAnimator.SetBool("IsMoving", true);
+                }
+                else
+                {
+                    playerAnimator.SetBool("IsMoving", false);
+                }
+                if ((Mathf.Abs(input.x) > float.Epsilon || Mathf.Abs(input.y) > float.Epsilon) /*&& (advancedSettings.airControl || m_IsGrounded)*/)
 				{
-					// always move along the camera forward as it is the direction that it being aimed at
-					Vector3 desiredMove = cam.transform.forward * input.y + cam.transform.right * input.x;
+                    // always move along the camera forward as it is the direction that it being aimed at
+                    Vector3 desiredMove = cam.transform.forward * input.y + cam.transform.right * input.x;
 					desiredMove = Vector3.ProjectOnPlane(desiredMove, m_GroundContactNormal).normalized;
 
 					desiredMove.x = desiredMove.x * movementSettings.CurrentTargetSpeed;
