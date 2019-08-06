@@ -74,15 +74,15 @@ public class LightLever : BaseInteractable
             for (int i = 0; i < lightsSources.Length; i++)
                 lightsSources[ i ].intensity = lightStrengths[ i ];
 
-            if (isVoicelinePlayed == false)
-            {
-                if(Random.Range(0,2) >= 1)
-                    VoiceLines.instance.PlayVoiceLine(1, 1.3f);
-                else
-                    VoiceLines.instance.PlayVoiceLine(4, 1.3f);
+            //if (isVoicelinePlayed == false)
+            //{
+            //    if(Random.Range(0,2) >= 1)
+            //        VoiceLines.instance.PlayVoiceLine(1, 1.3f);
+            //    else
+            //        VoiceLines.instance.PlayVoiceLine(4, 1.3f);
 
-                isVoicelinePlayed = true;
-            }
+            //    isVoicelinePlayed = true;
+            //}
         }
         else
         {

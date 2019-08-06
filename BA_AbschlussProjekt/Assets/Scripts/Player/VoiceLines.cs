@@ -10,6 +10,8 @@ public class VoiceLines : MonoBehaviour
     public List<AudioSource> dillenVoiceLines = new List<AudioSource>();
 
     private bool voiceLinePlayed = false;
+    private float? deltaTime = null;
+    public bool solved = false;
 
     private void Awake()
     {
@@ -32,17 +34,11 @@ public class VoiceLines : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(Time.time >= 180 && !voiceLinePlayed)
+        if((Time.time >= deltaTime + 5) && !voiceLinePlayed && solved)
         {
+            Debug.Log("start voiceline after 180");
             voiceLinePlayed = true;
-            if(Random.Range(0,2) >= 1)
-            {
-                PlayVoiceLine(7, 0f);
-            }
-            else
-            {
-                PlayVoiceLine(8, 0f);
-            }
+            PlayVoiceLine(Random.Range(7, 9), 0f);
         }
     }
 
@@ -76,5 +72,10 @@ public class VoiceLines : MonoBehaviour
 
         voiceLines[0].Play();
 
+    }
+    public void SetDeltaTime()
+    {
+        deltaTime = Time.time;
+        Debug.Log(deltaTime);
     }
 }
