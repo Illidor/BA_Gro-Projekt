@@ -41,13 +41,15 @@ public class InteractionScript : MonoBehaviour
         private set
         {
             isCarrying = value;
-            //if (value)
-            //    StartPickup?.Invoke();
+            if (value)
+                StartPickup?.Invoke();
         }
     }
     public bool IsPushing { get; private set; }
 
     public bool IsFrozen { get; set; }
+
+    public bool CanInteract { get; protected set; }
 
     public Transform HandIKLeft;
     public Transform HandIKRight;
@@ -78,6 +80,12 @@ public class InteractionScript : MonoBehaviour
 
         if (IsFrozen)
             return;
+
+        if (CanInteract == false)
+        {
+            GUIInteractionFeedbackHandler.ResetGUI();
+            return;
+        }
 
         if (IsCarrying || IsPushing)
         {
@@ -281,6 +289,27 @@ public class InteractionScript : MonoBehaviour
     public void ResetReachToDefault()
     {
         GrabingReach = emptyHandedGrabingReach;
+    }
+
+    /// <summary>
+    /// Block the players ability to interact. If duration is greater than 0, it will unblock after that set time
+    /// </summary>
+    /// <param name="duration"> If duration is greater than 0, it will unblock after that set time</param>
+    public void BlockInteraction(float duration = -1)
+    {
+        CancelInvoke("ReallowInteraction");
+
+        CanInteract = false;
+
+        if (duration > 0)
+        {
+            Invoke("ReallowInteraction", duration);
+        }
+    }
+
+    public void ReallowInteraction()
+    {
+        CanInteract = true;
     }
 
     private void PutObjectDownAfterBeingShocked() {
