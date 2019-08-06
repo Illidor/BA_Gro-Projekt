@@ -28,7 +28,7 @@ public class KeyBox : BaseInteractable
 
     public bool IsOpen { get; private set; }
 
-    private void Awake()
+    private new void Awake()
     {
         key.SetActive(false);
 
