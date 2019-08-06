@@ -299,13 +299,11 @@ public class InteractionScript : MonoBehaviour
     {
         CancelInvoke("ReallowInteraction");
 
+        CanInteract = false;
+
         if (duration > 0)
         {
             Invoke("ReallowInteraction", duration);
-        }
-        else
-        {
-            CanInteract = false;
         }
     }
 
