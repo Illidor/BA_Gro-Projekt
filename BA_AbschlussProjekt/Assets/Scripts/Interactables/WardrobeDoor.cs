@@ -65,6 +65,9 @@ public class WardrobeDoor : HingedInteraction, ICombinable
 
         if (handcuffRB != null)
         {
+            Destroy(handcuffRB.gameObject.GetComponent<HingeJoint>());
+            Destroy(otherDoor.GetComponent<WardrobeDoor>().handcuffRB.GetComponent<HingeJoint>());
+
             handcuffRB.useGravity = !IsLocked;
             handcuffRB.isKinematic = IsLocked;
         }
