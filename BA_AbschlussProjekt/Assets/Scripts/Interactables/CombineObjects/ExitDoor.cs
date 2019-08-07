@@ -2,10 +2,14 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.Playables;
 
 public class ExitDoor : BaseInteractable, ICombinable   
 {
+    public static event UnityAction<string> OpenDoorAnim;
+    public static event UnityAction<Transform> MovePlayerToTargetPosition;
+
     [SerializeField]
     private float timeToWaitUntilDoorOpens = 1.65f;
     [SerializeField]
@@ -20,6 +24,8 @@ public class ExitDoor : BaseInteractable, ICombinable
     protected Sound doorOpeningSound;
 
     private bool isOpen = false;
+
+    [SerializeField] Transform playerTargetPosition;
 
     public bool Combine(InteractionScript player, BaseInteractable interactingComponent)
     {
@@ -89,6 +95,10 @@ public class ExitDoor : BaseInteractable, ICombinable
                 VoiceLines.instance.PlayVoiceLine(UnityEngine.Random.Range(10, 13), 0f);
                 break;
         }
+
+        OpenDoorAnim?.Invoke("LockedDoor");
+        MovePlayerToTargetPosition?.Invoke(playerTargetPosition);
+
         interactionCount++;
         return true;
     }

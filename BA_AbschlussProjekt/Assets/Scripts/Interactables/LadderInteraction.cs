@@ -57,12 +57,12 @@ public class LadderInteraction : ConditionedInteraction
     {
         climbingSound = GetComponent<Sound>();
 
-        if(RightIKHand == null)
-        {
-            RightIKHand = GameObject.Find("ik_arm_R").transform;
-            LeftIKHand = GameObject.Find("ik_arm_L").transform;
-            GrabingPoint = GameObject.Find("GrabbingPoint").transform;
-        }
+        //if(RightIKHand == null)
+        //{
+        //    RightIKHand = GameObject.Find("ik_arm_R").transform;
+        //    LeftIKHand = GameObject.Find("ik_arm_L").transform;
+        //    GrabingPoint = GameObject.Find("GrabbingPoint").transform;
+        //}
     }
 
     private void OnValidate()
@@ -147,10 +147,10 @@ public class LadderInteraction : ConditionedInteraction
                 rightHandGrabPoint = item;
         }
 
-        LeftIKHand.transform.position  = Vector3.MoveTowards(LeftIKHand.transform.position, leftHandGrabPoint.position, .4f);
-        LeftIKHand.transform.rotation  = Quaternion.Lerp(LeftIKHand.transform.rotation, leftHandGrabPoint.rotation, .4f);
-        RightIKHand.transform.position = Vector3.MoveTowards(RightIKHand.transform.position, rightHandGrabPoint.position, .4f);
-        RightIKHand.transform.rotation = Quaternion.Lerp(RightIKHand.transform.rotation, rightHandGrabPoint.rotation, .4f);
+        //LeftIKHand.transform.position  = Vector3.MoveTowards(LeftIKHand.transform.position, leftHandGrabPoint.position, .4f);
+        //LeftIKHand.transform.rotation  = Quaternion.Lerp(LeftIKHand.transform.rotation, leftHandGrabPoint.rotation, .4f);
+        //RightIKHand.transform.position = Vector3.MoveTowards(RightIKHand.transform.position, rightHandGrabPoint.position, .4f);
+        //RightIKHand.transform.rotation = Quaternion.Lerp(RightIKHand.transform.rotation, rightHandGrabPoint.rotation, .4f);
     }
 
     private void DetachFromLadder()
