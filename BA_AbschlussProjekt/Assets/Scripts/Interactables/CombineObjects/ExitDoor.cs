@@ -40,7 +40,7 @@ public class ExitDoor : BaseInteractable, ICombinable
             ((GrabInteractable)interactingComponent).PutDown(player);
             Destroy(interactingComponent.gameObject);
 
-            interactSound?.PlaySound(0);
+            doorOpeningSound?.PlaySound(0);
 
             StartCoroutine(OpenDoor(player, interactingComponent));
 
@@ -77,18 +77,18 @@ public class ExitDoor : BaseInteractable, ICombinable
         switch (interactionCount)
         {
             case 0:
-                interactSound?.PlaySound(1);                        //rütteln(door_rattle) 
+                interactSound?.PlaySound(0, 0.5f);                  //rütteln(door_rattle) 
                 VoiceLines.instance.PlayVoiceLine(19, 1f);          // voiceline(help ?), 
                 VoiceLines.instance.PlayDillenVoiceLine(3, 2f);     //dillen3, 
                 VoiceLines.instance.PlayVoiceLine(14, 8f);          //voice(iknowthatvoice)
                 break;
             case 1:
-                interactSound?.PlaySound(2);//hämmern und voiceline, dillen
+                interactSound?.PlaySound(1);                        //klopfen und voiceline, dillen
                 VoiceLines.instance.PlayVoiceLine(20, 1f);
                 VoiceLines.instance.PlayDillenVoiceLine(12, 6f);
                 break;
             case 2:
-                interactSound?.PlaySound(3);//hämmern, verletzen
+                interactSound?.PlaySound(1);//hämmern, verletzen
                 player.PlayerHealth.ChangeCondition(Conditions.UpperBodyCondition, 0.5f);
                 break;
             default:
