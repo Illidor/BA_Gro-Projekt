@@ -88,10 +88,6 @@ namespace UnityStandardAssets.Characters.FirstPerson
 		[SerializeField] private CapsuleCollider standCollider;
 		[SerializeField] private CapsuleCollider crouchCollider;
 		private PlayerHealth playerHealth;
-		private Sound footstepSound;
-		[SerializeField] private float footstepSoundTicker = 1f;
-		[SerializeField] private float footstepSoundThreshold = 0.65f;
-		private int footstepSoundCount = 0;
 
 		// used for saving before reducing the speed with health conditions
 		private float defaultForwardSpeed;
@@ -118,7 +114,6 @@ namespace UnityStandardAssets.Characters.FirstPerson
 			defaultCrouchSpeed = movementSettings.CrouchSpeed;
 
 			playerHealth = GetComponent<PlayerHealth>();
-			footstepSound = GetComponent<Sound>();
 
             Invoke("defreezeMovement", 7f);
 
@@ -199,23 +194,6 @@ namespace UnityStandardAssets.Characters.FirstPerson
 						(movementSettings.CurrentTargetSpeed * movementSettings.CurrentTargetSpeed))
 					{
 						m_RigidBody.AddForce(desiredMove * SlopeMultiplier() / 2f, ForceMode.VelocityChange);
-					}
-
-					// Footstep audio logic with increasing ticker and threshold
-					footstepSoundTicker += Time.deltaTime;
-					if (footstepSoundTicker > footstepSoundThreshold)
-					{
-						footstepSoundTicker = 0f;
-						footstepSoundCount++;
-						// Play sounds at different audio sources so they don't get killed before fully played
-						if (footstepSoundCount % 2 == 0)
-						{
-							footstepSound.PlaySound(UnityEngine.Random.Range(0, footstepSound.clips.Count), 1);
-						}
-						else
-						{
-							footstepSound.PlaySound(UnityEngine.Random.Range(0, footstepSound.clips.Count), 2);
-						}
 					}
 				}
 			}
