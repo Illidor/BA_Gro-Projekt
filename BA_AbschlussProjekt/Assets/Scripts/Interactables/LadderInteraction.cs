@@ -94,12 +94,16 @@ public class LadderInteraction : ConditionedInteraction
         // <drop from ladder cases>
 
         if (CTRLHub.DropDown)
+        {
             DetachFromLadder();
+            return;
+        }
 
         if (currentClimber.transform.position.y < startPoint.position.y ||
             currentClimber.transform.position.y > endPoint.position.y     )
         {
             DetachFromLadder();
+            return;
         }
 
 
