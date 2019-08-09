@@ -13,6 +13,8 @@ public class VoiceLines : MonoBehaviour
     private float? deltaTime = null;
     public bool solved = false;
 
+    private InteractionScript player;
+
     private void Awake()
     {
         if(instance == null)
@@ -23,15 +25,15 @@ public class VoiceLines : MonoBehaviour
         {
             Destroy(gameObject);
         }
+
+        player = FindObjectOfType<InteractionScript>();
     }
 
-    // Start is called before the first frame update
     void Start()
     {
        StartCoroutine(DelayWakeUpVoiceLine());
     }
 
-    // Update is called once per frame
     void Update()
     {
         if((Time.time >= deltaTime + 180) && !voiceLinePlayed && solved)
@@ -56,7 +58,13 @@ public class VoiceLines : MonoBehaviour
     {
         yield return new WaitForSeconds(delay);
 
-        voiceLines[index].Play();
+        StartVoicelinePlaying(index);
+    }
+
+    private void StartVoicelinePlaying(int index)
+    {
+        voiceLines[ index ].Play();
+        player.FreezePlayer(voiceLines[ index ].clip.length);
     }
 
     private IEnumerator DelayDillenVoiceLine(int index, float delay)
@@ -71,8 +79,8 @@ public class VoiceLines : MonoBehaviour
         yield return new WaitForSeconds(4f);
 
         voiceLines[0].Play();
-
     }
+
     public void SetDeltaTime()
     {
         deltaTime = Time.time;
