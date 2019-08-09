@@ -12,11 +12,14 @@ public class PlayerAnimationEvents : MonoBehaviour
 
     [SerializeField] AudioSource dyingSound;
     [SerializeField] AudioSource collapseSound;
+    [SerializeField] Sound footstepSound;
 
     private Animator playerAnimator;
     private Transform playerTransform;
 
     private Transform mainCamTransform;
+
+    private int footstepSoundCount = 0;
 
     private void Awake()
     {
@@ -29,7 +32,6 @@ public class PlayerAnimationEvents : MonoBehaviour
             Destroy(this);
         }
     }
-
 
     // Start is called before the first frame update
     void Start()
@@ -49,6 +51,16 @@ public class PlayerAnimationEvents : MonoBehaviour
     private void UnfreezePlayerMovement()
     {
         fpController.freezePlayerMovement = false;
+    }
+
+    private void PlayFootstepSound() {
+        footstepSoundCount++;
+        if (footstepSoundCount % 2 == 0) {
+            footstepSound.PlaySound(Random.Range(0, footstepSound.clips.Count), 1);
+        }
+        else {
+            footstepSound.PlaySound(Random.Range(0, footstepSound.clips.Count), 2);
+        }
     }
 
     private void FreezeCamera()
