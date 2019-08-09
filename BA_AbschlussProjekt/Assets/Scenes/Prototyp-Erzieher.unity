@@ -6313,6 +6313,7 @@ GameObject:
   - component: {fileID: 174416664}
   - component: {fileID: 174416663}
   - component: {fileID: 174416662}
+  - component: {fileID: 174416665}
   m_Layer: 11
   m_Name: Plane (3)
   m_TagString: Untagged
@@ -6393,6 +6394,21 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 174416660}
   m_Mesh: {fileID: 10209, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &174416665
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 174416660}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 464d81a3406d2174992e3e45e2f6c5ef, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  <DisplayName>k__BackingField: Spiderweb
+  conditionsTypeNeededToInteract: 0
+  isBothHanded: 0
 --- !u!1001 &177299378
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -6981,6 +6997,7 @@ GameObject:
   - component: {fileID: 192063473}
   - component: {fileID: 192063472}
   - component: {fileID: 192063471}
+  - component: {fileID: 192063474}
   m_Layer: 11
   m_Name: Plane (10)
   m_TagString: Untagged
@@ -7061,6 +7078,21 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 192063469}
   m_Mesh: {fileID: 10209, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &192063474
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 192063469}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 464d81a3406d2174992e3e45e2f6c5ef, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  <DisplayName>k__BackingField: Spiderweb
+  conditionsTypeNeededToInteract: 0
+  isBothHanded: 0
 --- !u!1001 &193427845
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -9385,6 +9417,7 @@ GameObject:
   - component: {fileID: 270797806}
   - component: {fileID: 270797805}
   - component: {fileID: 270797804}
+  - component: {fileID: 270797807}
   m_Layer: 11
   m_Name: Plane (18)
   m_TagString: Untagged
@@ -9465,6 +9498,21 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 270797802}
   m_Mesh: {fileID: 10209, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &270797807
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 270797802}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 464d81a3406d2174992e3e45e2f6c5ef, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  <DisplayName>k__BackingField: Spiderweb
+  conditionsTypeNeededToInteract: 0
+  isBothHanded: 0
 --- !u!4 &273506886 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -4216859302048453862, guid: 4394aa30ace5c1940a989e468b3f5250,
@@ -16490,6 +16538,16 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2317778900975317699, guid: 59a92eedfb8c4e24583d031e06d1cd55,
+        type: 3}
+      propertyPath: m_Animation
+      value: 
+      objectReference: {fileID: 7400000, guid: 45d18f15547154e409d1f851aaa27567, type: 2}
+    - target: {fileID: 2317778900975317699, guid: 59a92eedfb8c4e24583d031e06d1cd55,
+        type: 3}
+      propertyPath: m_PlayAutomatically
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1619212048, guid: 59a92eedfb8c4e24583d031e06d1cd55, type: 3}
       propertyPath: m_ConnectedAnchor.x
       value: -0.05243015
@@ -16501,45 +16559,6 @@ PrefabInstance:
     - target: {fileID: 1619212048, guid: 59a92eedfb8c4e24583d031e06d1cd55, type: 3}
       propertyPath: m_ConnectedAnchor.z
       value: 0.60716784
-      objectReference: {fileID: 0}
-    - target: {fileID: 135989453, guid: 59a92eedfb8c4e24583d031e06d1cd55, type: 3}
-      propertyPath: m_ConnectedAnchor.x
-      value: -0.060137972
-      objectReference: {fileID: 0}
-    - target: {fileID: 135989453, guid: 59a92eedfb8c4e24583d031e06d1cd55, type: 3}
-      propertyPath: m_ConnectedAnchor.y
-      value: -0.0809921
-      objectReference: {fileID: 0}
-    - target: {fileID: 135989453, guid: 59a92eedfb8c4e24583d031e06d1cd55, type: 3}
-      propertyPath: m_ConnectedAnchor.z
-      value: -0.61772
-      objectReference: {fileID: 0}
-    - target: {fileID: 1017151866, guid: 59a92eedfb8c4e24583d031e06d1cd55, type: 3}
-      propertyPath: m_ConnectedAnchor.x
-      value: -0.043518346
-      objectReference: {fileID: 0}
-    - target: {fileID: 1017151866, guid: 59a92eedfb8c4e24583d031e06d1cd55, type: 3}
-      propertyPath: m_ConnectedAnchor.y
-      value: 0.059790768
-      objectReference: {fileID: 0}
-    - target: {fileID: 1017151866, guid: 59a92eedfb8c4e24583d031e06d1cd55, type: 3}
-      propertyPath: m_ConnectedAnchor.z
-      value: 0.0028213323
-      objectReference: {fileID: 0}
-    - target: {fileID: 7086709795874493231, guid: 59a92eedfb8c4e24583d031e06d1cd55,
-        type: 3}
-      propertyPath: m_ConnectedAnchor.x
-      value: 0.0018218528
-      objectReference: {fileID: 0}
-    - target: {fileID: 7086709795874493231, guid: 59a92eedfb8c4e24583d031e06d1cd55,
-        type: 3}
-      propertyPath: m_ConnectedAnchor.y
-      value: 0.0050665657
-      objectReference: {fileID: 0}
-    - target: {fileID: 7086709795874493231, guid: 59a92eedfb8c4e24583d031e06d1cd55,
-        type: 3}
-      propertyPath: m_ConnectedAnchor.z
-      value: 0.0011765319
       objectReference: {fileID: 0}
     - target: {fileID: 2409062796999599146, guid: 59a92eedfb8c4e24583d031e06d1cd55,
         type: 3}
@@ -16566,6 +16585,90 @@ PrefabInstance:
       propertyPath: m_ConnectedAnchor.z
       value: 0.0011765487
       objectReference: {fileID: 0}
+    - target: {fileID: 7086709795874493231, guid: 59a92eedfb8c4e24583d031e06d1cd55,
+        type: 3}
+      propertyPath: m_ConnectedAnchor.x
+      value: 0.0018218528
+      objectReference: {fileID: 0}
+    - target: {fileID: 7086709795874493231, guid: 59a92eedfb8c4e24583d031e06d1cd55,
+        type: 3}
+      propertyPath: m_ConnectedAnchor.y
+      value: 0.0050665657
+      objectReference: {fileID: 0}
+    - target: {fileID: 7086709795874493231, guid: 59a92eedfb8c4e24583d031e06d1cd55,
+        type: 3}
+      propertyPath: m_ConnectedAnchor.z
+      value: 0.0011765319
+      objectReference: {fileID: 0}
+    - target: {fileID: 1017151866, guid: 59a92eedfb8c4e24583d031e06d1cd55, type: 3}
+      propertyPath: m_ConnectedAnchor.x
+      value: -0.043518346
+      objectReference: {fileID: 0}
+    - target: {fileID: 1017151866, guid: 59a92eedfb8c4e24583d031e06d1cd55, type: 3}
+      propertyPath: m_ConnectedAnchor.y
+      value: 0.059790768
+      objectReference: {fileID: 0}
+    - target: {fileID: 1017151866, guid: 59a92eedfb8c4e24583d031e06d1cd55, type: 3}
+      propertyPath: m_ConnectedAnchor.z
+      value: 0.0028213323
+      objectReference: {fileID: 0}
+    - target: {fileID: 135989453, guid: 59a92eedfb8c4e24583d031e06d1cd55, type: 3}
+      propertyPath: m_ConnectedAnchor.x
+      value: -0.060137972
+      objectReference: {fileID: 0}
+    - target: {fileID: 135989453, guid: 59a92eedfb8c4e24583d031e06d1cd55, type: 3}
+      propertyPath: m_ConnectedAnchor.y
+      value: -0.0809921
+      objectReference: {fileID: 0}
+    - target: {fileID: 135989453, guid: 59a92eedfb8c4e24583d031e06d1cd55, type: 3}
+      propertyPath: m_ConnectedAnchor.z
+      value: -0.61772
+      objectReference: {fileID: 0}
+    - target: {fileID: 5460422697018907181, guid: 59a92eedfb8c4e24583d031e06d1cd55,
+        type: 3}
+      propertyPath: m_ConnectedAnchor.x
+      value: 0.0031389825
+      objectReference: {fileID: 0}
+    - target: {fileID: 5460422697018907181, guid: 59a92eedfb8c4e24583d031e06d1cd55,
+        type: 3}
+      propertyPath: m_ConnectedAnchor.y
+      value: 0.00017345021
+      objectReference: {fileID: 0}
+    - target: {fileID: 5460422697018907181, guid: 59a92eedfb8c4e24583d031e06d1cd55,
+        type: 3}
+      propertyPath: m_ConnectedAnchor.z
+      value: -0.003572925
+      objectReference: {fileID: 0}
+    - target: {fileID: 362937954549009677, guid: 59a92eedfb8c4e24583d031e06d1cd55,
+        type: 3}
+      propertyPath: m_ConnectedAnchor.x
+      value: -0.0058890637
+      objectReference: {fileID: 0}
+    - target: {fileID: 362937954549009677, guid: 59a92eedfb8c4e24583d031e06d1cd55,
+        type: 3}
+      propertyPath: m_ConnectedAnchor.y
+      value: 0.00555104
+      objectReference: {fileID: 0}
+    - target: {fileID: 362937954549009677, guid: 59a92eedfb8c4e24583d031e06d1cd55,
+        type: 3}
+      propertyPath: m_ConnectedAnchor.z
+      value: 0.0034025125
+      objectReference: {fileID: 0}
+    - target: {fileID: 8163181628799763500, guid: 59a92eedfb8c4e24583d031e06d1cd55,
+        type: 3}
+      propertyPath: m_ConnectedAnchor.x
+      value: -0.041986994
+      objectReference: {fileID: 0}
+    - target: {fileID: 8163181628799763500, guid: 59a92eedfb8c4e24583d031e06d1cd55,
+        type: 3}
+      propertyPath: m_ConnectedAnchor.y
+      value: -0.06231979
+      objectReference: {fileID: 0}
+    - target: {fileID: 8163181628799763500, guid: 59a92eedfb8c4e24583d031e06d1cd55,
+        type: 3}
+      propertyPath: m_ConnectedAnchor.z
+      value: 0.01065763
+      objectReference: {fileID: 0}
     - target: {fileID: 2082318320608984132, guid: 59a92eedfb8c4e24583d031e06d1cd55,
         type: 3}
       propertyPath: m_ConnectedAnchor.x
@@ -16580,21 +16683,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_ConnectedAnchor.z
       value: -0.0000072419643
-      objectReference: {fileID: 0}
-    - target: {fileID: 8099446001664702553, guid: 59a92eedfb8c4e24583d031e06d1cd55,
-        type: 3}
-      propertyPath: m_ConnectedAnchor.x
-      value: -0.041986994
-      objectReference: {fileID: 0}
-    - target: {fileID: 8099446001664702553, guid: 59a92eedfb8c4e24583d031e06d1cd55,
-        type: 3}
-      propertyPath: m_ConnectedAnchor.y
-      value: -0.06231979
-      objectReference: {fileID: 0}
-    - target: {fileID: 8099446001664702553, guid: 59a92eedfb8c4e24583d031e06d1cd55,
-        type: 3}
-      propertyPath: m_ConnectedAnchor.z
-      value: 0.01065763
       objectReference: {fileID: 0}
     - target: {fileID: 7234775284969481631, guid: 59a92eedfb8c4e24583d031e06d1cd55,
         type: 3}
@@ -16626,60 +16714,20 @@ PrefabInstance:
       propertyPath: m_ConnectedAnchor.z
       value: 0.0012439471
       objectReference: {fileID: 0}
-    - target: {fileID: 8163181628799763500, guid: 59a92eedfb8c4e24583d031e06d1cd55,
+    - target: {fileID: 8099446001664702553, guid: 59a92eedfb8c4e24583d031e06d1cd55,
         type: 3}
       propertyPath: m_ConnectedAnchor.x
       value: -0.041986994
       objectReference: {fileID: 0}
-    - target: {fileID: 8163181628799763500, guid: 59a92eedfb8c4e24583d031e06d1cd55,
+    - target: {fileID: 8099446001664702553, guid: 59a92eedfb8c4e24583d031e06d1cd55,
         type: 3}
       propertyPath: m_ConnectedAnchor.y
       value: -0.06231979
       objectReference: {fileID: 0}
-    - target: {fileID: 8163181628799763500, guid: 59a92eedfb8c4e24583d031e06d1cd55,
+    - target: {fileID: 8099446001664702553, guid: 59a92eedfb8c4e24583d031e06d1cd55,
         type: 3}
       propertyPath: m_ConnectedAnchor.z
       value: 0.01065763
-      objectReference: {fileID: 0}
-    - target: {fileID: 362937954549009677, guid: 59a92eedfb8c4e24583d031e06d1cd55,
-        type: 3}
-      propertyPath: m_ConnectedAnchor.x
-      value: -0.0058890637
-      objectReference: {fileID: 0}
-    - target: {fileID: 362937954549009677, guid: 59a92eedfb8c4e24583d031e06d1cd55,
-        type: 3}
-      propertyPath: m_ConnectedAnchor.y
-      value: 0.00555104
-      objectReference: {fileID: 0}
-    - target: {fileID: 362937954549009677, guid: 59a92eedfb8c4e24583d031e06d1cd55,
-        type: 3}
-      propertyPath: m_ConnectedAnchor.z
-      value: 0.0034025125
-      objectReference: {fileID: 0}
-    - target: {fileID: 2317778900975317699, guid: 59a92eedfb8c4e24583d031e06d1cd55,
-        type: 3}
-      propertyPath: m_Animation
-      value: 
-      objectReference: {fileID: 7400000, guid: 45d18f15547154e409d1f851aaa27567, type: 2}
-    - target: {fileID: 2317778900975317699, guid: 59a92eedfb8c4e24583d031e06d1cd55,
-        type: 3}
-      propertyPath: m_PlayAutomatically
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5460422697018907181, guid: 59a92eedfb8c4e24583d031e06d1cd55,
-        type: 3}
-      propertyPath: m_ConnectedAnchor.x
-      value: 0.0031389825
-      objectReference: {fileID: 0}
-    - target: {fileID: 5460422697018907181, guid: 59a92eedfb8c4e24583d031e06d1cd55,
-        type: 3}
-      propertyPath: m_ConnectedAnchor.y
-      value: 0.00017345021
-      objectReference: {fileID: 0}
-    - target: {fileID: 5460422697018907181, guid: 59a92eedfb8c4e24583d031e06d1cd55,
-        type: 3}
-      propertyPath: m_ConnectedAnchor.z
-      value: -0.003572925
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 59a92eedfb8c4e24583d031e06d1cd55, type: 3}
@@ -17035,6 +17083,7 @@ GameObject:
   - component: {fileID: 456627568}
   - component: {fileID: 456627567}
   - component: {fileID: 456627566}
+  - component: {fileID: 456627569}
   m_Layer: 11
   m_Name: Plane (4)
   m_TagString: Untagged
@@ -17115,6 +17164,21 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 456627564}
   m_Mesh: {fileID: 10209, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &456627569
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 456627564}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 464d81a3406d2174992e3e45e2f6c5ef, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  <DisplayName>k__BackingField: Spiderweb
+  conditionsTypeNeededToInteract: 0
+  isBothHanded: 0
 --- !u!1 &456990903 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: -927199367670048503, guid: 8a7e0ea1ec9643a488c5ddee99a6d122,
@@ -19878,6 +19942,7 @@ GameObject:
   - component: {fileID: 523714396}
   - component: {fileID: 523714395}
   - component: {fileID: 523714394}
+  - component: {fileID: 523714397}
   m_Layer: 11
   m_Name: Plane (15)
   m_TagString: Untagged
@@ -19958,6 +20023,21 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 523714392}
   m_Mesh: {fileID: 10209, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &523714397
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 523714392}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 464d81a3406d2174992e3e45e2f6c5ef, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  <DisplayName>k__BackingField: Spiderweb
+  conditionsTypeNeededToInteract: 0
+  isBothHanded: 0
 --- !u!1001 &525894923
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -20450,6 +20530,7 @@ GameObject:
   - component: {fileID: 537266864}
   - component: {fileID: 537266863}
   - component: {fileID: 537266862}
+  - component: {fileID: 537266865}
   m_Layer: 11
   m_Name: Plane (7)
   m_TagString: Untagged
@@ -20530,6 +20611,21 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 537266860}
   m_Mesh: {fileID: 10209, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &537266865
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 537266860}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 464d81a3406d2174992e3e45e2f6c5ef, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  <DisplayName>k__BackingField: Spiderweb
+  conditionsTypeNeededToInteract: 0
+  isBothHanded: 0
 --- !u!1001 &538657502
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -21979,6 +22075,7 @@ GameObject:
   - component: {fileID: 577777589}
   - component: {fileID: 577777588}
   - component: {fileID: 577777587}
+  - component: {fileID: 577777590}
   m_Layer: 11
   m_Name: Plane (6)
   m_TagString: Untagged
@@ -22059,6 +22156,21 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 577777585}
   m_Mesh: {fileID: 10209, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &577777590
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 577777585}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 464d81a3406d2174992e3e45e2f6c5ef, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  <DisplayName>k__BackingField: Spiderweb
+  conditionsTypeNeededToInteract: 0
+  isBothHanded: 0
 --- !u!1001 &579966752
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -22839,6 +22951,7 @@ GameObject:
   - component: {fileID: 609845372}
   - component: {fileID: 609845371}
   - component: {fileID: 609845370}
+  - component: {fileID: 609845373}
   m_Layer: 11
   m_Name: Plane (12)
   m_TagString: Untagged
@@ -22919,6 +23032,21 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 609845368}
   m_Mesh: {fileID: 10209, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &609845373
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 609845368}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 464d81a3406d2174992e3e45e2f6c5ef, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  <DisplayName>k__BackingField: Spiderweb
+  conditionsTypeNeededToInteract: 0
+  isBothHanded: 0
 --- !u!1001 &613938424
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -25190,6 +25318,7 @@ GameObject:
   - component: {fileID: 672201261}
   - component: {fileID: 672201260}
   - component: {fileID: 672201259}
+  - component: {fileID: 672201262}
   m_Layer: 11
   m_Name: Plane (8)
   m_TagString: Untagged
@@ -25270,6 +25399,21 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 672201257}
   m_Mesh: {fileID: 10209, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &672201262
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 672201257}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 464d81a3406d2174992e3e45e2f6c5ef, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  <DisplayName>k__BackingField: Spiderweb
+  conditionsTypeNeededToInteract: 0
+  isBothHanded: 0
 --- !u!1001 &674690869
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -28344,6 +28488,7 @@ GameObject:
   - component: {fileID: 744285302}
   - component: {fileID: 744285301}
   - component: {fileID: 744285300}
+  - component: {fileID: 744285304}
   m_Layer: 11
   m_Name: Plane
   m_TagString: Untagged
@@ -28424,6 +28569,21 @@ Transform:
   m_Father: {fileID: 1202655079}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: -64.455, y: 42.533, z: 44.523003}
+--- !u!114 &744285304
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 744285299}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 464d81a3406d2174992e3e45e2f6c5ef, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  <DisplayName>k__BackingField: Spiderweb
+  conditionsTypeNeededToInteract: 0
+  isBothHanded: 0
 --- !u!1 &751864374 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: -927199367670048503, guid: 8a7e0ea1ec9643a488c5ddee99a6d122,
@@ -32046,6 +32206,11 @@ PrefabInstance:
       propertyPath: soundToPlayOnInteractAndDrop
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 7478610528927840225, guid: e11a3d1d0962d21469d873060ad29156,
+        type: 3}
+      propertyPath: m_Name
+      value: crutch
+      objectReference: {fileID: 0}
     - target: {fileID: 5899290583822482943, guid: e11a3d1d0962d21469d873060ad29156,
         type: 3}
       propertyPath: isBothHanded
@@ -32061,11 +32226,6 @@ PrefabInstance:
       propertyPath: bgMusic
       value: 
       objectReference: {fileID: 688315880}
-    - target: {fileID: 7478610528927840225, guid: e11a3d1d0962d21469d873060ad29156,
-        type: 3}
-      propertyPath: m_Name
-      value: crutch
-      objectReference: {fileID: 0}
     - target: {fileID: 8194859578717620766, guid: e11a3d1d0962d21469d873060ad29156,
         type: 3}
       propertyPath: isBothHanded
@@ -41394,6 +41554,7 @@ GameObject:
   - component: {fileID: 1149743489}
   - component: {fileID: 1149743488}
   - component: {fileID: 1149743487}
+  - component: {fileID: 1149743490}
   m_Layer: 11
   m_Name: Plane (19)
   m_TagString: Untagged
@@ -41474,6 +41635,21 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1149743485}
   m_Mesh: {fileID: 10209, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &1149743490
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1149743485}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 464d81a3406d2174992e3e45e2f6c5ef, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  <DisplayName>k__BackingField: Spiderweb
+  conditionsTypeNeededToInteract: 0
+  isBothHanded: 0
 --- !u!1001 &1149826515
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -42836,6 +43012,7 @@ GameObject:
   - component: {fileID: 1192544011}
   - component: {fileID: 1192544010}
   - component: {fileID: 1192544009}
+  - component: {fileID: 1192544012}
   m_Layer: 11
   m_Name: Plane (5)
   m_TagString: Untagged
@@ -42916,6 +43093,21 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1192544007}
   m_Mesh: {fileID: 10209, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &1192544012
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1192544007}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 464d81a3406d2174992e3e45e2f6c5ef, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  <DisplayName>k__BackingField: Spiderweb
+  conditionsTypeNeededToInteract: 0
+  isBothHanded: 0
 --- !u!1001 &1194775104
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -46628,6 +46820,7 @@ GameObject:
   - component: {fileID: 1286741991}
   - component: {fileID: 1286741990}
   - component: {fileID: 1286741989}
+  - component: {fileID: 1286741992}
   m_Layer: 11
   m_Name: Plane (16)
   m_TagString: Untagged
@@ -46708,6 +46901,21 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1286741987}
   m_Mesh: {fileID: 10209, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &1286741992
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1286741987}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 464d81a3406d2174992e3e45e2f6c5ef, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  <DisplayName>k__BackingField: Spiderweb
+  conditionsTypeNeededToInteract: 0
+  isBothHanded: 0
 --- !u!1001 &1288764067
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -48119,11 +48327,6 @@ PrefabInstance:
       propertyPath: velocityThreshholdToNotBreak
       value: -5
       objectReference: {fileID: 0}
-    - target: {fileID: 2889019327907585111, guid: 653d392e5dc231444b09e33a95a187ca,
-        type: 3}
-      propertyPath: m_Enabled
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 1121913290913178486, guid: 653d392e5dc231444b09e33a95a187ca,
         type: 3}
       propertyPath: clips.Array.size
@@ -48139,6 +48342,11 @@ PrefabInstance:
       propertyPath: clips.Array.data[1]
       value: 
       objectReference: {fileID: 8300000, guid: d6507f56fd1e4184cb8d1d3ef72fb0f6, type: 3}
+    - target: {fileID: 2889019327907585111, guid: 653d392e5dc231444b09e33a95a187ca,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3470883095039273099, guid: 653d392e5dc231444b09e33a95a187ca,
         type: 3}
       propertyPath: m_Layer
@@ -48788,6 +48996,7 @@ GameObject:
   - component: {fileID: 1349050430}
   - component: {fileID: 1349050429}
   - component: {fileID: 1349050428}
+  - component: {fileID: 1349050431}
   m_Layer: 11
   m_Name: Plane (9)
   m_TagString: Untagged
@@ -48868,6 +49077,21 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1349050426}
   m_Mesh: {fileID: 10209, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &1349050431
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1349050426}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 464d81a3406d2174992e3e45e2f6c5ef, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  <DisplayName>k__BackingField: Spiderweb
+  conditionsTypeNeededToInteract: 0
+  isBothHanded: 0
 --- !u!1001 &1349364942
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -51827,6 +52051,7 @@ GameObject:
   - component: {fileID: 1407701488}
   - component: {fileID: 1407701487}
   - component: {fileID: 1407701486}
+  - component: {fileID: 1407701489}
   m_Layer: 11
   m_Name: Plane (1)
   m_TagString: Untagged
@@ -51907,6 +52132,21 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1407701484}
   m_Mesh: {fileID: 10209, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &1407701489
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1407701484}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 464d81a3406d2174992e3e45e2f6c5ef, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  <DisplayName>k__BackingField: Spiderweb
+  conditionsTypeNeededToInteract: 0
+  isBothHanded: 0
 --- !u!1 &1409778011
 GameObject:
   m_ObjectHideFlags: 0
@@ -55939,6 +56179,7 @@ GameObject:
   - component: {fileID: 1535942818}
   - component: {fileID: 1535942817}
   - component: {fileID: 1535942816}
+  - component: {fileID: 1535942819}
   m_Layer: 11
   m_Name: Plane (11)
   m_TagString: Untagged
@@ -56019,6 +56260,21 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1535942814}
   m_Mesh: {fileID: 10209, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &1535942819
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1535942814}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 464d81a3406d2174992e3e45e2f6c5ef, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  <DisplayName>k__BackingField: Spiderweb
+  conditionsTypeNeededToInteract: 0
+  isBothHanded: 0
 --- !u!1 &1535956752 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 4643663041275882150, guid: 288d1fcf2354d34419b3ad0f32cf42ae,
@@ -68911,6 +69167,36 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4679517990798572127, guid: 5eec42ff1a4a66447a417ce398e71a76,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.025797728
+      objectReference: {fileID: 0}
+    - target: {fileID: 4679517990798572127, guid: 5eec42ff1a4a66447a417ce398e71a76,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5615883694327691067, guid: 5eec42ff1a4a66447a417ce398e71a76,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2307585403790517771, guid: 5eec42ff1a4a66447a417ce398e71a76,
+        type: 3}
+      propertyPath: m_Shadows.m_Type
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2307585403790517771, guid: 5eec42ff1a4a66447a417ce398e71a76,
+        type: 3}
+      propertyPath: m_BounceIntensity
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1685208178687504456, guid: 5eec42ff1a4a66447a417ce398e71a76,
+        type: 3}
+      propertyPath: m_Avatar
+      value: 
+      objectReference: {fileID: 9000000, guid: f1d71c9aa9d29fe4ba0f257fe0409b4d, type: 3}
     - target: {fileID: 659298141263582962, guid: 5eec42ff1a4a66447a417ce398e71a76,
         type: 3}
       propertyPath: lightStrengths.Array.size
@@ -69006,36 +69292,6 @@ PrefabInstance:
       propertyPath: lightsSources.Array.data[15]
       value: 
       objectReference: {fileID: 0}
-    - target: {fileID: 4679517990798572127, guid: 5eec42ff1a4a66447a417ce398e71a76,
-        type: 3}
-      propertyPath: m_LocalPosition.y
-      value: -0.025797728
-      objectReference: {fileID: 0}
-    - target: {fileID: 4679517990798572127, guid: 5eec42ff1a4a66447a417ce398e71a76,
-        type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5615883694327691067, guid: 5eec42ff1a4a66447a417ce398e71a76,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2307585403790517771, guid: 5eec42ff1a4a66447a417ce398e71a76,
-        type: 3}
-      propertyPath: m_Shadows.m_Type
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 2307585403790517771, guid: 5eec42ff1a4a66447a417ce398e71a76,
-        type: 3}
-      propertyPath: m_BounceIntensity
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1685208178687504456, guid: 5eec42ff1a4a66447a417ce398e71a76,
-        type: 3}
-      propertyPath: m_Avatar
-      value: 
-      objectReference: {fileID: 9000000, guid: f1d71c9aa9d29fe4ba0f257fe0409b4d, type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5eec42ff1a4a66447a417ce398e71a76, type: 3}
 --- !u!1001 &1903588274
@@ -69140,6 +69396,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1534773610}
     m_Modifications:
+    - target: {fileID: -927199367670048503, guid: 393a4043f9ed91c4fb4ef1ddfc7b9b39,
+        type: 3}
+      propertyPath: m_Name
+      value: mdl_ceiling
+      objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: 393a4043f9ed91c4fb4ef1ddfc7b9b39,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -69194,11 +69455,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: -927199367670048503, guid: 393a4043f9ed91c4fb4ef1ddfc7b9b39,
-        type: 3}
-      propertyPath: m_Name
-      value: mdl_ceiling
       objectReference: {fileID: 0}
     - target: {fileID: -1504981713932161579, guid: 393a4043f9ed91c4fb4ef1ddfc7b9b39,
         type: 3}
@@ -69843,6 +70099,7 @@ GameObject:
   - component: {fileID: 1919116172}
   - component: {fileID: 1919116171}
   - component: {fileID: 1919116170}
+  - component: {fileID: 1919116173}
   m_Layer: 11
   m_Name: Plane (13)
   m_TagString: Untagged
@@ -69923,6 +70180,21 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1919116168}
   m_Mesh: {fileID: 10209, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &1919116173
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1919116168}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 464d81a3406d2174992e3e45e2f6c5ef, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  <DisplayName>k__BackingField: Spiderweb
+  conditionsTypeNeededToInteract: 0
+  isBothHanded: 0
 --- !u!4 &1923727168 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -4216859302048453862, guid: c709a7f5091271346ba61f41790c9a38,
@@ -70215,6 +70487,7 @@ GameObject:
   - component: {fileID: 1936108834}
   - component: {fileID: 1936108833}
   - component: {fileID: 1936108832}
+  - component: {fileID: 1936108835}
   m_Layer: 11
   m_Name: Plane (17)
   m_TagString: Untagged
@@ -70295,6 +70568,21 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1936108830}
   m_Mesh: {fileID: 10209, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &1936108835
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1936108830}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 464d81a3406d2174992e3e45e2f6c5ef, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  <DisplayName>k__BackingField: Spiderweb
+  conditionsTypeNeededToInteract: 0
+  isBothHanded: 0
 --- !u!1001 &1937378716
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -71860,6 +72148,7 @@ GameObject:
   - component: {fileID: 1986806804}
   - component: {fileID: 1986806803}
   - component: {fileID: 1986806802}
+  - component: {fileID: 1986806805}
   m_Layer: 11
   m_Name: Plane (14)
   m_TagString: Untagged
@@ -71940,6 +72229,21 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1986806800}
   m_Mesh: {fileID: 10209, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &1986806805
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1986806800}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 464d81a3406d2174992e3e45e2f6c5ef, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  <DisplayName>k__BackingField: Spiderweb
+  conditionsTypeNeededToInteract: 0
+  isBothHanded: 0
 --- !u!4 &1988723853 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -4216859302048453862, guid: 479a7d7d40ba8d3438d498c37b4e6b9d,
@@ -74773,6 +75077,7 @@ GameObject:
   - component: {fileID: 2059314395}
   - component: {fileID: 2059314394}
   - component: {fileID: 2059314393}
+  - component: {fileID: 2059314396}
   m_Layer: 11
   m_Name: Plane (2)
   m_TagString: Untagged
@@ -74853,6 +75158,21 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2059314391}
   m_Mesh: {fileID: 10209, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &2059314396
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2059314391}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 464d81a3406d2174992e3e45e2f6c5ef, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  <DisplayName>k__BackingField: Spiderweb
+  conditionsTypeNeededToInteract: 0
+  isBothHanded: 0
 --- !u!1 &2059973001
 GameObject:
   m_ObjectHideFlags: 0
@@ -80978,11 +81298,6 @@ PrefabInstance:
       propertyPath: monitorRoomCamera
       value: 
       objectReference: {fileID: 240843224}
-    - target: {fileID: 6653334337025046750, guid: 90891cf74d950f549b222878b37ee411,
-        type: 3}
-      propertyPath: m_Layer
-      value: 2
-      objectReference: {fileID: 0}
     - target: {fileID: 838962989, guid: 90891cf74d950f549b222878b37ee411, type: 3}
       propertyPath: dillenVoiceLines.Array.size
       value: 13
@@ -81039,6 +81354,11 @@ PrefabInstance:
       propertyPath: dillenVoiceLines.Array.data[12]
       value: 
       objectReference: {fileID: 179516070}
+    - target: {fileID: 6653334337025046750, guid: 90891cf74d950f549b222878b37ee411,
+        type: 3}
+      propertyPath: m_Layer
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 2037467, guid: 90891cf74d950f549b222878b37ee411, type: 3}
       propertyPath: OutputAudioMixerGroup
       value: 
