@@ -16,8 +16,12 @@ public class Window : BaseInteractable
 
     public override bool CarryOutInteraction(InteractionScript player)
     {
-        if(interactionTicker > interactionThreshold)
+        Debug.Log("asdasd");
+        PlayerAnimationEvents.instance.PlayAnimation("TryOpenWindow");
+
+        if (interactionTicker > interactionThreshold)
         {
+
             interactionTicker = 0f;
             interactionCount++;
 

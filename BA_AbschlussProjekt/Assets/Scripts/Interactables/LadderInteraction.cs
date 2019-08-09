@@ -155,17 +155,13 @@ public class LadderInteraction : ConditionedInteraction
 
     private void DetachFromLadder()
     {
-        Debug.Log("detatch?");
-
         if (currentClimber == null)
             return;
-
-        Debug.Log("fuckingdetatch");
 
         Rigidbody currentClimblerRigidbody = currentClimber.GetComponent<Rigidbody>();
         currentClimblerRigidbody.isKinematic = false;
         currentClimblerRigidbody.useGravity = true;
-        currentClimber.ResetIK();
+        //currentClimber.ResetIK();
 
         IsBeeingClimbed = false;
         currentClimber = null;

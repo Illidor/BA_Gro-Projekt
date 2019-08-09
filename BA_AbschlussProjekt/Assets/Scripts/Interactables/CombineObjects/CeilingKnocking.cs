@@ -84,7 +84,7 @@ public class CeilingKnocking : InteractionFoundation, ICombinable
         }
 
 
-        StartCoroutine(player.IKToObject(interactingComponent, false));
+        //StartCoroutine(player.IKToObject(interactingComponent, false));
 
         yield return new WaitForEndOfFrame();
         cR = null;

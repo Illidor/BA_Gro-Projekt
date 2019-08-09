@@ -155,7 +155,7 @@ public class HatchInteraction : BaseInteractable, ICombinable
         }
 
 
-        StartCoroutine(characterInteractionScript.IKToObject(interactingComponent, false));
+        //StartCoroutine(characterInteractionScript.IKToObject(interactingComponent, false));
 
         yield return new WaitForEndOfFrame();
         cR = null;

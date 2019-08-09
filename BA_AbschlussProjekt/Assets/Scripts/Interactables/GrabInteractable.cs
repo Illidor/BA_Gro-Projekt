@@ -2,6 +2,7 @@
 using System.Collections;
 using CustomEnums;
 using UnityEngine;
+using UnityEngine.Events;
 
 /// <summary>
 /// Used for objects that can be carried or pushed
@@ -59,12 +60,14 @@ public class GrabInteractable : BaseInteractable
 
         if (CTRLHub.InteractDown)
         {
-            if (!player.cR_isRunning)
-            {
-                player.cR_isRunning = true;
-               
-                StartCoroutine(player.IKToObject(this, isBothHanded));
-            }
+            //if (!player.cR_isRunning)
+            //{
+            //    player.cR_isRunning = true;
+
+            //    StartCoroutine(player.IKToObject(this, isBothHanded));
+            //}
+            StartCoroutine(DelayParenting(0.35f, player));
+            PlayerAnimationEvents.instance.PlayAnimation("GrabMid");
         }
     }
 
@@ -165,6 +168,14 @@ public class GrabInteractable : BaseInteractable
         rigidbodyPulling = player.GetComponent<Rigidbody>();
 
         return true;
+    }
+
+    private IEnumerator DelayParenting(float delay, InteractionScript player)
+    {
+        yield return new WaitForSeconds(delay);
+        CarryOutInteraction(player);
+        transform.SetParent(player.GrabingPoint.transform);
+        transform.localPosition = Vector3.zero;
     }
 
     protected void FixedUpdate()

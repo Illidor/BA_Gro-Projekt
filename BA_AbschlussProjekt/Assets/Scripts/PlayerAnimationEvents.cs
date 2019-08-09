@@ -1,10 +1,13 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityStandardAssets.Characters.FirstPerson;
 
 public class PlayerAnimationEvents : MonoBehaviour
 {
+    public static PlayerAnimationEvents instance = null; 
+
     private RigidbodyFirstPersonController fpController;
 
     [SerializeField] AudioSource dyingSound;
@@ -13,12 +16,29 @@ public class PlayerAnimationEvents : MonoBehaviour
     private Animator playerAnimator;
     private Transform playerTransform;
 
+    private Transform mainCamTransform;
+
+    private void Awake()
+    {
+        if(instance == null)
+        {
+            instance = this;
+        }
+        else
+        {
+            Destroy(this);
+        }
+    }
+
+
     // Start is called before the first frame update
     void Start()
     {
         fpController = GetComponentInParent<RigidbodyFirstPersonController>();
         playerAnimator = GetComponent<Animator>();
         playerTransform = transform.parent;
+
+        mainCamTransform = Camera.main.transform;
     }
 
     private void FreezeMovement()
@@ -61,20 +81,28 @@ public class PlayerAnimationEvents : MonoBehaviour
         playerAnimator.SetBool(boolName, state);
     }
 
-    private void SnapPlayerToTargetPosition(Transform targetTransform)
+    public void SnapPlayerToTargetPosition(Transform targetTransform)
     {
         playerTransform.position = targetTransform.position;
+    }
+
+    public void RotatePlayerToTargetPoint(Transform lookingTarget)
+    {
+        playerTransform.LookAt(lookingTarget);
+    }
+
+    public void PlayAnimation(string trigger)
+    {
+        playerAnimator.SetTrigger(trigger);
     }
 
     private void OnEnable()
     {
         ExitDoor.OpenDoorAnim += SetAnimatorTrigger;
-        ExitDoor.MovePlayerToTargetPosition += SnapPlayerToTargetPosition;
     }
 
     private void OnDisable()
     {
         ExitDoor.OpenDoorAnim -= SetAnimatorTrigger;
-        ExitDoor.MovePlayerToTargetPosition -= SnapPlayerToTargetPosition;
     }
 }
