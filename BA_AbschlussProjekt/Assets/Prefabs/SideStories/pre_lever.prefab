@@ -70,10 +70,10 @@ MonoBehaviour:
   levelCombinables:
   - name: LevelCombinatable
     objectToCombineWith: {fileID: 0}
-    corespondingObjectToDisplay: {fileID: 0}
+    corespondingObjectToDisplay: {fileID: 1571655606816122487}
   - name: LevelCombinatable
     objectToCombineWith: {fileID: 0}
-    corespondingObjectToDisplay: {fileID: 0}
+    corespondingObjectToDisplay: {fileID: 6003229750797139520}
   hinge: {fileID: 7579386170779841201}
   soundToPlayOnLeverFlip: {fileID: 2572861211628794365}
   soundToPlayOnLeverCraft: {fileID: 8055849332584179291}
@@ -237,7 +237,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6493801602131437411}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: -1, z: 0, w: 0}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0.27794778, y: 0.27794766, z: 0.27794778}
   m_Children:
@@ -245,7 +245,7 @@ Transform:
   - {fileID: 7283614164546161747}
   m_Father: {fileID: 2271384287697227123}
   m_RootOrder: 3
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: -180, z: 0}
 --- !u!54 &4824637574293028087
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -273,7 +273,7 @@ HingeJoint:
   m_Anchor: {x: 0, y: 0, z: 0}
   m_Axis: {x: 1, y: 0, z: 0}
   m_AutoConfigureConnectedAnchor: 1
-  m_ConnectedAnchor: {x: 7.493802, y: 2.623, z: 1.0139999}
+  m_ConnectedAnchor: {x: 10.4516, y: 1.333, z: 2.567}
   m_UseSpring: 0
   m_Spring:
     spring: 0
@@ -1003,12 +1003,12 @@ PrefabInstance:
     - target: {fileID: 3447087304589603566, guid: 579539c754a4e424f928b85586286711,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.07
+      value: 0.056
       objectReference: {fileID: 0}
     - target: {fileID: 3447087304589603566, guid: 579539c754a4e424f928b85586286711,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0.756
+      value: 0.65
       objectReference: {fileID: 0}
     - target: {fileID: 3447087304589603566, guid: 579539c754a4e424f928b85586286711,
         type: 3}
@@ -1067,6 +1067,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 579539c754a4e424f928b85586286711, type: 3}
+--- !u!1 &1571655606816122487 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1841368045357138173, guid: 579539c754a4e424f928b85586286711,
+    type: 3}
+  m_PrefabInstance: {fileID: 883407057221461642}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &2563952996179268708 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3447087304589603566, guid: 579539c754a4e424f928b85586286711,
@@ -1080,30 +1086,20 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 5867512898623834943}
     m_Modifications:
-    - target: {fileID: 4776677334423866151, guid: a27758da46f2ecc4d863a09545337d91,
-        type: 3}
-      propertyPath: m_Name
-      value: pre_ToyCar 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4776677334423866151, guid: a27758da46f2ecc4d863a09545337d91,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 8363592850489243956, guid: a27758da46f2ecc4d863a09545337d91,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.0381
+      value: 0.038
       objectReference: {fileID: 0}
     - target: {fileID: 8363592850489243956, guid: a27758da46f2ecc4d863a09545337d91,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.104
+      value: 0.116
       objectReference: {fileID: 0}
     - target: {fileID: 8363592850489243956, guid: a27758da46f2ecc4d863a09545337d91,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0.525
+      value: 0.436
       objectReference: {fileID: 0}
     - target: {fileID: 8363592850489243956, guid: a27758da46f2ecc4d863a09545337d91,
         type: 3}
@@ -1160,11 +1156,27 @@ PrefabInstance:
       propertyPath: m_LocalScale.z
       value: 3.597799
       objectReference: {fileID: 0}
+    - target: {fileID: 4776677334423866151, guid: a27758da46f2ecc4d863a09545337d91,
+        type: 3}
+      propertyPath: m_Name
+      value: pre_ToyCar 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4776677334423866151, guid: a27758da46f2ecc4d863a09545337d91,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a27758da46f2ecc4d863a09545337d91, type: 3}
 --- !u!4 &7283614164546161747 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8363592850489243956, guid: a27758da46f2ecc4d863a09545337d91,
+    type: 3}
+  m_PrefabInstance: {fileID: 1226644981933897063}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &6003229750797139520 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4776677334423866151, guid: a27758da46f2ecc4d863a09545337d91,
     type: 3}
   m_PrefabInstance: {fileID: 1226644981933897063}
   m_PrefabAsset: {fileID: 0}
@@ -1175,11 +1187,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 2271384287697227123}
     m_Modifications:
-    - target: {fileID: -927199367670048503, guid: 72203831621458647a9e898563ed6498,
-        type: 3}
-      propertyPath: m_Name
-      value: mdl_leaver_construction
-      objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: 72203831621458647a9e898563ed6498,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1245,11 +1252,16 @@ PrefabInstance:
       propertyPath: m_LocalScale.y
       value: 1.322843
       objectReference: {fileID: 0}
+    - target: {fileID: -927199367670048503, guid: 72203831621458647a9e898563ed6498,
+        type: 3}
+      propertyPath: m_Name
+      value: mdl_leaver_construction
+      objectReference: {fileID: 0}
     - target: {fileID: -1504981713932161579, guid: 72203831621458647a9e898563ed6498,
         type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: 8348eec4640de0543a396d5b4018afc0, type: 2}
+      objectReference: {fileID: 2100000, guid: 1a3d655cc3276884a98b69a8e080ada6, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 72203831621458647a9e898563ed6498, type: 3}
 --- !u!4 &1057899613724605471 stripped
