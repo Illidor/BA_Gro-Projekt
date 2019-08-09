@@ -118,21 +118,21 @@ public class LadderInteraction : ConditionedInteraction
 
         // <Ladder audio handling>
 
-        climbingSoundTicker += Time.deltaTime; 
-        if (climbingSoundTicker > climbingSoundThreshold && (Input.GetAxis("Vertical") > 0.1f || Input.GetAxis("Vertical") < -0.1f))
-        {
-            climbingSoundTicker = 0f;
-            climbCount++;
-            // Play sounds at different audio sources so they don't get killed before fully played
-            if (climbCount % 2 == 0)
-            {
-                climbingSound.PlaySound(UnityEngine.Random.Range(0, climbingSound.clips.Count), 1);
-            }
-            else
-            {
-                climbingSound.PlaySound(UnityEngine.Random.Range(0, climbingSound.clips.Count), 2);
-            }
-        }
+        //climbingSoundTicker += Time.deltaTime; 
+        //if (climbingSoundTicker > climbingSoundThreshold && (Input.GetAxis("Vertical") > 0.1f || Input.GetAxis("Vertical") < -0.1f))
+        //{
+        //    climbingSoundTicker = 0f;
+        //    climbCount++;
+        //    // Play sounds at different audio sources so they don't get killed before fully played
+        //    if (climbCount % 2 == 0)
+        //    {
+        //        climbingSound.PlaySound(UnityEngine.Random.Range(0, climbingSound.clips.Count), 1);
+        //    }
+        //    else
+        //    {
+        //        climbingSound.PlaySound(UnityEngine.Random.Range(0, climbingSound.clips.Count), 2);
+        //    }
+        //}
 
 
         // <IK and animation handling>
