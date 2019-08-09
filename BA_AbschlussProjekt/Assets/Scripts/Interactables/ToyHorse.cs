@@ -10,6 +10,7 @@ public class ToyHorse : BaseInteractable {
     private float interactionThreshold = 1.25f;
 
     private Animator anim;
+    public Sound pushSound;
 
     private void Start() {
         anim = GetComponent<Animator>();
@@ -25,6 +26,7 @@ public class ToyHorse : BaseInteractable {
         if (interactionTicker > interactionThreshold) {
             interactionTicker = 0f;
             anim.SetTrigger("StartSeesaw");
+            pushSound.PlaySound(0);
             isMoving = true;
         }
         return true;

@@ -25,7 +25,6 @@ namespace UnityStandardAssets.Characters.FirstPerson
 			public bool IsCrouching = false;
 			private bool m_Running;
 
-
 			public void UpdateDesiredTargetSpeed(Vector2 input)
 			{
 				if (input == Vector2.zero) return;
@@ -89,10 +88,6 @@ namespace UnityStandardAssets.Characters.FirstPerson
 		[SerializeField] private CapsuleCollider standCollider;
 		[SerializeField] private CapsuleCollider crouchCollider;
 		private PlayerHealth playerHealth;
-		private Sound footstepSound;
-		[SerializeField] private float footstepSoundTicker = 1f;
-		[SerializeField] private float footstepSoundThreshold = 0.65f;
-		private int footstepSoundCount = 0;
 
 		// used for saving before reducing the speed with health conditions
 		private float defaultForwardSpeed;
@@ -103,6 +98,9 @@ namespace UnityStandardAssets.Characters.FirstPerson
 		//used to lock PlayerMovement
 		public bool freezePlayerCamera = true;
 		public bool freezePlayerMovement = true;
+
+        private Quaternion targetRotation;
+        public Quaternion TargetRotation { get { return targetRotation; } set { targetRotation = value; } }
 
 		private void Start()
 		{
@@ -116,7 +114,6 @@ namespace UnityStandardAssets.Characters.FirstPerson
 			defaultCrouchSpeed = movementSettings.CrouchSpeed;
 
 			playerHealth = GetComponent<PlayerHealth>();
-			footstepSound = GetComponent<Sound>();
 
             Invoke("defreezeMovement", 7f);
 
@@ -125,10 +122,15 @@ namespace UnityStandardAssets.Characters.FirstPerson
 
 		private void Update()
 		{
-			if(!freezePlayerCamera)
-				RotateView();
+            if (!freezePlayerCamera)
+                RotateView();
+            else
+            {
+                cam.transform.rotation = new Quaternion(0, 0, 0, 0);
+                transform.rotation = targetRotation;
+            }
 
-			if (CrossPlatformInputManager.GetButtonDown("Crouch") && isCrouching == false)
+            if (CrossPlatformInputManager.GetButtonDown("Crouch") && isCrouching == false)
 			{
 				movementSettings.IsCrouching = true;
 				isCrouching = true;
@@ -192,23 +194,6 @@ namespace UnityStandardAssets.Characters.FirstPerson
 						(movementSettings.CurrentTargetSpeed * movementSettings.CurrentTargetSpeed))
 					{
 						m_RigidBody.AddForce(desiredMove * SlopeMultiplier() / 2f, ForceMode.VelocityChange);
-					}
-
-					// Footstep audio logic with increasing ticker and threshold
-					footstepSoundTicker += Time.deltaTime;
-					if (footstepSoundTicker > footstepSoundThreshold)
-					{
-						footstepSoundTicker = 0f;
-						footstepSoundCount++;
-						// Play sounds at different audio sources so they don't get killed before fully played
-						if (footstepSoundCount % 2 == 0)
-						{
-							footstepSound.PlaySound(UnityEngine.Random.Range(0, footstepSound.clips.Count), 1);
-						}
-						else
-						{
-							footstepSound.PlaySound(UnityEngine.Random.Range(0, footstepSound.clips.Count), 2);
-						}
 					}
 				}
 			}
