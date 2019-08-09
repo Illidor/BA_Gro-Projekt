@@ -47,7 +47,17 @@ public class InteractionScript : MonoBehaviour
     }
     public bool IsPushing { get; private set; }
 
-    public bool IsFrozen { get; set; }
+    private bool isFrozen;
+    public bool IsFrozen
+    {
+        get => isFrozen;
+
+        set
+        {
+            isFrozen = value;
+            rigidbodyFirstPersonController.freezePlayerMovement = value;
+        }
+    }
 
     public bool CanInteract { get; protected set; }
 
@@ -57,22 +67,28 @@ public class InteractionScript : MonoBehaviour
 
     public float GrabingReach { get; private set; }
 
+    public RigidbodyFirstPersonController rigidbodyFirstPersonController;
+
     protected void Awake()
     {
-        CanInteract = true;
-
-        GrabingReach = emptyHandedGrabingReach;
-
-        IsFrozen = false;
-
         if (GUIInteractionFeedbackHandler == null)
             GUIInteractionFeedbackHandler = GetComponentInChildren<GUIInteractionFeedbackHandler>();
 
         if (PlayerHealth == null)
             PlayerHealth = GetComponentInChildren<PlayerHealth>();
 
+        if (rigidbodyFirstPersonController == null)
+            rigidbodyFirstPersonController = GetComponent<RigidbodyFirstPersonController>();
+
         fPSController = gameObject.GetComponent<RigidbodyFirstPersonController>();
         animator = GetComponentInChildren<Animator>();
+
+
+        CanInteract = true;
+
+        GrabingReach = emptyHandedGrabingReach;
+
+        IsFrozen = false;
     }
 
     protected void Update()
@@ -136,7 +152,7 @@ public class InteractionScript : MonoBehaviour
     //    }
 
     //    //animator.SetBool("Grab", false);
-      
+
 
     //    StartCoroutine(IKToObject(null, true));
     //}
@@ -314,17 +330,33 @@ public class InteractionScript : MonoBehaviour
         CanInteract = true;
     }
 
-    private void PutObjectDownAfterBeingShocked() {
-        if (IsCarrying || IsPushing) {
+    private void PutObjectDownAfterBeingShocked()
+    {
+        if (IsCarrying || IsPushing)
+        {
             UsedObject.PutDown(this);
         }
     }
 
-    private void OnEnable() {
+    public void FreezePlayer(float duration = 0)
+    {
+        IsFrozen = true;
+
+        if (duration > 0)
+            Invoke("UnfreezePlayer", duration);
+    }
+
+    public void UnfreezePlayer()
+    {
+        IsFrozen = false;
+    }
+
+    private void OnEnable()
+    {
         ElectricBracelet.DropItemAfterBeingShocked += PutObjectDownAfterBeingShocked;
     }
 
-    private void OnDisable() 
+    private void OnDisable()
     {
         ElectricBracelet.DropItemAfterBeingShocked -= PutObjectDownAfterBeingShocked;
     }
