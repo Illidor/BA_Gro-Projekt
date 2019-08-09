@@ -98,6 +98,7 @@ public class PlayerAnimationEvents : MonoBehaviour
 
     public void SnapPlayerToTargetPosition(Transform targetTransform)
     {
+        Debug.Log(targetTransform.name);
         playerTransform.position = targetTransform.position;
         fpController.TargetRotation = targetTransform.rotation;
 

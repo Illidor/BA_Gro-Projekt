@@ -45,18 +45,19 @@ public class DropZoneTrigger : MonoBehaviour
 
     private IEnumerator PlayerDropping()
     {
-        playerController.freezePlayerCamera = true;
-        playerController.freezePlayerMovement = true;
+        yield return null;
+        //playerController.freezePlayerCamera = true;
+        //playerController.freezePlayerMovement = true;
 
-        PlayerAnimationEvents.instance.PlayAnimation("DropDownLadder");
-        PlayerAnimationEvents.instance.SnapPlayerToTargetPosition(startPosition);
-        player.transform.position = endPosition.position;
+        //PlayerAnimationEvents.instance.PlayAnimation("DropDownLadder");
+        //PlayerAnimationEvents.instance.SnapPlayerToTargetPosition(startPosition);
+        //player.transform.position = endPosition.position;
 
 
 
-        yield return new WaitForSeconds(24.5f);
-        playerController.freezePlayerCamera = false;
-        playerController.freezePlayerMovement = false;
+        //yield return new WaitForSeconds(24.5f);
+        //playerController.freezePlayerCamera = false;
+        //playerController.freezePlayerMovement = false;
 
     }
 }

@@ -60,6 +60,9 @@ public class LadderInteraction : ConditionedInteraction
     {
         climbingSound = GetComponent<Sound>();
 
+        if (playerTargetEndPosition == null)
+            Debug.Log("hurensohn" + name);
+
         //if(RightIKHand == null)
         //{
         //    RightIKHand = GameObject.Find("ik_arm_R").transform;
@@ -232,7 +235,10 @@ public class LadderInteraction : ConditionedInteraction
 
     private void SnapPlayerToEndOfLadder()
     {
-        PlayerAnimationEvents.instance.SnapPlayerToTargetPosition(playerTargetEndPosition);
+        Debug.Log(playerTargetEndPosition == null);
+        Debug.Log("now calling " + playerTargetEndPosition.name);
+
+        PlayerAnimationEvents.instance.SnapPlayerToTargetPosition(GameObject.Find("PlayerEndPositionHatch").transform);
     }
 
     public void ResetClimbingSpeedToStandard()
@@ -252,7 +258,7 @@ public class LadderInteraction : ConditionedInteraction
 
     private void OnDisable()
     {
-        PlayerAnimationEvents.ReachedLadderEnd += SnapPlayerToEndOfLadder;
+        PlayerAnimationEvents.ReachedLadderEnd -= SnapPlayerToEndOfLadder;
     }
 
 }

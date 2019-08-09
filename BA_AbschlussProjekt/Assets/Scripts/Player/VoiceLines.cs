@@ -36,7 +36,7 @@ public class VoiceLines : MonoBehaviour
 
     void Update()
     {
-        if((Time.time >= deltaTime + 180) && !voiceLinePlayed && solved)
+        if((Time.time >= deltaTime + 180) && !voiceLinePlayed && !solved)
         {
             Debug.Log("start voiceline after 180");
             voiceLinePlayed = true;
