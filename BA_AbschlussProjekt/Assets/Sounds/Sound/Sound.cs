@@ -52,7 +52,6 @@ public class Sound : MonoBehaviour
     }
 
     public void PlaySound(int index, int audioSourceIndex) {
-        Debug.Log(gameObject.name);
         if (audioSourceIndex == 1) {
             if (source == null) {
                 source = gameObject.AddComponent<AudioSource>();
@@ -86,7 +85,6 @@ public class Sound : MonoBehaviour
     }
     public void PlaySound(int index, float delay)
     {
-        Debug.Log(gameObject.name);
         StartCoroutine(DelaySound(index, delay));
     }
 
