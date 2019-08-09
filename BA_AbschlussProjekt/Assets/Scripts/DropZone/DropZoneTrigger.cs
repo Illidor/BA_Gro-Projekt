@@ -8,14 +8,12 @@ public class DropZoneTrigger : MonoBehaviour
 
     private bool hasPlayerEntered = false;
 
-    [SerializeField] Camera mainCam;
-    [SerializeField] Camera blackScreen;
-
     [SerializeField] Sound headbump;
     [SerializeField] Sound breakingBones;
     [SerializeField] Sound bodyonfloor;
 
     [SerializeField] GameObject player;
+    [SerializeField] Transform startPosition;
     [SerializeField] Transform endPosition;
 
     private RigidbodyFirstPersonController playerController;
@@ -23,7 +21,7 @@ public class DropZoneTrigger : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-            GetComponent<BoxCollider>().enabled = false;
+        GetComponent<BoxCollider>().enabled = false;
         playerController = player.GetComponent<RigidbodyFirstPersonController>();
     }
 
@@ -50,22 +48,15 @@ public class DropZoneTrigger : MonoBehaviour
         playerController.freezePlayerCamera = true;
         playerController.freezePlayerMovement = true;
 
-        yield return new WaitForSeconds(0.3f);
-
-        mainCam.enabled = false;
-        blackScreen.enabled = true;
-        headbump.PlaySound(0);
-
-        yield return new WaitForSeconds(1.4f);
-        bodyonfloor.PlaySound(0);
-        breakingBones.PlaySound(0);
+        PlayerAnimationEvents.instance.PlayAnimation("DropDownLadder");
+        PlayerAnimationEvents.instance.SnapPlayerToTargetPosition(startPosition);
         player.transform.position = endPosition.position;
 
-        yield return new WaitForSeconds(1.5f);
-        mainCam.enabled = true;
-        blackScreen.enabled = false;
 
+
+        yield return new WaitForSeconds(24.5f);
         playerController.freezePlayerCamera = false;
         playerController.freezePlayerMovement = false;
+
     }
 }

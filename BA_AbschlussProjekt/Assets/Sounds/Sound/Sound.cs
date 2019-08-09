@@ -38,8 +38,6 @@ public class Sound : MonoBehaviour
             source = gameObject.AddComponent<AudioSource>();
         }
 
-        Debug.Log(gameObject.name);
-
         if(index < clips.Count)
         {
             source.clip = clips[index];
