@@ -94,12 +94,16 @@ public class LadderInteraction : ConditionedInteraction
         // <drop from ladder cases>
 
         if (CTRLHub.DropDown)
+        {
             DetachFromLadder();
+            return;
+        }
 
         if (currentClimber.transform.position.y < startPoint.position.y ||
             currentClimber.transform.position.y > endPoint.position.y     )
         {
             DetachFromLadder();
+            return;
         }
 
 
@@ -119,11 +123,11 @@ public class LadderInteraction : ConditionedInteraction
             // Play sounds at different audio sources so they don't get killed before fully played
             if (climbCount % 2 == 0)
             {
-                climbingSound.PlaySound(0, 1);
+                climbingSound.PlaySound(UnityEngine.Random.Range(0, climbingSound.clips.Count), 1);
             }
             else
             {
-                climbingSound.PlaySound(0, 2);
+                climbingSound.PlaySound(UnityEngine.Random.Range(0, climbingSound.clips.Count), 2);
             }
         }
 
