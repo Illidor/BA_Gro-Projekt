@@ -99,6 +99,9 @@ namespace UnityStandardAssets.Characters.FirstPerson
 		public bool freezePlayerCamera = true;
 		public bool freezePlayerMovement = true;
 
+        private Quaternion targetRotation;
+        public Quaternion TargetRotation { get { return targetRotation; } set { targetRotation = value; } }
+
 		private void Start()
 		{
 			m_RigidBody = GetComponent<Rigidbody>();
@@ -119,10 +122,15 @@ namespace UnityStandardAssets.Characters.FirstPerson
 
 		private void Update()
 		{
-			if(!freezePlayerCamera)
-				RotateView();
+            if (!freezePlayerCamera)
+                RotateView();
+            else
+            {
+                cam.transform.rotation = new Quaternion(0, 0, 0, 0);
+                transform.rotation = targetRotation;
+            }
 
-			if (CrossPlatformInputManager.GetButtonDown("Crouch") && isCrouching == false)
+            if (CrossPlatformInputManager.GetButtonDown("Crouch") && isCrouching == false)
 			{
 				movementSettings.IsCrouching = true;
 				isCrouching = true;

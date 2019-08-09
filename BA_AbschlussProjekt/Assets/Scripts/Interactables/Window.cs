@@ -14,10 +14,12 @@ public class Window : BaseInteractable
 
     private int interactionCount = 0;
 
+    [SerializeField] Transform playerTargetPosition;
+
     public override bool CarryOutInteraction(InteractionScript player)
     {
-        Debug.Log("asdasd");
         PlayerAnimationEvents.instance.PlayAnimation("TryOpenWindow");
+        PlayerAnimationEvents.instance.SnapPlayerToTargetPosition(playerTargetPosition);
 
         if (interactionTicker > interactionThreshold)
         {
