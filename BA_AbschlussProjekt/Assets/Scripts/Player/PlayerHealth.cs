@@ -149,7 +149,10 @@ public class PlayerHealth : MonoBehaviour
                 break;
         }
     }
-
+    public void ChangeCondition(Conditions which, float value, float delay)
+    {
+        StartCoroutine(DelayChangeCondition(which, value, delay));
+    }
     public float GetCondition(Conditions which)
     {
         switch (which)
@@ -194,6 +197,11 @@ public class PlayerHealth : MonoBehaviour
     private void OnDisable()
     {
         Picture.PlayerFailed -= PlayerDeathThirdPerson;
+    }
+    private IEnumerator DelayChangeCondition(Conditions which, float value, float delay)
+    {
+        yield return new WaitForSeconds(delay);
+        ChangeCondition(which, value);
     }
 
 }
