@@ -21,9 +21,18 @@ public class ElectricBracelet : MonoBehaviour
     [SerializeField] MeshRenderer[] braceletLamps;
     [SerializeField] Material disabledLampMaterial;
 
+    [Space]
+    [SerializeField] Animator anim;
+
     void Start()
     {
         currentHealth = maxHealth;
+    }
+
+    private void Update() {
+        if (Input.GetKeyDown(KeyCode.Z)) {
+            GetShockDamage();
+        }
     }
 
     private void GetShockDamage() {
@@ -46,21 +55,25 @@ public class ElectricBracelet : MonoBehaviour
         switch (shockCount) {
             case 1:
                 // Intro Shock
+                anim.SetTrigger("Shocked");
                 screamSound.PlaySound(0);
                 breathingSound.PlaySound(0);
                 break;
             case 2:
                 // First Shock just Screaming
+                anim.SetTrigger("Shocked");
                 screamSound.PlaySound(0);
                 breathingSound.PlaySound(0);
                 break;
             case 3:
                 // Fade and Feedback that the shocks harm the Player long term
+                anim.SetTrigger("Shocked");
                 screamSound.PlaySound(0);
                 breathingSound.PlaySound(0);
                 break;
             case 4:
                 // Intense Feedback, This is the last Shock before you DIE! Be careful now!
+                anim.SetTrigger("Shocked");
                 screamSound.PlaySound(0);
                 heartBeatSound.PlaySound(0);
                 break;
