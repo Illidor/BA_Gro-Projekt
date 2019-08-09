@@ -89,7 +89,7 @@ public class ExitDoor : BaseInteractable, ICombinable
                 break;
             case 2:
                 interactSound?.PlaySound(1);//hämmern, verletzen
-                player.PlayerHealth.ChangeCondition(Conditions.UpperBodyCondition, 0.5f);
+                player.PlayerHealth.ChangeCondition(Conditions.UpperBodyCondition, 0.5f, 1);
                 break;
             default:
                 VoiceLines.instance.PlayVoiceLine(UnityEngine.Random.Range(10, 13), 0f);
