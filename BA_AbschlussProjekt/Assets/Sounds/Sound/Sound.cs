@@ -83,6 +83,10 @@ public class Sound : MonoBehaviour
             }
         }
     }
+    public void PlaySound(int index, float delay)
+    {
+        StartCoroutine(DelaySound(index, delay));
+    }
 
     private IEnumerator DestroySoundComponent(AudioSource source)
     {
@@ -90,6 +94,11 @@ public class Sound : MonoBehaviour
         yield return new WaitUntil(() => source.isPlaying == false);
         Destroy(source);
         source = null;
+    }
+    private IEnumerator DelaySound(int index, float delay)
+    {
+        yield return new WaitForSeconds(delay);
+        PlaySound(index);
     }
 
 }

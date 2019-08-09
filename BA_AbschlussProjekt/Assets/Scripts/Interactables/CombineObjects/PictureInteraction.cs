@@ -41,7 +41,7 @@ public class PictureInteraction : InteractionFoundation, ICombinable
             GetComponent<Collider>().enabled = false;
 
             IsPictureOnStand = true;
-
+            VoiceLines.instance.solved = true;
             VoiceLines.instance.PlayDillenVoiceLine(0, 1.3f);
 
             return true;

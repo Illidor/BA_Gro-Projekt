@@ -41,13 +41,15 @@ public class InteractionScript : MonoBehaviour
         private set
         {
             isCarrying = value;
-            //if (value)
-            //    StartPickup?.Invoke();
+            if (value)
+                StartPickup?.Invoke();
         }
     }
     public bool IsPushing { get; private set; }
 
     public bool IsFrozen { get; set; }
+
+    public bool CanInteract { get; protected set; }
 
     public Transform HandIKLeft;
     public Transform HandIKRight;
@@ -57,6 +59,8 @@ public class InteractionScript : MonoBehaviour
 
     protected void Awake()
     {
+        CanInteract = true;
+
         GrabingReach = emptyHandedGrabingReach;
 
         IsFrozen = false;
@@ -68,7 +72,7 @@ public class InteractionScript : MonoBehaviour
             PlayerHealth = GetComponentInChildren<PlayerHealth>();
 
         fPSController = gameObject.GetComponent<RigidbodyFirstPersonController>();
-        animator = GetComponent<Animator>();
+        animator = GetComponentInChildren<Animator>();
     }
 
     protected void Update()
@@ -78,6 +82,12 @@ public class InteractionScript : MonoBehaviour
 
         if (IsFrozen)
             return;
+
+        if (CanInteract == false)
+        {
+            GUIInteractionFeedbackHandler.ResetGUI();
+            return;
+        }
 
         if (IsCarrying || IsPushing)
         {
@@ -125,7 +135,7 @@ public class InteractionScript : MonoBehaviour
             cR_isRunning = false;
         }
 
-        animator.SetBool("Grab", false);
+        //animator.SetBool("Grab", false);
       
 
         StartCoroutine(IKToObject(null, true));
@@ -133,120 +143,122 @@ public class InteractionScript : MonoBehaviour
 
     public IEnumerator IKToObject(BaseInteractable objecToInteractWith, bool bothHanded)
     {
-        animator.SetTrigger("GrabAnim");
-        animator.SetFloat("Blend", 0f);
+        //animator.SetTrigger("GrabAnim");
+        //animator.SetFloat("Blend", 0f);
 
-        yield return new WaitForSeconds(1f);
-        animator.SetFloat("Blend", 1f);
+        //yield return new WaitForSeconds(1f);
+        //animator.SetFloat("Blend", 1f);
 
-        cR_isRunning = true;
+        //cR_isRunning = true;
 
-        //BackUP
-        bool backUpGrabbing = false;
+        ////BackUP
+        //bool backUpGrabbing = false;
 
 
-        if (objecToInteractWith != null)
-        {
-            if (!bothHanded)
-            {
-                animator.SetBool("Grab", true);
-                animator.SetFloat("Blend", 0f);
-            }
-            else
-            {
-                animator.SetFloat("Blend", .5f);
-                animator.SetBool("Grab", true);
-            }
-        }
+        //if (objecToInteractWith != null)
+        //{
+        //    if (!bothHanded)
+        //    {
+        //        animator.SetBool("Grab", true);
+        //        animator.SetFloat("Blend", 0f);
+        //    }
+        //    else
+        //    {
+        //        animator.SetFloat("Blend", .5f);
+        //        animator.SetBool("Grab", true);
+        //    }
+        //}
 
-        if (objecToInteractWith != null && objecToInteractWith.GetIKPoint(false) == null)
-        {
-            backUpGrabbing = true;
-        }
+        //if (objecToInteractWith != null && objecToInteractWith.GetIKPoint(false) == null)
+        //{
+        //    backUpGrabbing = true;
+        //}
 
-        Transform pointRight;
-        Transform pointLeft = null;
-        if (objecToInteractWith == null || backUpGrabbing) //Resetting the arms when droping a item
-        {
-            pointRight = HandIKRight.parent;
-            pointLeft = HandIKLeft.parent;
-        }
-        else
-        {
-            pointRight = objecToInteractWith.GetIKPoint(false);
+        //Transform pointRight;
+        //Transform pointLeft = null;
+        //if (objecToInteractWith == null || backUpGrabbing) //Resetting the arms when droping a item
+        //{
+        //    pointRight = HandIKRight.parent;
+        //    pointLeft = HandIKLeft.parent;
+        //}
+        //else
+        //{
+        //    pointRight = objecToInteractWith.GetIKPoint(false);
 
-            if (bothHanded)
-            {
-                pointLeft = objecToInteractWith.GetIKPoint(true);
-            }
+        //    if (bothHanded)
+        //    {
+        //        pointLeft = objecToInteractWith.GetIKPoint(true);
+        //    }
 
-            fPSController.freezePlayerCamera = true;
-            fPSController.freezePlayerMovement = true;
-        }
+        //    fPSController.freezePlayerCamera = true;
+        //    fPSController.freezePlayerMovement = true;
+        //}
 
-        float speed = 20f / Time.deltaTime;
+        //float speed = 20f / Time.deltaTime;
 
-        if (pointRight != null)
-        {
-            Debug.Log(Vector3.Distance(HandIKRight.position, pointRight.position));
-            while ((HandIKRight.position - pointRight.position).magnitude > .2f || (HandIKRight.eulerAngles - pointRight.eulerAngles).magnitude > .2f)
-            //while (Vector3.Distance(HandIKRight.position, pointRight.position) > 0.4f)
-            {
-                HandIKRight.position = Vector3.MoveTowards(HandIKRight.position, pointRight.position, speed);
-                HandIKRight.rotation = Quaternion.Lerp(HandIKRight.rotation, pointRight.rotation, speed);
+        //if (pointRight != null)
+        //{
+        //    Debug.Log(Vector3.Distance(HandIKRight.position, pointRight.position));
+        //    while ((HandIKRight.position - pointRight.position).magnitude > .2f || (HandIKRight.eulerAngles - pointRight.eulerAngles).magnitude > .2f)
+        //    //while (Vector3.Distance(HandIKRight.position, pointRight.position) > 0.4f)
+        //    {
+        //        HandIKRight.position = Vector3.MoveTowards(HandIKRight.position, pointRight.position, speed);
+        //        HandIKRight.rotation = Quaternion.Lerp(HandIKRight.rotation, pointRight.rotation, speed);
 
-                if (bothHanded)
-                {
-                    HandIKLeft.position = Vector3.MoveTowards(HandIKLeft.position, pointLeft.position, speed);
-                    HandIKLeft.rotation = Quaternion.Lerp(HandIKLeft.rotation, pointLeft.rotation, speed);
-                }
+        //        if (bothHanded)
+        //        {
+        //            HandIKLeft.position = Vector3.MoveTowards(HandIKLeft.position, pointLeft.position, speed);
+        //            HandIKLeft.rotation = Quaternion.Lerp(HandIKLeft.rotation, pointLeft.rotation, speed);
+        //        }
 
-                yield return new WaitForEndOfFrame();
-            }
+        //        yield return new WaitForEndOfFrame();
+        //    }
 
-            HandIKRight.rotation = pointRight.rotation;
-            yield return new WaitForEndOfFrame();
-        }
+        //    HandIKRight.rotation = pointRight.rotation;
+        //    yield return new WaitForEndOfFrame();
+        //}
 
         objecToInteractWith?.CarryOutInteraction(this);
 
 
-        if (backUpGrabbing)
-        {
-            objecToInteractWith.transform.SetParent(GrabingPoint);
-            objecToInteractWith.transform.localPosition = fPSController.transform.forward;
-            objecToInteractWith.transform.localEulerAngles = Vector3.zero;
-        }
-        else if (pointRight != null && objecToInteractWith != null && UsedObject != null)
-        {
-            Transform FixPoint = objecToInteractWith.transform;
+        //if (backUpGrabbing)
+        //{
+        //    objecToInteractWith.transform.SetParent(GrabingPoint);
+        //    objecToInteractWith.transform.localPosition = fPSController.transform.forward;
+        //    objecToInteractWith.transform.localEulerAngles = Vector3.zero;
+        //}
+        //else if (pointRight != null && objecToInteractWith != null && UsedObject != null)
+        //{
+        //    Transform FixPoint = objecToInteractWith.transform;
 
-            if (FixPoint != null && FixPoint.gameObject.tag == "FixPoint")
-            {
-                while ((FixPoint.transform.position - GrabingPoint.position).magnitude > .2f || ((FixPoint.transform.eulerAngles - GrabingPoint.eulerAngles).magnitude > .2f))
-                {
-                    FixPoint.transform.position = Vector3.MoveTowards(FixPoint.transform.position, GrabingPoint.transform.position, speed);
-                    FixPoint.transform.rotation = Quaternion.Lerp(FixPoint.transform.rotation, GrabingPoint.transform.rotation, speed);
+        //    if (FixPoint != null && FixPoint.gameObject.tag == "FixPoint")
+        //    {
+        //        while ((FixPoint.transform.position - GrabingPoint.position).magnitude > .2f || ((FixPoint.transform.eulerAngles - GrabingPoint.eulerAngles).magnitude > .2f))
+        //        {
+        //            FixPoint.transform.position = Vector3.MoveTowards(FixPoint.transform.position, GrabingPoint.transform.position, speed);
+        //            FixPoint.transform.rotation = Quaternion.Lerp(FixPoint.transform.rotation, GrabingPoint.transform.rotation, speed);
 
-                    HandIKRight.transform.position = Vector3.MoveTowards(HandIKRight.position, pointRight.position, speed);
-                    HandIKRight.rotation = Quaternion.Lerp(HandIKRight.rotation, pointRight.rotation, speed);
+        //            HandIKRight.transform.position = Vector3.MoveTowards(HandIKRight.position, pointRight.position, speed);
+        //            HandIKRight.rotation = Quaternion.Lerp(HandIKRight.rotation, pointRight.rotation, speed);
 
-                    if (bothHanded)
-                    {
-                        HandIKLeft.transform.position = Vector3.MoveTowards(HandIKLeft.position, pointLeft.position, speed);
-                        HandIKLeft.rotation = Quaternion.Lerp(HandIKLeft.rotation, pointLeft.rotation, speed);
-                    }
-                    yield return new WaitForEndOfFrame();
-                }
-            }
-        }
+        //            if (bothHanded)
+        //            {
+        //                HandIKLeft.transform.position = Vector3.MoveTowards(HandIKLeft.position, pointLeft.position, speed);
+        //                HandIKLeft.rotation = Quaternion.Lerp(HandIKLeft.rotation, pointLeft.rotation, speed);
+        //            }
+        //            yield return new WaitForEndOfFrame();
+        //        }
+        //    }
+        //}
 
-        lastGrabWasBothHanded = bothHanded;
-        Debug.Log("cR_End");
-        cR_isRunning = false;
+        //lastGrabWasBothHanded = bothHanded;
+        //Debug.Log("cR_End");
+        //cR_isRunning = false;
 
         fPSController.freezePlayerCamera = false;
         fPSController.freezePlayerMovement = false;
+
+        yield return new WaitForSeconds(1f);
     }
 
     public void SetCarriedObject(GrabInteractable objectToCarry)
@@ -267,7 +279,7 @@ public class InteractionScript : MonoBehaviour
     {
         ResetIK();
 
-        animator.ResetTrigger("Grab");
+        //animator.ResetTrigger("Grab");
         UsedObject = null;
         IsCarrying = false;
         IsPushing = false;
@@ -281,6 +293,27 @@ public class InteractionScript : MonoBehaviour
     public void ResetReachToDefault()
     {
         GrabingReach = emptyHandedGrabingReach;
+    }
+
+    /// <summary>
+    /// Block the players ability to interact. If duration is greater than 0, it will unblock after that set time
+    /// </summary>
+    /// <param name="duration"> If duration is greater than 0, it will unblock after that set time</param>
+    public void BlockInteraction(float duration = -1)
+    {
+        CancelInvoke("ReallowInteraction");
+
+        CanInteract = false;
+
+        if (duration > 0)
+        {
+            Invoke("ReallowInteraction", duration);
+        }
+    }
+
+    public void ReallowInteraction()
+    {
+        CanInteract = true;
     }
 
     private void PutObjectDownAfterBeingShocked() {
