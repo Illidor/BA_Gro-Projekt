@@ -21,7 +21,7 @@ public class DropZoneTrigger : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-            GetComponent<BoxCollider>().enabled = false;
+        GetComponent<BoxCollider>().enabled = false;
         playerController = player.GetComponent<RigidbodyFirstPersonController>();
     }
 
