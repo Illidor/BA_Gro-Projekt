@@ -24,7 +24,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 888572826}
   m_LocalRotation: {x: 0, y: 0.99994683, z: 0, w: 0.0103117125}
-  m_LocalPosition: {x: 0.666, y: 1.034, z: 0.647}
+  m_LocalPosition: {x: 0.666, y: 1.006, z: 0.647}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4868409822055999786}
@@ -161,36 +161,6 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!1 &6676343542816717093
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1241842080167765119}
-  m_Layer: 0
-  m_Name: RotationPoint
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1241842080167765119
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6676343542816717093}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.61359215, y: 1, z: 0.031144857}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 4868409822055999786}
-  m_RootOrder: 4
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &8487958361528949561
 GameObject:
   m_ObjectHideFlags: 0
@@ -229,7 +199,6 @@ Transform:
   - {fileID: 1495966871351380850}
   - {fileID: 498391297310073524}
   - {fileID: 888572827}
-  - {fileID: 1241842080167765119}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -350,6 +319,7 @@ MonoBehaviour:
   interactSound: {fileID: 498391297310073527}
   doorOpeningSound: {fileID: 498391299019375177}
   playerTargetPosition: {fileID: 888572827}
+  lookAtPosition: {fileID: 0}
 --- !u!114 &498391299019375177
 MonoBehaviour:
   m_ObjectHideFlags: 0

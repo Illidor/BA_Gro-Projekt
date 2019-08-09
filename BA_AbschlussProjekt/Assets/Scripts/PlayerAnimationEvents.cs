@@ -6,7 +6,10 @@ using UnityStandardAssets.Characters.FirstPerson;
 
 public class PlayerAnimationEvents : MonoBehaviour
 {
+    public static event UnityAction ReachedLadderEnd;
+
     public static PlayerAnimationEvents instance = null; 
+
 
     private RigidbodyFirstPersonController fpController;
 
@@ -96,16 +99,18 @@ public class PlayerAnimationEvents : MonoBehaviour
     public void SnapPlayerToTargetPosition(Transform targetTransform)
     {
         playerTransform.position = targetTransform.position;
-    }
+        fpController.TargetRotation = targetTransform.rotation;
 
-    public void RotatePlayerToTargetPoint(Transform lookingTarget)
-    {
-        playerTransform.LookAt(lookingTarget);
     }
 
     public void PlayAnimation(string trigger)
     {
         playerAnimator.SetTrigger(trigger);
+    }
+
+    public void ReachedEndOfLadder()
+    {
+        ReachedLadderEnd?.Invoke();
     }
 
     private void OnEnable()

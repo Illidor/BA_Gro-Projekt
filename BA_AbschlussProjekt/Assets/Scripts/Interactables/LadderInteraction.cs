@@ -36,16 +36,19 @@ public class LadderInteraction : ConditionedInteraction
     private InteractionScript currentClimber;
     private bool isBeeingClimbed;
 
-    private bool IsBeeingClimbed
-    {
-        get => isBeeingClimbed;
-        set
-        {
-            isBeeingClimbed = value;
-            if (value == false)
-                currentClimber = null;
-        }
-    }
+    [SerializeField] Transform playerTargetPosition;
+    [SerializeField] Transform playerTargetEndPosition;
+
+    //private bool IsBeeingClimbed
+    //{
+    //    get => isBeeingClimbed;
+    //    set
+    //    {
+    //        isBeeingClimbed = value;
+    //        if (value == false)
+    //            currentClimber = null;
+    //    }
+    //}
 
     // climbing audio
     private Sound climbingSound;
@@ -79,38 +82,38 @@ public class LadderInteraction : ConditionedInteraction
     {
         CurrentClimbingSpeed = standardClimbingSpeed;
 
-        IsBeeingClimbed = false;
+        //IsBeeingClimbed = false;
 
         base.Awake();
     }
 
     void Update()
     {
-        // Stop update if ladder is not in use
-        if (!IsBeeingClimbed || currentClimber == null)
-            return;
+        //// Stop update if ladder is not in use
+        //if (!IsBeeingClimbed || currentClimber == null)
+        //    return;
 
 
         // <drop from ladder cases>
 
-        if (CTRLHub.DropDown)
-        {
-            DetachFromLadder();
-            return;
-        }
+        //if (CTRLHub.DropDown)
+        //{
+        //    DetachFromLadder();
+        //    return;
+        //}
 
-        if (currentClimber.transform.position.y < startPoint.position.y ||
-            currentClimber.transform.position.y > endPoint.position.y     )
-        {
-            DetachFromLadder();
-            return;
-        }
+        //if (currentClimber.transform.position.y < startPoint.position.y ||
+        //    currentClimber.transform.position.y > endPoint.position.y     )
+        //{
+        //    DetachFromLadder();
+        //    return;
+        //}
 
 
         // <actuall climbing>
 
-        currentClimber.transform.localPosition += 
-            (endPoint.position - startPoint.position).normalized * (CurrentClimbingSpeed * CTRLHub.VerticalAxis);
+        //currentClimber.transform.localPosition += 
+        //    (endPoint.position - startPoint.position).normalized * (CurrentClimbingSpeed * CTRLHub.VerticalAxis);
 
 
         // <Ladder audio handling>
@@ -134,22 +137,22 @@ public class LadderInteraction : ConditionedInteraction
 
         // <IK and animation handling>
 
-        if (LeftHandGrabPoints.Count == 0 || RightHandGrabPoints.Count == 0)
-            return;
+        //if (LeftHandGrabPoints.Count == 0 || RightHandGrabPoints.Count == 0)
+        //    return;
 
-        Transform leftHandGrabPoint = LeftHandGrabPoints[0];
-        foreach (Transform item in LeftHandGrabPoints)
-        {
-            if ((item.position - GrabingPoint.position).magnitude < (leftHandGrabPoint.position - GrabingPoint.position).magnitude)
-                leftHandGrabPoint = item;
-        }
+        //Transform leftHandGrabPoint = LeftHandGrabPoints[0];
+        //foreach (Transform item in LeftHandGrabPoints)
+        //{
+        //    if ((item.position - GrabingPoint.position).magnitude < (leftHandGrabPoint.position - GrabingPoint.position).magnitude)
+        //        leftHandGrabPoint = item;
+        //}
 
-        Transform rightHandGrabPoint = RightHandGrabPoints[0];
-        foreach (Transform item in RightHandGrabPoints)
-        {
-            if ((item.position - GrabingPoint.position).magnitude < (rightHandGrabPoint.position - GrabingPoint.position).magnitude)
-                rightHandGrabPoint = item;
-        }
+        //Transform rightHandGrabPoint = RightHandGrabPoints[0];
+        //foreach (Transform item in RightHandGrabPoints)
+        //{
+        //    if ((item.position - GrabingPoint.position).magnitude < (rightHandGrabPoint.position - GrabingPoint.position).magnitude)
+        //        rightHandGrabPoint = item;
+        //}
 
         //LeftIKHand.transform.position  = Vector3.MoveTowards(LeftIKHand.transform.position, leftHandGrabPoint.position, .4f);
         //LeftIKHand.transform.rotation  = Quaternion.Lerp(LeftIKHand.transform.rotation, leftHandGrabPoint.rotation, .4f);
@@ -159,15 +162,15 @@ public class LadderInteraction : ConditionedInteraction
 
     private void DetachFromLadder()
     {
-        if (currentClimber == null)
-            return;
+        //if (currentClimber == null)
+        //    return;
 
-        Rigidbody currentClimblerRigidbody = currentClimber.GetComponent<Rigidbody>();
-        currentClimblerRigidbody.isKinematic = false;
-        currentClimblerRigidbody.useGravity = true;
+        //Rigidbody currentClimblerRigidbody = currentClimber.GetComponent<Rigidbody>();
+        //currentClimblerRigidbody.isKinematic = false;
+        //currentClimblerRigidbody.useGravity = true;
         //currentClimber.ResetIK();
 
-        IsBeeingClimbed = false;
+        //IsBeeingClimbed = false;
         currentClimber = null;
 
         InteractionScript.StartPickup -= DetachFromLadder;
@@ -185,36 +188,51 @@ public class LadderInteraction : ConditionedInteraction
 
     public override bool CarryOutInteraction(InteractionScript player)
     {
-        currentClimber = player;
-        Rigidbody currentClimblerRigidbody = currentClimber.GetComponent<Rigidbody>();
-        currentClimblerRigidbody.isKinematic = true;
-        currentClimblerRigidbody.useGravity = false;
+        PlayerAnimationEvents.instance.PlayAnimation("ClimbLadder");
+        PlayerAnimationEvents.instance.SnapPlayerToTargetPosition(playerTargetPosition);
 
-        //Snap Player onto nearest Pos on Ladder
-        Vector3 heading = endPoint.position - startPoint.position;
-        float magnitudeMax = heading.magnitude;
-        heading.Normalize();
-        Vector3 lhs = currentClimber.transform.position - startPoint.position;
-        float dotProd = Vector3.Dot(lhs, heading);
-        dotProd = Mathf.Clamp(dotProd, 0f, magnitudeMax);
-        Vector3 ladderMountingPos = startPoint.position + heading * dotProd;
 
-        if (ladderMountingPos.y <= startPoint.position.y + ladderSnapOffsetFromBelow.y)
-        {
-            ladderMountingPos = startPoint.position + ladderSnapOffsetFromBelow;
-        }
-        else if (ladderMountingPos.y > endPoint.position.y + ladderSnapOffsetFromAbove.y)
-        {
-            ladderMountingPos = endPoint.position + ladderSnapOffsetFromAbove;
-        }
-
-        currentClimber.transform.position = ladderMountingPos;
-
-        IsBeeingClimbed = true;
 
         InteractionScript.StartPickup += DetachFromLadder;
 
+
+        //Old code
+
+        //currentClimber = player;
+        //Rigidbody currentClimblerRigidbody = currentClimber.GetComponent<Rigidbody>();
+        //currentClimblerRigidbody.isKinematic = true;
+        //currentClimblerRigidbody.useGravity = false;
+
+        ////Snap Player onto nearest Pos on Ladder
+        //Vector3 heading = endPoint.position - startPoint.position;
+        //float magnitudeMax = heading.magnitude;
+        //heading.Normalize();
+        //Vector3 lhs = currentClimber.transform.position - startPoint.position;
+        //float dotProd = Vector3.Dot(lhs, heading);
+        //dotProd = Mathf.Clamp(dotProd, 0f, magnitudeMax);
+        //Vector3 ladderMountingPos = startPoint.position + heading * dotProd;
+
+        //if (ladderMountingPos.y <= startPoint.position.y + ladderSnapOffsetFromBelow.y)
+        //{
+        //    ladderMountingPos = startPoint.position + ladderSnapOffsetFromBelow;
+        //}
+        //else if (ladderMountingPos.y > endPoint.position.y + ladderSnapOffsetFromAbove.y)
+        //{
+        //    ladderMountingPos = endPoint.position + ladderSnapOffsetFromAbove;
+        //}
+
+        //currentClimber.transform.position = ladderMountingPos;
+
+        //IsBeeingClimbed = true;
+
+        //InteractionScript.StartPickup += DetachFromLadder;
+
         return true;
+    }
+
+    private void SnapPlayerToEndOfLadder()
+    {
+        PlayerAnimationEvents.instance.SnapPlayerToTargetPosition(playerTargetEndPosition);
     }
 
     public void ResetClimbingSpeedToStandard()
@@ -225,6 +243,16 @@ public class LadderInteraction : ConditionedInteraction
     public void SetClimbingSpeedToSlow()
     {
         CurrentClimbingSpeed = slowClimbingSpeed;
+    }
+
+    private void OnEnable()
+    {
+        PlayerAnimationEvents.ReachedLadderEnd += SnapPlayerToEndOfLadder;
+    }
+
+    private void OnDisable()
+    {
+        PlayerAnimationEvents.ReachedLadderEnd += SnapPlayerToEndOfLadder;
     }
 
 }

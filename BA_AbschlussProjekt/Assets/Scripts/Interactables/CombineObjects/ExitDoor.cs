@@ -98,7 +98,6 @@ public class ExitDoor : BaseInteractable, ICombinable
 
         OpenDoorAnim?.Invoke("LockedDoor");
         PlayerAnimationEvents.instance.SnapPlayerToTargetPosition(playerTargetPosition);
-        PlayerAnimationEvents.instance.RotatePlayerToTargetPoint(lookAtPosition);
 
         interactionCount++;
         return true;
