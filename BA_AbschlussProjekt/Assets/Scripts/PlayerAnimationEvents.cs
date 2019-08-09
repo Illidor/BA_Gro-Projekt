@@ -108,6 +108,11 @@ public class PlayerAnimationEvents : MonoBehaviour
         playerAnimator.SetTrigger(trigger);
     }
 
+    public void DisableTrigger(string trigger)
+    {
+        playerAnimator.ResetTrigger(trigger);
+    }
+
     public void ReachedEndOfLadder()
     {
         ReachedLadderEnd?.Invoke();

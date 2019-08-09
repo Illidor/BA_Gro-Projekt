@@ -37,6 +37,9 @@ public class ElectricBracelet : MonoBehaviour
 
     private void GetShockDamage() {
         if(currentHealth > 0) {
+            // Disable anim triggers
+            PlayerAnimationEvents.instance.DisableTrigger("TryOpenWindow");
+
             // Disable Bracelet Lamp
             braceletLamps[currentHealth - 1].material = disabledLampMaterial;
 
