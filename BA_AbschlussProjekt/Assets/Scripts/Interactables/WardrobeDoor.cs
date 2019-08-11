@@ -15,7 +15,8 @@ public class WardrobeDoor : HingedInteraction, ICombinable
     [SerializeField]
     private Sound unlockWithKeySound;
     [SerializeField]
-    private Animation animationToPlay;
+    private Animation lockanimationToPlay;
+    public bool open;
 
 
 
@@ -27,7 +28,7 @@ public class WardrobeDoor : HingedInteraction, ICombinable
         {
             IsLocked = true;
         }
-
+        open = false;
         base.Awake();
     }
 
@@ -81,16 +82,72 @@ public class WardrobeDoor : HingedInteraction, ICombinable
         {
             if (gameObject.name == "mdl_wardrobe_door_right")
             {
-                animationToPlay.Play();
+                lockanimationToPlay.Play();
             }
             else
             {
-                animationToPlay.Play();
+                lockanimationToPlay.Play();
             }
             return false;
 
         }
+        else
+        {
+            //Open Door animation
+            StartCoroutine(doorAnimation());
+        }
 
-        return base.CarryOutInteraction(player);
+        return true;
+        //return base.CarryOutInteraction(player);
+    }
+
+    public IEnumerator doorAnimation()
+    {
+        if (!open)
+        {
+            if (gameObject.name == "mdl_wardrobe_door_right")
+            {
+                while (gameObject.transform.localEulerAngles.y > 270)
+                {
+                    gameObject.transform.Rotate(0, -1, 0);
+                    otherDoor.transform.Rotate(0, 1, 0);
+                    yield return new WaitForFixedUpdate();
+                }
+            }
+            else
+            {
+                while (gameObject.transform.localEulerAngles.y < 90)
+                {
+                    gameObject.transform.Rotate(0, 1, 0);
+                    otherDoor.transform.Rotate(0, -1, 0);
+                    yield return new WaitForFixedUpdate();
+                }
+            }
+        }
+        else
+        {
+            if (gameObject.name == "mdl_wardrobe_door_right")
+            {
+                while (gameObject.transform.localEulerAngles.y > 0)
+                {
+                    gameObject.transform.Rotate(0, 1, 0);
+                    otherDoor.transform.Rotate(0, -1, 0);
+                    yield return new WaitForFixedUpdate();
+                }
+            }
+            else
+            {
+                while (gameObject.transform.localEulerAngles.y > 0)
+                {
+                    gameObject.transform.Rotate(0, -1, 0);
+                    otherDoor.transform.Rotate(0, 1, 0);
+                    yield return new WaitForFixedUpdate();
+                }
+            }
+        }
+
+        open = !open;
+        otherDoor.GetComponent<WardrobeDoor>().open = open;
+        yield return new WaitForFixedUpdate();
     }
 }

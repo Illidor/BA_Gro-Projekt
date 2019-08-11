@@ -16,6 +16,7 @@ public class HingedInteraction : BaseInteractable
     [Space]
     [SerializeField]
     private Transform transformToHinge;
+    private bool open;
 
     private bool isOpen;
 
@@ -33,8 +34,8 @@ public class HingedInteraction : BaseInteractable
         if (axis.x + axis.y + axis.z != 1)
             axis = Vector3.zero;
 
-        OpenCloseDoor(false);
-
+        //OpenCloseDoor(false);
+        isOpen = false;
         base.Awake();
     }
 
@@ -43,20 +44,44 @@ public class HingedInteraction : BaseInteractable
     /// </summary>
     private void OpenCloseDoor(bool? setOpen = null)
     {
-        if (setOpen == true)
+        StartCoroutine(openAnimation());
+
+        //if (setOpen == true)
+        //{
+        //    transformToHinge.localRotation = Quaternion.Euler(GetHingeExtreme(Extreme.Max));
+        //    isOpen = true;
+        //}
+        //else if (setOpen == false)
+        //{
+        //    transformToHinge.localRotation = Quaternion.Euler(GetHingeExtreme(Extreme.Min));
+        //    isOpen = false;
+        //}
+        //else
+        //{
+        //    OpenCloseDoor( ! isOpen);   // switch door position
+        //}
+    }
+
+    public IEnumerator openAnimation()
+    {
+        if (open)
         {
-            transformToHinge.localRotation = Quaternion.Euler(GetHingeExtreme(Extreme.Max));
-            isOpen = true;
-        }
-        else if (setOpen == false)
-        {
-            transformToHinge.localRotation = Quaternion.Euler(GetHingeExtreme(Extreme.Min));
-            isOpen = false;
+            while (gameObject.transform.localEulerAngles.x >= 270)
+            {
+                gameObject.transform.Rotate(-1, 0, 0);
+                yield return new WaitForFixedUpdate();
+            }
         }
         else
         {
-            OpenCloseDoor( ! isOpen);   // switch door position
+            while (gameObject.transform.localEulerAngles.x <= 270)
+            {
+                gameObject.transform.Rotate(1, 0, 0);
+                yield return new WaitForFixedUpdate();
+            }
         }
+
+        open = !open;
     }
 
     private Vector3 GetHingeExtreme(Extreme extreme)
