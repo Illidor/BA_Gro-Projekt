@@ -5,6 +5,7 @@ using CustomEnums;
 using System;
 using UnityEngine.Events;
 using UnityEngine.Rendering.PostProcessing;
+using UnityStandardAssets.Characters.FirstPerson;
 
 public enum Conditions
 {
@@ -23,6 +24,8 @@ public class PlayerHealth : MonoBehaviour
     private Sound smallConditionSound;
     [SerializeField]
     private Sound bigConditionSound;
+    [SerializeField]
+    private GameObject armature;
 
     public Camera monitorRoomCamera;
     public Camera mainCamera;
@@ -49,6 +52,8 @@ public class PlayerHealth : MonoBehaviour
         ppVolume = PostProcessManager.instance.QuickVolume(gameObject.layer, 100f, vignette);
 
         anim = GetComponentInChildren<Animator>();
+
+        activateRagdoll(false);
 
     }
 
@@ -90,6 +95,42 @@ public class PlayerHealth : MonoBehaviour
         }
 
     }
+
+    public void activateRagdoll(bool p_death)
+    {
+        if (p_death)
+        {
+            foreach (var var_gameObject in armature.GetComponentsInChildren<Rigidbody>())
+            {
+                var_gameObject.useGravity = true;
+                var_gameObject.isKinematic = false;
+
+                if(var_gameObject.GetComponent<BoxCollider>() != null)
+                {
+                    var_gameObject.GetComponent<BoxCollider>().enabled = true;
+                }
+                else if(var_gameObject.GetComponent<SphereCollider>() != null)
+                {
+                    var_gameObject.GetComponent<SphereCollider>().enabled = true;
+                }
+
+                var_gameObject.GetComponentInParent<Animator>().enabled = false;
+                gameObject.GetComponent<RigidbodyFirstPersonController>().enabled = false;
+            }
+        }
+        else
+        {
+            foreach (var var_gameObject in armature.GetComponentsInChildren<Rigidbody>())
+            {
+                var_gameObject.useGravity = false;
+                var_gameObject.isKinematic = true;
+
+                var_gameObject.GetComponentInParent<Animator>().enabled = true;
+                gameObject.GetComponent<RigidbodyFirstPersonController>().enabled = true;
+            }
+        }
+    }
+
 
     public void ChangeCondition(Conditions which, float value)
     {
