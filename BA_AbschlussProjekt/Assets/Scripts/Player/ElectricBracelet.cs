@@ -89,10 +89,14 @@ public class ElectricBracelet : MonoBehaviour
     private void OnEnable() {
         Window.ShockPlayer += GetShockDamage;
         KeyBox.ShockPlayer += GetShockDamage;
+        WardrobeDoor.ShockPlayer += GetShockDamage;
+        WardrobeBack.ShockPlayer += GetShockDamage;
     }
 
     private void OnDisable() {
         Window.ShockPlayer -= GetShockDamage;
         KeyBox.ShockPlayer -= GetShockDamage;
+        WardrobeDoor.ShockPlayer -= GetShockDamage;
+        WardrobeBack.ShockPlayer -= GetShockDamage;
     }
 }
