@@ -172,9 +172,7 @@ GameObject:
   - component: {fileID: 4868409822055999786}
   - component: {fileID: 4524734780899889948}
   - component: {fileID: 7923977047065456613}
-  - component: {fileID: 498391299019375180}
   - component: {fileID: 498391299019375182}
-  - component: {fileID: 498391299019375181}
   - component: {fileID: 498391299019375183}
   - component: {fileID: 498391299019375177}
   m_Layer: 0
@@ -247,25 +245,6 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!320 &498391299019375180
-PlayableDirector:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8487958361528949561}
-  m_Enabled: 1
-  serializedVersion: 3
-  m_PlayableAsset: {fileID: 11400000, guid: 4b075497320ebe046a84cce57c9406ef, type: 2}
-  m_InitialState: 0
-  m_WrapMode: 2
-  m_DirectorUpdateMode: 1
-  m_InitialTime: 0
-  m_SceneBindings:
-  - key: {fileID: -1335708655745680561, guid: 4b075497320ebe046a84cce57c9406ef, type: 2}
-    value: {fileID: 498391299019375181}
-  m_ExposedReferences:
-    m_References: []
 --- !u!65 &498391299019375182
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -279,25 +258,6 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1.2300003, y: 2, z: 0.15868266}
   m_Center: {x: 0.6135917, y: 1, z: 0.031144962}
---- !u!95 &498391299019375181
-Animator:
-  serializedVersion: 3
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8487958361528949561}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 0}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!114 &498391299019375183
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -318,6 +278,8 @@ MonoBehaviour:
   nameOfKeysGameobject: Key
   interactSound: {fileID: 498391297310073527}
   doorOpeningSound: {fileID: 498391299019375177}
+  maxOpenAngle: 81
+  openSpeed: 0.8
   playerTargetPosition: {fileID: 888572827}
   lookAtPosition: {fileID: 0}
 --- !u!114 &498391299019375177
