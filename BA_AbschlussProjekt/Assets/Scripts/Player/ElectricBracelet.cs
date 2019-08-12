@@ -23,6 +23,7 @@ public class ElectricBracelet : MonoBehaviour
 
     [Space]
     [SerializeField] Animator anim;
+    [SerializeField] PlayerHealth playerHealth;
 
     void Start()
     {
@@ -82,6 +83,7 @@ public class ElectricBracelet : MonoBehaviour
                 break;
             case 5:
                 // Player Dead
+                //playerHealth.
                 break;
         }
     }
