@@ -25,14 +25,14 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1119596953079513504}
-  m_LocalRotation: {x: -0.00000024959445, y: 0.752746, z: -0.6583111, w: 0.00000020861626}
-  m_LocalPosition: {x: -0.00003864988, y: 0.1225176, z: -1.930944}
+  m_LocalRotation: {x: -0.0077480255, y: 0.9086891, z: 0.060946904, w: 0.41292825}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 99.999985, y: 99.99997, z: 99.99997}
   m_Children:
   - {fileID: 958607155308380251}
   m_Father: {fileID: 3248960814941470819}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 82.342, y: -179.99998, z: 0}
+  m_LocalEulerAnglesHint: {x: -6.728, y: -228.999, z: 2.092}
 --- !u!33 &1119596953079513532
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -91,6 +91,7 @@ GameObject:
   - component: {fileID: 248031620714776236}
   - component: {fileID: 7008626898340624372}
   - component: {fileID: 6042786138150675966}
+  - component: {fileID: 434761653}
   m_Layer: 12
   m_Name: pre_painting_atticHatch_3
   m_TagString: FixPoint
@@ -107,7 +108,7 @@ Transform:
   m_GameObject: {fileID: 1967502928844878448}
   m_LocalRotation: {x: -0.061072674, y: 0.9052571, z: 0.19634196, w: 0.37179247}
   m_LocalPosition: {x: -7.4958863, y: 1.3240619, z: -0.920952}
-  m_LocalScale: {x: 0.010000002, y: 0.01, z: 0.010000004}
+  m_LocalScale: {x: 0.010000048, y: 0.010000119, z: 0.010000136}
   m_Children:
   - {fileID: 1119596953079513505}
   - {fileID: 7878924773326068061}
@@ -170,7 +171,7 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 27.9, y: 36.91, z: 0.30092672}
+  m_Size: {x: 27.63, y: 6.7, z: 36.61}
   m_Center: {x: -8.2153756e-10, y: -0.0065088756, z: -0.0011713882}
 --- !u!54 &6042786138150675966
 Rigidbody:
@@ -183,11 +184,29 @@ Rigidbody:
   m_Mass: 1
   m_Drag: 0
   m_AngularDrag: 0.05
-  m_UseGravity: 1
+  m_UseGravity: 0
   m_IsKinematic: 1
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 3
+--- !u!114 &434761653
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1967502928844878448}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d8bdc993e595ec845b9a429a2b6ef257, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  <DisplayName>k__BackingField: Child drawing
+  conditionsTypeNeededToInteract: 0
+  isBothHanded: 0
+  minConditionToCarry: 0.5
+  minConditionToPush: 3
+  soundToPlayOnInteractAndDrop: {fileID: 0}
 --- !u!1 &7883869028839200246
 GameObject:
   m_ObjectHideFlags: 0
@@ -272,11 +291,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1119596953079513505}
     m_Modifications:
-    - target: {fileID: 6186170551374099250, guid: 0a84cd2bc60f3dc4da7447168960b976,
-        type: 3}
-      propertyPath: m_Name
-      value: IK
-      objectReference: {fileID: 0}
     - target: {fileID: 6186170551374099249, guid: 0a84cd2bc60f3dc4da7447168960b976,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -331,6 +345,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 239.40298
+      objectReference: {fileID: 0}
+    - target: {fileID: 6186170551374099250, guid: 0a84cd2bc60f3dc4da7447168960b976,
+        type: 3}
+      propertyPath: m_Name
+      value: IK
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0a84cd2bc60f3dc4da7447168960b976, type: 3}
