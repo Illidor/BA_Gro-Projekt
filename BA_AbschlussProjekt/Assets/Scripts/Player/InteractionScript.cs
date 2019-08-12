@@ -338,9 +338,9 @@ public class InteractionScript : MonoBehaviour
         }
     }
 
-    public void FreezePlayer(float duration = 0)
+    public void SlowPlayer(float duration = 0)
     {
-        IsFrozen = true;
+        rigidbodyFirstPersonController.movementSettings.CurrentTargetSpeed = 0f;
 
         if (duration > 0)
             Invoke("UnfreezePlayer", duration);
@@ -348,7 +348,7 @@ public class InteractionScript : MonoBehaviour
 
     public void UnfreezePlayer()
     {
-        IsFrozen = false;
+        rigidbodyFirstPersonController.movementSettings.CurrentTargetSpeed = 0f;
     }
 
     private void OnEnable()

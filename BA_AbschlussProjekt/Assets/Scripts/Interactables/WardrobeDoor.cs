@@ -1,9 +1,12 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class WardrobeDoor : HingedInteraction, ICombinable
 {
+    public static event UnityAction ShockPlayer;
+
     [SerializeField]
     private string wardrobeKeyName = "WardrobeKey";
     [SerializeField]
@@ -48,7 +51,9 @@ public class WardrobeDoor : HingedInteraction, ICombinable
     {
         if (interactingComponent is Crowbar)
         {
-            doorBreakOpenSound?.PlaySound(0);
+            //doorBreakOpenSound?.PlaySound(0);
+            ShockPlayer?.Invoke();
+            return true;
         }
         else if (interactingComponent.name.Equals(wardrobeKeyName))
         {

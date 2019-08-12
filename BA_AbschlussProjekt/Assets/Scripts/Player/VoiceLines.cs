@@ -64,7 +64,7 @@ public class VoiceLines : MonoBehaviour
     private void StartVoicelinePlaying(int index)
     {
         voiceLines[ index ].Play();
-        player.FreezePlayer(voiceLines[ index ].clip.length);
+        player.SlowPlayer(voiceLines[ index ].clip.length);
     }
 
     private IEnumerator DelayDillenVoiceLine(int index, float delay)
