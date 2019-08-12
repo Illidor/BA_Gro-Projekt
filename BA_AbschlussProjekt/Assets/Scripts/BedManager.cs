@@ -6,12 +6,15 @@ public class BedManager : MonoBehaviour
 {
     public GameObject toyCar;
     private int rattleCount = 0;
+    [SerializeField] HatchLever hatch;
     [SerializeField] Transform player;
+
 
     private void BedRattle(GameObject bed) {
         rattleCount++;
         if(rattleCount == 3) {
             GameObject tmpCar = Instantiate(toyCar, player.position + Vector3.up + player.forward * 0.5f, Quaternion.identity);
+            hatch.AddCombinableReference(tmpCar.GetComponent<GrabInteractable>(), 1);
             tmpCar.GetComponent<ToyCar>().CallSoundAfterDelay(0.5f);
         }
     }

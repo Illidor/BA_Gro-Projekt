@@ -40,9 +40,9 @@ public class GrabInteractable : BaseInteractable
 
     protected new void Awake()
     {
-        FixPoint = gameObject.transform.parent;
-        positionDelta = transform.position - FixPoint.position;
-        rotationDelta = transform.eulerAngles - FixPoint.eulerAngles;
+        //FixPoint = gameObject.transform.parent;
+        //positionDelta = transform.position - FixPoint.position;
+        //rotationDelta = transform.eulerAngles - FixPoint.eulerAngles;
 
         rigidbody = GetComponent<Rigidbody>();
         collider = GetComponent<Collider>();

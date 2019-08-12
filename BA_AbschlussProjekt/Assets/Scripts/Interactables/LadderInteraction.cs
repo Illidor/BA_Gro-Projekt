@@ -61,7 +61,6 @@ public class LadderInteraction : ConditionedInteraction
         climbingSound = GetComponent<Sound>();
 
         if (playerTargetEndPosition == null)
-            Debug.Log("hurensohn" + name);
 
         //if(RightIKHand == null)
         //{

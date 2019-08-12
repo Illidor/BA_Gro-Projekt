@@ -152,7 +152,6 @@ namespace UnityStandardAssets.Characters.FirstPerson
             if(cam.transform.eulerAngles.x >= mouseLook.MaximumX - 20f && cam.transform.eulerAngles.x < 180)
             {
                 //TODO: Trigger animation;
-                Debug.Log("CheckCondition");
             }
 		}
 

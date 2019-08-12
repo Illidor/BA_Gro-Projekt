@@ -50,6 +50,10 @@ public class HatchLever : BaseInteractable, ICombinable
         return false;
     }
 
+    public void AddCombinableReference(GrabInteractable grabInteractable, int index) {
+        levelCombinables[index].objectToCombineWith = grabInteractable;
+    }
+
     public bool Combine(InteractionScript player, BaseInteractable interactingComponent)
     {
         for (int i = 0; i < levelCombinables.Length; i++)
@@ -72,7 +76,7 @@ public class HatchLever : BaseInteractable, ICombinable
 
     public override bool CarryOutInteraction(InteractionScript player)
     {
-        if (hasLever == false)
+        if (hasLever == false || alreadyOpend)
             return false;
 
         if (IsLeverDown)
