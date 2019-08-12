@@ -96,7 +96,7 @@ public class InteractionScript : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.I))
             SceneManager.LoadScene(1);
 
-        if (IsFrozen)
+        if (IsFrozen || rigidbodyFirstPersonController.freezePlayerCamera)
             return;
 
         if (CanInteract == false)
