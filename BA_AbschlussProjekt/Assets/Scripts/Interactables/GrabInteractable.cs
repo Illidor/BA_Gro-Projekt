@@ -96,6 +96,7 @@ public class GrabInteractable : BaseInteractable
         //{
         //    transform.SetParent(null);
         //}
+
         transform.SetParent(player.GrabingPoint.transform);
        
         //transform.localPosition = Vector3.zero;
@@ -112,7 +113,6 @@ public class GrabInteractable : BaseInteractable
 
     public virtual void PutDown(InteractionScript player)
     {
-        Debug.Log("put down");
 
         if (IsBeeingCarried)
         {
@@ -122,8 +122,13 @@ public class GrabInteractable : BaseInteractable
 
             if (Physics.Raycast(screenCenterRay, out RaycastHit raycastHit, player.GrabingReach))
             {
+                if (raycastHit.collider.gameObject.tag == "Commode")
+                {
+                    transform.parent = raycastHit.collider.gameObject.transform;
+                    transform.localPosition = new Vector3(.165f, 0, 0);
+                }
                 // if the player is looking at a surface in his reach, ...
-                if (Vector3.Angle(raycastHit.normal, Vector3.up) < putDownOnTopDefinitionOffsetInDegrees)
+                else if (Vector3.Angle(raycastHit.normal, Vector3.up) < putDownOnTopDefinitionOffsetInDegrees)
                 {
                     // ... and it's pointing upwards (eg a table), then put the object down obtop of it.
                     transform.position = raycastHit.point + putDownOffset;
@@ -149,6 +154,7 @@ public class GrabInteractable : BaseInteractable
         }
 
         rigidbody.isKinematic = false;
+        rigidbody.useGravity = true;
         player.StopUsingObject();
 
         IsBeeingPulled = false;

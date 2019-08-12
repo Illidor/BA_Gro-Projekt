@@ -147,6 +147,13 @@ namespace UnityStandardAssets.Characters.FirstPerson
 			}
 
 			CheckMovability();
+
+            //Check Hand -> Health Condition or Readeable
+            if(cam.transform.eulerAngles.x >= 60f && cam.transform.eulerAngles.x < 180)
+            {
+                //TODO: Trigger animation;
+                Debug.Log("CheckCondition");
+            }
 		}
 
         private void defreezeMovement()
