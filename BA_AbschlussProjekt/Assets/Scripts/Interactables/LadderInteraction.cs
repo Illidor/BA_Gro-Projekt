@@ -60,7 +60,6 @@ public class LadderInteraction : ConditionedInteraction
     {
         climbingSound = GetComponent<Sound>();
 
-        if (playerTargetEndPosition == null)
         //if(RightIKHand == null)
         //{
         //    RightIKHand = GameObject.Find("ik_arm_R").transform;
