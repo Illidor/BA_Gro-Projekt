@@ -1,4 +1,6 @@
 ﻿using UnityEngine;
+using System;
+using System.Collections;
 
 public class Crutch : GrabInteractable
 {
@@ -7,6 +9,8 @@ public class Crutch : GrabInteractable
 
     private bool isMusicPlaying = false;
     [SerializeField] Sound bgMusic;
+
+    [SerializeField] GameObject crutchChild;
 
     protected override bool CarryOutInteraction_Carry(InteractionScript player)
     {
@@ -18,9 +22,9 @@ public class Crutch : GrabInteractable
             isMusicPlaying = true;
             bgMusic.PlaySound(0);
         }
-
+        
         //<<<<<<< HEAD
-        return base.CarryOutInteraction_Carry(player);
+        return base.CarryOutInteraction_Carry(player); 
 
         /*
 
@@ -50,5 +54,29 @@ public class Crutch : GrabInteractable
         player.ResetReachToDefault();
         base.PutDown(player);
         GetComponent<Sound>()?.PlaySound(0);
+    }
+
+    private void DisableAndReenable()
+    {
+        StartCoroutine(EnableAfterDelay());
+    }
+
+    private IEnumerator EnableAfterDelay()
+    {
+        crutchChild.SetActive(false);
+
+        yield return new WaitForSeconds(5f);
+
+        crutchChild.SetActive(true);
+    }
+
+    private void OnEnable()
+    {
+        HatchInteraction.PlayCrutchAnim += DisableAndReenable;
+    }
+
+    private void OnDisable()
+    {
+        HatchInteraction.PlayCrutchAnim -= DisableAndReenable;
     }
 }
