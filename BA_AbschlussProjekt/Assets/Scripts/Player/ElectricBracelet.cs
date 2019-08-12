@@ -84,6 +84,7 @@ public class ElectricBracelet : MonoBehaviour
                 break;
             case 5:
                 // Player Dead
+                Debug.Log("DEAD");
                 playerHealth.activateRagdoll(true);
                 break;
         }
