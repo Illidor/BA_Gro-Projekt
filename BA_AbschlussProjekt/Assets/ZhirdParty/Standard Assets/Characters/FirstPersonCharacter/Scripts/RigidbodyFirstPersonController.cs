@@ -134,17 +134,17 @@ namespace UnityStandardAssets.Characters.FirstPerson
 			{
 				movementSettings.IsCrouching = true;
 				isCrouching = true;
-				crouchCollider.enabled = true;
-				standCollider.enabled = false;
-			}
+                crouchCollider.enabled = true;
+                standCollider.enabled = false;
+            }
 
 			if (CrossPlatformInputManager.GetButtonUp("Crouch") && isCrouching)
 			{
 				movementSettings.IsCrouching = false;
 				isCrouching = false;
-				standCollider.enabled = true;
-				crouchCollider.enabled = false;
-			}
+                standCollider.enabled = true;
+                crouchCollider.enabled = false;
+            }
 
 			CheckMovability();
 
