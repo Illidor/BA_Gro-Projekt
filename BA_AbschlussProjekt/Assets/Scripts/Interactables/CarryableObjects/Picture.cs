@@ -46,7 +46,6 @@ public class Picture : GrabInteractable
                 !broken && 
                 velocity < velocityThreshholdToNotBreak)
             {
-                Debug.Log("Break");
                 Break();
             }
             else if (velocity < -2f)

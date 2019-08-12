@@ -2,9 +2,12 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class LadderInteraction : ConditionedInteraction
 {
+    public static event UnityAction<bool> ClimbLadder;
+
     [SerializeField]
     private float standardClimbingSpeed = 0.1f;
     [SerializeField]
@@ -60,12 +63,7 @@ public class LadderInteraction : ConditionedInteraction
     {
         climbingSound = GetComponent<Sound>();
 
-        //if(RightIKHand == null)
-        //{
-        //    RightIKHand = GameObject.Find("ik_arm_R").transform;
-        //    LeftIKHand = GameObject.Find("ik_arm_L").transform;
-        //    GrabingPoint = GameObject.Find("GrabbingPoint").transform;
-        //}
+        //if (playerTargetEndPosition == null)
     }
 
     private void OnValidate()
@@ -191,6 +189,7 @@ public class LadderInteraction : ConditionedInteraction
         PlayerAnimationEvents.instance.PlayAnimation("ClimbLadder");
         PlayerAnimationEvents.instance.SnapPlayerToTargetPosition(playerTargetPosition);
 
+        ClimbLadder?.Invoke(true);
 
 
         InteractionScript.StartPickup += DetachFromLadder;

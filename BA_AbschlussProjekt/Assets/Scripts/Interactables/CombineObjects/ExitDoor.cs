@@ -22,6 +22,11 @@ public class ExitDoor : BaseInteractable, ICombinable
     [SerializeField]
     protected Sound doorOpeningSound;
 
+    [SerializeField]
+    private float maxOpenAngle;
+    [SerializeField]
+    private float openSpeed;
+
     private bool isOpen = false;
 
     [SerializeField] Transform playerTargetPosition;
@@ -55,7 +60,11 @@ public class ExitDoor : BaseInteractable, ICombinable
     {
         yield return new WaitForSeconds(timeToWaitUntilDoorOpens);
 
-        GetComponent<PlayableDirector>().Play();
+        while (gameObject.transform.localEulerAngles.y < maxOpenAngle)
+        {
+            gameObject.transform.Rotate(0,1f * openSpeed, 0);
+            yield return new WaitForEndOfFrame();
+        }
     }
 
     public bool HandleCombine(InteractionScript player, BaseInteractable currentlyHolding)
