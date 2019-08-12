@@ -2,9 +2,12 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class HatchInteraction : BaseInteractable, ICombinable
 {
+    public static event UnityAction PlayCrutchAnim;
+
     [SerializeField]
     private float timeDelayBetweenKnocksInSeconds = 1;
     [SerializeField]
@@ -32,6 +35,8 @@ public class HatchInteraction : BaseInteractable, ICombinable
     private int knockCounter = 0;
 
     private float timeOfLastKnock;
+
+    [SerializeField] Transform playerTargetPosition;
 
     private void Start()
     {
@@ -86,11 +91,14 @@ public class HatchInteraction : BaseInteractable, ICombinable
 
             return false;
         }
+        PlayerAnimationEvents.instance.SnapPlayerToTargetPosition(playerTargetPosition);
+        PlayerAnimationEvents.instance.PlayAnimation("OpenAtticWithCrutch");
+        PlayCrutchAnim?.Invoke();
 
         if (isOpen)
             return false;
 
-        OpenHatch();
+        Invoke("OpenHatch", 2.5f);
 
         return true;
     }
@@ -138,24 +146,25 @@ public class HatchInteraction : BaseInteractable, ICombinable
     {
         InteractionScript characterInteractionScript = GameObject.FindObjectOfType<InteractionScript>();
 
-        while ((gameObject.transform.position.y - interactingComponent.gameObject.transform.position.y) > animationOffset)
-        {
-            //characterInteractionScript.HandIKRight.position = Vector3.MoveTowards(characterInteractionScript.HandIKRight.position, interactingComponent.gameObject.transform.position, animationSpeed);
-            //characterInteractionScript.HandIKRight.rotation = Quaternion.Lerp(characterInteractionScript.HandIKRight.rotation, interactingComponent.gameObject.transform.rotation, animationSpeed);
+        //while ((gameObject.transform.position.y - interactingComponent.gameObject.transform.position.y) > animationOffset)
+        //{
+        //    //characterInteractionScript.HandIKRight.position = Vector3.MoveTowards(characterInteractionScript.HandIKRight.position, interactingComponent.gameObject.transform.position, animationSpeed);
+        //    //characterInteractionScript.HandIKRight.rotation = Quaternion.Lerp(characterInteractionScript.HandIKRight.rotation, interactingComponent.gameObject.transform.rotation, animationSpeed);
 
 
-            interactingComponent.gameObject.transform.position = Vector3.MoveTowards(interactingComponent.gameObject.transform.position, new Vector3
-                                                                                                                    (interactingComponent.gameObject.transform.position.x,
-                                                                                                                    gameObject.transform.position.y,
-                                                                                                                    interactingComponent.gameObject.transform.position.z), animationSpeed);
+        //    //interactingComponent.gameObject.transform.position = Vector3.MoveTowards(interactingComponent.gameObject.transform.position, new Vector3
+        //    //                                                                                                        (interactingComponent.gameObject.transform.position.x,
+        //    //                                                                                                        gameObject.transform.position.y,
+        //    //                                                                                                        interactingComponent.gameObject.transform.position.z), animationSpeed);
 
-            //interactingComponent.gameObject.transform.LookAt(new Vector3(interactingComponent.gameObject.transform.position.x, gameObject.transform.position.y, interactingComponent.gameObject.transform.position.z));
+        //    //interactingComponent.gameObject.transform.LookAt(new Vector3(interactingComponent.gameObject.transform.position.x, gameObject.transform.position.y, interactingComponent.gameObject.transform.position.z));
 
-            yield return new WaitForEndOfFrame();
-        }
+        //    yield return new WaitForEndOfFrame();
+        //}
 
 
         //StartCoroutine(characterInteractionScript.IKToObject(interactingComponent, false));
+
 
         yield return new WaitForEndOfFrame();
         cR = null;

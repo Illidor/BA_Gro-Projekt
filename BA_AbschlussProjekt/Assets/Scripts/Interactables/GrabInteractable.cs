@@ -96,9 +96,6 @@ public class GrabInteractable : BaseInteractable
         //{
         //    transform.SetParent(null);
         //}
-        transform.SetParent(player.GrabingPoint.transform);
-       
-        //transform.localPosition = Vector3.zero;
         rigidbody.isKinematic = true;
         player.SetCarriedObject(this);
         IsBeeingCarried = true;
