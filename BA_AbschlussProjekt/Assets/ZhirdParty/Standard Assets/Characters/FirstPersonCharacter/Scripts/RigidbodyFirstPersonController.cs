@@ -149,7 +149,7 @@ namespace UnityStandardAssets.Characters.FirstPerson
 			CheckMovability();
 
             //Check Hand -> Health Condition or Readeable
-            if(cam.transform.eulerAngles.x >= 60f && cam.transform.eulerAngles.x < 180)
+            if(cam.transform.eulerAngles.x >= mouseLook.MaximumX - 20f && cam.transform.eulerAngles.x < 180)
             {
                 //TODO: Trigger animation;
                 Debug.Log("CheckCondition");
