@@ -16,6 +16,7 @@ public class PlayerAnimationEvents : MonoBehaviour
     [SerializeField] AudioSource dyingSound;
     [SerializeField] AudioSource collapseSound;
     [SerializeField] Sound footstepSound;
+    [SerializeField] Sound footstepSoundAttic;
 
     private Animator playerAnimator;
     private Transform playerTransform;
@@ -23,6 +24,7 @@ public class PlayerAnimationEvents : MonoBehaviour
     private Transform mainCamTransform;
 
     private int footstepSoundCount = 0;
+    private bool isAtAttic = false;
 
     private void Awake()
     {
@@ -59,10 +61,16 @@ public class PlayerAnimationEvents : MonoBehaviour
     private void PlayFootstepSound() {
         footstepSoundCount++;
         if (footstepSoundCount % 2 == 0) {
-            footstepSound.PlaySound(Random.Range(0, footstepSound.clips.Count), 1);
+            if(isAtAttic)
+                footstepSoundAttic.PlaySound(Random.Range(0, footstepSound.clips.Count), 1);
+            else
+                footstepSound.PlaySound(Random.Range(0, footstepSound.clips.Count), 1);
         }
         else {
-            footstepSound.PlaySound(Random.Range(0, footstepSound.clips.Count), 2);
+            if (isAtAttic)
+                footstepSoundAttic.PlaySound(Random.Range(0, footstepSound.clips.Count), 2);
+            else
+                footstepSound.PlaySound(Random.Range(0, footstepSound.clips.Count), 2);
         }
     }
 
@@ -119,13 +127,19 @@ public class PlayerAnimationEvents : MonoBehaviour
         ReachedLadderEnd?.Invoke();
     }
 
+    private void ChangeAtticState(bool state) {
+        isAtAttic = state;
+    }
+
     private void OnEnable()
     {
         ExitDoor.OpenDoorAnim += SetAnimatorTrigger;
+        LadderInteraction.ClimbLadder += ChangeAtticState;
     }
 
     private void OnDisable()
     {
         ExitDoor.OpenDoorAnim -= SetAnimatorTrigger;
+        LadderInteraction.ClimbLadder -= ChangeAtticState;
     }
 }

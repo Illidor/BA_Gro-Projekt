@@ -2,9 +2,12 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class LadderInteraction : ConditionedInteraction
 {
+    public static event UnityAction<bool> ClimbLadder;
+
     [SerializeField]
     private float standardClimbingSpeed = 0.1f;
     [SerializeField]
@@ -186,6 +189,7 @@ public class LadderInteraction : ConditionedInteraction
         PlayerAnimationEvents.instance.PlayAnimation("ClimbLadder");
         PlayerAnimationEvents.instance.SnapPlayerToTargetPosition(playerTargetPosition);
 
+        ClimbLadder?.Invoke(true);
 
 
         InteractionScript.StartPickup += DetachFromLadder;
