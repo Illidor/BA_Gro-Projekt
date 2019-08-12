@@ -23,10 +23,12 @@ public class ElectricBracelet : MonoBehaviour
 
     [Space]
     [SerializeField] Animator anim;
+    private PlayerHealth playerHealth;
 
     void Start()
     {
         currentHealth = maxHealth;
+        playerHealth = GameObject.Find("Player").GetComponent<PlayerHealth>();
     }
 
     private void Update() {
@@ -82,6 +84,8 @@ public class ElectricBracelet : MonoBehaviour
                 break;
             case 5:
                 // Player Dead
+                Debug.Log("DEAD");
+                playerHealth.activateRagdoll(true);
                 break;
         }
     }
