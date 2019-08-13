@@ -31,6 +31,7 @@ public class InteractionScript : MonoBehaviour
     public PlayerHealth PlayerHealth { get; protected set; }
 
     public GrabInteractable UsedObject { get; set; }
+    public string UsedObjectName { get; set; }
     private Animator animator;
 
     private bool isCarrying;
@@ -280,6 +281,8 @@ public class InteractionScript : MonoBehaviour
     public void SetCarriedObject(GrabInteractable objectToCarry)
     {
         UsedObject = objectToCarry;
+        UsedObjectName = objectToCarry.gameObject.name;
+        Debug.Log(objectToCarry.gameObject.name);
         IsCarrying = true;
         IsPushing = false;
     }
@@ -287,6 +290,7 @@ public class InteractionScript : MonoBehaviour
     public void SetPushedObject(GrabInteractable objectToPush)
     {
         UsedObject = objectToPush;
+        UsedObjectName = objectToPush.gameObject.name;
         IsPushing = true;
         IsCarrying = false;
     }
