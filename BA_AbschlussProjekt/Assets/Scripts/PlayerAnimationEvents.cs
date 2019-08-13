@@ -25,6 +25,8 @@ public class PlayerAnimationEvents : MonoBehaviour
 
     private int footstepSoundCount = 0;
     private bool isAtAttic = false;
+    private int previousFootStepId = 0;
+    private int currentFootStepId = 1;
 
     private void Awake()
     {
@@ -61,16 +63,45 @@ public class PlayerAnimationEvents : MonoBehaviour
     private void PlayFootstepSound() {
         footstepSoundCount++;
         if (footstepSoundCount % 2 == 0) {
-            if(isAtAttic)
-                footstepSoundAttic.PlaySound(Random.Range(0, footstepSound.clips.Count), 1);
+            if (isAtAttic)
+            {
+                while(currentFootStepId == previousFootStepId)
+                    currentFootStepId = Random.Range(0, footstepSoundAttic.clips.Count);
+
+                previousFootStepId = currentFootStepId;
+
+                footstepSoundAttic.PlaySound(currentFootStepId, 1);
+            }
             else
-                footstepSound.PlaySound(Random.Range(0, footstepSound.clips.Count), 1);
+            {
+                while (currentFootStepId == previousFootStepId)
+                    currentFootStepId = Random.Range(0, footstepSound.clips.Count);
+
+                previousFootStepId = currentFootStepId;
+
+                footstepSound.PlaySound(currentFootStepId, 1);
+            }
         }
         else {
             if (isAtAttic)
-                footstepSoundAttic.PlaySound(Random.Range(0, footstepSound.clips.Count), 2);
+            {
+                while (currentFootStepId == previousFootStepId)
+                    currentFootStepId = Random.Range(0, footstepSoundAttic.clips.Count);
+
+                previousFootStepId = currentFootStepId;
+
+                footstepSoundAttic.PlaySound(currentFootStepId, 2);
+            }
             else
-                footstepSound.PlaySound(Random.Range(0, footstepSound.clips.Count), 2);
+            {
+                while (currentFootStepId == previousFootStepId)
+                    currentFootStepId = Random.Range(0, footstepSound.clips.Count);
+
+                previousFootStepId = currentFootStepId;
+
+                footstepSound.PlaySound(currentFootStepId, 2);
+            }
+                
         }
     }
 
