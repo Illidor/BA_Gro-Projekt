@@ -8,9 +8,11 @@ public class DropZoneTrigger : MonoBehaviour
 
     private bool hasPlayerEntered = false;
 
-    [SerializeField] Sound headbump;
+    [SerializeField] Sound plankInFace;
     [SerializeField] Sound breakingBones;
     [SerializeField] Sound bodyonfloor;
+    [SerializeField] Sound heavyBreathing;
+
 
     [SerializeField] GameObject player;
     [SerializeField] Transform startPosition;
@@ -66,9 +68,16 @@ public class DropZoneTrigger : MonoBehaviour
         PlayerAnimationEvents.instance.SnapPlayerToTargetPosition(startPosition);
         player.transform.position = endPosition.position;
 
+        yield return new WaitForSeconds(16f);
 
+        breakingBones.PlaySound(0);
+        bodyonfloor.PlaySound(0);
+        plankInFace.PlaySound(0);
 
-        yield return new WaitForSeconds(24.5f);
+        yield return new WaitForSeconds(1.5f);
+        heavyBreathing.PlaySound(0);
+
+        yield return new WaitForSeconds(7f);
         playerController.freezePlayerCamera = false;
         playerController.freezePlayerMovement = false;
 
