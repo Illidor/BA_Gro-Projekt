@@ -199,6 +199,7 @@ public class PlayerHealth : MonoBehaviour
                 else
                 {
                     lowerBodyCondition = 0f;
+                    PlayerDeathFirstPerson();
                 }
 
                 break;
@@ -238,6 +239,7 @@ public class PlayerHealth : MonoBehaviour
 
     private void PlayerDeathFirstPerson()
     {
+        activateRagdoll(true);
         unshrinkVignette = true;
         shrinkVignette = false;
         deathAudioSnapshot.TransitionTo(25f);
