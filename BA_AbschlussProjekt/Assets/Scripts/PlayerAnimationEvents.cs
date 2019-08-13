@@ -7,6 +7,7 @@ using UnityStandardAssets.Characters.FirstPerson;
 public class PlayerAnimationEvents : MonoBehaviour
 {
     public static event UnityAction ReachedLadderEnd;
+    public static event UnityAction ShockPlayerAtStart;
 
     public static PlayerAnimationEvents instance = null; 
 
@@ -143,6 +144,11 @@ public class PlayerAnimationEvents : MonoBehaviour
         playerTransform.position = targetTransform.position;
         fpController.TargetRotation = targetTransform.rotation;
 
+    }
+
+    private void ShockPlayer()
+    {
+        ShockPlayerAtStart?.Invoke();
     }
 
     private void PlayWoodKnockAndEmitDust()

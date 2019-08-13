@@ -96,6 +96,7 @@ public class ElectricBracelet : MonoBehaviour
         KeyBox.ShockPlayer += GetShockDamage;
         WardrobeDoor.ShockPlayer += GetShockDamage;
         WardrobeBack.ShockPlayer += GetShockDamage;
+        PlayerAnimationEvents.ShockPlayerAtStart += GetShockDamage;
     }
 
     private void OnDisable() {
@@ -103,5 +104,6 @@ public class ElectricBracelet : MonoBehaviour
         KeyBox.ShockPlayer -= GetShockDamage;
         WardrobeDoor.ShockPlayer -= GetShockDamage;
         WardrobeBack.ShockPlayer -= GetShockDamage;
+        PlayerAnimationEvents.ShockPlayerAtStart -= GetShockDamage;
     }
 }
