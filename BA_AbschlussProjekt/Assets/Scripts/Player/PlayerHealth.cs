@@ -237,7 +237,7 @@ public class PlayerHealth : MonoBehaviour
 
     private void PlayerDeathFirstPerson()
     {
-        activateRagdoll(true);
+        activateRagdoll(true, 10f);
         unshrinkVignette = true;
         shrinkVignette = false;
         deathAudioSnapshot.TransitionTo(25f);
@@ -255,12 +255,14 @@ public class PlayerHealth : MonoBehaviour
     {
         Picture.PlayerFailed += PlayerDeathThirdPerson;
         ElectricBracelet.PlayerDied += PlayerDeathFirstPerson;
+        DropFromAttic.PlayerDroppedFromAttic += PlayerDeathFirstPerson;
     }
 
     private void OnDisable()
     {
         Picture.PlayerFailed -= PlayerDeathThirdPerson;
         ElectricBracelet.PlayerDied -= PlayerDeathFirstPerson;
+        DropFromAttic.PlayerDroppedFromAttic -= PlayerDeathFirstPerson;
     }
 
 }
