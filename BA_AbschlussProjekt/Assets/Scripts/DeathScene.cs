@@ -47,7 +47,7 @@ public class DeathScene : MonoBehaviour
             // if (i == playerPoses.Count)  // makes no sense ~Robin
             //     bodyOnFloor.Play();
 
-            yield return new WaitForSeconds(2f);
+            yield return new WaitForSeconds(3f);
         }
 
         isSceneFinished = true;
@@ -64,7 +64,7 @@ public class DeathScene : MonoBehaviour
 #if UNITY_EDITOR
     private static void LoadSceneAfterDeath()
     {
-        SceneManager.LoadScene(1);
+        InstancePool.instance.GoBackToMainMenue(0f);
     }
 #else
     private static void LoadSceneAfterDeath()
