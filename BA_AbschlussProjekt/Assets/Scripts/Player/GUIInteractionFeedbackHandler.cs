@@ -63,10 +63,12 @@ public class GUIInteractionFeedbackHandler : MonoBehaviour
     private void OnEnable()
     {
         PlayerHealth.PlayerDied += DisableInteractionGUI;
+        PlayerHealth.PlayerDiedFirstPerson += DisableInteractionGUI;
     }
 
     private void OnDisable()
     {
         PlayerHealth.PlayerDied -= DisableInteractionGUI;
+        PlayerHealth.PlayerDiedFirstPerson -= DisableInteractionGUI;
     }
 }

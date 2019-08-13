@@ -6,6 +6,7 @@ using System;
 using UnityEngine.Events;
 using UnityEngine.Rendering.PostProcessing;
 using UnityStandardAssets.Characters.FirstPerson;
+using UnityEngine.Audio;
 
 public enum Conditions
 {
@@ -16,6 +17,7 @@ public enum Conditions
 public class PlayerHealth : MonoBehaviour
 {
     public static event UnityAction PlayerDied;
+    public static event UnityAction PlayerDiedFirstPerson;
 
     private float upperBodyCondition;
     private float lowerBodyCondition;
@@ -26,9 +28,11 @@ public class PlayerHealth : MonoBehaviour
     private Sound bigConditionSound;
     [SerializeField]
     private GameObject armature;
+    [SerializeField] AudioMixerSnapshot deathAudioSnapshot;
 
     public Camera monitorRoomCamera;
     public Camera mainCamera;
+    public Camera blackCamera;
 
     private Animator anim;
     private PostProcessVolume ppVolume;
@@ -41,15 +45,21 @@ public class PlayerHealth : MonoBehaviour
     {
         upperBodyCondition = 2f;
         lowerBodyCondition = 2f;
+
+        
     }
 
     private void Start()
     {
-        vignette = ScriptableObject.CreateInstance<Vignette>();
-        vignette.enabled.Override(true);
-        vignette.intensity.Override(1f);
+        //vignette = ScriptableObject.CreateInstance<Vignette>();
+        //vignette.enabled.Override(true);
+        //vignette.intensity.Override(1f);
 
-        ppVolume = PostProcessManager.instance.QuickVolume(gameObject.layer, 100f, vignette);
+        //ppVolume = PostProcessManager.instance.QuickVolume(gameObject.layer, 100f, vignette);
+        ppVolume = mainCamera.GetComponent<PostProcessVolume>();
+        vignette = ppVolume.profile.GetSetting<Vignette>();
+        vignette.intensity.Override(1f);
+        //ppVolume = PostProcessManager.instance.QuickVolume(gameObject.layer, 100f, vignette);
 
         anim = GetComponentInChildren<Animator>();
 
@@ -71,13 +81,15 @@ public class PlayerHealth : MonoBehaviour
 
         if(unshrinkVignette)
         {
-            lerpTimer += Time.deltaTime / 10f;
+            lerpTimer += Time.deltaTime / 5f;
             vignette.intensity.value = lerpTimer;
 
             if (lerpTimer >= 1f)
             {
                 unshrinkVignette = false;
                 lerpTimer = 1f;
+                blackCamera.enabled = true;
+                mainCamera.enabled = false;
             }
         }
 
@@ -224,25 +236,29 @@ public class PlayerHealth : MonoBehaviour
 
     private void PlayerDeathFirstPerson()
     {
-        anim.SetTrigger("Die");
         unshrinkVignette = true;
+        shrinkVignette = false;
+        deathAudioSnapshot.TransitionTo(20f);
 
-        vignette.intensity.value = 1f;
+        PlayerDiedFirstPerson?.Invoke();
+    }
+
+    private IEnumerator DelayChangeCondition(Conditions which, float value, float delay)
+    {
+        yield return new WaitForSeconds(delay);
+        ChangeCondition(which, value);
     }
 
     private void OnEnable()
     {
         Picture.PlayerFailed += PlayerDeathThirdPerson;
+        ElectricBracelet.PlayerDied += PlayerDeathFirstPerson;
     }
 
     private void OnDisable()
     {
         Picture.PlayerFailed -= PlayerDeathThirdPerson;
-    }
-    private IEnumerator DelayChangeCondition(Conditions which, float value, float delay)
-    {
-        yield return new WaitForSeconds(delay);
-        ChangeCondition(which, value);
+        ElectricBracelet.PlayerDied -= PlayerDeathFirstPerson;
     }
 
 }
