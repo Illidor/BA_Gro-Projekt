@@ -40,6 +40,10 @@ public class DropZoneTrigger : MonoBehaviour
         {
             isPictureCarried = true;
         }
+        else if(isPictureCarried && interactionScript.UsedObjectName == null)
+        {
+            isPictureCarried = false;
+        }
         
         if(Input.GetKeyDown(KeyCode.L))
         {
