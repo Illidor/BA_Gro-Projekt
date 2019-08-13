@@ -306,8 +306,10 @@ public class InteractionScript : MonoBehaviour
 
     public void StopUsingObject()
     {
+        Debug.Log("asdasda");
         //animator.ResetTrigger("Grab");
         UsedObject = null;
+        UsedObjectName = null;
         IsCarrying = false;
         IsPushing = false;
     }
