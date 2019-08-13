@@ -6,6 +6,7 @@ using UnityEngine.Events;
 public class ElectricBracelet : MonoBehaviour
 {
     public static event UnityAction DropItemAfterBeingShocked;
+    public static event UnityAction PlayerDied;
 
     private int maxHealth = 5;
     private int currentHealth;
@@ -84,7 +85,8 @@ public class ElectricBracelet : MonoBehaviour
                 break;
             case 5:
                 // Player Dead
-                Debug.Log("DEAD");
+                heartBeatSound.PlaySound(0);
+                PlayerDied?.Invoke();
                 playerHealth.activateRagdoll(true);
                 break;
         }
