@@ -11,9 +11,19 @@ public class CommodeInteraction : BaseInteractable
     private float interactionSpeed;
     private bool isOpen = false;
 
+    [SerializeField] Sound openSound;
+    [SerializeField] Sound closeSound;
+
     public override bool CarryOutInteraction(InteractionScript player)
     {
         isOpen = !isOpen;
+
+        if(isOpen)
+            openSound.PlaySound(0);
+        else
+            closeSound.PlaySound(0);
+
+
         return true;
     }
 
