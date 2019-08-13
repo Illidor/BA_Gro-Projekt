@@ -78,19 +78,20 @@ public class HatchInteraction : BaseInteractable, ICombinable
 
     private bool HandleKnockLogicAndOpening()
     {
-        knockingSound?.PlaySound(0);
+        //knockingSound?.PlaySound(0);
 
-        if (knockCounter < knockingCountToUnlock - 1 &&
-            (Time.time - timeOfLastKnock) > timeDelayBetweenKnocksInSeconds)
-        {
+        //if (knockCounter < knockingCountToUnlock - 1 &&
+        //    (Time.time - timeOfLastKnock) > timeDelayBetweenKnocksInSeconds)
+        //{
 
-            timeOfLastKnock = Time.time;
-            knockCounter++;
+        //    timeOfLastKnock = Time.time;
+        //    knockCounter++;
 
-            EmitDust(10);
+        //    EmitDust(10);
 
-            return false;
-        }
+        //    return false;
+        //}
+
         PlayerAnimationEvents.instance.SnapPlayerToTargetPosition(playerTargetPosition);
         PlayerAnimationEvents.instance.PlayAnimation("OpenAtticWithCrutch");
         PlayCrutchAnim?.Invoke();
