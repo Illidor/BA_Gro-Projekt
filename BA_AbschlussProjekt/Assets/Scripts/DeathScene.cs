@@ -25,6 +25,8 @@ public class DeathScene : MonoBehaviour
         StartCoroutine(DelayPositionSwap());
         SwitchToDeathSnap();
         deadSceneMusic.Play();
+
+        InstancePool.instance.GoBackToMainMenue(2f);
     }
 
     private void Update()
