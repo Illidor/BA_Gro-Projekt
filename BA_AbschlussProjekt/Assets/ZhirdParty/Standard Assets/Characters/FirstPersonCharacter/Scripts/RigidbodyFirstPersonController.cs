@@ -159,13 +159,6 @@ namespace UnityStandardAssets.Characters.FirstPerson
             }
 		}
 
-        private void defreezeMovement()
-        {
-            freezePlayerCamera = false;
-            freezePlayerMovement = false;
-        }
-
-
         private void FixedUpdate()
 		{
 			Vector2 input = GetInput();
