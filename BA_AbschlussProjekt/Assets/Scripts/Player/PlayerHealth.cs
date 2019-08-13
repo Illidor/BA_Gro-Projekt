@@ -238,7 +238,7 @@ public class PlayerHealth : MonoBehaviour
     {
         unshrinkVignette = true;
         shrinkVignette = false;
-        deathAudioSnapshot.TransitionTo(20f);
+        deathAudioSnapshot.TransitionTo(25f);
 
         PlayerDiedFirstPerson?.Invoke();
     }
