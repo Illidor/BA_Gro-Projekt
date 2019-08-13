@@ -8,9 +8,11 @@ public class DropZoneTrigger : MonoBehaviour
 
     private bool hasPlayerEntered = false;
 
-    [SerializeField] Sound headbump;
+    [SerializeField] Sound plankInFace;
     [SerializeField] Sound breakingBones;
     [SerializeField] Sound bodyonfloor;
+    [SerializeField] Sound heavyBreathing;
+
 
     [SerializeField] GameObject player;
     [SerializeField] Transform startPosition;
@@ -18,16 +20,27 @@ public class DropZoneTrigger : MonoBehaviour
 
     private RigidbodyFirstPersonController playerController;
 
+    private InteractionScript interactionScript;
+
+    private bool isPictureCarried = false;
+
     // Start is called before the first frame update
     void Start()
     {
-        GetComponent<BoxCollider>().enabled = false;
         playerController = player.GetComponent<RigidbodyFirstPersonController>();
+
+        interactionScript = player.GetComponent<InteractionScript>();
     }
 
     // Update is called once per frame
     void Update()
     {
+
+        if(!isPictureCarried && interactionScript.UsedObjectName == "Picture")
+        {
+            isPictureCarried = true;
+        }
+        
         if(Input.GetKeyDown(KeyCode.L))
         {
             GetComponent<BoxCollider>().enabled = true;
@@ -36,8 +49,10 @@ public class DropZoneTrigger : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if(other.CompareTag("Player") && !hasPlayerEntered)
+        Debug.Log("entered");
+        if(other.CompareTag("Player") && !hasPlayerEntered && isPictureCarried)
         {
+            Debug.Log("playerCarriesPicture");
             hasPlayerEntered = true;
             StartCoroutine(PlayerDropping());
         }
@@ -46,18 +61,25 @@ public class DropZoneTrigger : MonoBehaviour
     private IEnumerator PlayerDropping()
     {
         yield return null;
-        //playerController.freezePlayerCamera = true;
-        //playerController.freezePlayerMovement = true;
+        playerController.freezePlayerCamera = true;
+        playerController.freezePlayerMovement = true;
 
-        //PlayerAnimationEvents.instance.PlayAnimation("DropDownLadder");
-        //PlayerAnimationEvents.instance.SnapPlayerToTargetPosition(startPosition);
-        //player.transform.position = endPosition.position;
+        PlayerAnimationEvents.instance.PlayAnimation("DropDownLadder");
+        PlayerAnimationEvents.instance.SnapPlayerToTargetPosition(startPosition);
+        player.transform.position = endPosition.position;
 
+        yield return new WaitForSeconds(16f);
 
+        breakingBones.PlaySound(0);
+        bodyonfloor.PlaySound(0);
+        plankInFace.PlaySound(0);
 
-        //yield return new WaitForSeconds(24.5f);
-        //playerController.freezePlayerCamera = false;
-        //playerController.freezePlayerMovement = false;
+        yield return new WaitForSeconds(1.5f);
+        heavyBreathing.PlaySound(0);
+
+        yield return new WaitForSeconds(7f);
+        playerController.freezePlayerCamera = false;
+        playerController.freezePlayerMovement = false;
 
     }
 }
