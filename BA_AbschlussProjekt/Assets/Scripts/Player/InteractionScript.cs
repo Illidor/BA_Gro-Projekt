@@ -94,6 +94,15 @@ public class InteractionScript : MonoBehaviour
 
     protected void Update()
     {
+        if(UsedObject == null)
+        {
+            animator.SetBool("GrabbedObject", false);
+        }
+        else
+        {
+            animator.SetBool("GrabbedObject", true);
+        }
+
         if (Input.GetKeyDown(KeyCode.I))
             SceneManager.LoadScene(1);
 

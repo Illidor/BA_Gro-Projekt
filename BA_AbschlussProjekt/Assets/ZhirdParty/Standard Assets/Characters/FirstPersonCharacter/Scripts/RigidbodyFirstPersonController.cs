@@ -99,6 +99,8 @@ namespace UnityStandardAssets.Characters.FirstPerson
 		public bool freezePlayerCamera = true;
 		public bool freezePlayerMovement = true;
 
+        [SerializeField] private Animator animator;
+
         private Quaternion targetRotation;
         public Quaternion TargetRotation { get { return targetRotation; } set { targetRotation = value; } }
 
@@ -151,7 +153,11 @@ namespace UnityStandardAssets.Characters.FirstPerson
             //Check Hand -> Health Condition or Readeable
             if(cam.transform.eulerAngles.x >= mouseLook.MaximumX - 20f && cam.transform.eulerAngles.x < 180)
             {
-                //TODO: Trigger animation;
+                animator.SetBool("LookAt", true);
+            }
+            else
+            {
+                animator.SetBool("LookAt", false);
             }
 		}
 
