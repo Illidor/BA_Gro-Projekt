@@ -49,7 +49,6 @@ public class DropZoneTrigger : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        Debug.Log("entered");
         if(other.CompareTag("Player") && !hasPlayerEntered && isPictureCarried)
         {
             Debug.Log("playerCarriesPicture");
