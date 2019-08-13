@@ -230,23 +230,23 @@ public class PlayerHealth : MonoBehaviour
     private void PlayerDeathThirdPerson()
     {
         StartCoroutine(startFadeout());
-
-        PlayerDied?.Invoke();
     }
 
     public IEnumerator startFadeout()
     {
         PostProcessVolume postProcessVolume = mainCamera.GetComponent<PostProcessVolume>();
 
-        for (int i = 0; i < 30; i++)
+        for (int i = 0; i < 60; i++)
         {
             postProcessVolume.profile.TryGetSettings(out vignette);
-            vignette.intensity.value -= (1 / 30);
+            vignette.intensity.value = (i / 60);
             yield return new WaitForEndOfFrame();
         }
 
         mainCamera.enabled = false;
         monitorRoomCamera.enabled = true;
+        PlayerDied?.Invoke();
+        yield return new WaitForEndOfFrame();
     }
 
     private void PlayerDeathFirstPerson()
