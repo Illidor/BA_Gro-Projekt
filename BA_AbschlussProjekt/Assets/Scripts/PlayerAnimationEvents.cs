@@ -13,10 +13,12 @@ public class PlayerAnimationEvents : MonoBehaviour
 
     private RigidbodyFirstPersonController fpController;
 
-    [SerializeField] AudioSource dyingSound;
-    [SerializeField] AudioSource collapseSound;
     [SerializeField] Sound footstepSound;
     [SerializeField] Sound footstepSoundAttic;
+    [SerializeField] Sound knockOnWoodSound;
+
+    [SerializeField] ParticleSystem dustPs;
+    [SerializeField] Sound dustParticleSound;
 
     private Animator playerAnimator;
     private Transform playerTransform;
@@ -117,12 +119,12 @@ public class PlayerAnimationEvents : MonoBehaviour
 
     private void PlayDyingSound()
     {
-        dyingSound.Play();
+        //dyingSound.Play();
     }
 
     private void PlayCollapseSound()
     {
-        collapseSound.Play();
+        //collapseSound.Play();
     }
 
     private void SetAnimatorTrigger(string triggerName)
@@ -141,6 +143,13 @@ public class PlayerAnimationEvents : MonoBehaviour
         playerTransform.position = targetTransform.position;
         fpController.TargetRotation = targetTransform.rotation;
 
+    }
+
+    private void PlayWoodKnockAndEmitDust()
+    {
+        knockOnWoodSound.PlaySound(0);
+        dustPs.Emit(10);
+        dustParticleSound.PlaySound(0);
     }
 
     public void PlayAnimation(string trigger)
