@@ -43,7 +43,8 @@
 			#pragma shader_feature _GLOW_ON
 			#pragma shader_feature _GLITCH_ON
 			#pragma vertex vert
-			#pragma fragment frag
+			#pragma 
+			ment frag
 			
 			#include "UnityCG.cginc"
 
