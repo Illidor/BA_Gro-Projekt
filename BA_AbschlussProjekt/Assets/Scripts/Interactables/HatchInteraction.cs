@@ -99,7 +99,7 @@ public class HatchInteraction : BaseInteractable, ICombinable
         if (isOpen)
             return false;
 
-        Invoke("OpenHatch", 2.5f);
+        Invoke("OpenHatch", 3f);
 
         return true;
     }
