@@ -102,8 +102,6 @@ namespace UnityStandardAssets.Characters.FirstPerson
         private Quaternion targetRotation;
         public Quaternion TargetRotation { get { return targetRotation; } set { targetRotation = value; } }
 
-        private bool isLookingAnimationPlaying = false;
-
 		private void Start()
 		{
 			m_RigidBody = GetComponent<Rigidbody>();
@@ -153,23 +151,9 @@ namespace UnityStandardAssets.Characters.FirstPerson
             //Check Hand -> Health Condition or Readeable
             if(cam.transform.eulerAngles.x >= mouseLook.MaximumX - 20f && cam.transform.eulerAngles.x < 180)
             {
-                Debug.Log("asdad");
-                if(!isLookingAnimationPlaying)
-                {
-                    PlayerAnimationEvents.instance.PlayAnimation("LookAtShackle");
-                    StartCoroutine(DelayIsAnimPlaying());
-                }
+                //TODO: Trigger animation;
             }
 		}
-
-        private IEnumerator DelayIsAnimPlaying()
-        {
-            isLookingAnimationPlaying = true;
-
-            yield return new WaitForSeconds(0.833f);
-
-            isLookingAnimationPlaying = false;
-        }
 
         private void defreezeMovement()
         {
