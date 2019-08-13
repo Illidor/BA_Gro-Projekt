@@ -87,7 +87,7 @@ public class ElectricBracelet : MonoBehaviour
                 // Player Dead
                 heartBeatSound.PlaySound(0);
                 PlayerDied?.Invoke();
-                playerHealth.activateRagdoll(true);
+                playerHealth.activateRagdoll(true, 10f);
                 break;
         }
     }

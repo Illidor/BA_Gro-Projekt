@@ -45,8 +45,6 @@ public class PlayerHealth : MonoBehaviour
     {
         upperBodyCondition = 2f;
         lowerBodyCondition = 2f;
-
-        
     }
 
     private void Start()
@@ -63,7 +61,7 @@ public class PlayerHealth : MonoBehaviour
 
         anim = GetComponentInChildren<Animator>();
 
-        activateRagdoll(false);
+        activateRagdoll(false, 0f);
 
     }
 
@@ -108,7 +106,7 @@ public class PlayerHealth : MonoBehaviour
 
     }
 
-    public void activateRagdoll(bool p_death)
+    public void activateRagdoll(bool p_death, float timerBackToMainMenu)
     {
         if (p_death)
         {
@@ -130,7 +128,7 @@ public class PlayerHealth : MonoBehaviour
                 gameObject.GetComponent<RigidbodyFirstPersonController>().enabled = false;
             }
 
-            InstancePool.instance.GoBackToMainMenue(5f);
+            InstancePool.instance.GoBackToMainMenue(timerBackToMainMenu);
         }
         else
         {
