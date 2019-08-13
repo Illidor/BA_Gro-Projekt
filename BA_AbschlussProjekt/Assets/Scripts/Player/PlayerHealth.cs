@@ -129,6 +129,8 @@ public class PlayerHealth : MonoBehaviour
                 var_gameObject.GetComponentInParent<Animator>().enabled = false;
                 gameObject.GetComponent<RigidbodyFirstPersonController>().enabled = false;
             }
+
+            InstancePool.instance.GoBackToMainMenue(5f);
         }
         else
         {

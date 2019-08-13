@@ -47,7 +47,6 @@ public class RoomExitCutszene : MonoBehaviour
 
     private IEnumerator deleteCam()
     {
-
         yield return new WaitForSeconds(0.15f);
         GetComponent<Animation>().Play();
         yield return new WaitForSeconds(0.15f);
@@ -55,5 +54,6 @@ public class RoomExitCutszene : MonoBehaviour
         mainCam.enabled = false;
         blackScreen.enabled = true;
 
+        InstancePool.instance.GoBackToMainMenue(2.7f);
     }
 }
