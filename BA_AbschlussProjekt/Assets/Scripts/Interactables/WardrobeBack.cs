@@ -14,12 +14,16 @@ public class WardrobeBack : BaseInteractable, ICombinable
 
     private bool isBrokenOut = false;
 
+    private bool isUsingCrowbar = false;
+
+    [SerializeField] Transform playerTargetPosition;
+
     public bool Combine(InteractionScript player, BaseInteractable interactingComponent)
     {
         if (interactingComponent is Crowbar)
         {
             //doorBreakOpenSound?.PlaySound(0);
-            ShockPlayer?.Invoke();
+            isUsingCrowbar = true;
             CarryOutInteraction(player);
             return true;
         }
@@ -43,21 +47,32 @@ public class WardrobeBack : BaseInteractable, ICombinable
 
     public override bool CarryOutInteraction(InteractionScript player)
     {
-        if (!isBrokenOut)
+        if (!isBrokenOut && isUsingCrowbar)
         {
-            Rigidbody rigidbody = GetComponent<Rigidbody>();
-            rigidbody.isKinematic = false;
-            rigidbody.AddForce(-(transform.position - player.transform.position).normalized * smashStrength, ForceMode.Impulse);
-
-            wardrobeBackBreakSound?.PlaySound(0);
-
-            isBrokenOut = true;
-
+            StartCoroutine(DelayCarryOutInteraction(player));
             return true;
         }
         else
             return false;
         
+    }
+
+    private IEnumerator DelayCarryOutInteraction(InteractionScript player)
+    {
+        PlayerAnimationEvents.instance.PlayAnimation("OpenWardrobeWithCrowbar");
+        PlayerAnimationEvents.instance.SnapPlayerToTargetPosition(playerTargetPosition);
+        yield return new WaitForSeconds(4f);
+
+        Rigidbody rigidbody = GetComponent<Rigidbody>();
+        rigidbody.isKinematic = false;
+        rigidbody.AddForce(-(transform.position - player.transform.position).normalized * smashStrength, ForceMode.Impulse);
+
+        wardrobeBackBreakSound?.PlaySound(0);
+
+        isBrokenOut = true;
+
+        yield return new WaitForSeconds(0.2f);
+        ShockPlayer?.Invoke();
     }
 
     //public override bool CarryOutInteraction(InteractionScript player)
