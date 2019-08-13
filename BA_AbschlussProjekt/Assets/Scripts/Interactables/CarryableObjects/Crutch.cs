@@ -7,7 +7,6 @@ public class Crutch : GrabInteractable
     [SerializeField]
     private float reachIncreaseOnCarry = 1;
 
-
     [SerializeField] GameObject crutchChild;
 
     protected override bool CarryOutInteraction_Carry(InteractionScript player)

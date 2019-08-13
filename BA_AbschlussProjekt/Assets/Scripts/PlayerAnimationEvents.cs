@@ -13,10 +13,12 @@ public class PlayerAnimationEvents : MonoBehaviour
 
     private RigidbodyFirstPersonController fpController;
 
-    [SerializeField] AudioSource dyingSound;
-    [SerializeField] AudioSource collapseSound;
     [SerializeField] Sound footstepSound;
     [SerializeField] Sound footstepSoundAttic;
+    [SerializeField] Sound knockOnWoodSound;
+
+    [SerializeField] ParticleSystem dustPs;
+    [SerializeField] Sound dustParticleSound;
 
     private Animator playerAnimator;
     private Transform playerTransform;
@@ -25,6 +27,8 @@ public class PlayerAnimationEvents : MonoBehaviour
 
     private int footstepSoundCount = 0;
     private bool isAtAttic = false;
+    private int previousFootStepId = 0;
+    private int currentFootStepId = 1;
 
     private void Awake()
     {
@@ -61,16 +65,45 @@ public class PlayerAnimationEvents : MonoBehaviour
     private void PlayFootstepSound() {
         footstepSoundCount++;
         if (footstepSoundCount % 2 == 0) {
-            if(isAtAttic)
-                footstepSoundAttic.PlaySound(Random.Range(0, footstepSound.clips.Count), 1);
+            if (isAtAttic)
+            {
+                while(currentFootStepId == previousFootStepId)
+                    currentFootStepId = Random.Range(0, footstepSoundAttic.clips.Count);
+
+                previousFootStepId = currentFootStepId;
+
+                footstepSoundAttic.PlaySound(currentFootStepId, 1);
+            }
             else
-                footstepSound.PlaySound(Random.Range(0, footstepSound.clips.Count), 1);
+            {
+                while (currentFootStepId == previousFootStepId)
+                    currentFootStepId = Random.Range(0, footstepSound.clips.Count);
+
+                previousFootStepId = currentFootStepId;
+
+                footstepSound.PlaySound(currentFootStepId, 1);
+            }
         }
         else {
             if (isAtAttic)
-                footstepSoundAttic.PlaySound(Random.Range(0, footstepSound.clips.Count), 2);
+            {
+                while (currentFootStepId == previousFootStepId)
+                    currentFootStepId = Random.Range(0, footstepSoundAttic.clips.Count);
+
+                previousFootStepId = currentFootStepId;
+
+                footstepSoundAttic.PlaySound(currentFootStepId, 2);
+            }
             else
-                footstepSound.PlaySound(Random.Range(0, footstepSound.clips.Count), 2);
+            {
+                while (currentFootStepId == previousFootStepId)
+                    currentFootStepId = Random.Range(0, footstepSound.clips.Count);
+
+                previousFootStepId = currentFootStepId;
+
+                footstepSound.PlaySound(currentFootStepId, 2);
+            }
+                
         }
     }
 
@@ -86,12 +119,12 @@ public class PlayerAnimationEvents : MonoBehaviour
 
     private void PlayDyingSound()
     {
-        dyingSound.Play();
+        //dyingSound.Play();
     }
 
     private void PlayCollapseSound()
     {
-        collapseSound.Play();
+        //collapseSound.Play();
     }
 
     private void SetAnimatorTrigger(string triggerName)
@@ -110,6 +143,13 @@ public class PlayerAnimationEvents : MonoBehaviour
         playerTransform.position = targetTransform.position;
         fpController.TargetRotation = targetTransform.rotation;
 
+    }
+
+    private void PlayWoodKnockAndEmitDust()
+    {
+        knockOnWoodSound.PlaySound(0);
+        dustPs.Emit(10);
+        dustParticleSound.PlaySound(0);
     }
 
     public void PlayAnimation(string trigger)
