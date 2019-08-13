@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityStandardAssets.Characters.FirstPerson;
 
 public class Altar : ConditionedInteraction
 {
@@ -10,6 +11,8 @@ public class Altar : ConditionedInteraction
     private KeyBox keyBox;
     [SerializeField]
     private PictureInteraction pictureInteraction;
+    private RigidbodyFirstPersonController rigidbodyFPSController;
+    private Animator playerAnimator;
 
     private int refusingCounter = 0;
 
@@ -18,15 +21,27 @@ public class Altar : ConditionedInteraction
         if (pictureInteraction == null)
             pictureInteraction = GetComponentInChildren<PictureInteraction>();
 
+        rigidbodyFPSController = GameObject.Find("Player").GetComponent<RigidbodyFirstPersonController>();
+        playerAnimator = rigidbodyFPSController.gameObject.GetComponentInChildren<Animator>();
+
         base.Awake();
     }
 
     public override bool CarryOutInteraction(InteractionScript player)
     {
+        StartCoroutine(OpenKeyBox());
+
+        return keyBox.IsOpen;
+    }
+
+    private IEnumerator OpenKeyBox()
+    {
+        yield return new WaitForSeconds(4.5f);
         if (keyBox.IsOpen == false)
             keyBox.OpenKeyBox();
 
-        return keyBox.IsOpen;
+        rigidbodyFPSController.freezePlayerCamera = true;
+        rigidbodyFPSController.freezePlayerMovement = true;
     }
 
     public bool CarryOutSecondInteract(InteractionScript interactionScript)
@@ -65,7 +80,12 @@ public class Altar : ConditionedInteraction
 
         if (CTRLHub.InteractDown && player.PlayerHealth.GetCondition(conditionsTypeNeededToInteract) > minCondition)
         {
+            rigidbodyFPSController.freezePlayerCamera = true;
+            rigidbodyFPSController.freezePlayerMovement = true;
+
+            playerAnimator.SetTrigger("Pray");
             CarryOutInteraction(player);
+            
         }
         else if (CTRLHub.SecondInteractDown && player.PlayerHealth.GetCondition(conditionsTypeNeededToInteract) > minCondition)
         {
