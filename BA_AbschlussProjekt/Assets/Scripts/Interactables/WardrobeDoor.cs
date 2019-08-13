@@ -21,7 +21,8 @@ public class WardrobeDoor : HingedInteraction, ICombinable
     private Animation lockanimationToPlay;
     public bool open;
 
-
+    [SerializeField] Animator handcuffAnim;
+    private bool wasHandcuffOpened = false;
 
     public bool IsLocked { get; set; }
 
@@ -61,22 +62,23 @@ public class WardrobeDoor : HingedInteraction, ICombinable
         }
         else    // if wrong combine object, don't execute code below
         {
-            print("Locked");
-
             return false; 
         }
 
         IsLocked = false;
         otherDoor.IsLocked = false;
 
-        if (handcuffRB != null)
-        {
-            Destroy(handcuffRB.gameObject.GetComponent<HingeJoint>());
-            Destroy(otherDoor.GetComponent<WardrobeDoor>().handcuffRB.GetComponent<HingeJoint>());
+        if(wasHandcuffOpened == false)
+            handcuffAnim.SetTrigger("Unlock");
 
-            handcuffRB.useGravity = !IsLocked;
-            handcuffRB.isKinematic = IsLocked;
-        }
+        //if (handcuffRB != null)
+        //{
+        //    Destroy(handcuffRB.gameObject.GetComponent<HingeJoint>());
+        //    Destroy(otherDoor.GetComponent<WardrobeDoor>().handcuffRB.GetComponent<HingeJoint>());
+
+        //    handcuffRB.useGravity = !IsLocked;
+        //    handcuffRB.isKinematic = IsLocked;
+        //}
 
         return true;
     }
