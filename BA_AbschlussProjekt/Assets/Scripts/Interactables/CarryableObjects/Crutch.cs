@@ -8,7 +8,6 @@ public class Crutch : GrabInteractable
     private float reachIncreaseOnCarry = 1;
 
     private bool isMusicPlaying = false;
-    [SerializeField] Sound bgMusic;
 
     [SerializeField] GameObject crutchChild;
 
@@ -20,7 +19,6 @@ public class Crutch : GrabInteractable
         if (isMusicPlaying == false)
         {
             isMusicPlaying = true;
-            bgMusic.PlaySound(0);
         }
         
         //<<<<<<< HEAD
