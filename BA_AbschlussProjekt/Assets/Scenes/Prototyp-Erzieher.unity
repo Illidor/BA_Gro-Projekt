@@ -22854,6 +22854,8 @@ GameObject:
   - component: {fileID: 595747888}
   - component: {fileID: 595747890}
   - component: {fileID: 595747889}
+  - component: {fileID: 595747892}
+  - component: {fileID: 595747891}
   m_Layer: 0
   m_Name: PlayerDropCollider
   m_TagString: Untagged
@@ -22887,6 +22889,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bdb1cbb27c7c3d24b81866b40207ca77, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  impactSound: {fileID: 595747891}
+  breakingBonesSound: {fileID: 595747892}
 --- !u!65 &595747890
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -22900,6 +22904,48 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 4.285666, y: 1, z: 4.153987}
   m_Center: {x: 0.23024487, y: 0, z: 0.076993585}
+--- !u!114 &595747891
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 595747887}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9b6d2cdd667f7204aabb934c567dcd10, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  clips:
+  - {fileID: 8300000, guid: 61df4bdd9469682439b9581f9abdbc19, type: 3}
+  volume: 0.75
+  volumeVariance: 0.1
+  pitch: 1
+  pitchVariance: 0.1
+  loop: 0
+  playOnAwake: 0
+  mixerGroup: {fileID: 0}
+--- !u!114 &595747892
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 595747887}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9b6d2cdd667f7204aabb934c567dcd10, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  clips:
+  - {fileID: 8300000, guid: d13cf6197e1cfd0479be58b2b67fce99, type: 3}
+  volume: 0.75
+  volumeVariance: 0.1
+  pitch: 1
+  pitchVariance: 0.1
+  loop: 0
+  playOnAwake: 0
+  mixerGroup: {fileID: 0}
 --- !u!1 &597406552
 GameObject:
   m_ObjectHideFlags: 0
@@ -38086,6 +38132,10 @@ PrefabInstance:
       propertyPath: isReadable
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 23030650, guid: 172a7f1d4e6a8e146875936e683325e5, type: 3}
+      propertyPath: soundToPlayOnInteractAndDrop
+      value: 
+      objectReference: {fileID: 1038534111}
     - target: {fileID: 2164004084156003365, guid: 172a7f1d4e6a8e146875936e683325e5,
         type: 3}
       propertyPath: m_LocalScale.x
@@ -38296,6 +38346,11 @@ PrefabInstance:
       propertyPath: isReadable
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 1705145142841142344, guid: 172a7f1d4e6a8e146875936e683325e5,
+        type: 3}
+      propertyPath: soundToPlayOnInteractAndDrop
+      value: 
+      objectReference: {fileID: 1038534113}
     - target: {fileID: 8578536319138749649, guid: 172a7f1d4e6a8e146875936e683325e5,
         type: 3}
       propertyPath: m_Materials.Array.data[0]
@@ -38303,6 +38358,60 @@ PrefabInstance:
       objectReference: {fileID: 2100000, guid: 85ce896828420f1428db4ac0259f56bf, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 172a7f1d4e6a8e146875936e683325e5, type: 3}
+--- !u!1 &1038534110 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1967502928719673023, guid: 172a7f1d4e6a8e146875936e683325e5,
+    type: 3}
+  m_PrefabInstance: {fileID: 1038534109}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1038534111
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1038534110}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9b6d2cdd667f7204aabb934c567dcd10, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  clips:
+  - {fileID: 8300000, guid: a466aaa47c8ba4d458588663668f6c75, type: 3}
+  volume: 0.75
+  volumeVariance: 0.1
+  pitch: 1
+  pitchVariance: 0.1
+  loop: 0
+  playOnAwake: 0
+  mixerGroup: {fileID: 0}
+--- !u!1 &1038534112 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4812883569388038562, guid: 172a7f1d4e6a8e146875936e683325e5,
+    type: 3}
+  m_PrefabInstance: {fileID: 1038534109}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1038534113
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1038534112}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9b6d2cdd667f7204aabb934c567dcd10, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  clips:
+  - {fileID: 8300000, guid: a466aaa47c8ba4d458588663668f6c75, type: 3}
+  volume: 0.75
+  volumeVariance: 0.1
+  pitch: 1
+  pitchVariance: 0.1
+  loop: 0
+  playOnAwake: 0
+  mixerGroup: {fileID: 0}
 --- !u!1001 &1039430109
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -39391,6 +39500,11 @@ PrefabInstance:
       propertyPath: <DisplayName>k__BackingField
       value: Child Drawing
       objectReference: {fileID: 0}
+    - target: {fileID: 2976532183381779965, guid: 3917bb029ea06e24f9419d2a3efde42d,
+        type: 3}
+      propertyPath: soundToPlayOnInteractAndDrop
+      value: 
+      objectReference: {fileID: 1914292315}
     m_RemovedComponents:
     - {fileID: 7386288632318255905, guid: 3917bb029ea06e24f9419d2a3efde42d, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 3917bb029ea06e24f9419d2a3efde42d, type: 3}
@@ -69771,16 +69885,18 @@ MonoBehaviour:
   m_GameObject: {fileID: 1914292314}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6cdabf5dcfaa4ff4481bff3e2b45042e, type: 3}
+  m_Script: {fileID: 11500000, guid: 9b6d2cdd667f7204aabb934c567dcd10, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  <DisplayName>k__BackingField: Child Drawing
-  conditionsTypeNeededToInteract: 0
-  isBothHanded: 0
-  minConditionToCarry: 0.5
-  minConditionToPush: 3
-  soundToPlayOnInteractAndDrop: {fileID: 0}
-  isReadable: 1
+  clips:
+  - {fileID: 8300000, guid: a466aaa47c8ba4d458588663668f6c75, type: 3}
+  volume: 0.75
+  volumeVariance: 0.1
+  pitch: 1
+  pitchVariance: 0.1
+  loop: 0
+  playOnAwake: 0
+  mixerGroup: {fileID: 0}
 --- !u!4 &1915591188 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -4216859302048453862, guid: d6ff7ac20f75d7e4ca37a8d0ad691a05,
@@ -69996,6 +70112,34 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1927146706}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1929156009 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 9091610172166694680, guid: 85076c124396d6c42b9eba1f18be34be,
+    type: 3}
+  m_PrefabInstance: {fileID: 9091610172420760931}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1929156017
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1929156009}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9b6d2cdd667f7204aabb934c567dcd10, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  clips:
+  - {fileID: 8300000, guid: 333382788f19f5f49b62491cecb9dedd, type: 3}
+  volume: 0.75
+  volumeVariance: 0.1
+  pitch: 1
+  pitchVariance: 0.1
+  loop: 0
+  playOnAwake: 0
+  mixerGroup: {fileID: -5150181079327529033, guid: 6872fd114135b4f46bccacb6c64a5036,
+    type: 2}
 --- !u!1 &1929203176
 GameObject:
   m_ObjectHideFlags: 0
@@ -81167,6 +81311,11 @@ PrefabInstance:
       propertyPath: isReadable
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 751470854660745276, guid: 01f45093f0b34c440bce5af09331d4ed,
+        type: 3}
+      propertyPath: soundToPlayOnInteractAndDrop
+      value: 
+      objectReference: {fileID: 2243021715380610687}
     - target: {fileID: 6311565023123641959, guid: 01f45093f0b34c440bce5af09331d4ed,
         type: 3}
       propertyPath: m_LocalRotation.x
@@ -81219,6 +81368,33 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 01f45093f0b34c440bce5af09331d4ed, type: 3}
+--- !u!1 &2243021715380610686 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8916800527849580055, guid: 01f45093f0b34c440bce5af09331d4ed,
+    type: 3}
+  m_PrefabInstance: {fileID: 2243021715380610685}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &2243021715380610687
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2243021715380610686}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9b6d2cdd667f7204aabb934c567dcd10, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  clips:
+  - {fileID: 8300000, guid: a466aaa47c8ba4d458588663668f6c75, type: 3}
+  volume: 0.75
+  volumeVariance: 0.1
+  pitch: 1
+  pitchVariance: 0.1
+  loop: 0
+  playOnAwake: 0
+  mixerGroup: {fileID: 0}
 --- !u!65 &2433760730414969672
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -81596,8 +81772,40 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: -71.47699
       objectReference: {fileID: 0}
+    - target: {fileID: 6126113576797072332, guid: d8c9fa55774377a45b906f206a76302f,
+        type: 3}
+      propertyPath: soundToPlayOnInteractAndDrop
+      value: 
+      objectReference: {fileID: 3931425650989239336}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d8c9fa55774377a45b906f206a76302f, type: 3}
+--- !u!1 &3931425650989239335 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 388739622980061343, guid: d8c9fa55774377a45b906f206a76302f,
+    type: 3}
+  m_PrefabInstance: {fileID: 3931425650989239334}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &3931425650989239336
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3931425650989239335}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9b6d2cdd667f7204aabb934c567dcd10, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  clips:
+  - {fileID: 8300000, guid: a466aaa47c8ba4d458588663668f6c75, type: 3}
+  volume: 0.75
+  volumeVariance: 0.1
+  pitch: 1
+  pitchVariance: 0.1
+  loop: 0
+  playOnAwake: 0
+  mixerGroup: {fileID: 0}
 --- !u!1001 &4278125001794640444
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -86122,6 +86330,11 @@ PrefabInstance:
       propertyPath: handcuffRBLeft
       value: 
       objectReference: {fileID: 1570925971}
+    - target: {fileID: 9091610172024822989, guid: 85076c124396d6c42b9eba1f18be34be,
+        type: 3}
+      propertyPath: tryOpenSound
+      value: 
+      objectReference: {fileID: 9091610172420760933}
     - target: {fileID: 9091610172166694883, guid: 85076c124396d6c42b9eba1f18be34be,
         type: 3}
       propertyPath: handcuffRBRight
@@ -86132,6 +86345,11 @@ PrefabInstance:
       propertyPath: handcuffRBLeft
       value: 
       objectReference: {fileID: 1570925971}
+    - target: {fileID: 9091610172166694883, guid: 85076c124396d6c42b9eba1f18be34be,
+        type: 3}
+      propertyPath: tryOpenSound
+      value: 
+      objectReference: {fileID: 1929156017}
     - target: {fileID: 9091610171660544747, guid: 85076c124396d6c42b9eba1f18be34be,
         type: 3}
       propertyPath: m_LocalPosition.y
@@ -86184,3 +86402,31 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 85076c124396d6c42b9eba1f18be34be, type: 3}
+--- !u!1 &9091610172420760932 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 9091610172024822981, guid: 85076c124396d6c42b9eba1f18be34be,
+    type: 3}
+  m_PrefabInstance: {fileID: 9091610172420760931}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &9091610172420760933
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9091610172420760932}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9b6d2cdd667f7204aabb934c567dcd10, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  clips:
+  - {fileID: 8300000, guid: 333382788f19f5f49b62491cecb9dedd, type: 3}
+  volume: 0.75
+  volumeVariance: 0.1
+  pitch: 1
+  pitchVariance: 0.1
+  loop: 0
+  playOnAwake: 0
+  mixerGroup: {fileID: -5150181079327529033, guid: 6872fd114135b4f46bccacb6c64a5036,
+    type: 2}

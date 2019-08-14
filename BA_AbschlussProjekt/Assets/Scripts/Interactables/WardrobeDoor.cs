@@ -23,6 +23,8 @@ public class WardrobeDoor : HingedInteraction, ICombinable
     private Animation lockanimationToPlay;
     public bool open;
 
+    [SerializeField] Sound tryOpenSound;
+
     [SerializeField] Animator handcuffAnim;
     private bool wasHandcuffOpened = false;
 
@@ -126,6 +128,7 @@ public class WardrobeDoor : HingedInteraction, ICombinable
                 {
                     gameObject.transform.Rotate(0, -1, 0);
                     otherDoor.transform.Rotate(0, 1, 0);
+                    tryOpenSound.PlaySound(0);
                     yield return new WaitForFixedUpdate();
                 }
             }
@@ -134,6 +137,7 @@ public class WardrobeDoor : HingedInteraction, ICombinable
                 while (gameObject.transform.localEulerAngles.y < 90)
                 {
                     gameObject.transform.Rotate(0, 1, 0);
+                    tryOpenSound.PlaySound(0);
                     otherDoor.transform.Rotate(0, -1, 0);
                     yield return new WaitForFixedUpdate();
                 }
