@@ -14,7 +14,9 @@ public class WardrobeDoor : HingedInteraction, ICombinable
     [SerializeField]
     private Sound doorBreakOpenSound;
     [SerializeField]
-    private Rigidbody handcuffRB;
+    private Rigidbody handcuffRBRight;
+    [SerializeField]
+    private Rigidbody handcuffRBLeft;
     [SerializeField]
     private Sound unlockWithKeySound;
     [SerializeField]
@@ -28,7 +30,7 @@ public class WardrobeDoor : HingedInteraction, ICombinable
 
     private new void Awake()
     {
-        if(handcuffRB != null)
+        if(handcuffRBRight != null)
         {
             IsLocked = true;
         }
@@ -58,6 +60,14 @@ public class WardrobeDoor : HingedInteraction, ICombinable
         }
         else if (interactingComponent.name.Equals(wardrobeKeyName))
         {
+            Destroy(handcuffRBRight.GetComponent<HingeJoint>());
+            Destroy(handcuffRBLeft.GetComponent<HingeJoint>());
+            handcuffRBRight.transform.SetParent(null);
+            handcuffRBLeft.transform.SetParent(null);
+            handcuffRBRight.useGravity = true;
+            handcuffRBLeft.useGravity = true;
+            handcuffRBRight.isKinematic = false;
+            handcuffRBLeft.isKinematic = false;
             unlockWithKeySound?.PlaySound(0);
         }
         else    // if wrong combine object, don't execute code below
@@ -68,8 +78,6 @@ public class WardrobeDoor : HingedInteraction, ICombinable
         IsLocked = false;
         otherDoor.IsLocked = false;
 
-        if(wasHandcuffOpened == false)
-            handcuffAnim.SetTrigger("Unlock");
 
         //if (handcuffRB != null)
         //{

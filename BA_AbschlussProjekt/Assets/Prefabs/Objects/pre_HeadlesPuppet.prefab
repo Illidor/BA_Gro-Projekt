@@ -103,14 +103,14 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1401789745096168012}
-  m_LocalRotation: {x: -0.490707, y: -0.44719052, z: -0.5477255, w: 0.50914043}
-  m_LocalPosition: {x: 0.7442553, y: 1.0944734, z: 2.7294085}
+  m_LocalRotation: {x: -0.17453244, y: -0.19657938, z: 0.082540266, w: -0.9612919}
+  m_LocalPosition: {x: -14, y: -31.1, z: -2.1}
   m_LocalScale: {x: 99.99995, y: 100, z: 100.00002}
   m_Children:
   - {fileID: 1120704881863400173}
   m_Father: {fileID: 2626415834897035643}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 124.713005, z: -90.00001}
+  m_LocalEulerAnglesHint: {x: -201.593, y: -157.946, z: -185.559}
 --- !u!33 &7497470119523372140
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -118,7 +118,7 @@ MeshFilter:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1401789745096168012}
-  m_Mesh: {fileID: 4493585093827132993, guid: a9cac155763bc6948b7b41aa33bf5112, type: 3}
+  m_Mesh: {fileID: 5471305524036107442, guid: 63d55e330b875214996dee3b72eed14b, type: 3}
 --- !u!23 &454586854408047266
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -136,8 +136,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: e08d2606f451bef40870993195ab4f91, type: 2}
-  - {fileID: 2100000, guid: 45e46e5b6f47fe3449996f8d7c843610, type: 2}
+  - {fileID: 2100000, guid: f58d89878a5016c45b59265e50bd2c77, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -266,8 +265,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 9.16, y: 8.95, z: 35.27}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Size: {x: 23.502148, y: 20.768566, z: 58.95533}
+  m_Center: {x: -12.422005, y: 1.6761097, z: -17.738096}
 --- !u!114 &3132025257963474019
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -286,6 +285,7 @@ MonoBehaviour:
   minConditionToCarry: 0.5
   minConditionToPush: 3
   soundToPlayOnInteractAndDrop: {fileID: 8986503489306178156}
+  isReadable: 0
 --- !u!114 &8986503489306178156
 MonoBehaviour:
   m_ObjectHideFlags: 0

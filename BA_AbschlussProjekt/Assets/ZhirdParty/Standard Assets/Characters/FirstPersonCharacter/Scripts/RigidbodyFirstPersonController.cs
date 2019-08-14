@@ -87,6 +87,7 @@ namespace UnityStandardAssets.Characters.FirstPerson
 		[SerializeField] private Vector3 cameraCrouchPositionOffset = new Vector3(0f, -0.5f, 0);
 		[SerializeField] private CapsuleCollider standCollider;
 		[SerializeField] private CapsuleCollider crouchCollider;
+        private InteractionScript interactionScript;
 		private PlayerHealth playerHealth;
 
 		// used for saving before reducing the speed with health conditions
@@ -114,6 +115,7 @@ namespace UnityStandardAssets.Characters.FirstPerson
 			defaultCrouchSpeed = movementSettings.CrouchSpeed;
 
 			playerHealth = GetComponent<PlayerHealth>();
+            interactionScript = GetComponent<InteractionScript>();
 
             Invoke("defreezeMovement", 7f);
 
@@ -151,7 +153,22 @@ namespace UnityStandardAssets.Characters.FirstPerson
             //Check Hand -> Health Condition or Readeable
             if(cam.transform.eulerAngles.x >= mouseLook.MaximumX - 20f && cam.transform.eulerAngles.x < 180)
             {
-                playerAnimator.SetBool("LookAt", true);
+
+                if(interactionScript.UsedObject != null)
+                {
+                    if (interactionScript.UsedObject.GetComponent<GrabInteractable>().isReadable)
+                    {
+                        playerAnimator.SetBool("LookAt", true);
+                    }
+                    else
+                    {
+                        playerAnimator.SetBool("LookAt", false);
+                    }
+                }
+                else
+                {
+                    playerAnimator.SetBool("LookAt", true);
+                }
             }
             else
             {

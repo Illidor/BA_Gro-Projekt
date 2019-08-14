@@ -25,14 +25,14 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 734140370996911769}
-  m_LocalRotation: {x: 0.031588357, y: -0.7226705, z: 0.6902887, w: -0.015843721}
-  m_LocalPosition: {x: -0.39392924, y: 1.9832203, z: -1.9451162}
+  m_LocalRotation: {x: 0.2975595, y: -0.65961814, z: 0.6236622, w: -0.29564798}
+  m_LocalPosition: {x: -24.54, y: -2.89, z: 1.18}
   m_LocalScale: {x: 100, y: 100, z: 100}
   m_Children:
   - {fileID: 5140235500868460800}
   m_Father: {fileID: 7426084427557805916}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 85.345, y: -235.04, z: -56.317}
+  m_LocalEulerAnglesHint: {x: 40.302002, y: -266.44598, z: -86.617004}
 --- !u!33 &734140370996911773
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -168,7 +168,7 @@ GameObject:
   - component: {fileID: 5289846808529361299}
   - component: {fileID: 5373132329638337739}
   - component: {fileID: 5429263421354027294}
-  - component: {fileID: 7386288632318255905}
+  - component: {fileID: 2976532183381779965}
   m_Layer: 12
   m_Name: pre_painting_altar
   m_TagString: FixPoint
@@ -248,8 +248,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 36.46, y: 29, z: 2.2}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Size: {x: 38.256252, y: 34.615074, z: 2.9671865}
+  m_Center: {x: -23.966259, y: -1.4111837, z: 2.4616833}
 --- !u!54 &5429263421354027294
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -266,7 +266,7 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 3
---- !u!114 &7386288632318255905
+--- !u!114 &2976532183381779965
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -275,15 +275,16 @@ MonoBehaviour:
   m_GameObject: {fileID: 5860759445368368463}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d4b56e026f0ae3c44998aacf92db0e1c, type: 3}
+  m_Script: {fileID: 11500000, guid: 6cdabf5dcfaa4ff4481bff3e2b45042e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  <DisplayName>k__BackingField: Child drawing
+  <DisplayName>k__BackingField: Child Drawing
   conditionsTypeNeededToInteract: 0
   isBothHanded: 0
   minConditionToCarry: 0.5
   minConditionToPush: 3
   soundToPlayOnInteractAndDrop: {fileID: 0}
+  isReadable: 1
 --- !u!1001 &1336576930572358193
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -291,6 +292,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 734140370996911768}
     m_Modifications:
+    - target: {fileID: 6186170551374099250, guid: 0a84cd2bc60f3dc4da7447168960b976,
+        type: 3}
+      propertyPath: m_Name
+      value: IK
+      objectReference: {fileID: 0}
     - target: {fileID: 6186170551374099249, guid: 0a84cd2bc60f3dc4da7447168960b976,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -345,11 +351,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 239.40298
-      objectReference: {fileID: 0}
-    - target: {fileID: 6186170551374099250, guid: 0a84cd2bc60f3dc4da7447168960b976,
-        type: 3}
-      propertyPath: m_Name
-      value: IK
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0a84cd2bc60f3dc4da7447168960b976, type: 3}

@@ -25,14 +25,14 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1119596953079513504}
-  m_LocalRotation: {x: -0.0077480255, y: 0.9086891, z: 0.060946904, w: 0.41292825}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalRotation: {x: 0.0030583285, y: 0.66871315, z: -0.63447344, w: 0.38762972}
+  m_LocalPosition: {x: -21.34, y: -1.17, z: -6.64}
   m_LocalScale: {x: 99.999985, y: 99.99997, z: 99.99997}
   m_Children:
   - {fileID: 958607155308380251}
   m_Father: {fileID: 3248960814941470819}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: -6.728, y: -228.999, z: 2.092}
+  m_LocalEulerAnglesHint: {x: 58.313004, y: -281.601, z: -68.22401}
 --- !u!33 &1119596953079513532
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -171,8 +171,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 27.63, y: 6.7, z: 36.61}
-  m_Center: {x: -8.2153756e-10, y: -0.0065088756, z: -0.0011713882}
+  m_Size: {x: 31.07764, y: 33.140026, z: 9.9258375}
+  m_Center: {x: -21.702059, y: 0.9399729, z: -7.947415}
 --- !u!54 &6042786138150675966
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -207,6 +207,7 @@ MonoBehaviour:
   minConditionToCarry: 0.5
   minConditionToPush: 3
   soundToPlayOnInteractAndDrop: {fileID: 0}
+  isReadable: 0
 --- !u!1 &7883869028839200246
 GameObject:
   m_ObjectHideFlags: 0
@@ -291,6 +292,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1119596953079513505}
     m_Modifications:
+    - target: {fileID: 6186170551374099250, guid: 0a84cd2bc60f3dc4da7447168960b976,
+        type: 3}
+      propertyPath: m_Name
+      value: IK
+      objectReference: {fileID: 0}
     - target: {fileID: 6186170551374099249, guid: 0a84cd2bc60f3dc4da7447168960b976,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -345,11 +351,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 239.40298
-      objectReference: {fileID: 0}
-    - target: {fileID: 6186170551374099250, guid: 0a84cd2bc60f3dc4da7447168960b976,
-        type: 3}
-      propertyPath: m_Name
-      value: IK
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0a84cd2bc60f3dc4da7447168960b976, type: 3}

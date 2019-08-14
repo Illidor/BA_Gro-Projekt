@@ -24,6 +24,8 @@ public class GrabInteractable : BaseInteractable
     protected float minConditionToPush = 3;
     [SerializeField] [Tooltip("Will use the first in the list to play on interact and the second on drop. Will search on this gameobject if not provided.")]
     protected Sound soundToPlayOnInteractAndDrop;
+    [SerializeField]
+    public bool isReadable = false;
 
     protected new Rigidbody rigidbody;
     protected Rigidbody rigidbodyPulling;
@@ -99,7 +101,7 @@ public class GrabInteractable : BaseInteractable
 
         transform.SetParent(player.GrabingPoint.transform);
        
-        //transform.localPosition = Vector3.zero;
+        transform.localEulerAngles = new Vector3(-31,91,-64);
         rigidbody.isKinematic = true;
         player.SetCarriedObject(this);
         IsBeeingCarried = true;

@@ -4,28 +4,39 @@ using UnityEngine;
 
 public class Toolbox : BaseInteractable
 {
-    private bool used = false;
+    public bool used = false;
+
+    private Animation parentAnimaton;
+    [SerializeField]
+    private Toolbox brother;
+
 
     [SerializeField]
     private AnimationClip close;
     [SerializeField]
     private AnimationClip open;
 
+    private void Awake()
+    {
+        parentAnimaton = transform.parent.GetComponent<Animation>();
+    }
+
 
     public override bool CarryOutInteraction(InteractionScript player)
     {
-        if (!used)
+        if (!used && !brother.used)
         {
             used = true;
-            GetComponent<Animation>().clip = open;
-            GetComponent<Animation>().Play();
+            parentAnimaton.GetComponent<Animation>().clip = open;
+            parentAnimaton.GetComponent<Animation>().Play();
             return true;
         }
         else
         {
             used = false;
-            GetComponent<Animation>().clip = close;
-            GetComponent<Animation>().Play();
+            brother.used = false;
+            parentAnimaton.GetComponent<Animation>().clip = close;
+            parentAnimaton.GetComponent<Animation>().Play();
         }
 
         return false;
