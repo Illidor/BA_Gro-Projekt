@@ -99,7 +99,7 @@ public class GrabInteractable : BaseInteractable
 
         transform.SetParent(player.GrabingPoint.transform);
        
-        //transform.localPosition = Vector3.zero;
+        transform.localEulerAngles = new Vector3(-31,113,-9);
         rigidbody.isKinematic = true;
         player.SetCarriedObject(this);
         IsBeeingCarried = true;

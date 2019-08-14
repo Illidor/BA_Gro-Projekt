@@ -187,7 +187,9 @@ namespace UnityStandardAssets.Characters.FirstPerson
 				{
                     // always move along the camera forward as it is the direction that it being aimed at
                     Vector3 desiredMove = cam.transform.forward * input.y + cam.transform.right * input.x;
-					desiredMove = Vector3.ProjectOnPlane(desiredMove, m_GroundContactNormal).normalized;
+                    Vector3 ignorYVector = new Vector3(desiredMove.x, 0, desiredMove.z);
+                    ignorYVector.Normalize();
+					ignorYVector = Vector3.ProjectOnPlane(desiredMove, m_GroundContactNormal).normalized;
 
 					desiredMove.x = desiredMove.x * movementSettings.CurrentTargetSpeed;
 					desiredMove.z = desiredMove.z * movementSettings.CurrentTargetSpeed;
