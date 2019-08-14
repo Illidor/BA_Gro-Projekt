@@ -5,27 +5,35 @@ using UnityEngine;
 public class Toolbox : BaseInteractable
 {
     private bool used = false;
+    private GameObject parent;
 
     [SerializeField]
     private AnimationClip close;
     [SerializeField]
     private AnimationClip open;
 
+    private void Awake()
+    {
+        parent = gameObject.transform.parent.gameObject;
+
+        base.Awake();
+    }
 
     public override bool CarryOutInteraction(InteractionScript player)
     {
+
         if (!used)
         {
             used = true;
-            GetComponent<Animation>().clip = open;
-            GetComponent<Animation>().Play();
+            parent.gameObject.GetComponent<Animation>().clip = open;
+            parent.gameObject.GetComponent<Animation>().Play();
             return true;
         }
         else
         {
             used = false;
-            GetComponent<Animation>().clip = close;
-            GetComponent<Animation>().Play();
+            parent.gameObject.GetComponent<Animation>().clip = close;
+            parent.gameObject.GetComponent<Animation>().Play();
         }
 
         return false;
