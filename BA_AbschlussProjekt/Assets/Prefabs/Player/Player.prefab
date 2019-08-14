@@ -160,7 +160,7 @@ MonoBehaviour:
   HandIKLeft: {fileID: 0}
   HandIKRight: {fileID: 0}
   cR_isRunning: 0
-  rigidbodyFirstPersonController: {fileID: 0}
+  rigidbodyFirstPersonController: {fileID: 1927853336373100708}
 --- !u!114 &1927853336373100710
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1297,8 +1297,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4347394089484415424}
-  m_LocalRotation: {x: 0.59729904, y: -0.5231766, z: 0.4032539, w: -0.45486957}
-  m_LocalPosition: {x: 0.0062, y: 0.2132, z: 0.01}
+  m_LocalRotation: {x: 0.7484296, y: -0.6581666, z: 0.0560728, w: -0.05937784}
+  m_LocalPosition: {x: 0.0079, y: 0.2128, z: 0.0063}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4347394089774698046}
@@ -1308,7 +1308,7 @@ Transform:
   - {fileID: 4347394090095688354}
   m_Father: {fileID: 4347394090740196173}
   m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: -6.9750004, y: -254.75699, z: -92.23801}
+  m_LocalEulerAnglesHint: {x: -0.86300004, y: -189.32999, z: -97.273}
 --- !u!33 &4347394089484415432
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -1334,7 +1334,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 9128996845051859952, guid: f854066c9bf787e4393a95e182c61ab5, type: 3}
+  - {fileID: 2100000, guid: 935c585479256214aace36dad4b0ca99, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -2463,6 +2463,7 @@ Transform:
   - {fileID: 4347394090511116673}
   - {fileID: 90958466312534013}
   - {fileID: 3111899332912200440}
+  - {fileID: 195123236194000812}
   m_Father: {fileID: 1927853336373100707}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -4044,9 +4045,9 @@ SkinnedMeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 1f2cdcd5ad97e024b92f6ced1b373d5e, type: 2}
+  - {fileID: 2100000, guid: 3be270f08f0b34a40a93bac93cff3ada, type: 2}
   - {fileID: 2100000, guid: 0fcc8ca9d81931047b15876d65d53fef, type: 2}
-  - {fileID: 9128996845051859952, guid: f854066c9bf787e4393a95e182c61ab5, type: 3}
+  - {fileID: 2100000, guid: 935c585479256214aace36dad4b0ca99, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -5523,6 +5524,7 @@ MonoBehaviour:
   footstepSound: {fileID: 4347394089676000464}
   footstepSoundAttic: {fileID: 4347394090511116678}
   knockOnWoodSound: {fileID: 7309785791802906183}
+  climbLadderSound: {fileID: 5039627465904795097}
   dustPs: {fileID: 0}
   dustParticleSound: {fileID: 7408388860267555517}
 --- !u!1 &4347394090556119178
@@ -7708,6 +7710,59 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   clips:
   - {fileID: 8300000, guid: 8fc0fa89ce62d4340b380299117222a5, type: 3}
+  volume: 0.75
+  volumeVariance: 0.1
+  pitch: 1
+  pitchVariance: 0.1
+  loop: 0
+  playOnAwake: 0
+  mixerGroup: {fileID: -5150181079327529033, guid: 6872fd114135b4f46bccacb6c64a5036,
+    type: 2}
+--- !u!1 &8499301588743880160
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 195123236194000812}
+  - component: {fileID: 5039627465904795097}
+  m_Layer: 2
+  m_Name: ClimbLadderSound
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &195123236194000812
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8499301588743880160}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 1, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 4347394089817597246}
+  m_RootOrder: 7
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &5039627465904795097
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8499301588743880160}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9b6d2cdd667f7204aabb934c567dcd10, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  clips:
+  - {fileID: 8300000, guid: 82a36a29edf449842935a35a21fe3da9, type: 3}
   volume: 0.75
   volumeVariance: 0.1
   pitch: 1

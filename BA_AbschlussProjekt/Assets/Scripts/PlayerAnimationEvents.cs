@@ -17,6 +17,7 @@ public class PlayerAnimationEvents : MonoBehaviour
     [SerializeField] Sound footstepSound;
     [SerializeField] Sound footstepSoundAttic;
     [SerializeField] Sound knockOnWoodSound;
+    [SerializeField] Sound climbLadderSound;
 
     [SerializeField] ParticleSystem dustPs;
     [SerializeField] Sound dustParticleSound;
@@ -126,6 +127,11 @@ public class PlayerAnimationEvents : MonoBehaviour
     private void PlayCollapseSound()
     {
         //collapseSound.Play();
+    }
+
+    private void PlayLadderSound()
+    {
+        climbLadderSound.PlaySound(0);
     }
 
     private void SetAnimatorTrigger(string triggerName)
