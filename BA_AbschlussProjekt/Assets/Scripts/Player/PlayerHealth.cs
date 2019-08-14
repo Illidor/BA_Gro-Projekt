@@ -236,10 +236,13 @@ public class PlayerHealth : MonoBehaviour
     {
         PostProcessVolume postProcessVolume = mainCamera.GetComponent<PostProcessVolume>();
 
-        for (int i = 0; i < 60; i++)
+        float framecount = 180;
+
+
+        for (int i = 0; i < framecount; i++)
         {
             postProcessVolume.profile.TryGetSettings(out vignette);
-            vignette.intensity.value = (i / 60);
+            vignette.intensity.value = (i / framecount);
             yield return new WaitForEndOfFrame();
         }
 
