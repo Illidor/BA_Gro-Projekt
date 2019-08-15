@@ -23,6 +23,8 @@ public class MainMenueButtonScript : MonoBehaviour
     private MainMenueFunktions funktion;
     private TextMesh textMesh;
     private GameObject camera;
+    [SerializeField]
+    private GameObject loadingCanvas;
 
     [SerializeField]
     private AudioClip hoverSound;
@@ -33,6 +35,7 @@ public class MainMenueButtonScript : MonoBehaviour
     {
         textMesh = GetComponentInChildren<TextMesh>();
         camera = GameObject.Find("Camera");
+        loadingCanvas.SetActive(false);
 
         if (funktion == MainMenueFunktions.EnableRL)
         {
@@ -58,7 +61,8 @@ public class MainMenueButtonScript : MonoBehaviour
         switch (funktion)
         {
             case MainMenueFunktions.NewGame:
-                SceneManager.LoadScene(1);
+                loadingCanvas.SetActive(true);
+                SceneManager.LoadSceneAsync(1);
                 break;
             case MainMenueFunktions.EnableRL:
                 if (GetComponent<SavePathSelection>().enableRogueLike)
