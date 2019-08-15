@@ -73,7 +73,7 @@ public class Sound : MonoBehaviour
             if (sourceTwo == null) {
                 sourceTwo = gameObject.AddComponent<AudioSource>();
             }
-            source.volume = volume;
+            sourceTwo.volume = volume;
 
             if (index < clips.Count) {
                 sourceTwo.clip = clips[index];
