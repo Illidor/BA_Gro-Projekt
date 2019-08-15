@@ -85,6 +85,7 @@ public class ElectricBracelet : MonoBehaviour
                 break;
             case 5:
                 // Player Dead
+                screamSound.PlaySound(1);
                 heartBeatSound.PlaySound(0);
                 PlayerDied?.Invoke();
                 break;

@@ -9,7 +9,7 @@ public class Crutch : GrabInteractable
 
     [SerializeField] GameObject crutchChild;
 
-    protected override bool CarryOutInteraction_Carry(InteractionScript player)
+    public override bool CarryOutInteraction_Carry(InteractionScript player)
     {
         player.IncreaseReach(reachIncreaseOnCarry);
         GetComponent<Sound>().PlaySound(0);

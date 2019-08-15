@@ -21,7 +21,7 @@ public class FamilyPicture : GrabInteractable
         textToDisplayOnHover = "Click to pick up " + DisplayName;
     }
 
-    protected override bool CarryOutInteraction_Carry(InteractionScript player)
+    public override bool CarryOutInteraction_Carry(InteractionScript player)
     {
         base.CarryOutInteraction_Carry(player);
 

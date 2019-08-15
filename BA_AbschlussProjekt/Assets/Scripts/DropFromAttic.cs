@@ -9,6 +9,7 @@ public class DropFromAttic : MonoBehaviour
 
     [SerializeField] Sound impactSound;
     [SerializeField] Sound breakingBonesSound;
+    [SerializeField] Sound scream;
 
     private void OnTriggerEnter(Collider other)
     {
@@ -17,6 +18,7 @@ public class DropFromAttic : MonoBehaviour
             {
                 PlayerDroppedFromAttic?.Invoke();
                 impactSound.PlaySound(0);
+                scream.PlaySound(0);
             }
         }
     }

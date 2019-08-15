@@ -18,6 +18,7 @@ public class Altar : ConditionedInteraction
     private RigidbodyFirstPersonController rigidbodyFPSController;
     private Animator playerAnimator;
     [SerializeField] Transform rageAnimStartTransform;
+    [SerializeField] Transform prayAnimStartTransform;
 
     [Space]
     [SerializeField] Rigidbody candleOne;
@@ -103,10 +104,11 @@ public class Altar : ConditionedInteraction
 
             VoiceLines.instance.PlayDillenVoiceLine(14, 16f);
 
+            MovePlayerToAltar?.Invoke(prayAnimStartTransform);
+
             playerAnimator.SetTrigger("Pray");
             StartCoroutine(StopPrayingAnimation());
             CarryOutInteraction(player);
-            
         }
         else if (CTRLHub.SecondInteractDown && player.PlayerHealth.GetCondition(conditionsTypeNeededToInteract) > minCondition && isAltarDestroyed == false)
         {

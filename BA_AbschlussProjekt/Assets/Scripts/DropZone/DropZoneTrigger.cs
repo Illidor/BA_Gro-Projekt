@@ -12,6 +12,7 @@ public class DropZoneTrigger : MonoBehaviour
     [SerializeField] Sound breakingBones;
     [SerializeField] Sound bodyonfloor;
     [SerializeField] Sound heavyBreathing;
+    [SerializeField] Sound scream;
 
 
     [SerializeField] GameObject player;
@@ -70,6 +71,7 @@ public class DropZoneTrigger : MonoBehaviour
         breakingBones.PlaySound(0);
         bodyonfloor.PlaySound(0);
         plankInFace.PlaySound(0);
+        scream.PlaySound(0);
 
         yield return new WaitForSeconds(1.5f);
         heavyBreathing.PlaySound(0);

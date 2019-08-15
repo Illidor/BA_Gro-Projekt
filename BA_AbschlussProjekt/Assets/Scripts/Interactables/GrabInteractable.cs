@@ -90,7 +90,7 @@ public class GrabInteractable : BaseInteractable
     /// <summary>
     /// Carry out interaction carry
     /// </summary>
-    protected virtual bool CarryOutInteraction_Carry(InteractionScript player)
+    public virtual bool CarryOutInteraction_Carry(InteractionScript player)
     {
         //gameObject.layer = LayerMask.NameToLayer("NoPlayerCollision");
 
