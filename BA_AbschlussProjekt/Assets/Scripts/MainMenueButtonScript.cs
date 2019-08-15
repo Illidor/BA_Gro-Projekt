@@ -50,12 +50,12 @@ public class MainMenueButtonScript : MonoBehaviour
             case MainMenueFunktions.EnableRL:
                 if (GetComponent<SavePathSelection>().enableRogueLike)
                 {
-                    GetComponentInChildren<TextMesh>().text = "Rough-Like Disabled";
+                    GetComponentInChildren<TextMesh>().text = "Rogue-like Disabled";
                     GetComponent<SavePathSelection>().enableRogueLike = false;
                 }
                 else
                 {
-                    GetComponentInChildren<TextMesh>().text = "Rough-Like Enabled";
+                    GetComponentInChildren<TextMesh>().text = "Rogue-like Enabled";
                     GetComponent<SavePathSelection>().enableRogueLike = true;
                 }
                 break;
