@@ -4915,7 +4915,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   clips:
   - {fileID: 8300000, guid: 168b54bab72fac1488a4a7997e7c3c08, type: 3}
-  volume: 0.3
+  volume: 0.2
   volumeVariance: 0.1
   pitch: 1
   pitchVariance: 0.1
@@ -5201,6 +5201,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1567004738}
   - component: {fileID: 1567004739}
+  - component: {fileID: 268608830}
   m_Layer: 11
   m_Name: DontFallOffCollider
   m_TagString: Untagged
@@ -5230,11 +5231,26 @@ BoxCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1567004737}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1.0749364, y: 0.3748386, z: 0.041723322}
-  m_Center: {x: -0.08576697, y: 0.050223455, z: -0.08529301}
+  m_Size: {x: 0.55, y: 0.2, z: 0.5}
+  m_Center: {x: -0.1, y: 0, z: -0.5}
+--- !u!114 &268608830
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1567004737}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7fab08a040b1bef4fbbddbc1ae0fd229, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  player: {fileID: 0}
+  startPosition: {fileID: 126413372}
+  endPosition: {fileID: 583600554}
 --- !u!1 &1618613190
 GameObject:
   m_ObjectHideFlags: 0
@@ -5708,6 +5724,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -4097606831172343501, guid: 32b2b073c91f75f41b6f0aede74ea51e,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0.0000025044778
+      objectReference: {fileID: 0}
     - target: {fileID: -6057140222963153312, guid: 32b2b073c91f75f41b6f0aede74ea51e,
         type: 3}
       propertyPath: m_Controller
@@ -5723,6 +5744,11 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: 5110b39a8189b634d974e5e59c67ee2c, type: 2}
+    - target: {fileID: -6241631085261090234, guid: 32b2b073c91f75f41b6f0aede74ea51e,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 79.41425
+      objectReference: {fileID: 0}
     - target: {fileID: -8603192046388392900, guid: 32b2b073c91f75f41b6f0aede74ea51e,
         type: 3}
       propertyPath: m_Materials.Array.data[0]
