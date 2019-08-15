@@ -21335,6 +21335,7 @@ GameObject:
   - component: {fileID: 595747889}
   - component: {fileID: 595747892}
   - component: {fileID: 595747891}
+  - component: {fileID: 595747893}
   m_Layer: 0
   m_Name: PlayerDropCollider
   m_TagString: Untagged
@@ -21370,6 +21371,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   impactSound: {fileID: 595747891}
   breakingBonesSound: {fileID: 595747892}
+  scream: {fileID: 595747893}
 --- !u!65 &595747890
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -21419,6 +21421,27 @@ MonoBehaviour:
   clips:
   - {fileID: 8300000, guid: d13cf6197e1cfd0479be58b2b67fce99, type: 3}
   volume: 0.75
+  volumeVariance: 0.1
+  pitch: 1
+  pitchVariance: 0.1
+  loop: 0
+  playOnAwake: 0
+  mixerGroup: {fileID: 0}
+--- !u!114 &595747893
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 595747887}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9b6d2cdd667f7204aabb934c567dcd10, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  clips:
+  - {fileID: 8300000, guid: 230411e9767f6924aabffe011d5ff91d, type: 3}
+  volume: 1
   volumeVariance: 0.1
   pitch: 1
   pitchVariance: 0.1
