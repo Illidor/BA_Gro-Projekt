@@ -33,6 +33,13 @@ public class Picture : GrabInteractable
         textToDisplayOnHover = "Click to pick up " + DisplayName;
     }
 
+    public override bool CarryOutInteraction_Carry(InteractionScript player)
+    {
+        base.CarryOutInteraction_Carry(player);
+        transform.GetChild(0).GetChild(0).localEulerAngles = new Vector3(-45f, 48f, -1.7f);
+        return true;
+    }
+
     private void OnCollisionEnter(Collision other)
     {
         // Check for Physics Material            no idea what this comment means, maybe a todo? The code had nothing to do with physics materials... I'll leave it in just in case
