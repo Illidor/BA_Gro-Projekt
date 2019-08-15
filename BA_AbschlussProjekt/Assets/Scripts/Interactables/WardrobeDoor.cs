@@ -36,6 +36,10 @@ public class WardrobeDoor : HingedInteraction, ICombinable
         {
             IsLocked = true;
         }
+        else
+        {
+            IsLocked = false;
+        }
         open = false;
         base.Awake();
     }
@@ -122,13 +126,17 @@ public class WardrobeDoor : HingedInteraction, ICombinable
     {
         if (!open)
         {
+            open = !open;
+            otherDoor.GetComponent<WardrobeDoor>().open = open;
+
             if (gameObject.name == "mdl_wardrobe_door_right")
             {
-                while (gameObject.transform.localEulerAngles.y > 270)
+                while (gameObject.transform.localEulerAngles.y > 270 || gameObject.transform.localEulerAngles.y < 1)
                 {
+                    Debug.Log("Blah" + gameObject.transform.localEulerAngles);
                     gameObject.transform.Rotate(0, -1, 0);
                     otherDoor.transform.Rotate(0, 1, 0);
-                    tryOpenSound.PlaySound(0);
+                    tryOpenSound?.PlaySound(0);
                     yield return new WaitForFixedUpdate();
                 }
             }
@@ -137,18 +145,22 @@ public class WardrobeDoor : HingedInteraction, ICombinable
                 while (gameObject.transform.localEulerAngles.y < 90)
                 {
                     gameObject.transform.Rotate(0, 1, 0);
-                    tryOpenSound.PlaySound(0);
                     otherDoor.transform.Rotate(0, -1, 0);
+                    tryOpenSound?.PlaySound(0);
                     yield return new WaitForFixedUpdate();
                 }
             }
         }
         else
         {
+            open = !open;
+            otherDoor.GetComponent<WardrobeDoor>().open = open;
+
             if (gameObject.name == "mdl_wardrobe_door_right")
             {
-                while (gameObject.transform.localEulerAngles.y > 0)
+                while (gameObject.transform.localEulerAngles.y > 1)
                 {
+                    Debug.Log("Blah" + gameObject.transform.localEulerAngles);
                     gameObject.transform.Rotate(0, 1, 0);
                     otherDoor.transform.Rotate(0, -1, 0);
                     yield return new WaitForFixedUpdate();
@@ -156,7 +168,7 @@ public class WardrobeDoor : HingedInteraction, ICombinable
             }
             else
             {
-                while (gameObject.transform.localEulerAngles.y > 0)
+                while (gameObject.transform.localEulerAngles.y <= 91 && gameObject.transform.localEulerAngles.y > 1)
                 {
                     gameObject.transform.Rotate(0, -1, 0);
                     otherDoor.transform.Rotate(0, 1, 0);
@@ -165,8 +177,7 @@ public class WardrobeDoor : HingedInteraction, ICombinable
             }
         }
 
-        open = !open;
-        otherDoor.GetComponent<WardrobeDoor>().open = open;
+
         yield return new WaitForFixedUpdate();
     }
 }
