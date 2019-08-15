@@ -83,7 +83,8 @@ public class Altar : ConditionedInteraction
             rigidbodyFPSController.freezePlayerCamera = true;
             rigidbodyFPSController.freezePlayerMovement = true;
 
-            playerAnimator.SetBool("Pray", true);
+            playerAnimator.SetTrigger("Pray");
+            StartCoroutine(StopPrayingAnimation());
             CarryOutInteraction(player);
             
         }
@@ -93,10 +94,9 @@ public class Altar : ConditionedInteraction
         }
     }
 
-    public IEnumerator resetPraying(float time)
+    private IEnumerator StopPrayingAnimation()
     {
-
-        yield return new WaitForSeconds(time);
-        playerAnimator.SetBool("Pray", false);
+        yield return new WaitForSeconds(8f);
+        playerAnimator.SetTrigger("StopPraying");
     }
 }

@@ -639,7 +639,13 @@ AnimatorController:
     m_DefaultBool: 0
     m_Controller: {fileID: 0}
   - m_Name: Pray
-    m_Type: 4
+    m_Type: 9
+    m_DefaultFloat: 0
+    m_DefaultInt: 0
+    m_DefaultBool: 0
+    m_Controller: {fileID: 0}
+  - m_Name: StopPraying
+    m_Type: 9
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
@@ -984,7 +990,7 @@ AnimatorStateMachine:
     m_Position: {x: -110, y: 460, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -8295546714987137503}
-    m_Position: {x: -110, y: 40, z: 0}
+    m_Position: {x: -90, y: 40, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 6095070416642539155}
     m_Position: {x: -10, y: -230, z: 0}
@@ -1320,8 +1326,8 @@ AnimatorStateTransition:
   m_PrefabAsset: {fileID: 0}
   m_Name: 
   m_Conditions:
-  - m_ConditionMode: 2
-    m_ConditionEvent: Pray
+  - m_ConditionMode: 1
+    m_ConditionEvent: StopPraying
     m_EventTreshold: 0
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: -6388992882212741855}
@@ -1329,9 +1335,9 @@ AnimatorStateTransition:
   m_Mute: 0
   m_IsExit: 0
   serializedVersion: 3
-  m_TransitionDuration: 0.25
+  m_TransitionDuration: 1
   m_TransitionOffset: 0
-  m_ExitTime: 0.94957983
+  m_ExitTime: 1
   m_HasExitTime: 1
   m_HasFixedDuration: 1
   m_InterruptionSource: 0
