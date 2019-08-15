@@ -88,7 +88,6 @@ public class Altar : ConditionedInteraction
 
             VoiceLines.instance.PlayDillenVoiceLine(14, 16f);
 
-            playerAnimator.SetBool("Pray", true);
             playerAnimator.SetTrigger("Pray");
             StartCoroutine(StopPrayingAnimation());
             CarryOutInteraction(player);
@@ -96,6 +95,7 @@ public class Altar : ConditionedInteraction
         }
         else if (CTRLHub.SecondInteractDown && player.PlayerHealth.GetCondition(conditionsTypeNeededToInteract) > minCondition)
         {
+            playerAnimator.SetTrigger("Rage");
             CarryOutSecondInteract(player);
         }
     }
