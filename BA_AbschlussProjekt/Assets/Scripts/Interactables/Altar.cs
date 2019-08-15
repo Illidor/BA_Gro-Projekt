@@ -83,6 +83,12 @@ public class Altar : ConditionedInteraction
             rigidbodyFPSController.freezePlayerCamera = true;
             rigidbodyFPSController.freezePlayerMovement = true;
 
+            VoiceLines.instance.PlayVoiceLine(21, 0f);
+            VoiceLines.instance.PlayDillenVoiceLine(13, 7.2f);
+
+            VoiceLines.instance.PlayDillenVoiceLine(14, 16f);
+
+            playerAnimator.SetBool("Pray", true);
             playerAnimator.SetTrigger("Pray");
             StartCoroutine(StopPrayingAnimation());
             CarryOutInteraction(player);
