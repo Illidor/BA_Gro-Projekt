@@ -44,18 +44,12 @@ public class DropZoneTrigger : MonoBehaviour
         {
             isPictureCarried = false;
         }
-        
-        if(Input.GetKeyDown(KeyCode.L))
-        {
-            GetComponent<BoxCollider>().enabled = true;
-        }
     }
 
     private void OnTriggerEnter(Collider other)
     {
         if(other.CompareTag("Player") && !hasPlayerEntered && isPictureCarried)
         {
-            Debug.Log("playerCarriesPicture");
             hasPlayerEntered = true;
             StartCoroutine(PlayerDropping());
         }
