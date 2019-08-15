@@ -3,6 +3,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityStandardAssets.Characters.FirstPerson;
+
 
 public class HatchInteraction : BaseInteractable, ICombinable
 {
@@ -36,7 +38,10 @@ public class HatchInteraction : BaseInteractable, ICombinable
 
     private float timeOfLastKnock;
 
-    [SerializeField] Transform playerTargetPosition;
+    [SerializeField] Transform playerTargetPositionClimbUp;
+    [SerializeField] Transform playerTargetPositionClimbDown;
+
+    [SerializeField] RigidbodyFirstPersonController playerController;
 
     private void Start()
     {
@@ -73,7 +78,15 @@ public class HatchInteraction : BaseInteractable, ICombinable
 
     public override bool CarryOutInteraction(InteractionScript player)
     {
-        return HandleKnockLogicAndOpening();
+        if(!playerController.IsPlayerAtAttic)
+        {
+            return HandleKnockLogicAndOpening();
+        }
+        else
+        {
+            return HandleClimbDownAnimation();
+        }
+
     }
 
     private bool HandleKnockLogicAndOpening()
@@ -92,7 +105,7 @@ public class HatchInteraction : BaseInteractable, ICombinable
         //    return false;
         //}
 
-        PlayerAnimationEvents.instance.SnapPlayerToTargetPosition(playerTargetPosition);
+        PlayerAnimationEvents.instance.SnapPlayerToTargetPosition(playerTargetPositionClimbUp);
         PlayerAnimationEvents.instance.PlayAnimation("OpenAtticWithCrutch");
         PlayCrutchAnim?.Invoke();
 
@@ -100,6 +113,14 @@ public class HatchInteraction : BaseInteractable, ICombinable
             return false;
 
         Invoke("OpenHatch", 3f);
+
+        return true;
+    }
+
+    private bool HandleClimbDownAnimation()
+    {
+        PlayerAnimationEvents.instance.SnapPlayerToTargetPosition(playerTargetPositionClimbDown);
+        PlayerAnimationEvents.instance.PlayAnimation("ClimbDownLadder");
 
         return true;
     }
