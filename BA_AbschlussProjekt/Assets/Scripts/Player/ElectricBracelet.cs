@@ -93,7 +93,7 @@ public class ElectricBracelet : MonoBehaviour
 
     private void InstantDeathShock()
     {
-        shockCount = 4;
+        shockCount = 3;
         GetShockDamage();
 
         for (int i = 0; i < braceletLamps.Length; i++)
@@ -101,6 +101,12 @@ public class ElectricBracelet : MonoBehaviour
             braceletLamps[i].material = disabledLampMaterial;
         }
 
+        StartCoroutine(DelayDeath());
+    }
+
+    private IEnumerator DelayDeath()
+    {
+        yield return new WaitForSeconds(1f);
         PlayerDied?.Invoke();
     }
 

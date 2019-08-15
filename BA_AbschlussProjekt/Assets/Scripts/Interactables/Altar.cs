@@ -24,6 +24,7 @@ public class Altar : ConditionedInteraction
     [SerializeField] Rigidbody candleTwo;
     [SerializeField] GameObject woodStand;
     [SerializeField] Rigidbody drawing;
+    [SerializeField] Rigidbody picture;
 
     private int refusingCounter = 0;
     private bool hasPrayed = false;
@@ -122,10 +123,16 @@ public class Altar : ConditionedInteraction
     private void DestroyAltar()
     {
         candleOne.AddForce((Vector3.right + Vector3.up / 2f) * 6f, ForceMode.Impulse);
-        candleTwo.AddForce((Vector3.right + Vector3.up / 2f) * 6f, ForceMode.Impulse);
+
+        picture.isKinematic = false;
+        picture.AddForce((Vector3.right + Vector3.up / 3f) * 6f, ForceMode.Impulse);
+
         Rigidbody woodStandRb = woodStand.AddComponent<Rigidbody>();
         woodStandRb.useGravity = true;
         woodStandRb.AddForce((Vector3.right + Vector3.up / 3f) * 6f, ForceMode.Impulse);
+
+        candleTwo.AddForce((Vector3.right + Vector3.up / 2f) * 6f, ForceMode.Impulse);
+
         drawing.isKinematic = false;
         drawing.useGravity = true;
         drawing.AddForce((Vector3.right + Vector3.up / 2f) * 6f, ForceMode.Impulse);
