@@ -188,11 +188,13 @@ public class PlayerAnimationEvents : MonoBehaviour
     {
         ExitDoor.OpenDoorAnim += SetAnimatorTrigger;
         LadderInteraction.ClimbLadder += ChangeAtticState;
+        HatchLever.UseLeverAnimation += SetAnimatorTrigger;
     }
 
     private void OnDisable()
     {
         ExitDoor.OpenDoorAnim -= SetAnimatorTrigger;
         LadderInteraction.ClimbLadder -= ChangeAtticState;
+        HatchLever.UseLeverAnimation -= SetAnimatorTrigger;
     }
 }

@@ -291,7 +291,7 @@ public class InteractionScript : MonoBehaviour
     {
         UsedObject = objectToCarry;
         UsedObjectName = objectToCarry.gameObject.name;
-        Debug.Log(objectToCarry.gameObject.name);
+        //Debug.Log(objectToCarry.gameObject.name);
         IsCarrying = true;
         IsPushing = false;
     }
@@ -306,7 +306,6 @@ public class InteractionScript : MonoBehaviour
 
     public void StopUsingObject()
     {
-        Debug.Log("asdasda");
         //animator.ResetTrigger("Grab");
         UsedObject = null;
         UsedObjectName = null;
