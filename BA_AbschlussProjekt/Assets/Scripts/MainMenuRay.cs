@@ -40,15 +40,16 @@ public class MainMenuRay : MonoBehaviour
                 if (lastButton == null)
                 {
                     lastButton = newButton;
-                    lastButton.ChangeColor(false);
+                    lastButton.ChangeColor(true);
                 }
                 else if (lastButton != newButton)
                 {
                     lastButton.ChangeColor(false);
                     lastButton = newButton;
+                    lastButton.ChangeColor(true);
                 }
 
-                lastButton.ChangeColor(true);
+                //lastButton.ChangeColor(true);
 
                 if (Input.GetMouseButtonDown(0))
                 {
