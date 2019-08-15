@@ -27,6 +27,11 @@ public class Altar : ConditionedInteraction
     [SerializeField] Rigidbody drawing;
     [SerializeField] Rigidbody picture;
 
+    [Space]
+    [SerializeField] Sound destroyAltarSoundOne;
+    [SerializeField] Sound destroyAltarSoundTwo;
+    [SerializeField] Sound destroyAltarSoundThree;
+
     private Transform playerTrans;
 
     private int refusingCounter = 0;
@@ -128,6 +133,10 @@ public class Altar : ConditionedInteraction
 
     private void DestroyAltar()
     {
+        destroyAltarSoundOne.PlaySound(0);
+        destroyAltarSoundTwo.PlaySound(0);
+        destroyAltarSoundThree.PlaySound(0);
+
         candleOne.AddForce((Vector3.right + Vector3.up / 2f) * 6f, ForceMode.Impulse);
 
         picture.isKinematic = false;
