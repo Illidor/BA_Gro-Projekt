@@ -24,6 +24,12 @@ public class MainMenuRay : MonoBehaviour
         camera = GetComponent<Camera>();
     }
 
+    private void Start()
+    {
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
+    }
+
     private void Update()
     {
         RaycastHit hit;

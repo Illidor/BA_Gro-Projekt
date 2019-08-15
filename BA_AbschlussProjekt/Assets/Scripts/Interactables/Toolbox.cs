@@ -16,6 +16,9 @@ public class Toolbox : BaseInteractable
     [SerializeField]
     private AnimationClip open;
 
+    [SerializeField] Sound openSound;
+    [SerializeField] Sound closeSound;
+
     private void Awake()
     {
         parentAnimaton = transform.parent.GetComponent<Animation>();
@@ -29,6 +32,7 @@ public class Toolbox : BaseInteractable
             used = true;
             parentAnimaton.GetComponent<Animation>().clip = open;
             parentAnimaton.GetComponent<Animation>().Play();
+            openSound.PlaySound(0);
             return true;
         }
         else
@@ -37,6 +41,7 @@ public class Toolbox : BaseInteractable
             brother.used = false;
             parentAnimaton.GetComponent<Animation>().clip = close;
             parentAnimaton.GetComponent<Animation>().Play();
+            closeSound.PlaySound(0);
         }
 
         return false;
