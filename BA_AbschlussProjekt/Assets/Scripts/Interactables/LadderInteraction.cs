@@ -188,7 +188,7 @@ public class LadderInteraction : ConditionedInteraction
     {
         PlayerAnimationEvents.instance.PlayAnimation("ClimbLadder");
         PlayerAnimationEvents.instance.SnapPlayerToTargetPosition(playerTargetPosition);
-
+        BackgroundMusicController.instance.ChangeMusic(1);
         ClimbLadder?.Invoke(true);
 
 

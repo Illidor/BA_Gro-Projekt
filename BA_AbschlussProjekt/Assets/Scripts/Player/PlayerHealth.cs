@@ -249,6 +249,7 @@ public class PlayerHealth : MonoBehaviour
         mainCamera.enabled = false;
         monitorRoomCamera.enabled = true;
         PlayerDied?.Invoke();
+        VoiceLines.instance.PlayDillenVoiceLine(15, 1f);
         yield return new WaitForEndOfFrame();
     }
 

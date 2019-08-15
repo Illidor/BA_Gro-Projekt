@@ -11,6 +11,8 @@ public class VoiceLineTrigger : MonoBehaviour
 
     public bool decideBetweenVoicelines = false;
 
+    public bool isDillenVoiceLine = false;
+
     private void Start()
     {
         if(decideBetweenVoicelines)
@@ -26,7 +28,10 @@ public class VoiceLineTrigger : MonoBehaviour
     {
         if(other.CompareTag("Player"))
         {
-            VoiceLines.instance.PlayVoiceLine(index, delay);
+            if (!isDillenVoiceLine)
+                VoiceLines.instance.PlayVoiceLine(index, delay);
+            else
+                VoiceLines.instance.PlayDillenVoiceLine(index, delay);
             Destroy(gameObject);
         }
     }
