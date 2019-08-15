@@ -27,6 +27,13 @@ public class Altar : ConditionedInteraction
     [SerializeField] Rigidbody drawing;
     [SerializeField] Rigidbody picture;
 
+    [Space]
+    [SerializeField] Sound destroyAltarSoundOne;
+    [SerializeField] Sound destroyAltarSoundTwo;
+    [SerializeField] Sound destroyAltarSoundThree;
+
+    private Transform playerTrans;
+
     private int refusingCounter = 0;
     private bool hasPrayed = false;
     private bool isAltarDestroyed = false;
@@ -37,6 +44,7 @@ public class Altar : ConditionedInteraction
             pictureInteraction = GetComponentInChildren<PictureInteraction>();
 
         rigidbodyFPSController = GameObject.Find("Player").GetComponent<RigidbodyFirstPersonController>();
+        playerTrans = GameObject.Find("Player").transform;
         playerAnimator = rigidbodyFPSController.gameObject.GetComponentInChildren<Animator>();
 
         base.Awake();
@@ -105,6 +113,7 @@ public class Altar : ConditionedInteraction
             VoiceLines.instance.PlayDillenVoiceLine(14, 16f);
 
             MovePlayerToAltar?.Invoke(prayAnimStartTransform);
+            playerTrans.eulerAngles = new Vector3(playerTrans.eulerAngles.x, 0f, playerTrans.eulerAngles.z);
 
             playerAnimator.SetTrigger("Pray");
             StartCoroutine(StopPrayingAnimation());
@@ -124,6 +133,10 @@ public class Altar : ConditionedInteraction
 
     private void DestroyAltar()
     {
+        destroyAltarSoundOne.PlaySound(0);
+        destroyAltarSoundTwo.PlaySound(0);
+        destroyAltarSoundThree.PlaySound(0);
+
         candleOne.AddForce((Vector3.right + Vector3.up / 2f) * 6f, ForceMode.Impulse);
 
         picture.isKinematic = false;
