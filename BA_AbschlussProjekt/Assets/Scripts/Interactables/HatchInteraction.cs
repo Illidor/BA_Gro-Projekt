@@ -78,6 +78,8 @@ public class HatchInteraction : BaseInteractable, ICombinable
 
     public override bool CarryOutInteraction(InteractionScript player)
     {
+        Debug.Log("carryoutinteraction");
+
         if(!playerController.IsPlayerAtAttic)
         {
             return HandleKnockLogicAndOpening();
@@ -120,7 +122,7 @@ public class HatchInteraction : BaseInteractable, ICombinable
     private bool HandleClimbDownAnimation()
     {
         PlayerAnimationEvents.instance.SnapPlayerToTargetPosition(playerTargetPositionClimbDown);
-        PlayerAnimationEvents.instance.PlayAnimation("ClimbDownLadder");
+        PlayerAnimationEvents.instance.PlayAnimation("ClimbLadderDown");
 
         return true;
     }
