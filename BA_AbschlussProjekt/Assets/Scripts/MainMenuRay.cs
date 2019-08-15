@@ -62,8 +62,10 @@ public class MainMenuRay : MonoBehaviour
                 {
                     lastButton.ChangeColor(false);
                 }
-            }
+                lastButton = null;
+            }        
         }
+
 
 
         if (isOnMainPos && (gameObject.transform.position - mainPos.transform.position).sqrMagnitude > 0.2f)
