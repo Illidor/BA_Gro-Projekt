@@ -27,6 +27,8 @@ public class Altar : ConditionedInteraction
     [SerializeField] Rigidbody drawing;
     [SerializeField] Rigidbody picture;
 
+    private Transform playerTrans;
+
     private int refusingCounter = 0;
     private bool hasPrayed = false;
     private bool isAltarDestroyed = false;
@@ -37,6 +39,7 @@ public class Altar : ConditionedInteraction
             pictureInteraction = GetComponentInChildren<PictureInteraction>();
 
         rigidbodyFPSController = GameObject.Find("Player").GetComponent<RigidbodyFirstPersonController>();
+        playerTrans = GameObject.Find("Player").transform;
         playerAnimator = rigidbodyFPSController.gameObject.GetComponentInChildren<Animator>();
 
         base.Awake();
@@ -105,6 +108,7 @@ public class Altar : ConditionedInteraction
             VoiceLines.instance.PlayDillenVoiceLine(14, 16f);
 
             MovePlayerToAltar?.Invoke(prayAnimStartTransform);
+            playerTrans.eulerAngles = new Vector3(playerTrans.eulerAngles.x, 0f, playerTrans.eulerAngles.z);
 
             playerAnimator.SetTrigger("Pray");
             StartCoroutine(StopPrayingAnimation());
