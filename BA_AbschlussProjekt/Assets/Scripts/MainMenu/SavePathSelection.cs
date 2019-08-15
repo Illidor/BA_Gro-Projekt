@@ -6,34 +6,13 @@ using UnityEngine.SceneManagement;
 
 public class SavePathSelection : MonoBehaviour
 {
-    [SerializeField] Toggle toggle;
-
-    private bool enableRogueLike = false;
+    public bool enableRogueLike = false;
 
     private GameObject levelGameObject;
 
     private void Awake()
     {
         DontDestroyOnLoad(gameObject);
-    }
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        if(toggle.isOn)
-        {
-            enableRogueLike = true;
-        }
-        else
-        {
-            enableRogueLike = false;
-        }
     }
 
     private void OnLevelFinishedLoading(Scene scene, LoadSceneMode loadSceneMode)
