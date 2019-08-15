@@ -2,9 +2,12 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class HatchLever : BaseInteractable, ICombinable
 {
+    public static event UnityAction<string> UseLeverAnimation;
+
     [SerializeField]
     private HatchInteraction hatch;
     [SerializeField]
@@ -85,12 +88,11 @@ public class HatchLever : BaseInteractable, ICombinable
         }
         else
         {
-            hinge.transform.localRotation = Quaternion.Euler(hinge.limits.max, 0, 0);
-
             if (!alreadyOpend)
             {
-                hatch.OpenHatch();
                 alreadyOpend = true;
+                UseLeverAnimation?.Invoke("GrabMid");
+                StartCoroutine(DelayHatchUseage());
             }
         }
 
@@ -101,7 +103,12 @@ public class HatchLever : BaseInteractable, ICombinable
         return true;
     }
 
-
+    private IEnumerator DelayHatchUseage()
+    {
+        yield return new WaitForSeconds(0.25f);
+        hinge.transform.localRotation = Quaternion.Euler(hinge.limits.max, 0, 0);
+        hatch.OpenHatch();
+    }
 
     [Serializable]
     private class LevelCombinatables
