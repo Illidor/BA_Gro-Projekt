@@ -22,26 +22,39 @@ public class MainMenueButtonScript : MonoBehaviour
     [SerializeField]
     private MainMenueFunktions funktion;
     private TextMesh textMesh;
+    private GameObject camera;
+
+    [SerializeField]
+    private AudioClip hoverSound;
+    [SerializeField]
+    private AudioClip clickSound;
 
     private void Awake()
     {
-        textMesh = GetComponentInChildren<TextMesh>();     
-        
-        if(funktion == MainMenueFunktions.EnableRL)
+        textMesh = GetComponentInChildren<TextMesh>();
+        camera = GameObject.Find("Camera");
+
+        if (funktion == MainMenueFunktions.EnableRL)
         {
             if (!GetComponent<SavePathSelection>().enableRogueLike)
             {
-                GetComponentInChildren<TextMesh>().text = "Rough-Like Disabled";
+                GetComponentInChildren<TextMesh>().text = "Rogue-like Disabled";
             }
             else
             {
-                GetComponentInChildren<TextMesh>().text = "Rough-Like Enabled";
+                GetComponentInChildren<TextMesh>().text = "Rogue-like Enabled";
             }
         }
     }
 
     public void buttonClicked()
     {
+        if (camera.GetComponent<AudioSource>().isPlaying)
+        {
+            camera.GetComponent<AudioSource>().Stop();
+        }
+        camera.GetComponent<AudioSource>().clip = clickSound;
+        camera.GetComponent<AudioSource>().Play();
         switch (funktion)
         {
             case MainMenueFunktions.NewGame:
@@ -60,10 +73,10 @@ public class MainMenueButtonScript : MonoBehaviour
                 }
                 break;
             case MainMenueFunktions.Controlls:
-                GameObject.Find("Camera").GetComponent<MainMenuRay>().moveToControls(true);
+                camera.GetComponent<MainMenuRay>().moveToControls(true);
                 break;
             case MainMenueFunktions.Back:
-                GameObject.Find("Camera").GetComponent<MainMenuRay>().moveToControls(false);
+                camera.GetComponent<MainMenuRay>().moveToControls(false);
                 break;
             default:
                 break;
@@ -81,7 +94,12 @@ public class MainMenueButtonScript : MonoBehaviour
         else
         {
             textMesh.color = highlightColor;
-
+            if (camera.GetComponent<AudioSource>().isPlaying)
+            {
+                camera.GetComponent<AudioSource>().Stop();
+            }
+            camera.GetComponent<AudioSource>().clip = hoverSound;
+            camera.GetComponent<AudioSource>().Play();
         }
     }
 }

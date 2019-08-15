@@ -24340,15 +24340,15 @@ RectTransform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 626248770}
   m_LocalRotation: {x: 0.00058110396, y: 0.002399243, z: -0.9999952, w: -0.0018945711}
-  m_LocalPosition: {x: 0, y: 0, z: 0.003000026}
-  m_LocalScale: {x: 129.9347, y: 175.21292, z: 129.64235}
+  m_LocalPosition: {x: 0, y: 0, z: 0.003}
+  m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
   m_Children: []
   m_Father: {fileID: 2797510868576399724}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0.275, y: -0.067, z: -180.217}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0.062000357, y: -0.011999921}
+  m_AnchoredPosition: {x: 0.061, y: 0.002}
   m_SizeDelta: {x: 10, y: 10}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!102 &626248772
@@ -24361,15 +24361,15 @@ TextMesh:
   m_GameObject: {fileID: 626248770}
   m_Text: Controls
   m_OffsetZ: 0
-  m_CharacterSize: 0.0005
+  m_CharacterSize: 0.03
   m_LineSpacing: 1
   m_Anchor: 4
   m_Alignment: 1
   m_TabSize: 0
-  m_FontSize: 14
-  m_FontStyle: 1
+  m_FontSize: 89
+  m_FontStyle: 0
   m_RichText: 1
-  m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
+  m_Font: {fileID: 12800000, guid: f9c530bf24737634b91134de7649db3a, type: 3}
   m_Color:
     serializedVersion: 2
     rgba: 4294967295
@@ -24390,7 +24390,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10100, guid: 0000000000000000e000000000000000, type: 0}
+  - {fileID: 2100000, guid: f9c530bf24737634b91134de7649db3a, type: 3}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -27973,14 +27973,14 @@ RectTransform:
   m_GameObject: {fileID: 710603054}
   m_LocalRotation: {x: -0.0023989337, y: 0.00058261707, z: -0.0025246113, w: 0.9999938}
   m_LocalPosition: {x: 0, y: 0, z: -0.00052}
-  m_LocalScale: {x: 1.0980814, y: 1.4154152, z: 1.9533312}
+  m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
   m_Children: []
   m_Father: {fileID: 4526544842169965051}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: -0.275, y: 0.067, z: -0.289}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0.00015, y: -0.00004}
+  m_AnchoredPosition: {x: 0.00014, y: -0.00011}
   m_SizeDelta: {x: 10, y: 10}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!102 &710603056
@@ -27998,10 +27998,10 @@ TextMesh:
   m_Anchor: 4
   m_Alignment: 1
   m_TabSize: 0
-  m_FontSize: 9
-  m_FontStyle: 1
+  m_FontSize: 26
+  m_FontStyle: 0
   m_RichText: 1
-  m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
+  m_Font: {fileID: 12800000, guid: f9c530bf24737634b91134de7649db3a, type: 3}
   m_Color:
     serializedVersion: 2
     rgba: 4294967295
@@ -28022,7 +28022,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10100, guid: 0000000000000000e000000000000000, type: 0}
+  - {fileID: 2100000, guid: f9c530bf24737634b91134de7649db3a, type: 3}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -31077,6 +31077,7 @@ GameObject:
   - component: {fileID: 812285690}
   - component: {fileID: 812285689}
   - component: {fileID: 812285692}
+  - component: {fileID: 812285693}
   m_Layer: 0
   m_Name: Camera
   m_TagString: Untagged
@@ -31143,7 +31144,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 812285688}
   m_LocalRotation: {x: 0.05835989, y: 0.02034883, z: -0.005906882, w: 0.9980708}
-  m_LocalPosition: {x: -0.03281273, y: 2.367097, z: -1.105711}
+  m_LocalPosition: {x: -0.133, y: 2.367097, z: -1.105711}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -31164,6 +31165,102 @@ MonoBehaviour:
   moveSpeed: 4
   mainPos: {fileID: 1192018920}
   controlsPos: {fileID: 718616079}
+--- !u!82 &812285693
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 812285688}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 0}
+  m_PlayOnAwake: 1
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!1 &812940286
 GameObject:
   m_ObjectHideFlags: 0
@@ -40700,15 +40797,15 @@ RectTransform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1069681486}
   m_LocalRotation: {x: 0.0006132486, y: 0.0023912934, z: -0.9998797, w: -0.015313765}
-  m_LocalPosition: {x: 0, y: 0, z: -0.0008799987}
-  m_LocalScale: {x: 1.8385625, y: 1.2567269, z: 1.0350081}
+  m_LocalPosition: {x: 0, y: 0, z: -0.00019}
+  m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
   m_Children: []
   m_Father: {fileID: 385922805348389526}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0.273, y: -0.074, z: -181.75499}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -0.00023031235, y: -0.00039225817}
+  m_AnchoredPosition: {x: -0.000284, y: -0.000159}
   m_SizeDelta: {x: 10, y: 10}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!102 &1069681488
@@ -40726,10 +40823,10 @@ TextMesh:
   m_Anchor: 4
   m_Alignment: 1
   m_TabSize: 0
-  m_FontSize: 19
-  m_FontStyle: 1
+  m_FontSize: 52
+  m_FontStyle: 0
   m_RichText: 1
-  m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
+  m_Font: {fileID: 12800000, guid: f9c530bf24737634b91134de7649db3a, type: 3}
   m_Color:
     serializedVersion: 2
     rgba: 4294967295
@@ -40750,7 +40847,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10100, guid: 0000000000000000e000000000000000, type: 0}
+  - {fileID: 2100000, guid: f9c530bf24737634b91134de7649db3a, type: 3}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -44559,7 +44656,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1192018920}
   m_LocalRotation: {x: 0.05835989, y: 0.02034883, z: -0.005906882, w: 0.9980708}
-  m_LocalPosition: {x: -0.03281273, y: 2.367097, z: -1.105711}
+  m_LocalPosition: {x: -0.133, y: 2.367097, z: -1.105711}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -46193,6 +46290,8 @@ MonoBehaviour:
   normalColor: {r: 1, g: 1, b: 1, a: 1}
   highlightColor: {r: 0.5660378, g: 0.5660378, b: 0.5660378, a: 0.49019608}
   funktion: 0
+  hoverSound: {fileID: 8300000, guid: daeea4f0d6f188f45b63203b4e51788a, type: 3}
+  clickSound: {fileID: 8300000, guid: f943f9399eb7a614bb9818678d719518, type: 3}
 --- !u!1001 &1232182818
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -75402,14 +75501,14 @@ RectTransform:
   m_GameObject: {fileID: 2039112726}
   m_LocalRotation: {x: -0.002373601, y: 0.0006784822, z: -0.042682003, w: 0.9990857}
   m_LocalPosition: {x: 0, y: 0, z: -0.0003}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
   m_Children: []
   m_Father: {fileID: 4215233953357908064}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: -0.268, y: 0.089, z: -4.893}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -0.00007, y: -0.00024}
+  m_AnchoredPosition: {x: -0.00007, y: -0.00044}
   m_SizeDelta: {x: 10, y: 10}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!102 &2039112728
@@ -75427,10 +75526,10 @@ TextMesh:
   m_Anchor: 4
   m_Alignment: 1
   m_TabSize: 0
-  m_FontSize: 20
-  m_FontStyle: 1
+  m_FontSize: 41
+  m_FontStyle: 0
   m_RichText: 1
-  m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
+  m_Font: {fileID: 12800000, guid: f9c530bf24737634b91134de7649db3a, type: 3}
   m_Color:
     serializedVersion: 2
     rgba: 4294967295
@@ -75451,7 +75550,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10100, guid: 0000000000000000e000000000000000, type: 0}
+  - {fileID: 2100000, guid: f9c530bf24737634b91134de7649db3a, type: 3}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -83110,6 +83209,8 @@ MonoBehaviour:
   normalColor: {r: 1, g: 1, b: 1, a: 1}
   highlightColor: {r: 0.5660378, g: 0.5660378, b: 0.5660378, a: 0.49019608}
   funktion: 1
+  hoverSound: {fileID: 8300000, guid: daeea4f0d6f188f45b63203b4e51788a, type: 3}
+  clickSound: {fileID: 8300000, guid: a4a6169552ae42f4196326b3c5bbe637, type: 3}
 --- !u!33 &620284013081804644
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -86822,6 +86923,8 @@ MonoBehaviour:
   normalColor: {r: 1, g: 1, b: 1, a: 1}
   highlightColor: {r: 0.5660378, g: 0.5660378, b: 0.5660378, a: 0.49019608}
   funktion: 2
+  hoverSound: {fileID: 8300000, guid: daeea4f0d6f188f45b63203b4e51788a, type: 3}
+  clickSound: {fileID: 8300000, guid: a4a6169552ae42f4196326b3c5bbe637, type: 3}
 --- !u!65 &1191651289643910017
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -97055,6 +97158,8 @@ MonoBehaviour:
   normalColor: {r: 1, g: 1, b: 1, a: 1}
   highlightColor: {r: 0.5660378, g: 0.5660378, b: 0.5660378, a: 0.49019608}
   funktion: 3
+  hoverSound: {fileID: 8300000, guid: daeea4f0d6f188f45b63203b4e51788a, type: 3}
+  clickSound: {fileID: 8300000, guid: a4a6169552ae42f4196326b3c5bbe637, type: 3}
 --- !u!65 &3675020204977791111
 BoxCollider:
   m_ObjectHideFlags: 0
