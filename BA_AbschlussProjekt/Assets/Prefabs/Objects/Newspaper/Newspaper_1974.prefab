@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 6707544462235122653}
   - component: {fileID: 4052816739755556363}
   - component: {fileID: 6126113576797072332}
+  - component: {fileID: 3931425650989239336}
   m_Layer: 8
   m_Name: Newspaper_1974
   m_TagString: Untagged
@@ -26,7 +27,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 388739622980061343}
-  m_LocalRotation: {x: 0.5982118, y: -0.056051206, z: 0.48379537, w: 0.6363512}
+  m_LocalRotation: {x: 0.5982123, y: -0.056050815, z: 0.4837922, w: 0.63635325}
   m_LocalPosition: {x: -9.8569, y: 0.2085, z: -2.1294444}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -62,7 +63,7 @@ Rigidbody:
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 0
-  m_CollisionDetection: 0
+  m_CollisionDetection: 2
 --- !u!114 &6126113576797072332
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -80,8 +81,29 @@ MonoBehaviour:
   isBothHanded: 0
   minConditionToCarry: 0.5
   minConditionToPush: 3
-  soundToPlayOnInteractAndDrop: {fileID: 0}
+  soundToPlayOnInteractAndDrop: {fileID: 3931425650989239336}
   isReadable: 1
+--- !u!114 &3931425650989239336
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 388739622980061343}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9b6d2cdd667f7204aabb934c567dcd10, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  clips:
+  - {fileID: 8300000, guid: a466aaa47c8ba4d458588663668f6c75, type: 3}
+  volume: 0.75
+  volumeVariance: 0.1
+  pitch: 1
+  pitchVariance: 0.1
+  loop: 0
+  playOnAwake: 0
+  mixerGroup: {fileID: 0}
 --- !u!1 &9199033606101713705
 GameObject:
   m_ObjectHideFlags: 0
