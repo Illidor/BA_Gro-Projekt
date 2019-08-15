@@ -8,6 +8,7 @@ public class PlayerAnimationEvents : MonoBehaviour
 {
     public static event UnityAction ReachedLadderEnd;
     public static event UnityAction ShockPlayerAtStart;
+    public static event UnityAction PlayerDestroyAltar;
 
     public static PlayerAnimationEvents instance = null; 
 
@@ -147,7 +148,7 @@ public class PlayerAnimationEvents : MonoBehaviour
 
     public void SnapPlayerToTargetPosition(Transform targetTransform)
     {
-        Debug.Log(targetTransform.name);
+        //Debug.Log(targetTransform.name);
         playerTransform.position = targetTransform.position;
         fpController.TargetRotation = targetTransform.rotation;
 
@@ -163,6 +164,11 @@ public class PlayerAnimationEvents : MonoBehaviour
         knockOnWoodSound.PlaySound(0);
         dustPs.Emit(10);
         dustParticleSound.PlaySound(0);
+    }
+
+    private void DestroyAltar()
+    {
+        PlayerDestroyAltar?.Invoke();
     }
 
     public void PlayAnimation(string trigger)
@@ -189,6 +195,7 @@ public class PlayerAnimationEvents : MonoBehaviour
         ExitDoor.OpenDoorAnim += SetAnimatorTrigger;
         LadderInteraction.ClimbLadder += ChangeAtticState;
         HatchLever.UseLeverAnimation += SetAnimatorTrigger;
+        Altar.MovePlayerToAltar += SnapPlayerToTargetPosition;
     }
 
     private void OnDisable()
@@ -196,5 +203,6 @@ public class PlayerAnimationEvents : MonoBehaviour
         ExitDoor.OpenDoorAnim -= SetAnimatorTrigger;
         LadderInteraction.ClimbLadder -= ChangeAtticState;
         HatchLever.UseLeverAnimation -= SetAnimatorTrigger;
+        Altar.MovePlayerToAltar -= SnapPlayerToTargetPosition;
     }
 }

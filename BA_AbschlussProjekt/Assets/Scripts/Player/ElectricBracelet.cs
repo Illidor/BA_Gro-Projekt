@@ -91,12 +91,26 @@ public class ElectricBracelet : MonoBehaviour
         }
     }
 
+    private void InstantDeathShock()
+    {
+        shockCount = 4;
+        GetShockDamage();
+
+        for (int i = 0; i < braceletLamps.Length; i++)
+        {
+            braceletLamps[i].material = disabledLampMaterial;
+        }
+
+        PlayerDied?.Invoke();
+    }
+
     private void OnEnable() {
         Window.ShockPlayer += GetShockDamage;
         KeyBox.ShockPlayer += GetShockDamage;
         WardrobeDoor.ShockPlayer += GetShockDamage;
         WardrobeBack.ShockPlayer += GetShockDamage;
         PlayerAnimationEvents.ShockPlayerAtStart += GetShockDamage;
+        Altar.ShockPlayerToDeath += InstantDeathShock;
     }
 
     private void OnDisable() {
@@ -105,5 +119,6 @@ public class ElectricBracelet : MonoBehaviour
         WardrobeDoor.ShockPlayer -= GetShockDamage;
         WardrobeBack.ShockPlayer -= GetShockDamage;
         PlayerAnimationEvents.ShockPlayerAtStart -= GetShockDamage;
+        Altar.ShockPlayerToDeath -= InstantDeathShock;
     }
 }
