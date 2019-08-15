@@ -24,6 +24,7 @@ public class PlayerAnimationEvents : MonoBehaviour
 
     private Animator playerAnimator;
     private Transform playerTransform;
+    private RigidbodyFirstPersonController playerController;
 
     private Transform mainCamTransform;
 
@@ -50,7 +51,7 @@ public class PlayerAnimationEvents : MonoBehaviour
         fpController = GetComponentInParent<RigidbodyFirstPersonController>();
         playerAnimator = GetComponent<Animator>();
         playerTransform = transform.parent;
-
+        playerController = transform.parent.GetComponent<RigidbodyFirstPersonController>();
         mainCamTransform = Camera.main.transform;
     }
 
@@ -67,7 +68,7 @@ public class PlayerAnimationEvents : MonoBehaviour
     private void PlayFootstepSound() {
         footstepSoundCount++;
         if (footstepSoundCount % 2 == 0) {
-            if (isAtAttic)
+            if (playerController.IsPlayerAtAttic)
             {
                 while(currentFootStepId == previousFootStepId)
                     currentFootStepId = Random.Range(0, footstepSoundAttic.clips.Count);
@@ -87,7 +88,7 @@ public class PlayerAnimationEvents : MonoBehaviour
             }
         }
         else {
-            if (isAtAttic)
+            if (playerController.IsPlayerAtAttic)
             {
                 while (currentFootStepId == previousFootStepId)
                     currentFootStepId = Random.Range(0, footstepSoundAttic.clips.Count);
@@ -187,11 +188,13 @@ public class PlayerAnimationEvents : MonoBehaviour
     {
         ExitDoor.OpenDoorAnim += SetAnimatorTrigger;
         LadderInteraction.ClimbLadder += ChangeAtticState;
+        HatchLever.UseLeverAnimation += SetAnimatorTrigger;
     }
 
     private void OnDisable()
     {
         ExitDoor.OpenDoorAnim -= SetAnimatorTrigger;
         LadderInteraction.ClimbLadder -= ChangeAtticState;
+        HatchLever.UseLeverAnimation -= SetAnimatorTrigger;
     }
 }

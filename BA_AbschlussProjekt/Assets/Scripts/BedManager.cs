@@ -13,8 +13,8 @@ public class BedManager : MonoBehaviour
     private void BedRattle(GameObject bed) {
         rattleCount++;
         if(rattleCount == 3) {
-            GameObject tmpCar = Instantiate(toyCar, player.position + Vector3.up + player.forward * 0.5f, Quaternion.identity);
-            hatch.AddCombinableReference(tmpCar.GetComponent<GrabInteractable>(), 1);
+            GameObject tmpCar = Instantiate(toyCar, player.position + Vector3.up + player.forward * 1f, Quaternion.identity);
+            hatch.AddCombinableReference(tmpCar.GetComponent<GrabInteractable>(), 2);
             tmpCar.GetComponent<ToyCar>().CallSoundAfterDelay(0.5f);
         }
     }

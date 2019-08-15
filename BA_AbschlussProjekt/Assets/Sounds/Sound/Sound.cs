@@ -10,7 +10,7 @@ public class Sound : MonoBehaviour
     public List<AudioClip> clips;
 
     [Range(0f, 1f)]
-    public float volume = .75f;
+    public float volume = 1f;
     [Range(0f, 1f)]
     public float volumeVariance = .1f;
 
@@ -37,8 +37,9 @@ public class Sound : MonoBehaviour
         {
             source = gameObject.AddComponent<AudioSource>();
         }
+        source.volume = volume;
 
-        if(index < clips.Count)
+        if (index < clips.Count)
         {
             source.clip = clips[index];
             source.outputAudioMixerGroup = mixerGroup;
@@ -56,6 +57,7 @@ public class Sound : MonoBehaviour
             if (source == null) {
                 source = gameObject.AddComponent<AudioSource>();
             }
+            source.volume = volume;
 
             if (index < clips.Count) {
                 source.clip = clips[index];
@@ -71,6 +73,7 @@ public class Sound : MonoBehaviour
             if (sourceTwo == null) {
                 sourceTwo = gameObject.AddComponent<AudioSource>();
             }
+            sourceTwo.volume = volume;
 
             if (index < clips.Count) {
                 sourceTwo.clip = clips[index];

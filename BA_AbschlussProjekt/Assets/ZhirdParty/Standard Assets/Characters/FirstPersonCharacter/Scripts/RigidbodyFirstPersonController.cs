@@ -103,6 +103,8 @@ namespace UnityStandardAssets.Characters.FirstPerson
         private Quaternion targetRotation;
         public Quaternion TargetRotation { get { return targetRotation; } set { targetRotation = value; } }
 
+        public bool IsPlayerAtAttic { get; set; }
+
 		private void Start()
 		{
 			m_RigidBody = GetComponent<Rigidbody>();
@@ -120,6 +122,8 @@ namespace UnityStandardAssets.Characters.FirstPerson
             Invoke("defreezeMovement", 7f);
 
             playerAnimator = GetComponentInChildren<Animator>();
+
+            IsPlayerAtAttic = false;
         }
 
 		private void Update()
@@ -173,6 +177,15 @@ namespace UnityStandardAssets.Characters.FirstPerson
             else
             {
                 playerAnimator.SetBool("LookAt", false);
+            }
+
+            if(transform.position.y >= 3.5f)
+            {
+                IsPlayerAtAttic = true;
+            }
+            else
+            {
+                IsPlayerAtAttic = false;
             }
 		}
 
