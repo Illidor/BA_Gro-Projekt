@@ -58,7 +58,6 @@ public class DropZoneTrigger : MonoBehaviour
 
     private IEnumerator PlayerDropping()
     {
-        yield return null;
         playerController.freezePlayerCamera = true;
         playerController.freezePlayerMovement = true;
 

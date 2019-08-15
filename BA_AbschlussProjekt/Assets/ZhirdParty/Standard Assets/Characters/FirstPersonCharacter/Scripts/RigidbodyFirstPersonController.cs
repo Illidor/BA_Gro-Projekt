@@ -136,7 +136,7 @@ namespace UnityStandardAssets.Characters.FirstPerson
                 transform.rotation = targetRotation;
             }
 
-            if (CrossPlatformInputManager.GetButtonDown("Crouch") && isCrouching == false)
+            if (CrossPlatformInputManager.GetButtonDown("Crouch") && isCrouching == false && !freezePlayerMovement)
 			{
 				movementSettings.IsCrouching = true;
 				isCrouching = true;
