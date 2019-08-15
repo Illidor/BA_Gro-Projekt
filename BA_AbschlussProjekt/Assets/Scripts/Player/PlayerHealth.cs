@@ -282,5 +282,4 @@ public class PlayerHealth : MonoBehaviour
         ElectricBracelet.PlayerDied -= PlayerDeathFirstPerson;
         DropFromAttic.PlayerDroppedFromAttic -= PlayerDeathFirstPerson;
     }
-
 }
