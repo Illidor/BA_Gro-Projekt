@@ -16,9 +16,7 @@ public class HingedInteraction : BaseInteractable
     [Space]
     [SerializeField]
     private Transform transformToHinge;
-    private bool open;
-
-    private bool isOpen;
+    private bool closed;
 
     private void OnValidate()
     {
@@ -35,7 +33,7 @@ public class HingedInteraction : BaseInteractable
             axis = Vector3.zero;
 
         //OpenCloseDoor(false);
-        isOpen = false;
+        closed = true;
         base.Awake();
     }
 
@@ -64,7 +62,7 @@ public class HingedInteraction : BaseInteractable
 
     public IEnumerator openAnimation()
     {
-        if (open)
+        if (closed)
         {
             while (gameObject.transform.localEulerAngles.x >= 270)
             {
@@ -81,7 +79,7 @@ public class HingedInteraction : BaseInteractable
             }
         }
 
-        open = !open;
+        closed = !closed;
     }
 
     private Vector3 GetHingeExtreme(Extreme extreme)
