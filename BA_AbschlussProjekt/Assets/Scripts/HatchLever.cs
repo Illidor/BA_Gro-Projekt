@@ -59,19 +59,22 @@ public class HatchLever : BaseInteractable, ICombinable
 
     public bool Combine(InteractionScript player, BaseInteractable interactingComponent)
     {
-        for (int i = 0; i < levelCombinables.Length; i++)
+        if(!hasLever)
         {
-            if (levelCombinables[ i ].objectToCombineWith.Equals(interactingComponent))
+            for (int i = 0; i < levelCombinables.Length; i++)
             {
-                levelCombinables[ i ].corespondingObjectToDisplay.SetActive(true);
-                hasLever = true;
+                if (levelCombinables[i].objectToCombineWith.Equals(interactingComponent))
+                {
+                    levelCombinables[i].corespondingObjectToDisplay.SetActive(true);
+                    hasLever = true;
 
-                player.StopUsingObject();
-                Destroy(interactingComponent.gameObject);
+                    player.StopUsingObject();
+                    Destroy(interactingComponent.gameObject);
 
-                soundToPlayOnLeverCraft?.PlaySound(0);
+                    soundToPlayOnLeverCraft?.PlaySound(0);
 
-                return true;
+                    return true;
+                }
             }
         }
         return false;
