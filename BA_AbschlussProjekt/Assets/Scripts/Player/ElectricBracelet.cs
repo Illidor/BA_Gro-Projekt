@@ -32,12 +32,6 @@ public class ElectricBracelet : MonoBehaviour
         playerHealth = GameObject.Find("Player").GetComponent<PlayerHealth>();
     }
 
-    private void Update() {
-        if (Input.GetKeyDown(KeyCode.Z)) {
-            GetShockDamage();
-        }
-    }
-
     private void GetShockDamage() {
         if(currentHealth > 0) {
             // Disable anim triggers

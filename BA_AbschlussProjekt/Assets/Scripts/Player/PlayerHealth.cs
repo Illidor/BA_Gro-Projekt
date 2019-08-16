@@ -67,16 +67,6 @@ public class PlayerHealth : MonoBehaviour
 
     private void Update()
     {
-        if(Input.GetKeyDown(KeyCode.P))
-        {
-            PlayerDeathThirdPerson();
-        }
-
-        if(Input.GetKeyDown(KeyCode.O))
-        {
-            PlayerDeathFirstPerson();
-        }
-
         if(unshrinkVignette)
         {
             lerpTimer += Time.deltaTime / 5f;
