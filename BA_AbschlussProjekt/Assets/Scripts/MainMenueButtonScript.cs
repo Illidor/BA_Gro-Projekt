@@ -8,7 +8,8 @@ public enum MainMenueFunktions
     NewGame,
     EnableRL,
     Controlls,
-    Back
+    Back,
+    Exit
 }
 
 
@@ -81,6 +82,9 @@ public class MainMenueButtonScript : MonoBehaviour
                 break;
             case MainMenueFunktions.Back:
                 camera.GetComponent<MainMenuRay>().moveToControls(false);
+                break;
+            case MainMenueFunktions.Exit:
+                Application.Quit();
                 break;
             default:
                 break;
