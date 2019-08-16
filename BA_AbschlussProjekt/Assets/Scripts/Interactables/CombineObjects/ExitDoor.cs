@@ -116,7 +116,7 @@ public class ExitDoor : BaseInteractable, ICombinable
                 break;
             case 2:
                 interactSound?.PlaySound(0, 0.7f);//hämmern, verletzen
-                player.PlayerHealth.ChangeCondition(Conditions.UpperBodyCondition, 0.5f, 1);
+                player.PlayerHealth.ChangeCondition(Conditions.UpperBodyCondition, 0.5f, 1.3f);
                 OpenDoorAnim?.Invoke("LockedDoor");
                 PlayerAnimationEvents.instance.SnapPlayerToTargetPosition(playerTargetPosition);
                 StartCoroutine(DelayShock());
