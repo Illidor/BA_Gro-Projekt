@@ -248,7 +248,7 @@ public class PlayerHealth : MonoBehaviour
         activateRagdoll(true, 10f);
         unshrinkVignette = true;
         shrinkVignette = false;
-        deathAudioSnapshot.TransitionTo(25f);
+        deathAudioSnapshot.TransitionTo(15f);
 
         PlayerDiedFirstPerson?.Invoke();
     }
