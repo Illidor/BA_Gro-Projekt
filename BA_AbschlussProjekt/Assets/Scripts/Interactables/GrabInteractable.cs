@@ -26,6 +26,7 @@ public class GrabInteractable : BaseInteractable
     protected Sound soundToPlayOnInteractAndDrop;
     [SerializeField]
     public bool isReadable = false;
+    public Vector3 rotationVector = new Vector3(-31, 91, -64);
 
     protected new Rigidbody rigidbody;
     protected Rigidbody rigidbodyPulling;
@@ -101,7 +102,7 @@ public class GrabInteractable : BaseInteractable
 
         transform.SetParent(player.GrabingPoint.transform);
        
-        transform.localEulerAngles = new Vector3(-31,91,-64);
+        transform.localEulerAngles = rotationVector;
         rigidbody.isKinematic = true;
         player.SetCarriedObject(this);
         IsBeeingCarried = true;

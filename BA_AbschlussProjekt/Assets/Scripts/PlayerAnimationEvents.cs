@@ -25,6 +25,7 @@ public class PlayerAnimationEvents : MonoBehaviour
 
     private Animator playerAnimator;
     private Transform playerTransform;
+    [SerializeField] private GameObject Canvas;
     private RigidbodyFirstPersonController playerController;
 
     private Transform mainCamTransform;
@@ -114,11 +115,13 @@ public class PlayerAnimationEvents : MonoBehaviour
     private void FreezeCamera()
     {
         fpController.freezePlayerCamera = true;
+        Canvas.SetActive(false);
     }
 
     private void UnfreezCamera()
     {
         fpController.freezePlayerCamera = false;
+        Canvas.SetActive(true);
     }
 
     private void PlayDyingSound()

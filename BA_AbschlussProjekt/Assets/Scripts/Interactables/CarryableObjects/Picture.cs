@@ -36,7 +36,7 @@ public class Picture : GrabInteractable
     public override bool CarryOutInteraction_Carry(InteractionScript player)
     {
         base.CarryOutInteraction_Carry(player);
-        transform.GetChild(0).GetChild(0).localEulerAngles = new Vector3(-45f, 48f, -1.7f);
+        transform.localEulerAngles = new Vector3(-5.883f, -20.567f, 56.543f);
         return true;
     }
 
