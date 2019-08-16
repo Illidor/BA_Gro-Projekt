@@ -264,6 +264,8 @@ public class PlayerHealth : MonoBehaviour
         Picture.PlayerFailed += PlayerDeathThirdPerson;
         ElectricBracelet.PlayerDied += PlayerDeathFirstPerson;
         DropFromAttic.PlayerDroppedFromAttic += PlayerDeathFirstPerson;
+        SelectPuzzlePath.FirstPersonDeath += PlayerDeathFirstPerson;
+        SelectPuzzlePath.ThirdPersonDeath += PlayerDeathThirdPerson;
     }
 
     private void OnDisable()
@@ -271,5 +273,7 @@ public class PlayerHealth : MonoBehaviour
         Picture.PlayerFailed -= PlayerDeathThirdPerson;
         ElectricBracelet.PlayerDied -= PlayerDeathFirstPerson;
         DropFromAttic.PlayerDroppedFromAttic -= PlayerDeathFirstPerson;
+        SelectPuzzlePath.FirstPersonDeath -= PlayerDeathFirstPerson;
+        SelectPuzzlePath.ThirdPersonDeath -= PlayerDeathThirdPerson;
     }
 }

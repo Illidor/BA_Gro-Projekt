@@ -112,6 +112,7 @@ public class ElectricBracelet : MonoBehaviour
         WardrobeBack.ShockPlayer += GetShockDamage;
         PlayerAnimationEvents.ShockPlayerAtStart += GetShockDamage;
         Altar.ShockPlayerToDeath += InstantDeathShock;
+        SelectPuzzlePath.GetShockDamage += GetShockDamage;
     }
 
     private void OnDisable() {
@@ -121,5 +122,6 @@ public class ElectricBracelet : MonoBehaviour
         WardrobeBack.ShockPlayer -= GetShockDamage;
         PlayerAnimationEvents.ShockPlayerAtStart -= GetShockDamage;
         Altar.ShockPlayerToDeath -= InstantDeathShock;
+        SelectPuzzlePath.GetShockDamage -= GetShockDamage;
     }
 }
