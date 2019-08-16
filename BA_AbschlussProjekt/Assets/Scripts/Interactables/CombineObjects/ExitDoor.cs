@@ -119,6 +119,7 @@ public class ExitDoor : BaseInteractable, ICombinable
                 player.PlayerHealth.ChangeCondition(Conditions.UpperBodyCondition, 0.5f, 1);
                 OpenDoorAnim?.Invoke("LockedDoor");
                 PlayerAnimationEvents.instance.SnapPlayerToTargetPosition(playerTargetPosition);
+                StartCoroutine(DelayShock());
                 break;
             default:
                 VoiceLines.instance.PlayVoiceLine(UnityEngine.Random.Range(10, 13), 0f);
@@ -126,5 +127,11 @@ public class ExitDoor : BaseInteractable, ICombinable
         }
         interactionCount++;
         return true;
+    }
+
+    private IEnumerator DelayShock()
+    {
+        yield return new WaitForSeconds(1.3f);
+        ShockPlayer?.Invoke();
     }
 }
