@@ -32,7 +32,7 @@ public class SelectPuzzlePath : MonoBehaviour
 
     private void Update()
     {
-        if (SelectPath)
+        if (!SelectPath)
         {
             if (Input.GetKeyDown(KeyCode.Z))
             {
