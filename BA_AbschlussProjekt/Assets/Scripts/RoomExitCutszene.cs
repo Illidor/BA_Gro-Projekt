@@ -13,8 +13,6 @@ public class RoomExitCutszene : MonoBehaviour
     [SerializeField] Camera blackScreen;
     [SerializeField] Camera mainCam;
 
-    private PostProcessVolume mainCamProfile;
-
     private AudioSource hitSound;
 
     [SerializeField] Transform playerTrans;
@@ -25,7 +23,6 @@ public class RoomExitCutszene : MonoBehaviour
     {
         hitSound = GetComponent<AudioSource>();
         trigger = GetComponent<BoxCollider>();
-        mainCamProfile = mainCam.GetComponent<PostProcessVolume>();
     }
 
     private void OnTriggerEnter(Collider other)

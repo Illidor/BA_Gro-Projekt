@@ -128,10 +128,17 @@ public class InteractionScript : MonoBehaviour
     {
         GUIInteractionFeedbackHandler.ResetGUI();
 
-        Ray screenCenterRay = Camera.main.ScreenPointToRay(Input.mousePosition);
+        bool didRaycastHit = false;
+        Ray screenCenterRay = new Ray();
+        RaycastHit raycastHit = new RaycastHit();
 
-        RaycastHit raycastHit;
-        bool didRaycastHit = Physics.Raycast(screenCenterRay, out raycastHit, GrabingReach);
+        if (Camera.main != null)
+        {
+            screenCenterRay = Camera.main.ScreenPointToRay(Input.mousePosition);
+
+            didRaycastHit = Physics.Raycast(screenCenterRay, out raycastHit, GrabingReach);
+        }
+   
 
         if (IsCarrying == false)
         {

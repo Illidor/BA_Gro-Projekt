@@ -15,7 +15,9 @@ public class DeathScene : MonoBehaviour
     [SerializeField]
     private AudioMixerSnapshot defautlSnapshot;
     public GameObject player;
-
+    public GameObject shackles;
+    public Renderer playerRenderer;
+    [SerializeField] GameObject mainCam;
     private bool isSceneFinished = false;
 
     [SerializeField] AudioSource deadSceneMusic;
@@ -28,12 +30,15 @@ public class DeathScene : MonoBehaviour
 
     private void PlayerDied()
     {
-        player.SetActive(false);
+        PlayerAnimationEvents.instance.FreezeMovement();
+        player.transform.position = new Vector3(1000f, 100f, 1000f);
+        playerRenderer.enabled = false;
+        shackles.SetActive(false);
+        mainCam.GetComponent<Camera>().enabled = false;
         StartCoroutine(DelayPositionSwap());
         SwitchToDeathSnap();
         deadSceneMusic.Play();
-
-        InstancePool.instance.GoBackToMainMenue(2f);
+        InstancePool.instance.GoBackToMainMenue(15f);
     }
 
     private void Update()
@@ -65,7 +70,7 @@ public class DeathScene : MonoBehaviour
     }
     private void SwitchToDeathSnap()
     {
-        deathSnapshot.TransitionTo(0f);
+        deathSnapshot.TransitionTo(5f);
     }
 
     private void ChangeToDefault()

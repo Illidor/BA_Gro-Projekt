@@ -62,5 +62,6 @@ public class ClimbDownLadder : MonoBehaviour
         yield return new WaitForSeconds(24.5f);
         playerController.freezePlayerCamera = false;
         playerController.freezePlayerMovement = false;
+        hasPlayerEntered = false;
     }
 }

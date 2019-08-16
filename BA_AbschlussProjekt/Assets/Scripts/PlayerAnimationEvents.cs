@@ -56,12 +56,12 @@ public class PlayerAnimationEvents : MonoBehaviour
         mainCamTransform = Camera.main.transform;
     }
 
-    private void FreezeMovement()
+    public void FreezeMovement()
     {
         fpController.freezePlayerMovement = true;
     }
 
-    private void UnfreezePlayerMovement()
+    public void UnfreezePlayerMovement()
     {
         fpController.freezePlayerMovement = false;
     }
