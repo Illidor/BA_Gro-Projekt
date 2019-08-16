@@ -8,6 +8,7 @@ using UnityEngine.Playables;
 public class ExitDoor : BaseInteractable, ICombinable   
 {
     public static event UnityAction<string> OpenDoorAnim;
+    public static event UnityAction ShockPlayer;
 
     [SerializeField]
     private float timeToWaitUntilDoorOpens = 1.65f;
@@ -35,8 +36,20 @@ public class ExitDoor : BaseInteractable, ICombinable
     public bool Combine(InteractionScript player, BaseInteractable interactingComponent)
     {
         if (interactingComponent is Crowbar crowbar)
+        {
             crowbar.Break(player);
+            ShockPlayer?.Invoke();
+        }
 
+        if(interactingComponent.GetComponent<GrabInteractable>().DisplayName == "Metal Rod")
+        {
+            ShockPlayer?.Invoke();
+        }
+
+        if(interactingComponent is Crutch)
+        {
+            ShockPlayer?.Invoke();
+        }
 
         if (interactingComponent.name == nameOfKeysGameobject)
         {
@@ -53,6 +66,7 @@ public class ExitDoor : BaseInteractable, ICombinable
 
             return true;
         }
+
         return false;
     }
 
