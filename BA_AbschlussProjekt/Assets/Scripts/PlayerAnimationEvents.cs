@@ -151,7 +151,7 @@ public class PlayerAnimationEvents : MonoBehaviour
         //Debug.Log(targetTransform.name);
         playerTransform.position = targetTransform.position;
         fpController.TargetRotation = targetTransform.rotation;
-
+        fpController.GetComponent<Rigidbody>().velocity = Vector3.zero;
     }
 
     private void ShockPlayer()
