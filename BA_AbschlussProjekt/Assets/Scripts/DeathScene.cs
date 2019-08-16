@@ -12,12 +12,19 @@ public class DeathScene : MonoBehaviour
     private float returnToMenuAfterSequenceEnded = 30f;
     [SerializeField]
     private AudioMixerSnapshot deathSnapshot;
+    [SerializeField]
+    private AudioMixerSnapshot defautlSnapshot;
     public GameObject player;
 
     private bool isSceneFinished = false;
 
     [SerializeField] AudioSource deadSceneMusic;
     //[SerializeField] AudioSource bodyOnFloor;
+
+    private void Start()
+    {
+        defautlSnapshot.TransitionTo(0f);
+    }
 
     private void PlayerDied()
     {
@@ -59,6 +66,11 @@ public class DeathScene : MonoBehaviour
     private void SwitchToDeathSnap()
     {
         deathSnapshot.TransitionTo(0f);
+    }
+
+    private void ChangeToDefault()
+    {
+        defautlSnapshot.TransitionTo(0f);
     }
 
 #if UNITY_EDITOR
