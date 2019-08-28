@@ -781,6 +781,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8465557698175178339}
   - component: {fileID: 8465557698175178348}
+  - component: {fileID: 13506118657468084}
   m_Layer: 0
   m_Name: CameraMonitorRoom
   m_TagString: Untagged
@@ -845,6 +846,20 @@ Camera:
   m_OcclusionCulling: 1
   m_StereoConvergence: 10
   m_StereoSeparation: 0.022
+--- !u!114 &13506118657468084
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8465557698175178338}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2a0b01bb00d099a468aeb5ddd07bfe95, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  shaderIncludedMaterial: {fileID: 2100000, guid: 6bb5f185885db4c4ea4104f2e1599b3b,
+    type: 2}
 --- !u!1 &8465557698193998794
 GameObject:
   m_ObjectHideFlags: 0
@@ -1455,6 +1470,12 @@ PrefabInstance:
       value: 
       objectReference: {fileID: -6478536213147159724, guid: 1ab36d57842a8f9409a6a23666e6ab47,
         type: 3}
+    - target: {fileID: 2269945780269634025, guid: 72822069d00c2cf419ff5303a0da50f5,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: -876546973899608171, guid: 1ab36d57842a8f9409a6a23666e6ab47,
+        type: 3}
     - target: {fileID: 6833982493792972689, guid: 72822069d00c2cf419ff5303a0da50f5,
         type: 3}
       propertyPath: m_Materials.Array.data[0]
@@ -1466,12 +1487,6 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: -6478536213147159724, guid: 1ab36d57842a8f9409a6a23666e6ab47,
-        type: 3}
-    - target: {fileID: 2269945780269634025, guid: 72822069d00c2cf419ff5303a0da50f5,
-        type: 3}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: -876546973899608171, guid: 1ab36d57842a8f9409a6a23666e6ab47,
         type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 72822069d00c2cf419ff5303a0da50f5, type: 3}
