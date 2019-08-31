@@ -9,6 +9,8 @@ public class MainMenuRay : MonoBehaviour
     private MainMenueButtonScript lastButton;
     private Camera camera;
     private bool isOnMainPos = true;
+    private bool isOnCreditsPos = false;
+    
 
 
     [SerializeField]
@@ -17,6 +19,8 @@ public class MainMenuRay : MonoBehaviour
     GameObject mainPos;
     [SerializeField]
     GameObject controlsPos;
+    [SerializeField]
+    GameObject creditsPos;
 
 
     private void Awake()
@@ -74,21 +78,36 @@ public class MainMenuRay : MonoBehaviour
 
 
 
-        if (isOnMainPos && (gameObject.transform.position - mainPos.transform.position).sqrMagnitude > 0.2f)
+        if (isOnMainPos && (gameObject.transform.position - mainPos.transform.position).sqrMagnitude > 0.01f)
         {
             gameObject.transform.position = Vector3.MoveTowards(gameObject.transform.position, mainPos.transform.position, moveSpeed * Time.deltaTime);
         }
-        else if(!isOnMainPos && (gameObject.transform.position - controlsPos.transform.position).sqrMagnitude > 0.2f)
+        else if (isOnCreditsPos && (gameObject.transform.position - creditsPos.transform.position).sqrMagnitude > 0.01f)
+        {
+            gameObject.transform.position = Vector3.MoveTowards(gameObject.transform.position, creditsPos.transform.position, moveSpeed * Time.deltaTime);
+        }
+        else if(!isOnMainPos && !isOnCreditsPos && (gameObject.transform.position - controlsPos.transform.position).sqrMagnitude > 0.01f)
         {
             gameObject.transform.position = Vector3.MoveTowards(gameObject.transform.position, controlsPos.transform.position, moveSpeed * Time.deltaTime);
         }
+
+        creditsPos.transform.GetChild(creditsPos.transform.childCount-1).Translate(Vector3.up * Time.deltaTime);
+
+        //creditsPos.GetComponentInChildren<Transform>().Translate(Vector3.up * Time.deltaTime);
+
     }
 
     public void moveToControls(bool direction)
     {
         isOnMainPos = !direction;
+        //isOnCreditsPos = !isOnMainPos;
     }
 
+    public void moveToCredits(bool direction)
+    {
+        isOnCreditsPos = !direction;
+        isOnMainPos = !isOnCreditsPos;
+    }
 
 
     //[SerializeField]

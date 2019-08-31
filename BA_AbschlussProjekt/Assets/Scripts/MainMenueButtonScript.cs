@@ -9,7 +9,8 @@ public enum MainMenueFunktions
     EnableRL,
     Controlls,
     Back,
-    Exit
+    Exit,
+    Credits
 }
 
 
@@ -80,8 +81,13 @@ public class MainMenueButtonScript : MonoBehaviour
             case MainMenueFunktions.Controlls:
                 camera.GetComponent<MainMenuRay>().moveToControls(true);
                 break;
+            case MainMenueFunktions.Credits:
+                camera.GetComponent<MainMenuRay>().moveToCredits(false);
+                GameObject.Find("Credits").transform.localPosition = new Vector3(0, -4, 4); 
+                break;
             case MainMenueFunktions.Back:
                 camera.GetComponent<MainMenuRay>().moveToControls(false);
+                camera.GetComponent<MainMenuRay>().moveToCredits(true);
                 break;
             case MainMenueFunktions.Exit:
                 Application.Quit();
